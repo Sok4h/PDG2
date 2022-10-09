@@ -1,0 +1,38 @@
+.card{
+
+    background-color: white;
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 16px;
+    padding: 32px;
+    font-family: 'Poppins';
+
+
+    &--row{
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    &__valueContainer{
+        display: flex;
+        justify-content: center;
+    }
+
+    &__value{
+
+        font-weight: bold;
+
+    }
+
+        .detailsChartBtn{
+
+            margin-top: 8px;
+            width: 80%;
+        }
+    
+}
+

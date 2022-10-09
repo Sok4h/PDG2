@@ -1,0 +1,58 @@
+.login {
+  display: flex;
+  width: 100%;
+  height: 90vh;
+  justify-content: center;
+  gap: 120px;
+  padding: 0.5em;
+
+  align-items: center;
+
+  &__title {
+    font-family: 'Poppins';
+    color: #021E66;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline;
+    
+  }
+
+  &__description {
+    font-size: 1em;
+    color: #3E4D72;
+  }
+
+  &__container {
+    height: fit-content;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  &__form {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  &__imgContainer {
+    border-radius: 32px;
+    width: fit-content;
+    height: 100%;
+  }
+
+  &__img {
+    width: auto;
+    height: 100%;
+    border-radius: 32px;
+    object-fit: cover;
+    aspect-ratio: 4/5;
+
+  }
+
+
+}

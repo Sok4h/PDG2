@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+
+* {
+
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+
+/* grafica pro*/
+
+#chart {
+
+    width: 40%
+}
+
+.chartContainer{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 32px;
+}
+
+button{
+
+    cursor: pointer;
+}
+body {
+
+    background-color: #F4F4F4;
+}
+
+
+
+
+.logo {
+    text-align: center;
+    display: flex;
+    transition: all 0.5s ease;
+    align-items: center;
+    margin: 10px 0 0 10px;
+}
+
+.logo img {
+
+    width: 45px;
+    height: 45px;
+    align-self: center;
+
+}
+
+.logo span {
+
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+a {
+
+    position: relative;
+    color: rgba(255, 255, 255, 70%);
+    font-size: 14px;
+    display: table;
+    width: 300px;
+    padding: 10px;
+
+}
+
+.bx {
+
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+
+a:hover {
+
+    color: white;
+}
+
+
+
+a:hover {
+
+    /* background-color: #eee; */
+}
+
+
+
+main {
+
+    margin-left: 210px;
+    margin-top: 2em;
+}
+
+
+
+/* horizontal charts containers */
+
+.horizontalChart {
+
+    background-color: white;
+    height: fit-content;
+    border-radius: 24px;
+    width: 40%;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detailsChartBtn {
+
+    border: 1px solid #1D1D1D;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: white;
+    width: 60%;
+
+}
+.highlightsContainer{
+
+    display: flex;
+    justify-content: space-evenly;
+    margin: 16px;
+
+}
+.highlight{
+
+    width: 20%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    text-align: center;
+    border-radius: 16px;
+    padding: 32px;
+}
+
+.infoContainer{
+
+    display: flex;
+    width: 40%;
+    text-align: center;
+    align-items: center;
+    background-color: white;
+    padding: 32px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+
+.suggestion{
+
+    margin-bottom: 24px;
+}
+
+.lineChartContainer{
+
+    width: 40%;
+}

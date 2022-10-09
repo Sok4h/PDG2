@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="Styles/style.css">
+
+    <!-- <link rel="stylesheet" href="test.css"> -->
+
+</head>
+
+<body>
+    <main>
+
+        <h2 class="formTitle">INNLAB innovation index</h2>
+        <h3 class="formSubTitle">Configuracion prueba</h3>
+        <form class="testForm">
+
+            <div class="input-box">
+
+                <span class="labelInput">Nombre de la compañia</span>
+                <input class="inputs inputs--form" type="text" placeholder="Ingrese su usuario">
+            </div>
+
+            <div class="input-box">
+
+                <span class="labelInput">Sector de la compañia</span>
+                <input class="inputs inputs--form" type="text" placeholder="Ingrese su usuario">
+            </div>
+
+            <div class="input-box">
+
+                <div class="infoContainer">
+                    <span class="labelInput">Tamaño de empresa</span>
+                    <i class='bx bxs-info-circle' id="companySize"></i>
+
+                </div>
+
+                <select class="selectForm" name="companySize">
+
+                    <option>Startup</option>
+
+                    <option>Microempresa</option>
+
+                    <option>Pequeña</option>
+
+                    <option>Pyme</option>
+
+                    <option>Grande</option>
+
+                </select>
+            </div>
+
+            <div class="input-box">
+
+                <span class="labelInput">Cantidad de personas en la compañia</span>
+
+                <input class="inputs inputs--form" type="number" placeholder="Ingrese su usuario">
+            </div>
+
+            <div class="input-box">
+
+                <div class="infoContainer">
+                    <span class="labelInput">Departamentos</span>
+                    <i class='bx bxs-info-circle' id="companySize"></i>
+
+                </div>
+                <label class="labelAdd">
+                    <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingrese su usuario">
+                    <button class="btn btn--addInput">+</button>
+                </label>
+
+            </div>
+
+            <div class="input-box">
+
+                <span class="labelInput">Trabajadores por departamento</span>
+                <input class="inputs inputs--form " type="text" placeholder="Ingrese su usuario">
+            </div>
+
+            <div class="input-box">
+
+                <div class="infoContainer">
+                    <span class="labelInput">Subdepartamentos</span>
+                    <i class='bx bxs-info-circle' id="companySize"></i>
+
+                </div>
+                <label class="labelAdd">
+                    <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingrese su usuario">
+                    <button class="btn btn--addInput">+</button>
+                </label>
+
+            </div>
+
+        </form>
+
+        <!--  Nivel Confianza -->
+
+        <!--  Organizacional -->
+        <section class="trustLevel">
+            <p>Para asegurar la fiabilidad a nivel ORGANIZACIONAL de la prueba se debe ser realizada por almenos:</p>
+
+            <div class="trustOrganization">
+
+                <div class="trustbox" id="trustPopulation">
+
+                    <i class='bx bxs-badge-check'></i>
+                    <p>Población</p>
+
+                    <span>100</span>
+
+                </div>
+
+                <div class="trustbox" id="trustLevel">
+
+                    <i class='bx bxs-group'></i>
+                    <p>Nivel de confianza</p>
+
+                    <span>95%</span>
+                </div>
+
+
+                <div class="trustbox" id="errorMargin">
+
+                    <i class='bx bxs-shield-x'></i>
+                    <p>Margen de error</p>
+
+                    <span>5%</span>
+                </div>
+
+                <div class="trustbox" id="errorMargin">
+
+                    <i class='bx bxs-user-check'></i>
+                    <p>Muestra</p>
+
+                    <span>na</span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!--  Departamento -->
+        <section class="trustLevel">
+            <p>Para asegurar la fiabilidad de datos en el equipo o departamento N.A la prueba debe ser realizada por
+                almenos:</p>
+
+            <div class="trustOrganization">
+
+                <div class="trustbox" id="trustPopulation">
+
+                    <i class='bx bxs-badge-check'></i>
+                    <p>Población</p>
+
+                    <span>100</span>
+
+                </div>
+
+                <div class="trustbox" id="trustLevel">
+
+                    <i class='bx bxs-group'></i>
+                    <p>Nivel de confianza</p>
+
+                    <span>95%</span>
+                </div>
+
+
+                <div class="trustbox" id="errorMargin">
+
+                    <i class='bx bxs-shield-x'></i>
+                    <p>Margen de error</p>
+
+                    <span>5%</span>
+                </div>
+
+                <div class="trustbox" id="errorMargin">
+
+                    <i class='bx bxs-user-check'></i>
+                    <p>Muestra</p>
+
+                    <span>na</span>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="piramidJerarchy">
+
+            <div class="infoContainer">
+                <span class="labelInput">Subdepartamentos</span>
+                <i class='bx bxs-info-circle' id="companySize"></i>
+
+            </div>
+            <h3>Niveles</h3>
+
+            <div class="pyramidContainers">
+
+                <div class="pyramid">
+
+                    <img src="resources/pyramid-top.png" alt="">
+
+                    <div class="pyramidInfo">
+
+                        <h3 class="title">Nivel superior</h3>
+
+                        <h4 class="subTitle">Ejemplo</h4>
+
+                        <p>Direciones generales, presidencias, CEO’s, lideres de areas, etc.</p>
+
+                        <label class="labelAdd">
+                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingrese su usuario">
+                            <button class="btn btn--addInput">+</button>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="pyramid">
+
+                    <img src="resources/pyramid-mid.png" alt="">
+
+                    <div class="pyramidInfo">
+
+                        <h3 class="title">Nivel medio</h3>
+
+                        <h4 class="subTitle">Ejemplo</h4>
+
+                        <p>Directores, gerentes, administradores, etc.</p>
+                        <label class="labelAdd">
+                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingrese su usuario">
+                            <button class="btn btn--addInput">+</button>
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="pyramid">
+
+                    <img src="resources/pyramid-bottom.png" alt="">
+
+                    <div class="pyramidInfo">
+
+                        <h3 class="title">Nivel operacional</h3>
+
+                        <h4 class="subTitle">Ejemplo</h4>
+
+                        <p>Supervisores, jefes, etc.</p>
+
+                        <label class="labelAdd">
+                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingrese su usuario">
+                            <button class="btn btn--addInput">+</button>
+                        </label>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="upload">
+
+            <h3>Registro de usuarios</h3>
+            <p>La prueba requiere que se le mande a los usuarios un usuario de entrada, porfavor sube la informacion requerida como un documento de Excel para mandar la informacion. (Los usuarios que no tengan correo necesitaran ser llamadaos dentro de la compañia) </p>
+            <div class="card uploadContainer">  
+                <p>Poner archivo aqui</p>
+                <button class="btn">Upload</button>
+            </div>
+        </div>
+
+        <button class="btn btnFinishTest">Finalizar</button>
+    </main>
+</body>
+
+</html>

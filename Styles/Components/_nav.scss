@@ -1,0 +1,152 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  width: 100px;
+  min-width: 100px;
+  height: 90%;
+
+  padding: 2em 1em;
+
+  background: #1D1D1D;
+  color: white;
+  bottom: 0;
+
+  top: 10px;
+  overflow: hidden;
+  transition: width 0.2s linear;
+  border-radius: 0px 24px 24px 0px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    width: 200px;
+    transition: all 0.5s ease;
+
+    .btn--nav::after {
+      content: 'Crear prueba';
+      transition: all 0.5s ease;
+    }
+
+    .nav__item {
+      justify-content: flex-start;
+      padding-left: 1em;
+    }
+
+    .nav__item--home a::after {
+      content: "Home";
+    }
+
+    .nav__item--team a::after {
+      content: "Equipo";
+    }
+
+    .nav__item--herarchy a::after {
+      content: "Jerarquia";
+    }
+
+    .nav__item--atributes a::after {
+      content: "Atributos";
+    }
+
+    .nav__item--history a::after {
+      content: "Historial";
+    }
+
+    .nav__item--report a::after {
+      content: "Informe";
+    }
+
+    .nav__item--logout a::after {
+      content: "Salir";
+    }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    text-align: center;
+    display: flex;
+    transition: all 0.5s ease;
+    align-items: center;
+
+    img {
+      object-fit: contain;
+      aspect-ratio: 1/1;
+      width: 45px;
+      align-self: center;
+    }
+  }
+
+  ul {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+
+    list-style: none;
+
+    a {
+      img {
+        opacity: 0.6;
+      }
+
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      font-family: 'Poppins';
+      font-size: 16px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+
+      &:hover {
+
+        img {
+          opacity: 1;
+        }
+
+        color: white;
+      }
+
+    }
+
+    &--active {
+      position: relative;
+
+      &::after{
+        content: " ";
+
+        background-color: #fff;
+
+        width: 12px;
+        height: 100%;
+        border-radius: 0 8px 8px 0;
+
+        position: absolute;
+        top: 0;
+        left: -1em;
+      }
+      
+      a {
+
+        img {
+          opacity: 1;
+        }
+
+        color: white;
+      }
+    }
+  }
+}

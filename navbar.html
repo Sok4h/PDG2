@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+</head>
+
+<body>
+
+    <nav class="nav">
+        <ul>
+            <li>
+                <a href="" class="logo">
+                    <img src="resources/logo-menu.png" alt="">
+                </a>
+
+
+
+            </li>
+
+            <button class="btnNewTest">+</button>
+
+            <li class="active">
+                <a href="">
+
+                    <i class='bx bxs-home'></i>
+                    <span class="nav-item">Home</span>
+
+                </a>
+            </li>
+            <li>
+                <a href="">
+
+                    <i class='bx bxs-group'></i>
+
+                    <span class="nav-item">Equipos</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bxs-group'></i>
+
+                    <span class="nav-item">Jerarquias</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bxs-group'></i>
+
+                    <span class="nav-item">Jerarquias</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+
+                    <i class='bx bxs-group'></i>
+
+                    <span class="nav-item">Historial</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <div class="highlightsContainer">
+
+            <div class="highlight">
+
+                <p>Completada</p>
+                <h1>150/150</h1>
+                <p>Pruebas completadas</p>
+            </div>
+
+            <div class="highlight">
+
+                <p>Puntaje promedio</p>
+                <h1>57%</h1>
+                <p>Media general</p>
+            </div>
+
+            <div class="highlight">
+
+                <p>Mayor atributo</p>
+                <h1>87%</h1>
+                <p>Recursos</p>
+            </div>
+
+            <div class="highlight">
+
+                <p>Menor atributo</p>
+                <h1>9%</h1>
+                <p>Gobernanza</p>
+            </div>
+        </div>
+
+        <div class="chartContainer">
+
+            <div id="chart"></div>
+
+        </div>
+        <div class="horizontalChart">
+
+            <h2>Mejores atributos</h2>
+            <canvas id="hChart"></canvas>
+            <button class="detailsChartBtn">Ver detalles</button>
+
+        </div>
+
+
+
+        </div>
+
+
+        <div class="infoContainer">
+            <div class="titles">
+
+                <h2 class="infoTitle">Liderazgo</h2>
+                <h3 class="infoValue">9%</h3>
+                <h4 class="infoDescription">Media general</h4>
+
+            </div>
+
+            <div class="info">
+
+                <p class="suggestion">Tus trabajadores sienten que eres un modelo a seguir y que bajo tu liderazgo se
+                    podrá triunfar.</p>
+                <button class="detailsChartBtn">Ver detalles</button>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="lineChartContainer">
+
+            <canvas id="lineChart"></canvas>
+
+        </div>
+
+    </main>
+
+</body>
+<script src="script.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="./test.js"></script>
+
+</html>

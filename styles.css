@@ -1,0 +1,130 @@
+/*
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+* {
+
+    margin: 0;
+    padding: 0.3em;
+    box-sizing: border-box;
+}
+
+
+
+
+
+span {
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: bold;
+    color: #3E4D72;
+
+}
+
+
+.login {
+
+    padding: 0.3em;
+    display: flex;
+    justify-content: space-between;
+    height: 80%;
+    align-items: center;
+}
+
+
+
+p {
+
+    font-family: 'Poppins';
+}
+
+
+.loginTitle {
+
+    font-family: 'Poppins';
+    color: #021E66;
+    font-weight: bold;
+    font-size: 2em;
+    display: inline;
+
+
+}
+
+.inputs {
+
+    width: 40vw;
+}
+
+
+.loginDescription {
+
+    font-size: 1em;
+    color: #3E4D72;
+}
+
+.inputContainer {
+
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+
+
+     width: 40%; 
+
+}
+
+.loginForm {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.heroContainer {
+
+    height: 600px;
+}
+
+.heroImg {
+
+    height: 100%;
+    width: 100%;
+    border-radius: 32px;
+
+}
+*/
+
+/*
+.inputLogin {
+
+    max-width: 400px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-color: #1D1D1D;
+    border-width: 1px;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.labelLogin {
+
+    color: #1D1D1D;
+
+}
+
+.btnLogin {
+    max-width: 400px;
+    border-radius: 8px;
+    border: 1px solid #1D1D1D;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.btnLogin:hover {
+
+    background-color: #1D1D1D;
+    color: white;
+}
+*/

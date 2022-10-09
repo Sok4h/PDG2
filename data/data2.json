@@ -1,0 +1,247 @@
+{
+  "name": "Index",
+  "children": [
+    {
+      "name": "Estrategia",
+      "children": [
+        {
+          "name": "Definición",
+          "value": 60
+        },
+        {
+          "name": "Enfoque",
+          "value": 50
+        },
+        {
+          "name": "Entorno y Prospectiva",
+          "value": 50
+        },
+        {
+          "name": "Propósito",
+          "value": 80
+        },
+
+        {
+          "name": "Visión",
+          "value": 30
+        }
+
+      ]
+    },
+    {
+      "name": "Gobernanza",
+      "children": [
+        {
+          "name": "Organigrama",
+          "value": 50
+        },
+        {
+          "name": "Evaluación de ideas",
+          "value": 70
+        },
+        {
+          "name": "Habilitadores",
+          "value": 40
+        },
+        {
+          "name": "Indicadores",
+          "value": 60
+        },
+        {
+          "name": "Paneles de control",
+          "value": 40
+        }
+      ]
+    },
+
+    {
+      "name": "Colaboración",
+      "children": [
+        {
+          "name": "Fluidez",
+          "value": 100
+        },
+        {
+          "name": "Resultados",
+          "value": 50
+        },
+        {
+          "name": "Transparencia",
+          "value": 80
+        },
+        {
+          "name": "Interconexión",
+          "value": 10
+        },
+        {
+          "name": "Socios externos",
+          "value": 70
+        }
+      ]
+    }
+    ,
+
+    {
+      "name": "Clima",
+      "children": [
+        {
+          "name": "Creatividad",
+          "value": 30
+        },
+        {
+          "name": "Fallo y Error",
+          "value": 100
+        },
+        {
+          "name": "Franqueza",
+          "value": 50
+        },
+        {
+          "name": "Mentalidad de Cambio",
+          "value": 80
+        },
+        {
+          "name": "Toma de riesgos",
+          "value": 70
+        }
+      ]
+    }
+    ,
+
+    {
+      "name": "Personas",
+      "children": [
+        {
+          "name": "Conocimiento",
+          "value": 20
+        },
+        {
+          "name": "Diversidad",
+          "value": 30
+        },
+        {
+          "name": "Eventos",
+          "value": 80
+        },
+        {
+          "name": "Formación",
+          "value": 100
+        },
+        {
+          "name": "Reclutamiento",
+          "value": 50
+        }
+      ]
+    }
+    ,
+
+    {
+      "name": "Liderazgo",
+      "children": [
+        {
+          "name": "Acción",
+          "value": 50
+        },
+        {
+          "name": "Modelo a seguir",
+          "value": 20
+        },
+        {
+          "name": "Narrativas",
+          "value": 80
+        },
+        {
+          "name": "Patrocinio y apoyo",
+          "value": 50
+        },
+        {
+          "name": "Retar",
+          "value": 100
+        }
+      ]
+    }
+    ,
+
+    {
+      "name": "Procesos",
+      "children": [
+        {
+          "name": "Descubrimiento y empatía",
+          "value": 100
+        },
+        {
+          "name": "Ideación",
+          "value": 40
+        },
+        {
+          "name": "Validaciones y pruebas",
+          "value": 100
+        },
+        {
+          "name": "Evaluación y aprobación",
+          "value": 10
+        },
+        {
+          "name": "Protección de ideas",
+          "value": 70
+        }
+      ]
+    }
+
+    ,
+
+    {
+      "name": "Recursos",
+      "children": [
+        {
+          "name": "Dinero",
+          "value": 100
+        },
+        {
+          "name": "Espacios",
+          "value": 50
+        },
+        {
+          "name": "Expertos",
+          "value": 80
+        },
+        {
+          "name": "Recompensas",
+          "value": 20
+        },
+        {
+          "name": "Tecnología",
+          "value": 70
+        }
+      ]
+    }
+
+    ,
+
+    {
+      "name": "Resultados",
+      "children": [
+        {
+          "name": "Éxito externo",
+          "value": 100
+        },
+        {
+          "name": "Éxito Financiero",
+          "value": 50
+        },
+        {
+          "name": "Éxito General",
+          "value": 80
+        },
+        {
+          "name": "Éxito Personal",
+          "value": 10
+        },
+        {
+          "name": "Fracasos y cierres",
+          "value": 100
+        }
+      ]
+    }
+  ]
+}

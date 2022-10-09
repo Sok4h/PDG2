@@ -1,0 +1,77 @@
+.btn {
+
+  border-radius: 8px;
+  border: 1px solid #1D1D1D;
+  background-color: white;
+  padding: 10px;
+  cursor: pointer;
+
+  &--login {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #1D1D1D;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  &--nav {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid white;
+    background-color: #1D1D1D;
+
+    color: white;
+    font-family: 'Poppins';
+
+    font-size: 16px;
+    line-height: 16px;
+    cursor: pointer;
+    font-weight: bold;
+
+
+    &::after {
+      content: "+"
+    }
+
+  }
+
+  &:hover {
+    background-color: #1D1D1D;
+    color: white;
+  }
+
+  &--filter{
+
+     border: 1px solid #0073A7;
+     &:hover{
+
+      background-color: #0073A7;
+      color: white;
+     }
+  }
+  &--active{
+
+    background-color: #0073A7;
+    color: white;
+    border: none;
+  }
+
+  &--addInput{
+
+    padding: 9px;
+    border-radius: 8px;
+    background-color: #578AEF;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    color: white;
+    font-weight: bold;
+    border: none;
+  }
+}
+
+.btnFinishTest{
+
+  width: 50%;
+  margin: 0;
+}

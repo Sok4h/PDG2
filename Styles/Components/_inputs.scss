@@ -1,0 +1,28 @@
+.inputs {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #1D1D1D;
+  padding: 8px;
+  &--login {
+    margin-bottom: 8px;
+    border-color: #1D1D1D;
+    border-width: 1px;
+
+    padding: 8px;
+  }
+
+  &--form {
+
+    width: 80%;
+    margin-top: 8px;
+  }
+  &--add {
+
+    width: 75%;
+    border-radius: 8px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  
+}
