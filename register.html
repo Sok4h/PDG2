@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDG</title>
+
+    <link rel="stylesheet" href="./Styles/style.css">
+</head>
+
+<body>
+
+    <img class="logo" src="resources/logo.svg" alt="">
+
+    <div class="login">
+
+        <div class="login login__container">
+
+            <div class="login login__form">
+
+                <h1 class="login__title">Registrate</h1>
+                <p class="login__description">
+                    Bienvenido a Index, tu plataforma de innovación de confianza.
+                </p>
+
+                <span class=" label label--login">Nombre</span>
+                <input class="inputs inputs--login" type="text" name="name" id="registerName"
+                    placeholder="Ingrese su nombre">
+
+                    <span class=" label label--login">Correo</span>
+                <input class="inputs inputs--login" type="text" name="email" id="registerEmail"
+                    placeholder="Ingrese su correo">
+
+                <span class="label label--login">Contraseña</span>
+                <input class="inputs inputs--login" type="password" name="password" id="registerPassword"
+                    placeholder="Ingrese su contraseña">
+
+                <button class="btn btn--register" id="btnRegister">Registrarse</button>
+            </div>
+
+            <p>¿Ya tienes una cuenta?  <a href="login.html"><span  class="linkRegister" id="loginSpan">Ingresar</span></p></a>
+
+        </div>
+
+        <div class="login login__imgContainer">
+            <img class="login login__img" src="resources/imgLogin.png" alt="">
+
+        </div>
+
+
+
+    </div>
+
+   
+
+
+</body>
+
+</html>
+
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+
+<script src="scripts/firebase.js"></script>
+<script src="scripts/register.js"></script>

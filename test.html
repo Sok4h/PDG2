@@ -23,13 +23,13 @@
             <div class="input-box">
 
                 <span class="labelInput">Nombre de la compañia</span>
-                <input class="inputs inputs--form" type="text" placeholder="Ingrese su usuario">
+                <input class="inputs inputs--form" id="companyName" type="text" placeholder="">
             </div>
 
             <div class="input-box">
 
                 <span class="labelInput">Sector de la compañia</span>
-                <input class="inputs inputs--form" type="text" placeholder="Ingrese su usuario">
+                <input class="inputs inputs--form" id="companySector" type="text" placeholder="Ingrese su usuario">
             </div>
 
             <div class="input-box">
@@ -59,20 +59,24 @@
 
                 <span class="labelInput">Cantidad de personas en la compañia</span>
 
-                <input class="inputs inputs--form" type="number" placeholder="Ingrese su usuario">
+                <input class="inputs inputs--form"  id="numberEmployers" type="number" placeholder="Ingrese su usuario">
             </div>
 
-            <div class="input-box">
+            <div class="input-box departmentContainer">
 
                 <div class="infoContainer">
                     <span class="labelInput">Departamentos</span>
                     <i class='bx bxs-info-circle' id="companySize"></i>
 
                 </div>
-                <label class="labelAdd">
-                    <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingrese su usuario">
-                    <button class="btn btn--addInput">+</button>
-                </label>
+                <div class="labelAdd">
+                    <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingenieria, Diseño, etc.">
+                    <button class="btn btn--deleteInput">+</button>
+                </div>
+                <div class="labelAdd">
+                    <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingenieria, Diseño, etc.">
+                    <button class="btn btn--deleteInput">+</button>
+                </div>
 
             </div>
 
@@ -211,10 +215,11 @@
 
                         <p>Direciones generales, presidencias, CEO’s, lideres de areas, etc.</p>
 
-                        <label class="labelAdd">
+                        <div class="labelAdd">
                             <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingrese su usuario">
                             <button class="btn btn--addInput">+</button>
-                        </label>
+                        </div>
+                        
                     </div>
 
                 </div>
@@ -277,4 +282,5 @@
     </main>
 </body>
 
+<script src="scripts/test.js"></script>
 </html>

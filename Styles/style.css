@@ -25,6 +25,10 @@ p {
   display: none;
 }
 
+.linkRegister {
+  cursor: pointer;
+}
+
 .inputs {
   width: 100%;
   border-radius: 8px;
@@ -67,6 +71,14 @@ p {
   padding: 10px;
   cursor: pointer;
 }
+.btn--register {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #1D1D1D;
+  background-color: white;
+  padding: 10px;
+  cursor: pointer;
+}
 .btn--nav {
   width: 100%;
   padding: 10px;
@@ -102,6 +114,16 @@ p {
   padding: 9px;
   border-radius: 8px;
   background-color: #578AEF;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+.btn--deleteInput {
+  padding: 9px;
+  border-radius: 8px;
+  background-color: #EC6969;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   color: white;
@@ -318,6 +340,11 @@ p {
   aspect-ratio: 4/5;
 }
 
+.logo {
+  margin-left: 3em;
+  margin-top: 1em;
+}
+
 .dashboard {
   display: flex;
   height: 100vh;
@@ -378,6 +405,16 @@ p {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.emptyDashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1em;
 }
 
 .sunburstInfo {

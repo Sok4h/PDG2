@@ -27,6 +27,11 @@ p {
   display: none;
 }
 
+.linkRegister{
+
+  cursor: pointer;
+}
+
 @import './Components/inputs';
 @import './Components/label';
 @import './Components/btn';

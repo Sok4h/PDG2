@@ -15,6 +15,15 @@
     cursor: pointer;
   }
 
+  &--register {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #1D1D1D;
+    background-color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+
   &--nav {
     width: 100%;
     padding: 10px;
@@ -62,6 +71,18 @@
     padding: 9px;
     border-radius: 8px;
     background-color: #578AEF;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    color: white;
+    font-weight: bold;
+    border: none;
+  }
+
+  &--deleteInput{
+
+    padding: 9px;
+    border-radius: 8px;
+    background-color: #EC6969;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     color: white;

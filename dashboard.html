@@ -16,7 +16,7 @@
 
 <body class="dashboard">
 
-    <section class="nav__container">
+    <section class="nav__container ">
         <nav class="nav">
 
             <a href="" class="nav__logo">
@@ -84,189 +84,24 @@
     </section>
 
 
-    <main class="dashboard__content">
+   
 
-        <section class="highlightsContainer">
-
-            <div class="card">
-
-                <p class="card__title">Completada</p>
-                <div class="valueContainer">
-                    <h1 class="card__value">150/150</h1>
-                </div>
-
-                <p class="highlight__description">Pruebas completadas</p>
-            </div>
-
-            <div class="card">
-
-                <p class="card__title">Completada</p>
-                <div class="valueContainer">
-                    <h1 class="card__value">150/150</h1>
-                </div>
-
-                <p class="highlight__description">Pruebas completadas</p>
-            </div>
-
-            <div class="card">
-
-                <p class="card__title">Completada</p>
-                <div class="valueContainer">
-                    <h1 class="card__value">150/150</h1>
-                </div>
-
-                <p class="highlight__description">Pruebas completadas</p>
-            </div>
-
-            <div class="card">
-
-                <p class="card__title">Completada</p>
-                <div class="valueContainer">
-                    <h1 class="card__value">150/150</h1>
-                </div>
-
-                <p class="highlight__description">Pruebas completadas</p>
-            </div>
-
-
-
-        </section>
-
-        <section class="sunbust__container">
-
-            <div class="sunbust__chart card" id="chart"></div>
-
-
-            <section class="sunbust__infoContainer">
-
-                <!-- Muestra info al darle click al grafico -->
-                <div class="sunbust__info card card--row">
-                    <div class="titles">
-
-                        <h2 class="infoTitle">Liderazgo</h2>
-                        <h3 class="infoValue">9%</h3>
-                        <h4 class="infoDescription">Media general</h4>
-
-                    </div>
-
-                    <div class="info">
-
-                        <p class="suggestion">Tus trabajadores sienten que eres un modelo a seguir y que bajo tu
-                            liderazgo
-                            se podrá triunfar.</p>
-                        <button class="detailsChartBtn btn">Ver detalles</button>
-                    </div>
-
-
-
-                </div>
-
-                <div class="sunbust__details card">
-
-                    <h2>Mejores atributos</h2>
-                    <canvas id="hChart"></canvas>
-                    <button class="detailsChartBtn btn">Ver detalles</button>
-
-                </div>
-
-            </section>
-
-
-
-        </section>
-
-        <section class="proficiency__container">
-            <div class="card proficiency__view">
-
-
-
-                <h2 class="infoTitle">Nivel de proficiencia promedio</h2>
-                <h1 class="infoValue">57%</h1>
-                <h4 class="infoDescription">Principiante</h4>
-
-                <p>Tus trabajadores sienten que los lideres de equipos deben dar mejor ejemplo y empujarlosa hacer mas.
-                </p>
-                <button class="detailsChartBtn btn">Ver detalles</button>
-
-
-            </div>
-
-            <div class="card proficiency__resume">
-                <div class="proficiency__resume__titles">
-                    <h3>Atributo</h3>
-                    <h3>Porcentaje</h3>
-                    <h3>Proficiencia</h3>
-                </div>
-
-                <div class="proficiency__resume__content">
-                    <div class="proficiency__resume__names">
-                        <p>Recursos</p>
-                        <p>Colaboración</p>
-                        <p>Estrategia</p>
-                        <p>Liderazgo</p>
-                        <p>Personas</p>
-                        <p>Resultados</p>
-                        <p>Clima</p>
-                        <p>Gobernanza</p>
-                        <p>Procesos</p>
-                    </div>
-
-                    <div class="proficiency__resume__porcentage">
-                        <p>%</p>
-                        <p>%</p>
-                        <p>%</p>
-                        <p>%</p>
-                        <p>%</p>
-                        <p>%</p>
-                        <p>%</p>
-                        <p>%</p>
-                        <p>%</p>
-                    </div>
-
-                    <div class="proficiency__resume__calification">
-                        <p>Proficiente</p>
-                        <p>Proficiente</p>
-                        <p>Proficiente</p>
-                        <p>Competente</p>
-                        <p>Competente</p>
-                        <p>Principiante</p>
-                        <p>Principiante</p>
-                        <p>Principiante</p>
-                        <p>Principiante</p>
-                    </div>
-
-                </div>
-
-                <button class="detailsChartBtn btn">Ver detalle</button>
-            </div>
-        </section>
-
-        <!-- Grafico complejo -->
-
-        <div class="card complexChart">
-
-            <h2 class="complexChart__title">Liderazgo</h3>
-                <h3 class="complexChart__description">Puntaje promedio de las preguntas</h4>
-                    <p class="complexChart__sortBy">Ordenar segun:</p>
-
-                    <div class="btnFilterContainer">
-
-                        <button class="btn btn--active btn--filter">Alfabeticamente</button>
-                        <button class="btn btn--filter">Mayor Valor</button>
-                        <button class="btn btn--filter">Menor Valor</button>
-                    </div>
-                    <canvas id="lineChart"></canvas>
-
-        </div>
-
-        <div class="card">
-
-
-        </div>
-    </main>
+    
 </body>
+
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+
+<script src="scripts/firebase.js"></script>
+
+
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="script.js"></script>
-<script src="./test.js"></script>
+<script src="./scripts/script.js"></script>
+<script src="./scripts/dashboard.js"></script>
+
+<script src="./scripts/complexGraph.js"></script>
 
 </html>
