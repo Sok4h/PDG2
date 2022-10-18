@@ -18,18 +18,18 @@
 
         <h2 class="formTitle">INNLAB innovation index</h2>
         <h3 class="formSubTitle">Configuracion prueba</h3>
-        <form class="testForm">
+        <form class="testForm" >
 
             <div class="input-box">
 
                 <span class="labelInput">Nombre de la compañia</span>
-                <input class="inputs inputs--form" id="companyName" type="text" placeholder="">
+                <input class="inputs inputs--form" id="companyName" name="companyName" type="text" required>
             </div>
 
             <div class="input-box">
 
                 <span class="labelInput">Sector de la compañia</span>
-                <input class="inputs inputs--form" id="companySector" type="text" placeholder="Ingrese su usuario">
+                <input class="inputs inputs--form" id="companySector" name="companyArea" required type="text" placeholder="Ingrese su usuario">
             </div>
 
             <div class="input-box">
@@ -59,7 +59,7 @@
 
                 <span class="labelInput">Cantidad de personas en la compañia</span>
 
-                <input class="inputs inputs--form"  id="numberEmployers" type="number" placeholder="Ingrese su usuario">
+                <input class="inputs inputs--form"  name="numberEmployers" id="numberEmployers" type="number" placeholder="Ingrese su usuario">
             </div>
 
             <div class="input-box departmentContainer">
@@ -71,12 +71,9 @@
                 </div>
                 <div class="labelAdd">
                     <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingenieria, Diseño, etc.">
-                    <button class="btn btn--deleteInput">+</button>
+                    <button type='button' class="btn btn--addInput">+</button>
                 </div>
-                <div class="labelAdd">
-                    <input class="inputs inputs--form inputs--add" type="text" placeholder="Ingenieria, Diseño, etc.">
-                    <button class="btn btn--deleteInput">+</button>
-                </div>
+                
 
             </div>
 
@@ -115,7 +112,7 @@
                     <i class='bx bxs-badge-check'></i>
                     <p>Población</p>
 
-                    <span>100</span>
+                    <span id="population">100</span>
 
                 </div>
 
@@ -139,9 +136,9 @@
                 <div class="trustbox" id="errorMargin">
 
                     <i class='bx bxs-user-check'></i>
-                    <p>Muestra</p>
+                    <p >Muestra</p>
 
-                    <span>na</span>
+                    <span id="sampleSize">na</span>
                 </div>
             </div>
 
@@ -149,7 +146,7 @@
 
 
         <!--  Departamento -->
-        <section class="trustLevel">
+        <!-- <section class="trustLevel">
             <p>Para asegurar la fiabilidad de datos en el equipo o departamento N.A la prueba debe ser realizada por
                 almenos:</p>
 
@@ -190,7 +187,7 @@
                 </div>
             </div>
 
-        </section>
+        </section> -->
 
         <div class="piramidJerarchy">
 
@@ -207,7 +204,7 @@
 
                     <img src="resources/pyramid-top.png" alt="">
 
-                    <div class="pyramidInfo">
+                    <div class="pyramidInfo" id="pyramidTop">
 
                         <h3 class="title">Nivel superior</h3>
 
@@ -224,7 +221,7 @@
 
                 </div>
 
-                <div class="pyramid">
+                <div class="pyramid" id="pyramidMid">
 
                     <img src="resources/pyramid-mid.png" alt="">
 
@@ -248,7 +245,7 @@
 
                     <img src="resources/pyramid-bottom.png" alt="">
 
-                    <div class="pyramidInfo">
+                    <div class="pyramidInfo" id="pyramidBottom">
 
                         <h3 class="title">Nivel operacional</h3>
 
@@ -278,9 +275,16 @@
             </div>
         </div>
 
-        <button class="btn btnFinishTest">Finalizar</button>
+        <button  type="submit" class="btn btnFinishTest">Finalizar</button>
     </main>
 </body>
 
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+
+<script src="scripts/firebase.js"></script>
 <script src="scripts/test.js"></script>
 </html>

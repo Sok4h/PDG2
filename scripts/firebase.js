@@ -13,3 +13,16 @@ const firebaseConfig = {
   const db = firebase.firestore();
   
   const auth = firebase.auth();
+  let  currentUser
+
+  auth.onAuthStateChanged((user)=>{
+
+    
+    if(user){
+
+        currentUser=user
+        console.log(user)
+      
+    }
+
+})

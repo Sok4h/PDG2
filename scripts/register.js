@@ -2,9 +2,15 @@
 
 const registerEmail = document.querySelector("#registerEmail")
 const registerName = document.querySelector("#registerName")
+
 const btnRegister = document.querySelector("#btnRegister")
 const registerPassword = document.querySelector("#registerPassword")
  
+// loginSpan,addEventListener("click",()=>{
+
+//   window.location.href = "login.html"
+
+// })
 
 btnRegister.addEventListener("click", () => {
 
