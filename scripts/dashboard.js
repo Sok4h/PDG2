@@ -21,7 +21,7 @@ auth.onAuthStateChanged((user)=>{
             if(!docSnapshot.empty){
         
                 //alert("existe")
-
+                
                 docSnapshot.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
