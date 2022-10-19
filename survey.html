@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey</title>
+    <link rel="stylesheet" href="Styles/style.css">
+</head>
+
+<body>
+
+
+    <div class="card survey">
+
+        <h4 class="survey__title"></h4>
+
+        <div class="levels">
+
+            <div class="levelContainer">
+
+                <h5>Bajo</h5>
+                <img id="btnInfoLow" src="Iconos/Iconos/infoIcono.png" alt="">
+            </div>
+
+            <h5>Neutro</h5>
+
+            <div class="levelContainer">
+                <img id="btnInfoHigh" src="Iconos/Iconos/infoIcono.png" alt="">
+                <h5>Alto</h5>
+            </div>
+
+        </div>
+
+
+        <form class="options">
+
+            <input type="radio" name="optionSurvey" id="-3" class="hidebox" value="-3">
+            <label for="-3" class="label-radio">
+
+                <div class="display-box">
+
+                    -3
+                </div>
+            </label>
+
+            <input type="radio" name="optionSurvey" id="-2" class="hidebox" value="-2">
+            <label for="-2" class="label-radio">
+
+                <div class="display-box">
+
+                    -2
+                </div>
+            </label>
+
+
+            <input type="radio" name="optionSurvey" id="-1" class="hidebox" value="-1">
+            <label for="-1" class="label-radio">
+
+                <div class="display-box">
+
+                    -1
+                </div>
+            </label>
+
+            <input type="radio" name="optionSurvey" id="0" class="hidebox" value="0">
+            <label for="0" class="label-radio">
+
+                <div class="display-box">
+
+                    0
+                </div>
+            </label>
+
+            <input type="radio" name="optionSurvey" id="1" class="hidebox" value="1">
+            <label for="1" class="label-radio">
+
+                <div class="display-box">
+
+                    1
+                </div>
+            </label>
+
+            <input type="radio" name="optionSurvey" id="2" class="hidebox" value="2">
+            <label for="2" class="label-radio">
+
+                <div class="display-box">
+
+                    2
+                </div>
+            </label>
+
+            <input type="radio" name="optionSurvey" id="3" class="hidebox" value="3">
+            <label for="3" class="label-radio">
+
+                <div class="display-box">
+
+                    3
+                </div>
+            </label>
+
+            
+         
+
+        </form>
+        <dialog class="dialogSurvey">
+
+            <p class="dialogInfo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi sequi explicabo
+                animi autem modi rem
+                debitis dolore, quae vel labore voluptates, beatae quod exercitationem ipsam ad iste, necessitatibus
+                laudantium ma iores!</p>
+
+            <button class="btn btnCloseModal" >close</button>
+        </dialog>
+        <button class="btn btn--surveyActive" id="btnNextQuestion">Continuar</button>
+    </div>
+
+    <div class="card surveyBasicInfo">
+
+        <span class="label label--login">Cuanto tiempo llevas en la empresa?</span>
+        <input class="inputs inputs--login" type="number" name="numberYears" id="numberYears"
+            placeholder="años lleva en la empresa">
+
+
+            <span class="label ">Area de la compañia</span>
+
+            <select class="selectForm" name="companySize" id="companyAreas">
+
+            </select>
+
+            <button class="btn  btn--surveyActive" id="btnBasicInfo">Continuar</button>
+    </div>
+</body>
+
+</html>
+
+<script src="scripts/survey.js"></script>
