@@ -2,9 +2,15 @@
 //let currentUser
 
 const dashboardBody = document.querySelector(".dashboard")
+const emptyDashboard = document.querySelector(".emptyDashboard")
+const dashboard = document.querySelector(".dashboard__content")
+const completedCard = document.querySelector("#completedCard")
 console.log(auth)
 let currentTest
+let testAnswered
+let answers=[]
 
+dashboard.style.display="none"
 auth.onAuthStateChanged((user)=>{
 
     
@@ -26,6 +32,35 @@ auth.onAuthStateChanged((user)=>{
                 docSnapshot.forEach((doc) => {
                     console.log(doc.data())
                     console.log(doc.id)
+                    currentTest=doc.data()
+                    emptyDashboard.style.display="none"
+                    dashboard.style.display="flex"
+                     
+                    
+                    //obtiene respuestas
+
+                    db.collection("answers").get().then(function(querySnapshot) {
+                        console.log(querySnapshot.size);
+
+                        querySnapshot.forEach((doc) => {
+
+                                answers.push(doc.data())
+                        })
+                        testAnswered=querySnapshot.size
+                    }).then(()=>{
+
+                        loadBarChart(answers)
+
+                        if(testAnswered!=currentTest.numberEmployers){
+
+                            completedCard.querySelector(".card__title").textContent="En proceso"
+                        }
+                        completedCard.querySelector(".card__value").textContent=`${testAnswered}/${currentTest.numberEmployers}`
+                    });
+
+                    //load highlights
+
+                    
 
                     // doc.data() is never undefined for query doc snapshots
                     //console.log(doc.id, " => ", doc.data());
@@ -35,15 +70,7 @@ auth.onAuthStateChanged((user)=>{
             }
             else{
         
-                //alert("no existe")
-
-                const div = document.createElement('div');
-                div.className="emptyDashboard"
-                
-                div.innerHTML= ` <h2>No hay ninguna prueba</h2>
-                <img src="Iconos/Iconos/emptyDashboard.png" alt="">
-                <a href="test.html"><button class="btn">Crear prueba</button></a>`
-                dashboardBody.append(div)
+               //emptyDashboard.style.display
         
             }
         
@@ -55,10 +82,6 @@ auth.onAuthStateChanged((user)=>{
 })
 
 
-if(user){
-
-
-}
 
 
 

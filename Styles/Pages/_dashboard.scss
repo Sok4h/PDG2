@@ -19,9 +19,12 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    width: 100%;
 
     .card{
         width: 100%;
+        height: 100%;
+        justify-content: space-evenly;
     }
 }
 
@@ -30,7 +33,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 20px
+        gap: 20px;
+        width: 100%;
     }
 
     &__chart, &__infoContainer{

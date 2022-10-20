@@ -15,6 +15,7 @@ const emailTest = document.querySelector("#emailTest")
 const surveyEmail = document.querySelector("#surveyEmail")
 let currentQuestion = 0
 let preguntas = []
+//const _ = require("lodash");
 
 
 const queryString = window.location.search;
@@ -66,8 +67,8 @@ function verifyTest(id) {
                 console.log("correo o id no valido")
                 return
             }
-             
-            respuesta.email=emailTest.value
+
+            respuesta.email = emailTest.value
             console.log("niceee")
 
             startSurvey()
@@ -98,14 +99,92 @@ function startSurvey() {
     let pregunta2 = {
 
         categoria: "Estrategia",
-        subcategoria: "Definición",
+        subcategoria: "Entorno y Prospectiva",
         pregunta: "La organización analiza constantemente el entorno y las tendencias para definir las apuestas e iniciativas que se deban desarrollar a futuro.",
         hintHigh: "este es el maximo2",
         hintLow: "este es el minimo2"
     }
 
+    let pregunta3 = {
+
+        categoria: "Estrategia",
+        subcategoria: "Visión",
+        pregunta: "La organización analiza constantemente el entorno y las tendencias para definir las apuestas e iniciativas que se deban desarrollar a futuro.",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+
+
+    let pregunta4 = {
+
+        categoria: "Gobernanza",
+        subcategoria: "Evaluación de ideas",
+        pregunta: "La organización ofrece claridad y directrices sobre qué ideas se están buscando y sobre cómo se evaluarán y gestionarán para llevarlas a la realidad. Se tienen claras las reglas de juego para participar en las iniciativas de innovación.",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta5 = {
+
+        categoria: "Gobernanza",
+        subcategoria: "Habilitadores",
+        pregunta: "Las políticas y reglas de la institución en torno a la innovación permiten explorar nuevas ideas y habilitan a las personas para llevar esos proyectos a altos niveles de desarrollo e implementación.",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta6 = {
+
+        categoria: "Gobernanza",
+        subcategoria: "Indicadores",
+        pregunta: "Se cuenta con un sistema integral de métricas o indicadores que miden las entradas, el desarrollo y los resultados del sistema de innovación (Personas, Proyectos, Avances, Costos, Rentabilidad, etc). [→]",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+
+    let pregunta7 = {
+
+        categoria: "Clima",
+        subcategoria: "Creatividad",
+        pregunta: `El ambiente de la organización motiva a pensar creativamente y "por fuera de la caja" para generar ideas y propuestas novedosas y diferenciadas.`,
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta8 = {
+
+        categoria: "Clima",
+        subcategoria: "Franqueza",
+        pregunta: "Aquí podemos expresar de manera libre y sin miedos, nuestras opiniones, dudas, propuestas, críticas y sugerencias sobre situaciones, proyectos o iniciativas de innovación. [→]",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta9 = {
+
+        categoria: "Clima",
+        subcategoria: "Toma de riesgos",
+        pregunta: "La organización fomenta que persigamos libremente nuestra curiosidad y que tomemos riesgos para explorar nuevas oportunidades e ideas con un alto potencial de generar valor. [→]",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
     preguntas.push(pregunta)
     preguntas.push(pregunta2)
+    preguntas.push(pregunta3)
+    preguntas.push(pregunta4)
+    preguntas.push(pregunta5)
+    preguntas.push(pregunta6)
+    preguntas.push(pregunta7)
+    preguntas.push(pregunta8)
+    preguntas.push(pregunta9)
+
+    console.log(preguntas)
+
+    // let newPreguntas =_.shuffle(preguntas);
+    //console.log(newPreguntas)
+
 
     setupQuestions(currentQuestion)
 
@@ -121,14 +200,6 @@ function startSurvey() {
 
     }
 
-
-    let encuesta = {
-
-        departamentos: ["Ingenieria", "Diseño", "Marketing"]
-
-    }
-
-    
 
     openModalHigh.onclick = () => {
 
@@ -159,8 +230,8 @@ function startSurvey() {
             alert("complete todos los campos")
         } else {
 
-
-            respuesta.numberYears = numberYears.value
+            respuesta.testId = testId
+            respuesta.numberYears = parseInt(numberYears.value)
             respuesta.area = companyAreas.value
             surveyBasicInfo.style.display = "none"
             survey.style.display = "flex"
@@ -178,9 +249,56 @@ function startSurvey() {
 
         if (currentQuestion == preguntas.length - 1) {
 
+            let Estrategia=0, Gobernanza=0, Clima =0
+            for (let i = 0; i < preguntas.length; i++) {
+
+                switch (preguntas[i].categoria) {
+
+
+                    case "Estrategia":
+                        Estrategia += parseInt(preguntas[i].respuesta)
+                        
+
+                        console.log("Estrategia "+Estrategia)
+                        break
+
+                    case "Gobernanza":
+
+                        Gobernanza += parseInt(preguntas[i].respuesta)
+
+                        console.log("Gobernanza "+Gobernanza)
+
+                        break
+                        
+                    case "Clima":
+
+                        Clima += parseInt(preguntas[i].respuesta)
+
+                        console.log("Clima "+Clima)
+
+                        break
+
+                }
+            }
+
+            let values =[]
+            let tempValue1 = {name:"Estrategia",value:Estrategia}
+            let tempValue2 = {name:"Gobernanza",value:Gobernanza}
+            let tempValue3 = {name:"Clima",value:Clima}
+            
+            values.push(tempValue1)
+            values.push(tempValue2)
+            values.push(tempValue3)
+
+            respuesta.values=values
+            console.log(respuesta)
+            console.log(Gobernanza)
+            console.log(Clima)
+
+
             respuesta.respuestas = preguntas
-             
-            db.collection("answers").add(respuesta).then(()=>{
+
+            db.collection("answers").add(respuesta).then(() => {
 
                 dialogTitle.textContent = "prueba completada exitosamente,gracias por participar"
                 closeDialog.textContent = "Finalizar"
@@ -190,7 +308,7 @@ function startSurvey() {
                     window.location.href = "dashboard.html"
                 })
             })
-           
+
         }
         else {
 
