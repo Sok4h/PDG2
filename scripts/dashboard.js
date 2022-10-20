@@ -5,10 +5,20 @@ const dashboardBody = document.querySelector(".dashboard")
 const emptyDashboard = document.querySelector(".emptyDashboard")
 const dashboard = document.querySelector(".dashboard__content")
 const completedCard = document.querySelector("#completedCard")
-console.log(auth)
+const cardAverage = document.querySelector("#cardAverage")
+const cardAverageValue = cardAverage.querySelector(".card__value")
+const bestAttribute = document.querySelector("#bestAttribute")
+const worstAttribute = document.querySelector("#worstAttribute")
+
+const bestAttributeValue = bestAttribute.querySelector(".card__value")
+const bestAttributeName = bestAttribute.querySelector(".highlight__description")
+
+const worstAttributeValue = worstAttribute.querySelector(".card__value")
+const worstAttributeName = worstAttribute.querySelector(".highlight__description")
 let currentTest
 let testAnswered
-let answers=[]
+let answers2=[]
+
 
 dashboard.style.display="none"
 auth.onAuthStateChanged((user)=>{
@@ -44,12 +54,12 @@ auth.onAuthStateChanged((user)=>{
 
                         querySnapshot.forEach((doc) => {
 
-                                answers.push(doc.data())
+                                answers2.push(doc.data())
                         })
                         testAnswered=querySnapshot.size
                     }).then(()=>{
 
-                        loadBarChart(answers)
+                        //loadBarChart(answers)
 
                         if(testAnswered!=currentTest.numberEmployers){
 
@@ -67,6 +77,19 @@ auth.onAuthStateChanged((user)=>{
                 });
 
                 //?testId=8INIveodekK2Fj8ObEK7
+
+                console.log(totalValue)
+                cardAverageValue.textContent= Math.round(totalValue *100/4500) +"%" 
+
+                bestAttributeValue.textContent= Math.round(dataSorted[0].value *100/500) +"%"
+                bestAttributeName.textContent=dataSorted[0].name
+
+                console.log(dataSorted[dataSorted.length-1])
+                
+                worstAttributeValue.textContent= Math.round(dataSorted[dataSorted.length-1].value *100/500) +"%"
+                worstAttributeName.textContent=dataSorted[dataSorted.length-1].name
+
+
             }
             else{
         

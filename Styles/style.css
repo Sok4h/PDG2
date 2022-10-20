@@ -294,8 +294,28 @@ button {
   cursor: pointer;
 }
 
+.label-select {
+  display: flex;
+  border: 1px solid #021E66;
+  text-align: center;
+  border-radius: 8px;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 4px;
+  cursor: pointer;
+}
+
 input[type=radio]:checked + .label-radio {
   background-color: #021E66;
+  color: white;
+}
+
+input[type=radio]:checked + .label-select {
+  background-color: #0073A7;
   color: white;
 }
 
@@ -577,6 +597,12 @@ input[type=radio]:checked + .label-radio {
 }
 .proficiency__container .proficiency__view .infoValue {
   font-size: 48px;
+}
+
+.btnFilterContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .formTitle {

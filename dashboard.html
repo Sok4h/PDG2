@@ -96,7 +96,7 @@
                 <p class="highlight__description">Pruebas completadas</p>
             </div>
 
-            <div class="card">
+            <div class="card" id="cardAverage">
 
                 <p class="card__title">Puntaje promedio</p>
                 <div class="valueContainer">
@@ -106,7 +106,7 @@
                 <p class="highlight__description">Media general</p>
             </div>
 
-            <div class="card">
+            <div class="card" id="bestAttribute">
 
                 <p class="card__title">Mayor atributo</p>
                 <div class="valueContainer">
@@ -116,7 +116,7 @@
                 <p class="highlight__description">Recursos</p>
             </div>
 
-            <div class="card">
+            <div class="card" id="worstAttribute">
 
                 <p class="card__title">Menor atributo</p>
                 <div class="valueContainer">
@@ -247,12 +247,37 @@
                 <h3 class="complexChart__description">Puntaje promedio de las preguntas</h4>
                     <p class="complexChart__sortBy">Ordenar segun:</p>
 
-                    <div class="btnFilterContainer">
+                    <form class="btnFilterContainer" id="filterLineChart">
 
-                        <button class="btn btn--active btn--filter">Alfabeticamente</button>
-                        <button class="btn btn--filter">Mayor Valor</button>
-                        <button class="btn btn--filter">Menor Valor</button>
-                    </div>
+                        <input type="radio" checked="true" name="sortLine" id="highLine" class="hidebox" value="0">
+                        <label for="highLine" class=" label-select">
+
+                            <div class="display-box">
+
+                                Mayor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="lowLine" class="hidebox" value="1">
+                        <label for="lowLine" class=" label-select">
+
+                            <div class="display-box">
+
+                                Menor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="alphaLine" class="hidebox" value="2">
+                        <label for="alphaLine" class="label-select">
+
+                            <div class="display-box">
+
+                                Alfabeticamente
+                            </div>
+                        </label>
+
+
+                    </form>
                     <canvas id="lineChart"></canvas>
 
         </div>
@@ -263,23 +288,50 @@
                 <h3 class="complexChart__description">Puntaje promedio de las preguntas</h4>
                     <p class="complexChart__sortBy">Ordenar segun:</p>
 
-                    <div class="btnFilterContainer">
+                    <form class="btnFilterContainer" id="filterChartByDepartment">
 
-                        <button class="btn btn--active btn--filter">Alfabeticamente</button>
-                        <button class="btn btn--filter">Mayor Valor</button>
-                        <button class="btn btn--filter">Menor Valor</button>
-                    </div>
+                        <input type="radio" checked="true" name="optionSort" id="0" class="hidebox" value="0">
+                        <label for="0" class=" label-select">
+
+                            <div class="display-box">
+
+                                Mayor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="optionSort" id="1" class="hidebox" value="1">
+                        <label for="1" class="label-select">
+
+                            <div class="display-box">
+
+                                Menor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="optionSort" id="2" class="hidebox" value="2">
+                        <label for="2" class="label-select">
+
+                            <div class="display-box">
+
+                                Alfabeticamente
+                            </div>
+                        </label>
+
+
+                    </form>
                     <canvas id="barChartDepartments"></canvas>
-
         </div>
+
+
+        
     </main>
     <div class="emptyDashboard">
-    <h2>No hay ninguna prueba</h2>
-    <img src="Iconos/Iconos/emptyDashboard.png" alt="">
-    <a href="test.html"><button class="btn">Crear prueba</button></a>
-</div>
+        <h2>No hay ninguna prueba</h2>
+        <img src="Iconos/Iconos/emptyDashboard.png" alt="">
+        <a href="test.html"><button class="btn">Crear prueba</button></a>
+    </div>
 
-    
+
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
@@ -294,10 +346,11 @@
 
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="./scripts/complexGraph.js"></script>
+
 
 <script src="./scripts/dashboard.js"></script>
 
-<script src="./scripts/complexGraph.js"></script>
 <script src="./scripts/script.js"></script>
 
 </html>

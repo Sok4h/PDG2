@@ -18,6 +18,11 @@ let preguntas = []
 //const _ = require("lodash");
 
 
+//cargar info
+
+
+
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 

@@ -3,19 +3,25 @@
 // Released under the ISC license.
 // https://observablehq.com/@d3/sunburst
 
-
+let totalValue=0
+let dataSorted
 let partition = data => {
+
+  
   const root = d3.hierarchy(data)
     .sum(d => d.value)
     .sort((a, b) => b.value - a.value);
   return d3.partition()
     .size([2 * Math.PI, root.height + 1])
     (root);
+
 }
+
+
 
 let format = d3.format(",d");
 
-let width = 800;
+let width = 900;
 
 let radius = width / 6;
 
@@ -51,15 +57,19 @@ let secondArc = d3.arc()
 
     } else {
 
-
+      totalValue+=d.value
       console.log(d)
+      
 
       let childNumber = d.data.children.length * 100
+      console.log(childNumber)
       let percentageLeft = childNumber - d.value
       realheight = 155 * percentageLeft / childNumber
       // console.log(d)
       // console.log(realheight)
     }
+
+    console.log(totalValue)
     return height - realheight
   });
 
@@ -72,18 +82,45 @@ const colorScale =
 
 
 function chartZoom(data) {
-
+  
   //d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length+1))
   color = colorScale
   const root = partition(data);
 
+  console.log(root.data)
+
+  root.data.children.forEach((child,i)=>{
+
+    let value=0
+      child.children.forEach((item)=>{
+
+        value+=item.value
+      })
+
+      console.log(value)
+
+      let tempChild = child
+      tempChild.value=value
+      root.data.children[i]=tempChild
+
+    console.log(child)
+  })
+
+  console.log(root.data.children)
+
+ 
+  dataSorted=root.data.children.sort((a,b)=>{
+
+    return b.value -a.value
+  })
+  console.log(dataSorted)
   root.each(d => d.current = d);
 
   const svg = d3.create("svg")
     .attr("viewBox", [0, 0, width, width])
     .style("font", "16px sans-serif")
     .style("font-weigth","bold")
-    .style("color","#fff");
+    .style("fill","#fff");
 
 
 
