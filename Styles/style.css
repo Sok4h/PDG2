@@ -196,6 +196,7 @@ button {
   padding: 16px;
   width: 100%;
   background-color: #F3F3F3;
+  gap: 1.3em;
 }
 
 .survey {
@@ -603,6 +604,27 @@ input[type=radio]:checked + .label-select {
   display: flex;
   width: 100%;
   justify-content: space-around;
+}
+
+.proficiency {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  text-align: center;
+}
+
+.proficiencyContainer {
+  width: 100%;
+  text-align: center;
+}
+.proficiencyContainer p {
+  width: 100%;
+}
+.proficiencyContainer .proficiencyName {
+  text-align: start;
+}
+.proficiencyContainer .proficiencyGrade {
+  text-align: end;
 }
 
 .formTitle {

@@ -329,13 +329,16 @@ function loadBarChart(answers) {
     return a.area
   })
 
+ 
+  const finalNames = [...new Set(names)];
+  console.log(finalNames)
 
   let finalData = []
   answers.forEach((respuesta) => {
 
     respuesta.values.forEach((respuesta) => {
 
-
+      console.log(respuesta)
 
       if (respuesta.name == filter) {
 
@@ -368,12 +371,12 @@ function loadBarChart(answers) {
   merged = finalData.map((value, i) => {
 
     console.log(color[i])
-    return { "value": value, "name": names[i],"color":color[i] }
+    return { "value": value, "name": finalNames[i],"color":color[i] }
   })
 
   console.log(merged)
   mergedDepartment=merged
-  departmentChart.config.data.labels = names
+  departmentChart.config.data.labels = finalNames
 
   departmentChart.config.data.datasets[0].data = finalData
   departmentChart.config.data.datasets[0].backgroundColor = color

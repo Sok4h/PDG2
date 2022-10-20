@@ -10,6 +10,7 @@ const cardAverageValue = cardAverage.querySelector(".card__value")
 const bestAttribute = document.querySelector("#bestAttribute")
 const worstAttribute = document.querySelector("#worstAttribute")
 
+const proficiencyContainer= document.querySelector(".proficiencyContainer")
 const bestAttributeValue = bestAttribute.querySelector(".card__value")
 const bestAttributeName = bestAttribute.querySelector(".highlight__description")
 
@@ -89,6 +90,29 @@ auth.onAuthStateChanged((user)=>{
                 worstAttributeValue.textContent= Math.round(dataSorted[dataSorted.length-1].value *100/500) +"%"
                 worstAttributeName.textContent=dataSorted[dataSorted.length-1].name
 
+
+                console.log(dataSorted)
+                dataSorted.forEach((xd)=>{  
+
+                    let proficiency     
+                    console.log(xd)
+                    let percentage =Math.round(xd.value*100/500)
+                    console.log(percentage)
+                    if(percentage<=20) proficiency="principiante"
+
+                    if(percentage>20&&percentage<80) proficiency="competente"
+
+                    if(percentage>80) proficiency="proficiente"
+
+
+                    let div = document.createElement("div")
+                    div.classList.add("proficiency")
+                    div.innerHTML=`<p class="proficiencyName">${xd.name}</p>
+                    <p class="proficiencyPercentage">${percentage}%</p>
+                    <p class="proficiencyGrade">${proficiency}</p>`
+                    
+                    proficiencyContainer.appendChild(div)
+                })
 
             }
             else{

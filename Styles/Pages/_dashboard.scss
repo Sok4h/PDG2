@@ -134,3 +134,30 @@
     width: 100%;
     justify-content: space-around;
 }
+
+.proficiency{
+
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    text-align: center;
+}
+
+.proficiencyContainer{
+
+    width: 100%;
+    text-align: center;
+
+    p{
+        width: 100%;
+    }
+
+    .proficiencyName{
+        text-align: start;
+    }
+
+    .proficiencyGrade{
+        text-align: end;
+
+    }
+}

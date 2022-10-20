@@ -1,5 +1,5 @@
 
-const contentHistory= document.querySelector(".contentHistory")
+const contentHistory = document.querySelector(".contentHistory")
 auth.onAuthStateChanged((user) => {
 
 
@@ -14,7 +14,7 @@ auth.onAuthStateChanged((user) => {
                 docSnapshot.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
                     let tempDoc = doc.data()
-                    console.log(doc.data())
+                    console.log(doc.id)
                     const div = document.createElement('div');
                     div.classList.add("card")
                     div.classList.add("test")
@@ -27,12 +27,19 @@ auth.onAuthStateChanged((user) => {
                 <p>Participantes</p>
             </div>
             <h2 class="percentage">57%</h2>
-            <button class="btn bntDetails">Ver detalles </button>`
+            <button class="btn bntDetails">copiar</button>`
 
-            contentHistory.appendChild(div)
+                    let btnCopy = div.querySelector(".bntDetails")
+
+                    let copy = `?testId=${doc.id}`
+                    btnCopy.addEventListener("click", () => {
+
+                        navigator.clipboard.writeText(copy)
+                    })
+                    contentHistory.appendChild(div)
                 });
 
-               
+
             }
             else {
 
