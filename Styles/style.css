@@ -615,6 +615,10 @@ input[type=radio]:checked + .label-select {
   flex-direction: column;
   padding: 32px;
   align-items: center;
+  gap: 1em;
+}
+.upload p {
+  width: 50%;
 }
 
 .uploadContainer {
@@ -783,4 +787,11 @@ select {
 
 .pyramidInfo .title {
   margin-bottom: 16px;
+}
+
+#emails {
+  border-radius: 8px;
+  width: 50%;
+  height: 200px;
+  padding: 16px;
 }/*# sourceMappingURL=style.css.map */

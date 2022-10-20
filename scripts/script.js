@@ -20,6 +20,40 @@ const labels = [
 const data = {
   labels: labels,
   datasets: [{
+    label: 'atributos por departamento',
+    
+    borderColor: 'rgb(255, 99, 132)',
+    data: dataChart,
+    datalabels: {
+      formatter: function (value, context) {
+
+        console.log(value)
+        // return value * 100 / 100 + '%';
+        return value
+      },
+      color: "black",
+      anchor: "end",
+      align: "end",
+      clamp: true,
+      font: {
+
+        weight: "bold"
+      },
+      padding: {
+
+        right: 5
+      }
+
+    }
+  }
+
+
+  ]
+};
+
+const dataBar = {
+  labels: labels,
+  datasets: [{
     label: 'Mejores atributos',
     backgroundColor: 'rgb(255, 99, 132)',
     borderColor: 'rgb(255, 99, 132)',
@@ -93,7 +127,7 @@ const data2 = {
 
 const config = {
   type: 'bar',
-  data: data,
+  data: dataBar,
   plugins: [ChartDataLabels],
   options: {
 
@@ -314,36 +348,37 @@ function loadBarChart(answers) {
     )
   })
 
+  console.log(answers)
 
 
+  const color = answers.map((a) => {
 
-  merged = finalData.map((value, i) => {
+    switch (a.area) {
 
-    return { "value": value, "name": names[i] }
-  })
-
-  const color = merged.map((a) => {
-
-    switch (a.name) {
-
-      case "Marketing": return "rgba(255, 102, 26, 1)";
-
-      case "Ingenieria": return "rgba(234, 11, 52, 1)"
+      case "Marketing": return "rgba(255, 102, 26, 1)"; 
+      
+      case "Ingenieria": return "rgba(234, 11, 52, 1)";
 
       case "Diseño": return "rgba(3, 140, 135, 1)"
 
     }
-
-
-
   })
+
+  
+  merged = finalData.map((value, i) => {
+
+    console.log(color[i])
+    return { "value": value, "name": names[i],"color":color[i] }
+  })
+
+  console.log(merged)
   mergedDepartment=merged
   departmentChart.config.data.labels = names
 
   departmentChart.config.data.datasets[0].data = finalData
   departmentChart.config.data.datasets[0].backgroundColor = color
-  departmentChart.update()
-  //sortBarChart()
+  
+  sortBarChart("0",merged,departmentChart)
 
 }
 
@@ -525,10 +560,6 @@ for (let i = 0; i < filterDepartment.length; i++) {
 // 0 alfa 1 mayor 2 menor
 function sortBarChart(order, data, chart) {
 
-  console.log(data)
-  console.log(chart)
-
-  console.log(order)
   let dataSort = []
 
   console.log(data)
@@ -536,21 +567,29 @@ function sortBarChart(order, data, chart) {
   let sValue = []
   let sName = []
 
-  const color = data.map((a) => {
+  let Scolor =[]
 
-    switch (a.name) {
+  // if(chart==departmentChart){
 
-      case "Marketing": return "rgba(255, 102, 26, 1)";
+  //   color = data.map((a) => {
 
-      case "Ingenieria": return "rgba(234, 11, 52, 1)"
+  //     switch (a.name) {
+  
+  //       case "Marketing": return "rgba(255, 102, 26, 1)";
+  
+  //       case "Ingenieria": return "rgba(234, 11, 52, 1)"
+  
+  //       case "Diseño": return "rgba(3, 140, 135, 1)"
+  
+  //     }
+  
+  
+  
+  //   })
 
-      case "Diseño": return "rgba(3, 140, 135, 1)"
-
-    }
-
-
-
-  })
+  // }
+   
+  console.log(color)
   switch (order) {
 
 
@@ -596,17 +635,19 @@ function sortBarChart(order, data, chart) {
 
     sValue.push(dataSort[i].value)
     sName.push(dataSort[i].name)
+    Scolor.push(dataSort[i].color)
+    console.log(Scolor[i])
   }
 
   console.log(dataSort)
 
 
 
-  console.log(chart)
+  //console.log(chart)
 
   chart.config.data.datasets[0].data = sValue
   chart.config.data.labels = sName
-  chart.config.data.datasets[0].backgroundColor = color
+  chart.config.data.datasets[0].background = Scolor
   chart.update()
 }
 

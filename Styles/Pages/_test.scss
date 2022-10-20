@@ -10,6 +10,12 @@
     flex-direction: column;
     padding: 32px;
     align-items: center;
+    gap: 1em;
+
+    p{
+
+        width: 50%;
+    }
 }
 
 .uploadContainer{
@@ -210,4 +216,13 @@ select {
 
     margin-bottom: 16px;
     
+}
+
+#emails{
+
+    border-radius: 8px;
+    width: 50%;
+    height: 200px;
+    padding: 16px;
+
 }

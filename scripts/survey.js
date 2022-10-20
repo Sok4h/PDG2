@@ -66,8 +66,19 @@ function verifyTest(id) {
         }
 
         btnEmail.addEventListener("click", () => {
+            
+            let idValido=false
 
-            if (emailTest.value != test.email) {
+            test.emails.forEach((email)=>{
+
+                if(emailTest.value == email){ 
+                    
+                    idValido=true
+                    
+                }
+
+            })
+            if (!idValido) {
 
                 console.log("correo o id no valido")
                 return
