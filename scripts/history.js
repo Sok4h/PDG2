@@ -1,5 +1,6 @@
 
 const contentHistory = document.querySelector(".contentHistory")
+
 auth.onAuthStateChanged((user) => {
 
 
@@ -51,7 +52,7 @@ auth.onAuthStateChanged((user) => {
                 div.innerHTML = ` <h2>No hay ninguna prueba</h2>
         <img src="Iconos/Iconos/emptyDashboard.png" alt="">
         <a href="test.html"><button class="btn">Crear prueba</button></a>`
-                dashboardBody.append(div)
+        contentHistory.append(div)
 
             }
         })

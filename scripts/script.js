@@ -21,7 +21,7 @@ const data = {
   labels: labels,
   datasets: [{
     label: 'atributos por departamento',
-    
+
     borderColor: 'rgb(255, 99, 132)',
     data: dataChart,
     datalabels: {
@@ -323,15 +323,52 @@ auth.onAuthStateChanged((user) => {
 
 function loadBarChart(answers) {
 
+  console.log(answers)
   let merged
 
   const names = answers.map((a) => {
     return a.area
   })
 
- 
   const finalNames = [...new Set(names)];
   console.log(finalNames)
+
+  let pruebaValues = []
+
+  for (let i = 0; i < finalNames.length; i++) {
+
+
+    pruebaValues[i] = answers.filter(a => {
+
+
+
+      return a.area == finalNames[i]
+
+    })
+  }
+
+  
+  console.log(pruebaValues)
+
+
+  
+  pruebaValues.forEach((prueba)=>{
+
+    let object ={}
+    let total =0
+
+    object.department = prueba[0].area
+    console.log(prueba)
+
+    prueba.forEach((respuesta)=>{
+
+      console.log(respuesta)
+      total+=respuesta.total
+
+    })
+
+    console.log(object.department + " " + total/prueba.length)
+  })
 
   let finalData = []
   answers.forEach((respuesta) => {
@@ -342,7 +379,7 @@ function loadBarChart(answers) {
 
       if (respuesta.name == filter) {
 
-
+        console.log(respuesta)
         finalData.push(respuesta.value)
       }
 
@@ -351,6 +388,8 @@ function loadBarChart(answers) {
     )
   })
 
+  console.log(finalData)
+
   console.log(answers)
 
 
@@ -358,8 +397,8 @@ function loadBarChart(answers) {
 
     switch (a.area) {
 
-      case "Marketing": return "rgba(255, 102, 26, 1)"; 
-      
+      case "Marketing": return "rgba(255, 102, 26, 1)";
+
       case "Ingenieria": return "rgba(234, 11, 52, 1)";
 
       case "Diseño": return "rgba(3, 140, 135, 1)"
@@ -367,21 +406,21 @@ function loadBarChart(answers) {
     }
   })
 
-  
+
   merged = finalData.map((value, i) => {
 
     console.log(color[i])
-    return { "value": value, "name": finalNames[i],"color":color[i] }
+    return { "value": value, "name": finalNames[i], "color": color[i] }
   })
 
   console.log(merged)
-  mergedDepartment=merged
+  mergedDepartment = merged
   departmentChart.config.data.labels = finalNames
 
   departmentChart.config.data.datasets[0].data = finalData
   departmentChart.config.data.datasets[0].backgroundColor = color
-  
-  sortBarChart("0",merged,departmentChart)
+
+  sortBarChart("0", merged, departmentChart)
 
 }
 
@@ -482,8 +521,8 @@ function loadBestAttributes(answers) {
   myChart.config.data.datasets[0].data = finalValues
   myChart.config.data.datasets[0].backgroundColor = color
   myChart.update()
-  mergedAttribute=merged
-  sortBarChart("0", merged, myChart)  
+  mergedAttribute = merged
+  sortBarChart("0", merged, myChart)
 }
 
 for (let i = 0; i < filterDepartment.length; i++) {
@@ -491,7 +530,7 @@ for (let i = 0; i < filterDepartment.length; i++) {
   filterDepartment[i].addEventListener("click", () => {
 
     console.log(filterDepartment[i].value)
-    sortBarChart(filterDepartment[i].value, mergedDepartment,departmentChart)
+    sortBarChart(filterDepartment[i].value, mergedDepartment, departmentChart)
   })
 
 }
@@ -570,28 +609,28 @@ function sortBarChart(order, data, chart) {
   let sValue = []
   let sName = []
 
-  let Scolor =[]
+  let Scolor = []
 
   // if(chart==departmentChart){
 
   //   color = data.map((a) => {
 
   //     switch (a.name) {
-  
+
   //       case "Marketing": return "rgba(255, 102, 26, 1)";
-  
+
   //       case "Ingenieria": return "rgba(234, 11, 52, 1)"
-  
+
   //       case "Diseño": return "rgba(3, 140, 135, 1)"
-  
+
   //     }
-  
-  
-  
+
+
+
   //   })
 
   // }
-   
+
   console.log(color)
   switch (order) {
 

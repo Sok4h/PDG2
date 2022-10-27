@@ -301,12 +301,13 @@ function startSurvey() {
             let tempValue1 = {name:"Estrategia",value:Estrategia}
             let tempValue2 = {name:"Gobernanza",value:Gobernanza}
             let tempValue3 = {name:"Clima",value:Clima}
-            
+            let total =Estrategia+Gobernanza+Clima
             values.push(tempValue1)
             values.push(tempValue2)
             values.push(tempValue3)
 
             respuesta.values=values
+            respuesta.total = total
             console.log(respuesta)
             console.log(Gobernanza)
             console.log(Clima)
