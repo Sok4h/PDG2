@@ -79,40 +79,40 @@ auth.onAuthStateChanged((user)=>{
 
                 //?testId=8INIveodekK2Fj8ObEK7
 
-                console.log(totalValue)
-                cardAverageValue.textContent= Math.round(totalValue *100/4500) +"%" 
+                // //console.log(totalValue)
+                // cardAverageValue.textContent= Math.round(totalValue *100/4500) +"%" 
 
-                bestAttributeValue.textContent= Math.round(dataSorted[0].value *100/500) +"%"
-                bestAttributeName.textContent=dataSorted[0].name
+                // bestAttributeValue.textContent= Math.round(dataSorted[0].value *100/500) +"%"
+                // bestAttributeName.textContent=dataSorted[0].name
 
-                console.log(dataSorted[dataSorted.length-1])
+                // console.log(dataSorted[dataSorted.length-1])
                 
-                worstAttributeValue.textContent= Math.round(dataSorted[dataSorted.length-1].value *100/500) +"%"
-                worstAttributeName.textContent=dataSorted[dataSorted.length-1].name
+                // worstAttributeValue.textContent= Math.round(dataSorted[dataSorted.length-1].value *100/500) +"%"
+                // worstAttributeName.textContent=dataSorted[dataSorted.length-1].name
 
 
-                console.log(dataSorted)
-                dataSorted.forEach((xd)=>{  
+                // //console.log(dataSorted)
+                // dataSorted.forEach((xd)=>{  
 
-                    let proficiency     
-                    console.log(xd)
-                    let percentage =Math.round(xd.value*100/500)
-                    console.log(percentage)
-                    if(percentage<=20) proficiency="principiante"
+                //     let proficiency     
+                //     console.log(xd)
+                //     let percentage =Math.round(xd.value*100/500)
+                //     console.log(percentage)
+                //     if(percentage<=20) proficiency="principiante"
 
-                    if(percentage>20&&percentage<80) proficiency="competente"
+                //     if(percentage>20&&percentage<80) proficiency="competente"
 
-                    if(percentage>80) proficiency="proficiente"
+                //     if(percentage>80) proficiency="proficiente"
 
 
-                    let div = document.createElement("div")
-                    div.classList.add("proficiency")
-                    div.innerHTML=`<p class="proficiencyName">${xd.name}</p>
-                    <p class="proficiencyPercentage">${percentage}%</p>
-                    <p class="proficiencyGrade">${proficiency}</p>`
+                //     let div = document.createElement("div")
+                //     div.classList.add("proficiency")
+                //     div.innerHTML=`<p class="proficiencyName">${xd.name}</p>
+                //     <p class="proficiencyPercentage">${percentage}%</p>
+                //     <p class="proficiencyGrade">${proficiency}</p>`
                     
-                    proficiencyContainer.appendChild(div)
-                })
+                //     proficiencyContainer.appendChild(div)
+                // })
 
             }
             else{

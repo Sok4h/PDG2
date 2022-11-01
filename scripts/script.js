@@ -6,6 +6,11 @@ let mergedDepartment
 let mergedAttribute
 const formDepartment = document.querySelector("#filterChartByDepartment")
 const filterDepartment = formDepartment.querySelectorAll(".hidebox")
+
+const emptyDashboard = document.querySelector(".emptyDashboard")
+const dashboard = document.querySelector(".dashboard__content")
+dashboard.style.display = "none"
+
 // por departamento
 
 
@@ -272,6 +277,63 @@ const departmentChart = new Chart(
 );
 
 
+const dataRadar = {
+
+  labels: labels,
+  datasets: [{
+    label: 'Test overview',
+    backgroundColor: 'rgb(255, 99, 132,0.3)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: dataChart,
+    datalabels: {
+      formatter: function (value, context) {
+
+        console.log(value)
+        return value * 100 / 100 + '%';
+      },
+      color: "red",
+      anchor: "end",
+      align: "end",
+      clamp: true,
+      font: {
+
+        weight: "bold"
+      },
+      padding: {
+
+        right: 5
+      }
+
+    }
+  },
+
+
+  ]
+
+
+};
+const configRadar = {
+  type: 'radar',
+  data: dataRadar,
+
+  options: {
+    ticks: {
+      beginAtZero: true,
+      // max: 25,
+      // min: 0,
+      // stepSize: 1
+    }
+
+  }
+};
+
+
+const radarChart = new Chart(
+
+  document.querySelector("#chartRadar"),
+  configRadar
+);
+
 
 
 let answers = []
@@ -288,29 +350,41 @@ auth.onAuthStateChanged((user) => {
 
       if (!docSnapshot.empty) {
 
+        emptyDashboard.style.display = "none"
+        dashboard.style.display = "flex"
 
+        console.log(docSnapshot)
+
+        docSnapshot.forEach((doc) => {
+
+
+
+          db.collection("answers").where("testId", "==", doc.id).get().then(function (querySnapshot) {
+
+            querySnapshot.forEach((doc) => {
+
+              answers.push(doc.data())
+            })
+
+          }).then(() => {
+
+            console.log(answers)
+            loadBarChart(answers)
+            loadBestAttributes(answers)
+            loadRadarChart(answers)
+
+
+          });
+        })
         //obtiene respuestas
-        db.collection("answers").get().then(function (querySnapshot) {
 
-          querySnapshot.forEach((doc) => {
-
-            answers.push(doc.data())
-          })
-
-        }).then(() => {
-
-          console.log(answers)
-          loadBarChart(answers)
-          loadBestAttributes(answers)
-
-        });
 
 
         //?testId=8INIveodekK2Fj8ObEK7
       }
       else {
 
-        //emptyDashboard.style.display
+        emptyDashboard.style.display = flex
 
       }
 
@@ -320,6 +394,97 @@ auth.onAuthStateChanged((user) => {
   }
 })
 
+
+function loadRadarChart(answers) {
+
+
+
+  let categorias = ["Estrategia", "Gobernanza", "Clima", "Personas", "Liderazgo"]
+
+
+//   const data = categorias.map((element) => ({
+//     categoria: element,
+//     `total${element}`: 0
+//   }))
+
+// console.log(data);
+
+
+let totalEstrategia = 0, totalGobernanza = 0, totalClima = 0, totalPersonas = 0, totalLiderazgo = 0
+
+let finalValues = []
+answers.forEach((respuesta) => {
+
+  respuesta.values.forEach((a) => {
+
+    console.log(a)
+    switch (a.name) {
+
+
+      case "Estrategia":
+
+        console.log(a)
+        totalEstrategia += a.value
+
+        break;
+
+      case "Gobernanza":
+
+        console.log(a)
+        totalGobernanza += a.value
+
+        break;
+
+      case "Clima":
+
+        console.log(a)
+        totalClima += a.value
+
+        break;
+
+      case "Personas":
+
+        console.log(a)
+        totalPersonas += a.value
+
+        break;
+
+      case "Liderazgo":
+
+        console.log(a)
+        totalLiderazgo += a.value
+
+        break;
+    }
+
+
+
+  })
+})
+
+finalValues.push(parseInt(totalEstrategia / answers.length))
+finalValues.push(parseInt(totalGobernanza / answers.length))
+finalValues.push(parseInt(totalClima / answers.length))
+finalValues.push(parseInt(totalPersonas / answers.length))
+finalValues.push(parseInt(totalLiderazgo / answers.length))
+
+
+
+merged = categorias.map((value, i) => {
+
+  return { "name": value, "value": finalValues[i] }
+})
+
+console.log(merged)
+
+radarChart.config.data.labels = categorias
+
+radarChart.config.data.datasets[0].data = finalValues
+// radarChart.config.data.datasets[0].backgroundColor = color
+radarChart.update()
+//mergedAttribute = merged
+sortBarChart("0", merged, radarChart)
+}
 
 function loadBarChart(answers) {
 
@@ -331,7 +496,18 @@ function loadBarChart(answers) {
   })
 
   const finalNames = [...new Set(names)];
-  console.log(finalNames)
+  console.log(finalNames);
+  
+  const getAllValuesByDataType = filterResponseByTag(finalNames, "subcategorias", answers);
+
+  console.log(getAllValuesByDataType);
+
+  const getAllValuesByParameter = filterResponseByParameter("Diversidad", "subcategorias", getAllValuesByDataType);
+
+  //este es el importante
+  console.log(getAllValuesByParameter);
+
+
 
   let pruebaValues = []
 
@@ -347,28 +523,11 @@ function loadBarChart(answers) {
     })
   }
 
-  
+
   console.log(pruebaValues)
 
 
-  
-  pruebaValues.forEach((prueba)=>{
 
-    let object ={}
-    let total =0
-
-    object.department = prueba[0].area
-    console.log(prueba)
-
-    prueba.forEach((respuesta)=>{
-
-      console.log(respuesta)
-      total+=respuesta.total
-
-    })
-
-    console.log(object.department + " " + total/prueba.length)
-  })
 
   let finalData = []
   answers.forEach((respuesta) => {
@@ -393,36 +552,98 @@ function loadBarChart(answers) {
   console.log(answers)
 
 
-  const color = answers.map((a) => {
+  // const color = answers.map((a) => {
 
-    switch (a.area) {
+  //   switch (a.area) {
 
-      case "Marketing": return "rgba(255, 102, 26, 1)";
+  //     case "Marketing": return "rgba(255, 102, 26, 1)";
 
-      case "Ingenieria": return "rgba(234, 11, 52, 1)";
+  //     case "Ingenieria": return "rgba(234, 11, 52, 1)";
 
-      case "Diseño": return "rgba(3, 140, 135, 1)"
+  //     case "Diseño": return "rgba(3, 140, 135, 1)"
 
-    }
-  })
+  //   }
+  // })
 
 
-  merged = finalData.map((value, i) => {
-
-    console.log(color[i])
-    return { "value": value, "name": finalNames[i], "color": color[i] }
-  })
 
   console.log(merged)
   mergedDepartment = merged
   departmentChart.config.data.labels = finalNames
 
   departmentChart.config.data.datasets[0].data = finalData
-  departmentChart.config.data.datasets[0].backgroundColor = color
+  //departmentChart.config.data.datasets[0].backgroundColor = color
 
-  sortBarChart("0", merged, departmentChart)
+  sortBarChart("0", getAllValuesByParameter, departmentChart)
+}
+
+
+function filterResponseByTag(areas,dataType = "", responses) {
+
+  let areasName = areas;
+
+  let objectArea = areasName.map(area => ({ area: area }));
+
+  //albergo toda la información que llega
+  let responsesTest = responses;
+
+  //sumar los valores que tengan la misma area
+  objectArea.forEach(area => area[dataType] = responsesTest.filter(response => response.area === area.area));
+
+  //filtrar los valores para tener solo los values - Ej/ hay 3 panaderos y se suman sus respuestas en un arreglo que tiene 3 arreglos internos
+  objectArea.forEach(area => area[dataType] = area[dataType].map(a => a[dataType]));
+
+  //crear un objeto con el total de respuestas
+  objectArea = objectArea.map(area => ({ ...area, numberAnswer: area[dataType].length }));
+
+  //crear un solo arreglo de values - Ej/ el arreglo anterior elimina los arreglos y sumo todos sus objetos en uno sólo, quito un nivel de profundidad
+  objectArea = objectArea.map(area => ({ ...area, [dataType]: area[dataType].reduce((acc, curr) => acc.concat(curr)) }));
+
+  //sumar los que tengan elementos repetidos dentro de arreglo de values Ej/ si es el caso, sumo los que esten repetidos y dejo un arreglo con los elementos sumdos
+  objectArea = objectArea.map(area => ({
+    ...area, [dataType]: Array.from(area[dataType].reduce(
+      (m, { name, value }) => m.set(name, (m.get(name) || 0) + value), new Map
+    ), ([name, value]) => ({ name, value }))
+  }));
+
+  console.log(objectArea);
+
+  return objectArea;
 
 }
+
+function filterResponseByArea(nameArea = "", allValuesAreas = []) {
+  console.log(allValuesAreas);
+  let objectWithInfo = allValuesAreas.filter((value) => value.area === nameArea);
+  objectWithInfo = objectWithInfo.map(info => info.values); console.log(nameArea);
+
+
+  return objectWithInfo;
+}
+
+function filterResponseByParameter(nameResponse = "", dataType = "", allValuesAreas = []) {
+
+
+  let objectWithInfo = allValuesAreas.map(info => ({
+    area: info.area,
+    value: info[dataType].filter(i => {
+      return nameResponse === i.name ? i.value : "";
+    }).map(d => d.value),
+    numberAnswer: info.numberAnswer
+  }
+
+  ));
+
+
+  objectWithInfo = objectWithInfo.map(info => ({
+    name: info.area,
+    value: parseInt(info.value[0] / info.numberAnswer),
+  }))
+
+  return objectWithInfo;
+}
+
+
 
 function loadBestAttributes(answers) {
 
@@ -631,7 +852,7 @@ function sortBarChart(order, data, chart) {
 
   // }
 
-  console.log(color)
+  //console.log(color)
   switch (order) {
 
 

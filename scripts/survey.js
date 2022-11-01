@@ -9,13 +9,15 @@ const numberYears = document.querySelector("#numberYears")
 const surveyBasicInfo = document.querySelector(".surveyBasicInfo")
 const surveyTitle = document.querySelector(".survey__title")
 const options = document.getElementsByName("optionSurvey")
+const form = document.querySelector(".options")
 const btnNextQuestion = document.querySelector("#btnNextQuestion")
 const btnEmail = document.querySelector("#btnEmail")
 const emailTest = document.querySelector("#emailTest")
 const surveyEmail = document.querySelector("#surveyEmail")
+const surveyContainer = document.querySelector(".surveyContainer")
 let currentQuestion = 0
 let preguntas = []
-//const _ = require("lodash");
+
 
 
 //cargar info
@@ -30,7 +32,7 @@ const testId = urlParams.get('testId')
 console.log(testId)
 
 let test
-survey.style.display = "none"
+surveyContainer.style.display = "none"
 surveyBasicInfo.style.display = "none"
 
 let respuesta = {}
@@ -58,7 +60,7 @@ function verifyTest(id) {
 
         if (!testExists) {
 
-            survey.style.display = "none"
+            surveyContainer.style.display = "none"
             surveyBasicInfo.style.display = "none"
 
             //alert("enlace no valido")
@@ -66,15 +68,15 @@ function verifyTest(id) {
         }
 
         btnEmail.addEventListener("click", () => {
-            
-            let idValido=false
 
-            test.emails.forEach((email)=>{
+            let idValido = false
 
-                if(emailTest.value == email){ 
-                    
-                    idValido=true
-                    
+            test.emails.forEach((email) => {
+
+                if (emailTest.value == email) {
+
+                    idValido = true
+
                 }
 
             })
@@ -108,8 +110,8 @@ function startSurvey() {
         categoria: "Estrategia",
         subcategoria: "Definición",
         pregunta: "En la organización existe una definición clara y aspiracional de qué es la innovación en la organización",
-        hintHigh: "este es el maximo",
-        hintLow: "este es el minimo"
+        hintHigh: "El termino innovacion tiene muchas definiciones y es diferente para todos los miembros del equipo, incluso los lideres no pueden llegar a un acuerdo para la definicion.",
+        hintLow: "El termino innovacion tiene muchas definiciones y es diferente para todos los miembros del equipo, incluso los lideres no pueden llegar a un acuerdo para la definicion."
     }
 
     let pregunta2 = {
@@ -186,6 +188,101 @@ function startSurvey() {
         hintHigh: "este es el maximo2",
         hintLow: "este es el minimo2"
     }
+
+
+    let pregunta10 = {
+
+        categoria: "Colaboración",
+        subcategoria: "Fluidez",
+        pregunta: "Hay una comunicación constante sobre los aspectos relacionados con innovación que fluye en diversas direcciones y en diversos canales. La información es clara, periódica y accesible",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta11 = {
+
+        categoria: "Colaboración",
+        subcategoria: "Resultados",
+        pregunta: "Los resultados de las iniciativas de innovación se hacen públicos y se reconocen los impactos positivos generados por individuos, grupos o la organización, dadas las métricas establecidas para medir el éxito.",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta12 = {
+
+        categoria: "Colaboración",
+        subcategoria: "Transparencia",
+        pregunta: "Las personas que participan con ideas o propuestas reciben una retroalimentación transparente, adecuada y oportuna para comprender las decisiones que se han tomado sobre estas",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+
+    let pregunta13 = {
+
+        categoria: "Personas",
+        subcategoria: "Conocimiento",
+        pregunta: "Tenemos un grupo humano capacitado y con las competencias para desarrollar proyectos de innovación con éxito.",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+
+    let pregunta14 = {
+
+        categoria: "Personas",
+        subcategoria: "Diversidad",
+        pregunta: "La organización promueve la diversidad de pensamiento, se respetan las diferencias y se potencian las particularidades de cada uno de los colaboradores.",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta15 = {
+
+        categoria: "Personas",
+        subcategoria: "Eventos",
+        pregunta: "La organización tiene eventos donde se estimula la creatividad y se convoca a la comunidad interesada sobre la innovación para fortalecer lazos y promover nuevas conexiones",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta17 = {
+
+        categoria: "Liderazgo",
+        subcategoria: "Acción",
+        pregunta: "Nuestros líderes nos convocan a actuar. Se promueve un sesgo hacia la acción. Nos invitan a evitar la parálisis por el análisis.",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta16 = {
+
+        categoria: "Liderazgo",
+        subcategoria: "Modelo a seguir",
+        pregunta: "Los líderes asumen un rol activo y predican lo que aplican. Son ejemplo de lo que promueven y con sus actos dan muestra de lo que esperan de innovación. Los líderes son ejemplos a seguir en términos de innovación. ",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    let pregunta18 = {
+
+        categoria: "Liderazgo",
+        subcategoria: "Narrativas",
+        pregunta: "Los líderes nos inspiran constantemente con historias sobre colaboradores y equipos que demuestran altos valores y resultados positivos sobre innovación. ",
+        hintHigh: "este es el maximo2",
+        hintLow: "este es el minimo2"
+    }
+
+    // let pregunta19 = {
+
+    //     categoria: "Personas",
+    //     subcategoria: "Conocimiento",
+    //     pregunta: "Tenemos un grupo humano capacitado y con las competencias para desarrollar proyectos de innovación con éxito.",
+    //     hintHigh: "este es el maximo2",
+    //     hintLow: "este es el minimo2"
+    // }
+
+
     preguntas.push(pregunta)
     preguntas.push(pregunta2)
     preguntas.push(pregunta3)
@@ -196,39 +293,77 @@ function startSurvey() {
     preguntas.push(pregunta8)
     preguntas.push(pregunta9)
 
-    console.log(preguntas)
+    ///////////////////////////////////////
 
-    // let newPreguntas =_.shuffle(preguntas);
-    //console.log(newPreguntas)
+    preguntas.push(pregunta10)
+    preguntas.push(pregunta11)
+    preguntas.push(pregunta12)
+    preguntas.push(pregunta13)
+    preguntas.push(pregunta14)
+    preguntas.push(pregunta15)
+    preguntas.push(pregunta16)
+    preguntas.push(pregunta17)
+    preguntas.push(pregunta18)
+
+    console.log(preguntas.length)
 
 
     setupQuestions(currentQuestion)
 
     function setupQuestions(currentQuestion) {
 
+        const progress = document.querySelector(".progressDone")
+
+        progress.style.width = (100 * currentQuestion) / preguntas.length + '%'
+
+        console.log(progress.style.width)
+
         if (currentQuestion == preguntas.length - 1) {
 
             btnNextQuestion.textContent = "Finalizar"
         }
 
-        options[3].checked = true
+        btnNextQuestion.classList.remove("btn--surveyActive")
+        btnNextQuestion.classList.add("btn--survey")
+
+        options.forEach((option) => {
+
+            option.checked = false
+        })
         surveyTitle.textContent = preguntas[currentQuestion].pregunta
 
     }
 
 
-    openModalHigh.onclick = () => {
 
-        dialogTitle.textContent = pregunta.hintHigh
-        dialog.showModal()
-    }
-    openModalLow.onclick = () => {
-        dialogTitle.textContent = pregunta.hintLow
-        dialog.showModal()
-    }
-    closeDialog.onclick = () => { dialog.close() }
 
-    console.log(test.departments)
+    form.addEventListener('change', function () {
+
+        let checked = form.querySelector('input[name=optionSurvey]:checked');
+        if (checked) {
+
+            btnNextQuestion.classList.remove("btn--survey")
+            btnNextQuestion.classList.add("btn--surveyActive")
+
+        }
+    });
+
+
+
+    // nueva forma mostrar hint
+
+    tippy('#btnInfoLow', {
+
+        content: pregunta.hintLow
+
+    })
+
+
+    tippy('#btnInfoHigh', {
+
+        content: pregunta.hintHigh
+
+    })
     test.departments.forEach((departament) => {
 
         var opt = document.createElement('option');
@@ -250,22 +385,24 @@ function startSurvey() {
             respuesta.numberYears = parseInt(numberYears.value)
             respuesta.area = companyAreas.value
             surveyBasicInfo.style.display = "none"
-            survey.style.display = "flex"
+            surveyContainer.style.display = "flex"
         }
     })
 
 
     btnNextQuestion.addEventListener("click", () => {
 
+        if (!btnNextQuestion.classList.contains("btn--surveyActive")) return
         let value = checkRadio()
         let tempRespuesta = preguntas[currentQuestion]
         tempRespuesta.respuesta = value
         preguntas[currentQuestion] = tempRespuesta
         console.log(preguntas[currentQuestion])
 
+
         if (currentQuestion == preguntas.length - 1) {
 
-            let Estrategia=0, Gobernanza=0, Clima =0
+            let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0
             for (let i = 0; i < preguntas.length; i++) {
 
                 switch (preguntas[i].categoria) {
@@ -273,44 +410,67 @@ function startSurvey() {
 
                     case "Estrategia":
                         Estrategia += parseInt(preguntas[i].respuesta)
-                        
 
-                        console.log("Estrategia "+Estrategia)
+
+                        console.log("Estrategia " + Estrategia)
                         break
 
                     case "Gobernanza":
 
                         Gobernanza += parseInt(preguntas[i].respuesta)
 
-                        console.log("Gobernanza "+Gobernanza)
+                        console.log("Gobernanza " + Gobernanza)
 
                         break
-                        
+
                     case "Clima":
 
                         Clima += parseInt(preguntas[i].respuesta)
 
-                        console.log("Clima "+Clima)
+                        console.log("Clima " + Clima)
 
                         break
+
+                    case "Personas":
+
+                        Clima += parseInt(preguntas[i].respuesta)
+
+                        console.log("Personas " + Personas)
+
+                        break;
+
+                    case "Liderazgo":
+
+                        Liderazgo += parseInt(preguntas[i].respuesta)
+
+                        console.log("Liderazgo " + Liderazgo)
+
+                        break;
+                    case "Colaboración":
+
+                        Colaboración += parseInt(preguntas[i].respuesta)
+
+                        console.log("Colaboración " + Personas)
+
+                        break;
 
                 }
             }
 
-            let values =[]
-            let tempValue1 = {name:"Estrategia",value:Estrategia}
-            let tempValue2 = {name:"Gobernanza",value:Gobernanza}
-            let tempValue3 = {name:"Clima",value:Clima}
-            let total =Estrategia+Gobernanza+Clima
+            let values = []
+            let tempValue1 = { name: "Estrategia", value: parseInt(Estrategia / 3) }
+            let tempValue2 = { name: "Gobernanza", value: parseInt(Gobernanza / 3) }
+            let tempValue3 = { name: "Clima", value: parseInt(Clima / 3) }
+            let total = Estrategia + Gobernanza + Clima
             values.push(tempValue1)
             values.push(tempValue2)
             values.push(tempValue3)
 
-            respuesta.values=values
+            respuesta.values = values
             respuesta.total = total
-            console.log(respuesta)
-            console.log(Gobernanza)
-            console.log(Clima)
+            // console.log(respuesta)
+            // console.log(Gobernanza)
+            // console.log(Clima)
 
 
             respuesta.respuestas = preguntas

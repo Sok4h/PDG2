@@ -5,7 +5,10 @@
     border-color: gainsboro;
     padding: 48px;
     row-gap: 3.5em;
-    margin: 32px;
+    
+    width: 70%;
+    margin: auto;
+    
 
     .levels {
 
@@ -40,7 +43,7 @@
     .options {
 
         display: flex;
-        width: 100%;
+        width: 70%;
         justify-content: space-between;
 
         .optionSurvey {
@@ -93,7 +96,8 @@
 .surveyBasicInfo {
 
     margin: auto;
-    gap: 0.5em;
+    margin-top: 48px;
+    gap: 1em;
 
     width: 50%;
 
@@ -147,4 +151,11 @@ input[type=radio]:checked + .label-select{
 
     background-color: #0073A7; 
     color: white;
+}
+
+.surveyContainer{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
