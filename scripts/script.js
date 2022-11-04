@@ -1,6 +1,8 @@
 let dataChart;
 
 let filter = "Estrategia"
+let testAnswered
+
 
 let mergedDepartment
 let mergedAttribute
@@ -11,6 +13,20 @@ const emptyDashboard = document.querySelector(".emptyDashboard")
 const dashboard = document.querySelector(".dashboard__content")
 dashboard.style.display = "none"
 
+
+const completedCard = document.querySelector("#completedCard")
+const cardAverage = document.querySelector("#cardAverage")
+const cardAverageValue = cardAverage.querySelector(".card__value")
+
+
+const bestAttributeValue = bestAttribute.querySelector(".card__value")
+const bestAttributeName = bestAttribute.querySelector(".highlight__description")
+
+const worstAttributeValue = worstAttribute.querySelector(".card__value")
+const worstAttributeName = worstAttribute.querySelector(".highlight__description")
+console.log(completedCard)
+
+let currentTest
 // por departamento
 
 
@@ -317,12 +333,23 @@ const configRadar = {
   data: dataRadar,
 
   options: {
-    ticks: {
-      beginAtZero: true,
-      // max: 25,
-      // min: 0,
-      // stepSize: 1
+
+    scales:{
+
+      r:{
+
+        suggestedMin: 0,
+        suggestedMax: 22
+      }
+    //   ticks: {
+    //     display:false,
+    //     max:100, // Set it to your Max value
+    //     min: 0, // You can also change the Min
+    //     beginAtZero: true,
+    //     stepSize: 1, // in case you change the Min
+    //  }
     }
+   ,
 
   }
 };
@@ -355,7 +382,11 @@ auth.onAuthStateChanged((user) => {
 
         console.log(docSnapshot)
 
+
         docSnapshot.forEach((doc) => {
+
+
+          currentTest = doc.data()
 
 
 
@@ -372,6 +403,8 @@ auth.onAuthStateChanged((user) => {
             loadBarChart(answers)
             loadBestAttributes(answers)
             loadRadarChart(answers)
+
+            loadHighlights(currentTest, answers)
 
 
           });
@@ -395,95 +428,210 @@ auth.onAuthStateChanged((user) => {
 })
 
 
-function loadRadarChart(answers) {
+function sumAllCategories(answers){
 
+  const basket = answers.reduce((basket, fruit) => {
+ 
+      for (const [number, respuesta] of Object.entries(fruit)) {
+       // console.log(value)
+          if (!basket[number]) {
+            basket[number]={name: respuesta.name, value: 0};
+          }
+          
+          
+          basket[number].value+= respuesta.value;
+          //console.log( basket[number].)
+          
+      }
+  
+      return basket;
+  }, []);
 
+  console.log(basket)
+  return basket
+}
+function loadHighlights(test, respuestas) {
 
-  let categorias = ["Estrategia", "Gobernanza", "Clima", "Personas", "Liderazgo"]
+  let numeroRespuestas = respuestas.length
 
+  let respuestasFilter = respuestas.map((respuesta)=>{return respuesta.values} )
 
-//   const data = categorias.map((element) => ({
-//     categoria: element,
-//     `total${element}`: 0
-//   }))
+  let respuestaOrdenada= sumAllCategories(respuestasFilter)
 
-// console.log(data);
+  let respuestasDividas = respuestaOrdenada.map((respuesta)=>{
 
+    respuesta.value = parseInt(respuesta.value / respuestas.length)
+    return respuesta
+  })
 
-let totalEstrategia = 0, totalGobernanza = 0, totalClima = 0, totalPersonas = 0, totalLiderazgo = 0
+  console.log(respuestasDividas)
+  
+  
+  if (numeroRespuestas != test.numberEmployers) {
 
-let finalValues = []
-answers.forEach((respuesta) => {
+    completedCard.querySelector(".card__title").textContent = "En proceso"
+  }
+  completedCard.querySelector(".card__value").textContent = `${numeroRespuestas}/${test.numberEmployers}`
 
-  respuesta.values.forEach((a) => {
+  let promedio =0
 
-    console.log(a)
-    switch (a.name) {
+  respuestas.forEach((respuesta)=>{
 
-
-      case "Estrategia":
-
-        console.log(a)
-        totalEstrategia += a.value
-
-        break;
-
-      case "Gobernanza":
-
-        console.log(a)
-        totalGobernanza += a.value
-
-        break;
-
-      case "Clima":
-
-        console.log(a)
-        totalClima += a.value
-
-        break;
-
-      case "Personas":
-
-        console.log(a)
-        totalPersonas += a.value
-
-        break;
-
-      case "Liderazgo":
-
-        console.log(a)
-        totalLiderazgo += a.value
-
-        break;
-    }
-
-
+    promedio+= respuesta.total
 
   })
-})
 
-finalValues.push(parseInt(totalEstrategia / answers.length))
-finalValues.push(parseInt(totalGobernanza / answers.length))
-finalValues.push(parseInt(totalClima / answers.length))
-finalValues.push(parseInt(totalPersonas / answers.length))
-finalValues.push(parseInt(totalLiderazgo / answers.length))
+  promedio=promedio/respuestas.length
+
+  cardAverageValue.textContent= Math.round(promedio *100/63) +"%" 
+
+  console.log(answers)
+  
+  // const amounts = respuestas.values.map((a) => a.value)
+  // const highestAmount = Math.max(...amounts);
+
+  let finalNames = respuestas[0].values.map((respuesta)=>{
+
+    return respuesta.name
+  })
+
+  console.log(respuestas)
+
+
+  //Muestra valor mas bajo
+
+  let min = respuestasDividas.reduce((previous, current) => {
+    return current.value < previous.value ? current : previous;
+  });
+
+  let max = respuestasDividas.reduce((previous, current) => {
+    return current.value > previous.value ? current : previous;
+  });
+  console.log(min)
+
+  worstAttributeName.textContent = min.name
+  worstAttributeValue.textContent = ((min.value /21)*100).toFixed(1) +"%"
+
+
+  bestAttributeName.textContent = max.name
+  bestAttributeValue.textContent = ((max.value /21)*100).toFixed(1) +"%"
+   //const getAllValuesByDataType = filterResponseByTag(finalNames, "values", respuestas);
+
+  // const getAllValuesByParameter = filterResponseByParameter("Estrategia", "values", getAllValuesByDataType);
+
+  ///
+
+
+  // proficiency description
+  const  proficiencyAverage = document.querySelector(".proficiency__view")
+
+    const proficiencyValue = proficiencyAverage.querySelector(".infoValue")
+    let proficiency = Math.round(promedio *100/63)
+    proficiencyValue.textContent= proficiency +"%"
+
+    const proficiencyGrade = proficiencyAverage.querySelector(".infoDescription")
+
+    proficiencyGrade.textContent= getProficiencyName(proficiency)
+
+    
+  
+    
+}
+
+
+function getProficiencyName(value){
+
+
+  let proficiencyName =""
+    
+
+      if(value<=60) proficiencyName="Principiante"
+      if(value>60&&value<=78)  proficiencyName="Competente"
+      if(value>78&&value<=90)  proficiencyName="Proficiente"
+      if(value>90)  proficiencyName="Experto"
+
+      return proficiencyName
+}
+
+function loadRadarChart(answers) {
+
+  let categorias = ["Estrategia", "Gobernanza", "Clima"]
+
+
+  let totalEstrategia = 0, totalGobernanza = 0, totalClima = 0, totalPersonas = 0, totalLiderazgo = 0
+
+  let finalValues = []
+  answers.forEach((respuesta) => {
+
+    respuesta.values.forEach((a) => {
+
+      console.log(a)
+      switch (a.name) {
+
+
+        case "Estrategia":
+
+          console.log(a)
+          totalEstrategia += a.value
+
+          break;
+
+        case "Gobernanza":
+
+          console.log(a)
+          totalGobernanza += a.value
+
+          break;
+
+        case "Clima":
+
+          console.log(a)
+          totalClima += a.value
+
+          break;
+
+        case "Personas":
+
+          console.log(a)
+          totalPersonas += a.value
+
+          break;
+
+        case "Liderazgo":
+
+          console.log(a)
+          totalLiderazgo += a.value
+
+          break;
+      }
 
 
 
-merged = categorias.map((value, i) => {
+    })
+  })
 
-  return { "name": value, "value": finalValues[i] }
-})
+  finalValues.push(parseInt(totalEstrategia / answers.length))
+  finalValues.push(parseInt(totalGobernanza / answers.length))
+  finalValues.push(parseInt(totalClima / answers.length))
+  finalValues.push(parseInt(totalPersonas / answers.length))
+  finalValues.push(parseInt(totalLiderazgo / answers.length))
 
-console.log(merged)
 
-radarChart.config.data.labels = categorias
 
-radarChart.config.data.datasets[0].data = finalValues
-// radarChart.config.data.datasets[0].backgroundColor = color
-radarChart.update()
-//mergedAttribute = merged
-sortBarChart("0", merged, radarChart)
+  merged = categorias.map((value, i) => {
+
+    return { "name": value, "value": finalValues[i] }
+  })
+
+  console.log(merged)
+
+  radarChart.config.data.labels = categorias
+
+  radarChart.config.data.datasets[0].data = finalValues
+  // radarChart.config.data.datasets[0].backgroundColor = color
+  radarChart.update()
+  //mergedAttribute = merged
+  sortBarChart("0", merged, radarChart)
 }
 
 function loadBarChart(answers) {
@@ -497,15 +645,15 @@ function loadBarChart(answers) {
 
   const finalNames = [...new Set(names)];
   console.log(finalNames);
-  
-  const getAllValuesByDataType = filterResponseByTag(finalNames, "subcategorias", answers);
+
+  const getAllValuesByDataType = filterResponseByTag(finalNames, "subCategorias", answers);
 
   console.log(getAllValuesByDataType);
 
-  const getAllValuesByParameter = filterResponseByParameter("Diversidad", "subcategorias", getAllValuesByDataType);
-
+  const getAllValuesByParameter = filterResponseByParameter("Franqueza", "subCategorias", getAllValuesByDataType);
+  console.log(getAllValuesByParameter)
   //este es el importante
-  console.log(getAllValuesByParameter);
+  //console.log(getAllValuesByParameter);
 
 
 
@@ -578,18 +726,19 @@ function loadBarChart(answers) {
 }
 
 
-function filterResponseByTag(areas,dataType = "", responses) {
+function filterResponseByTag(areas, dataType = "", responses) {
 
   let areasName = areas;
 
   let objectArea = areasName.map(area => ({ area: area }));
+  console.log(objectArea)
 
   //albergo toda la información que llega
   let responsesTest = responses;
 
   //sumar los valores que tengan la misma area
   objectArea.forEach(area => area[dataType] = responsesTest.filter(response => response.area === area.area));
-
+  console.log(objectArea)
   //filtrar los valores para tener solo los values - Ej/ hay 3 panaderos y se suman sus respuestas en un arreglo que tiene 3 arreglos internos
   objectArea.forEach(area => area[dataType] = area[dataType].map(a => a[dataType]));
 
@@ -914,55 +1063,55 @@ function sortBarChart(order, data, chart) {
   chart.update()
 }
 
-fetch("./data/data2.json")
-  .then(res => res.json())
-  .then(data2 => {
+// fetch("./data/data2.json")
+//   .then(res => res.json())
+//   .then(data2 => {
 
-    const dataModificada2 = data2.children[1].children
-    //.slice().sort((a, b) => b.value - a.value).slice(0, 3)
+//     const dataModificada2 = data2.children[1].children
+//     //.slice().sort((a, b) => b.value - a.value).slice(0, 3)
 
-    console.log(dataModificada2)
+//     console.log(dataModificada2)
 
-    const values2 = dataModificada2.map((a) => {
+//     const values2 = dataModificada2.map((a) => {
 
-      return a.value
-    })
+//       return a.value
+//     })
 
-    const names = dataModificada2.map((a) => {
-      return a.name
-    })
+//     const names = dataModificada2.map((a) => {
+//       return a.name
+//     })
 
-    lineChart.config.data.datasets[1].data = values2
-    lineChart.config.data.labels = names
+//     lineChart.config.data.datasets[1].data = values2
+//     lineChart.config.data.labels = names
 
-    lineChart.update()
+//     lineChart.update()
 
-  }).then(dataa => {
-
-
-    fetch("./data/data.json")
-      .then(res => res.json())
-      .then(data => {
+//   }).then(dataa => {
 
 
-        const dataModificada = data.children[1].children
+//     fetch("./data/data.json")
+//       .then(res => res.json())
+//       .then(data => {
 
 
-        const values = dataModificada.map((a) => {
-
-          return a.value
-        })
-
-        const names = dataModificada.map((a) => {
-          return a.name
-        })
+//         const dataModificada = data.children[1].children
 
 
-        lineChart.config.data.datasets[0].data = values
-        lineChart.config.data.labels = names
-        lineChart.update()
-      })
+//         const values = dataModificada.map((a) => {
+
+//           return a.value
+//         })
+
+//         const names = dataModificada.map((a) => {
+//           return a.name
+//         })
 
 
-  })
+//         lineChart.config.data.datasets[0].data = values
+//         lineChart.config.data.labels = names
+//         lineChart.update()
+//       })
+
+
+//   })
 

@@ -15,6 +15,9 @@ const btnEmail = document.querySelector("#btnEmail")
 const emailTest = document.querySelector("#emailTest")
 const surveyEmail = document.querySelector("#surveyEmail")
 const surveyContainer = document.querySelector(".surveyContainer")
+
+
+
 let currentQuestion = 0
 let preguntas = []
 
@@ -295,15 +298,15 @@ function startSurvey() {
 
     ///////////////////////////////////////
 
-    preguntas.push(pregunta10)
-    preguntas.push(pregunta11)
-    preguntas.push(pregunta12)
-    preguntas.push(pregunta13)
-    preguntas.push(pregunta14)
-    preguntas.push(pregunta15)
-    preguntas.push(pregunta16)
-    preguntas.push(pregunta17)
-    preguntas.push(pregunta18)
+    // preguntas.push(pregunta10)
+    // preguntas.push(pregunta11)
+    // preguntas.push(pregunta12)
+    // preguntas.push(pregunta13)
+    // preguntas.push(pregunta14)
+    // preguntas.push(pregunta15)
+    // preguntas.push(pregunta16)
+    // preguntas.push(pregunta17)
+    // preguntas.push(pregunta18)
 
     console.log(preguntas.length)
 
@@ -402,7 +405,7 @@ function startSurvey() {
 
         if (currentQuestion == preguntas.length - 1) {
 
-            let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0
+            let     Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0
             for (let i = 0; i < preguntas.length; i++) {
 
                 switch (preguntas[i].categoria) {
@@ -457,10 +460,22 @@ function startSurvey() {
                 }
             }
 
+
+            let subCategorias=[]
+           
+            for (let i = 0; i < preguntas.length; i++) {
+                console.log(preguntas[i])
+                let tempSubCategoria = {name:preguntas[i].subcategoria,value:preguntas[i].respuesta,categoria:preguntas[i].categoria}
+
+                subCategorias.push(tempSubCategoria)
+            }
+
+            console.log(subCategorias)
+
             let values = []
-            let tempValue1 = { name: "Estrategia", value: parseInt(Estrategia / 3) }
-            let tempValue2 = { name: "Gobernanza", value: parseInt(Gobernanza / 3) }
-            let tempValue3 = { name: "Clima", value: parseInt(Clima / 3) }
+            let tempValue1 = { name: "Estrategia", value: Estrategia }
+            let tempValue2 = { name: "Gobernanza", value: Gobernanza  }
+            let tempValue3 = { name: "Clima", value: Clima }
             let total = Estrategia + Gobernanza + Clima
             values.push(tempValue1)
             values.push(tempValue2)
@@ -468,12 +483,16 @@ function startSurvey() {
 
             respuesta.values = values
             respuesta.total = total
-            // console.log(respuesta)
+            console.log(subCategorias)
+            respuesta.subCategorias=subCategorias
+             console.log(respuesta)
             // console.log(Gobernanza)
             // console.log(Clima)
 
 
             respuesta.respuestas = preguntas
+
+            
 
             db.collection("answers").add(respuesta).then(() => {
 
@@ -482,7 +501,7 @@ function startSurvey() {
                 dialogTitle.style.textAlign = "center"
                 dialog.showModal()
                 closeDialog.addEventListener("click", () => {
-                    window.location.href = "dashboard.html"
+                   // window.location.href = "dashboard.html"
                 })
             })
 
