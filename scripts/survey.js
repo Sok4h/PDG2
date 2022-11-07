@@ -15,8 +15,7 @@ const btnEmail = document.querySelector("#btnEmail")
 const emailTest = document.querySelector("#emailTest")
 const surveyEmail = document.querySelector("#surveyEmail")
 const surveyContainer = document.querySelector(".surveyContainer")
-
-
+const proficiencyContainer= document.querySelector(".proficiencyContainer")
 
 let currentQuestion = 0
 let preguntas = []
@@ -465,7 +464,7 @@ function startSurvey() {
            
             for (let i = 0; i < preguntas.length; i++) {
                 console.log(preguntas[i])
-                let tempSubCategoria = {name:preguntas[i].subcategoria,value:preguntas[i].respuesta,categoria:preguntas[i].categoria}
+                let tempSubCategoria = {name:preguntas[i].subcategoria,value: parseInt(preguntas[i].respuesta),categoria:preguntas[i].categoria}
 
                 subCategorias.push(tempSubCategoria)
             }
@@ -501,7 +500,7 @@ function startSurvey() {
                 dialogTitle.style.textAlign = "center"
                 dialog.showModal()
                 closeDialog.addEventListener("click", () => {
-                   // window.location.href = "dashboard.html"
+                    window.location.href = "dashboard.html"
                 })
             })
 
