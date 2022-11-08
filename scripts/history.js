@@ -16,28 +16,97 @@ auth.onAuthStateChanged((user) => {
                     // doc.data() is never undefined for query doc snapshots
                     let tempDoc = doc.data()
                     console.log(doc.id)
-                    const div = document.createElement('div');
-                    div.classList.add("card")
-                    div.classList.add("test")
-                    div.innerHTML = `<h2 class="">Prueba 2021</h2>
+                    let numberUser 
+                    let respuestas =[]
+                    db.collection("answers").where("testId","==",doc.id).get().then((docSnapshot)=>{
+                            
+                        docSnapshot.forEach((doc)=>{
+
+                            respuestas.push(doc.data())
+                        })
+                        
+                        numberUser =docSnapshot.size
+                    }).then(()=>{
+
+                        let estado = "En progreso*"
+                        let porcentaje = getAverage(respuestas)
+
+                        if(numberUser==tempDoc.numberEmployers) estado="Completada"
+                        const div = document.createElement('div');
+                        div.classList.add("card")
+                        div.classList.add("test")
+                        div.innerHTML = `<h2 class="">Prueba 2021</h2>
+        
+                        <div class="infoContainer">
+                
+                            <h3 class="status">${estado}</h3>
+                            <h3 class="participants">${numberUser}/${tempDoc.numberEmployers}</h3>
+                            <p>Participantes</p>
+                        </div>
+                        <h3>Porcentaje General</h3>
+                        <h1 class="percentage">${porcentaje}</h1>
+            
+                        <button class="btn btnDetails">Ver detalles</button>
+                        <div class="copyContainer">
+                            <div class="linkContainer cursor">
+                            <p class="link">${doc.id}</p>
+                                  
+                        </div>
+                        <img class="cursor btnCopy" src="Iconos/Iconos/copy.svg"></img>  
+                        </div>`
     
-            <div class="infoContainer">
+                        let btnCopy = div.querySelector(".btnCopy")
+                        let btnCopy2 = div.querySelector(".linkContainer")
+
     
-                <h3 class="status">Completada</h3>
-                <h3 class="participants">130/${tempDoc.numberEmployers}</h3>
-                <p>Participantes</p>
-            </div>
-            <h2 class="percentage">57%</h2>
-            <button class="btn bntDetails">copiar</button>`
+                        let copy = `?testId=${doc.id}`
+                        btnCopy.addEventListener("click", () => {
+    
+                            navigator.clipboard.writeText(copy)
 
-                    let btnCopy = div.querySelector(".bntDetails")
 
-                    let copy = `?testId=${doc.id}`
-                    btnCopy.addEventListener("click", () => {
+                            Toastify({
+                                text: "la url ha sido copiada",
+                                duration: 3000,
+                                close: true,
+                                gravity: "bottom", // `top` or `bottom`
+                                position: "center", // `left`, `center` or `right`
+                                stopOnFocus: true, // Prevents dismissing of toast on hover
+                                style: {
+                                  background: "#F3F3F3",
+                                  color :"black",
+                                 
+                                },
+                                onClick: function(){} // Callback after click
+                              }).showToast();
+                        })
 
-                        navigator.clipboard.writeText(copy)
+                        btnCopy2.addEventListener("click", () => {
+    
+                            navigator.clipboard.writeText(copy)
+
+                            Toastify({
+                                text: "la url ha sido copiada",
+                                duration: 3000,
+                                close: true,
+                                gravity: "bottom", // `top` or `bottom`
+                                position: "center", // `left`, `center` or `right`
+                                stopOnFocus: true, // Prevents dismissing of toast on hover
+                                style: {
+                                  background: "#F3F3F3",
+                                  color :"black",
+                                 
+                                },
+                                onClick: function(){} // Callback after click
+                              }).showToast();
+                        })
+                        contentHistory.appendChild(div)
+
+
                     })
-                    contentHistory.appendChild(div)
+
+
+                    
                 });
 
 
@@ -59,3 +128,35 @@ auth.onAuthStateChanged((user) => {
     }
 }
 )
+
+function getAverage(respuestas) {
+
+    let numeroRespuestas = respuestas.length
+  
+    console.log(respuestas)
+    let respuestasFilter = respuestas.map((respuesta) => { return respuesta.values })
+  
+    let respuestaOrdenada = sumAllCategories(respuestasFilter)
+  
+    let respuestasDividas = respuestaOrdenada.map((respuesta) => {
+  
+      respuesta.value = parseInt(respuesta.value / respuestas.length)
+      return respuesta
+    })
+  
+    console.log(respuestasDividas)
+  
+  
+    let promedio = 0
+  
+    respuestas.forEach((respuesta) => {
+  
+      promedio += respuesta.total
+  
+    })
+  
+    promedio = promedio / respuestas.length
+  
+    return Math.round(promedio * 100 / 63) + "%"
+
+}

@@ -5,6 +5,7 @@ const dialog = document.querySelector(".dialogSurvey")
 const closeDialog = document.querySelector(".btnCloseModal")
 const dialogTitle = dialog.querySelector(".dialogInfo")
 const companyAreas = document.querySelector("#companyAreas")
+const companyJerarchy = document.querySelector("#companyJerarquia")
 const numberYears = document.querySelector("#numberYears")
 const surveyBasicInfo = document.querySelector(".surveyBasicInfo")
 const surveyTitle = document.querySelector(".survey__title")
@@ -484,9 +485,7 @@ function startSurvey() {
             respuesta.total = total
             console.log(subCategorias)
             respuesta.subCategorias=subCategorias
-             console.log(respuesta)
-            // console.log(Gobernanza)
-            // console.log(Clima)
+
 
 
             respuesta.respuestas = preguntas

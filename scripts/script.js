@@ -388,7 +388,7 @@ const configdepartmentChart = {
     layout: {
       padding: {
 
-        top: 20
+        top: 30
       }
     }
     ,
@@ -409,7 +409,7 @@ const configdepartmentChart = {
         drawBorder: false,
       },
       y: {
-        //max: 21,
+        max: 21,
         grid: {
           display: false,
           drawBorder: false
@@ -491,8 +491,8 @@ const dataRadar = {
   labels: labels,
   datasets: [{
     label: 'Test overview',
-    backgroundColor: 'rgb(255, 99, 132,0.3)',
-    borderColor: 'rgb(255, 99, 132)',
+    backgroundColor: '#77D5FF',
+    //  borderColor: '#77D5FF',
     data: dataChart,
     datalabels: {
       formatter: function (value, context) {
@@ -817,7 +817,12 @@ function updateRadarChart(category) {
   radarChart.config.data.labels = names
 
   radarChart.config.data.datasets[0].data = arregloFinal
-  // radarChart.config.data.datasets[0].backgroundColor = color
+
+  let index = cateogorias.indexOf(category);
+
+  arregloFinal.forEach((e)=>{e.background=colorArrows[index]})
+
+   //radarChart.config.data.datasets[0].backgroundColor = colorArrows[index]
   radarChart.update()
 
   sortBarChart("0", arregloFinal, radarChart)

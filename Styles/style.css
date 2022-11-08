@@ -186,13 +186,35 @@ button {
 }
 
 .test {
-  row-gap: 1.3em;
-  width: 40%;
+  row-gap: 1em;
+  width: 30%;
 }
 .test .infoContainer {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  background-color: #F3F3F3;
+  padding: 20px;
+  border-radius: 8px;
+}
+.test .percentage {
+  font-size: 48px;
+  font-weight: bold;
+}
+.test .copyContainer {
+  display: flex;
+  gap: 0.3em;
+}
+.test .copyContainer .linkContainer {
+  display: flex;
+  background-color: #F3F3F3;
+  vertical-align: middle;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+}
+.test .cursor {
+  cursor: pointer;
 }
 
 .contentHistory {
@@ -205,6 +227,14 @@ button {
   width: 100%;
   background-color: #F3F3F3;
   gap: 1.3em;
+}
+
+.btnDetails {
+  width: 80%;
+}
+
+.bodySurvey {
+  background-color: #F3F3F3;
 }
 
 .survey {
@@ -286,6 +316,19 @@ button {
 }
 .surveyBasicInfo select {
   width: 100%;
+}
+
+.holder {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.descriptionBasic {
+  text-align: left;
 }
 
 .hidebox {

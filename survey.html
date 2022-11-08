@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="Styles/style.css">
 </head>
 
-<body>
+<body class="bodySurvey">
 
     <div class="surveyContainer">
 
@@ -23,136 +23,153 @@
         <div class="card survey">
 
             <h4 class="survey__title"></h4>
-    
-            <p>  ¿Qué tan de acuerdo está usted con la anterior afirmación?</p>
-    
+
+            <p> ¿Qué tan de acuerdo está usted con la anterior afirmación?</p>
+
             <div class="levels">
-    
-                
+
+
                 <div class="levelContainer">
-    
+
                     <h5>Totalmente desacuerdo</h5>
                     <img id="btnInfoLow" src="Iconos/Iconos/infoIcono.png" alt="">
                 </div>
-    
+
                 <h5>Neutro</h5>
-    
+
                 <div class="levelContainer">
                     <img id="btnInfoHigh" src="Iconos/Iconos/infoIcono.png" alt="">
                     <h5>Totalmente de acuerdo</h5>
                 </div>
-    
+
             </div>
-    
-    
+
+
             <form class="options">
-    
+
                 <input type="radio" name="optionSurvey" id="-3" class="hidebox" value="1">
                 <label for="-3" class="label-radio">
-    
+
                     <div class="display-box">
-    
+
                         -3
                     </div>
                 </label>
-    
+
                 <input type="radio" name="optionSurvey" id="-2" class="hidebox" value="2">
                 <label for="-2" class="label-radio">
-    
+
                     <div class="display-box">
-    
+
                         -2
                     </div>
                 </label>
-    
-    
+
+
                 <input type="radio" name="optionSurvey" id="-1" class="hidebox" value="3">
                 <label for="-1" class="label-radio">
-    
+
                     <div class="display-box">
-    
+
                         -1
                     </div>
                 </label>
-    
+
                 <input type="radio" name="optionSurvey" id="0" class="hidebox" value="4">
                 <label for="0" class="label-radio">
-    
+
                     <div class="display-box">
-    
+
                         0
                     </div>
                 </label>
-    
+
                 <input type="radio" name="optionSurvey" id="1" class="hidebox" value="5">
                 <label for="1" class="label-radio">
-    
+
                     <div class="display-box">
-    
+
                         1
                     </div>
                 </label>
-    
+
                 <input type="radio" name="optionSurvey" id="2" class="hidebox" value="6">
                 <label for="2" class="label-radio">
-    
+
                     <div class="display-box">
-    
+
                         2
                     </div>
                 </label>
-    
+
                 <input type="radio" name="optionSurvey" id="3" class="hidebox" value="7">
                 <label for="3" class="label-radio">
-    
+
                     <div class="display-box">
-    
+
                         3
                     </div>
                 </label>
-    
-                
-             
-    
+
+
+
+
             </form>
             <dialog class="dialogSurvey">
-    
+
                 <p class="dialogInfo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi sequi explicabo
                     animi autem modi rem
                     debitis dolore, quae vel labore voluptates, beatae quod exercitationem ipsam ad iste, necessitatibus
                     laudantium ma iores!</p>
-    
-                <button class="btn btnCloseModal" >close</button>
+
+                <button class="btn btnCloseModal">close</button>
             </dialog>
             <button class="btn btn--survey" id="btnNextQuestion">Continuar</button>
         </div>
     </div>
-    
-
-    <div class="card surveyBasicInfo">
-
-        <span class="label label--login">Cuanto tiempo llevas en la empresa?</span>
-        <input class="inputs inputs--login" type="number" name="numberYears" id="numberYears"
-            placeholder="años lleva en la empresa">
 
 
+    <div class="card surveyBasicInfo" id="workerInfo">
+
+        <h3>Bienvenido</h3>
+
+        <p class="descriptionBasic">Antes de iniciar la prueba necesitamos que diligencies la siguiente información sobre tu posición en la compañía. Recuerda que tu empleador no podrá ver tus respuestas individuales
+        </p>
+        <div class="holder">
+            <span class="label label--login">Cuanto tiempo llevas en la empresa?</span>
+            <input class="inputs inputs--login" type="number" name="numberYears" id="numberYears"
+                placeholder="años que lleva en la empresa">
+        </div>
+
+        <div class="holder">
             <span class="label ">Area de la compañia</span>
 
             <select class="selectForm" name="companySize" id="companyAreas">
 
             </select>
 
+        </div>
+
+        <div class="holder">
+            <span class="label ">Nivel jerárquico</span>
+
+            <select class="selectForm" name="companyJerarquia" id="companyJerarquia">
+                <option value="highHierarchy">Nivel superior</option>
+                <option value="midHierarchy">Nivel medio</option>
+                <option value="lowHierarchy">Nivel operacional</option>
+            </select>
+
             <button class="btn  btn--surveyActive" id="btnBasicInfo">Continuar</button>
+        </div>
     </div>
 
     <div class="card surveyBasicInfo" id="surveyEmail">
 
         <span class="label label--login">Ingresa tu correo o id</span>
-        <input class="inputs inputs--survey" type="text" name="email" id="emailTest"
-            placeholder="email o id">
+        <input class="inputs inputs--survey" type="text" name="email" id="emailTest" placeholder="email o id">
 
 
-            <button class="btn  btn--surveyActive" id="btnEmail">Continuar</button>
+        <button class="btn  btn--surveyActive" id="btnEmail">Continuar</button>
     </div>
 </body>
 
