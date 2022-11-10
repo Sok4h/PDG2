@@ -65,6 +65,13 @@ function getColor(category) {
 
 }
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+const testId = urlParams.get('testId')
+console.log(testId)
+
+let docRef 
 let answers = []
 
 auth.onAuthStateChanged((user) => {
@@ -74,7 +81,15 @@ auth.onAuthStateChanged((user) => {
 
     //currentUser=user
     console.log(user.uid)
-    db.collection("surveys").where("userId", "==", user.uid).limit(1).get().then((docSnapshot) => {
+
+    docRef=db.collection("surveys").where("userId", "==", user.uid).limit(1)
+
+    if(testId){
+
+      docRef= db.collection("surveys").doc(testId)
+
+    }
+    docRef.get().then((docSnapshot) => {
 
 
       if (!docSnapshot.empty) {
@@ -82,18 +97,49 @@ auth.onAuthStateChanged((user) => {
         emptyDashboard.style.display = "none"
         dashboard.style.display = "flex"
 
-        console.log(docSnapshot)
+        //console.log(docSnapshot.data())
 
 
-        docSnapshot.forEach((doc) => {
+        if(testId==null){
+
+          docSnapshot.forEach((doc) => {
 
 
-          currentTest = doc.data()
+            console.log(doc.data())
+            currentTest = doc.data()
+  
+  
+  
+            db.collection("answers").where("testId", "==", doc.id).get().then(function (querySnapshot) {
+  
+              querySnapshot.forEach((doc) => {
+  
+                answers.push(doc.data())
+              })
+  
+            }).then(() => {
+  
+              console.log(answers)
+  
+              listAnswers = answers
+              loadBarChart(answers)
+              loadBestAttributes(answers)
+              loadRadarChart(answers)
+              loadHighlights(currentTest, answers)
+              //updateRadarChart(cateogorias[0])
+  
+  
+            });
+          })
 
 
+        }
 
-          db.collection("answers").where("testId", "==", doc.id).get().then(function (querySnapshot) {
+        else{
 
+          currentTest= docSnapshot.data()
+          db.collection("answers").where("testId", "==", docSnapshot.id).get().then(function (querySnapshot) {
+  
             querySnapshot.forEach((doc) => {
 
               answers.push(doc.data())
@@ -112,7 +158,9 @@ auth.onAuthStateChanged((user) => {
 
 
           });
-        })
+
+        }
+      
         //obtiene respuestas
 
 

@@ -57,6 +57,13 @@ auth.onAuthStateChanged((user) => {
     
                         let btnCopy = div.querySelector(".btnCopy")
                         let btnCopy2 = div.querySelector(".linkContainer")
+                        let btnDetails = div.querySelector(".btnDetails")
+
+                        btnDetails.addEventListener("click",()=>{
+
+
+                            window.location.href = `dashboard.html?testId=${doc.id}`
+                        })
 
     
                         let copy = `?testId=${doc.id}`

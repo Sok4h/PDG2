@@ -16,7 +16,11 @@ const btnEmail = document.querySelector("#btnEmail")
 const emailTest = document.querySelector("#emailTest")
 const surveyEmail = document.querySelector("#surveyEmail")
 const surveyContainer = document.querySelector(".surveyContainer")
-const proficiencyContainer= document.querySelector(".proficiencyContainer")
+const proficiencyContainer = document.querySelector(".proficiencyContainer")
+
+const companyPosition = document.querySelector("#companyPosition")
+const position = document.querySelector(".position")
+
 
 let currentQuestion = 0
 let preguntas = []
@@ -24,7 +28,6 @@ let preguntas = []
 
 
 //cargar info
-
 
 
 
@@ -37,9 +40,14 @@ console.log(testId)
 let test
 surveyContainer.style.display = "none"
 surveyBasicInfo.style.display = "none"
+position.style.display = "none"
+
 
 let respuesta = {}
 let testExists
+
+
+
 
 verifyTest(testId)
 
@@ -69,6 +77,28 @@ function verifyTest(id) {
             //alert("enlace no valido")
             return
         }
+
+
+
+        companyJerarchy.addEventListener("change", () => {
+
+            position.style.display = "flex"
+            let value = companyJerarchy.value
+
+            if (value == "") {
+                position.style.display = "none"
+                return
+            }
+
+
+            loadPositions(test[value])
+
+
+
+        })
+
+
+
 
         btnEmail.addEventListener("click", () => {
 
@@ -102,6 +132,19 @@ function verifyTest(id) {
 
 }
 
+
+function loadPositions(positions) {
+
+    positions.forEach((position) => {
+
+        var opt = document.createElement('option');
+        opt.value = position
+        opt.innerHTML = position
+        companyPosition.appendChild(opt)
+
+    })
+
+}
 
 function startSurvey() {
 
@@ -286,6 +329,7 @@ function startSurvey() {
     // }
 
 
+
     preguntas.push(pregunta)
     preguntas.push(pregunta2)
     preguntas.push(pregunta3)
@@ -387,8 +431,11 @@ function startSurvey() {
             respuesta.testId = testId
             respuesta.numberYears = parseInt(numberYears.value)
             respuesta.area = companyAreas.value
+            respuesta.position = companyPosition.value
             surveyBasicInfo.style.display = "none"
             surveyContainer.style.display = "flex"
+
+            console.log(respuesta)
         }
     })
 
@@ -405,7 +452,7 @@ function startSurvey() {
 
         if (currentQuestion == preguntas.length - 1) {
 
-            let     Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0
+            let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0
             for (let i = 0; i < preguntas.length; i++) {
 
                 switch (preguntas[i].categoria) {
@@ -461,11 +508,11 @@ function startSurvey() {
             }
 
 
-            let subCategorias=[]
-           
+            let subCategorias = []
+
             for (let i = 0; i < preguntas.length; i++) {
                 console.log(preguntas[i])
-                let tempSubCategoria = {name:preguntas[i].subcategoria,value: parseInt(preguntas[i].respuesta),categoria:preguntas[i].categoria}
+                let tempSubCategoria = { name: preguntas[i].subcategoria, value: parseInt(preguntas[i].respuesta), categoria: preguntas[i].categoria }
 
                 subCategorias.push(tempSubCategoria)
             }
@@ -474,7 +521,7 @@ function startSurvey() {
 
             let values = []
             let tempValue1 = { name: "Estrategia", value: Estrategia }
-            let tempValue2 = { name: "Gobernanza", value: Gobernanza  }
+            let tempValue2 = { name: "Gobernanza", value: Gobernanza }
             let tempValue3 = { name: "Clima", value: Clima }
             let total = Estrategia + Gobernanza + Clima
             values.push(tempValue1)
@@ -484,13 +531,13 @@ function startSurvey() {
             respuesta.values = values
             respuesta.total = total
             console.log(subCategorias)
-            respuesta.subCategorias=subCategorias
+            respuesta.subCategorias = subCategorias
 
 
 
             respuesta.respuestas = preguntas
 
-            
+
 
             db.collection("answers").add(respuesta).then(() => {
 
