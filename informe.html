@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe</title>
+    <link rel="stylesheet" href="./Styles/style.css">
+
+</head>
+
+<body class="dashboard">
+
+    <section class="nav__container ">
+        <nav class="nav">
+
+            <a href="" class="nav__logo">
+                <img src="resources/logo-menu.png" alt="">
+            </a>
+
+            <a href="test.html"><button class="btn btn--nav"></button></a>
+
+            <ul>
+
+                <li class="nav__item nav__item--home ">
+                    <a href="dashboard.html">
+
+                        <img src="Iconos/Iconos/homeBarra.png" alt="">
+
+                    </a>
+                </li>
+                <li class="nav__item nav__item--team">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/equiposBarra.png" alt="">
+
+                    </a>
+                </li>
+                <li class="nav__item nav__item--herarchy">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/jerarquiaBarra.png" alt="">
+                    </a>
+                </li>
+                <li class="nav__item nav__item--atributes">
+                    <a href="">
+                        <img src="Iconos/Iconos/atributosBarra.png" alt="">
+
+
+                    </a>
+                </li>
+                <li class="nav__item nav__item--history nav__item--active">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/historialBarra.png" alt="">
+
+
+                    </a>
+                </li>
+
+                <li class="nav__item nav__item--report">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/informeBarra.png" alt="">
+
+
+                    </a>
+                </li>
+
+                <li class="nav__item nav__item--logout">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/logoutBarra.png" alt="">
+
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+
+    <main class="performanceBody">
+
+        <div class="performance">
+
+            <h2>Explicación desempeño</h2>
+
+
+            <div class="levelPerformanceContainer">
+                <div class="containerArrow">
+                    <div class="arrow">
+                        <div class="arrowInfo">
+                            <p>Tus resultados</p>
+                            <p>60%</p>
+
+                        </div>
+                        <div class="arrowTriangle"></div> 
+                    </div>
+                </div>
+                <div class="bar">
+
+                    <div class="ninety"></div>
+                    <div class="seventyeight"></div>
+                    <div class="sixty"></div>
+    
+                </div>
+                <div class="levelPerformance">
+
+                    <div class="container">
+
+                        <p>100%</p>
+                        <p>Experto</p>
+
+                    </div>
+                    <div class="container">
+
+                        <p>90%</p>
+                        <p>Proficiente</p>
+                    </div>
+                    <div class="container">
+
+                        <p>78%</p>
+                        <p>Competente</p>
+
+                    </div>
+                    <div class="container">
+
+                        <p>60%</p>
+                        <p>Principiante</p>
+                    </div>
+
+                </div>
+
+                <div class="levelDetails">
+
+                    <div class="container">
+
+                        <p>Tus resultados muestran el ejemplo de excelencia y cambio que es tu compañía, recuerda seguir así.</p>
+
+                    </div>
+                    <div class="container">
+
+                        <p>Tus resultados muestran que están en una situación favorable pero que todavía quedan unos pequeños detalles por mejorar.</p>
+                    </div>
+                    <div class="container">
+
+                        <p>Tus resultados muestran que tu compañía está en el proceso y todavía hay cambios que lograr pero que con dedicación y esfuerzo lo lograran.</p>
+                    </div>
+                    <div class="container">
+
+                        <p>Tus resultados muestran que estas iniciando el proceso de mejora, pero todavía tienes un largo camino por delante.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+
+<script src="scripts/firebase.js"></script>
+<script src="scripts/utilities.js"></script>
+
+</html>

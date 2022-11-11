@@ -151,6 +151,8 @@ function startSurvey() {
     console.log(test)
     surveyEmail.style.display = "none"
     surveyBasicInfo.style.display = "flex"
+
+    
     let pregunta = {
 
         categoria: "Estrategia",
