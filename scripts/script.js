@@ -16,9 +16,20 @@ const bestAttributeName = bestAttribute.querySelector(".highlight__description")
 const worstAttributeValue = worstAttribute.querySelector(".card__value")
 const worstAttributeName = worstAttribute.querySelector(".highlight__description")
 const graphByArea = document.querySelector("#graphByArea")
+const btnGeneral = document.querySelector(".btnGeneral")
+const cardRadarChart = document.querySelector(".sunbust__info")
+const titleCardChart = cardRadarChart.querySelector(".infoTitle")
+const valueCardChart = cardRadarChart.querySelector(".infoValue")
+const descriptionCardChart = cardRadarChart.querySelector(".suggestion")
+const levelCardChart = cardRadarChart.querySelector(".infoDescription")
+
+//cardRadarChart.style.display="none"
+
+
 console.log(completedCard)
 
 let listAnswers
+
 
 
 const cateogorias = ["Gobernanza", "Resultados", "Procesos", "Recursos", "Liderazgo", "Clima", "Estrategia", "Personas", "Colaboración"]
@@ -28,6 +39,10 @@ const rutasImagenes = ["Iconos/Iconos/gobernanza.png", "Iconos/Iconos/resultados
 ]
 
 let colorArrows = ["#EB0000", "#7022A8", "#0064EF", "#053AB8", "#0073A7", "#FF981A", "#D3016A", "#058C00", "#FF661A"]
+
+
+let colorRadar = ['rgba(235,0,0,0.5)', 'rgba(112,34,168,0.5)', 'rgba(0,100,239,0.5)', 'rgba(5,58,184,0.5)', 'rgba(0,115,167,0.5)', 'rgba(255,152,26,0.5)', 'rgba(211,1,106,0.5)', 'rgba(5,140,0,0.5)', 'rgba(255, 102, 26,0.5)']
+
 
 
 const proficiencyContainer = document.querySelector(".proficiencyContainer")
@@ -41,7 +56,7 @@ const flechaXd = complexChart.querySelectorAll("#pruebaFlecha")
 let colorsDepartment = ["#721F5A", "#F73D79", "#761AC1", "#3FA39C", "#4F6946", "#AB2408"]
 
 
-let categorias = ["Estrategia", "Gobernanza", "Clima"]
+//let categorias = ["Estrategia", "Gobernanza", "Clima"]
 
 
 //flechaXd.style.fill="#FF661A"
@@ -71,7 +86,7 @@ const urlParams = new URLSearchParams(queryString);
 const testId = urlParams.get('testId')
 console.log(testId)
 
-let docRef 
+let docRef
 let answers = []
 
 auth.onAuthStateChanged((user) => {
@@ -82,11 +97,11 @@ auth.onAuthStateChanged((user) => {
     //currentUser=user
     console.log(user.uid)
 
-    docRef=db.collection("surveys").where("userId", "==", user.uid).limit(1)
+    docRef = db.collection("surveys").where("userId", "==", user.uid).limit(1)
 
-    if(testId){
+    if (testId) {
 
-      docRef= db.collection("surveys").doc(testId)
+      docRef = db.collection("surveys").doc(testId)
 
     }
     docRef.get().then((docSnapshot) => {
@@ -100,46 +115,46 @@ auth.onAuthStateChanged((user) => {
         //console.log(docSnapshot.data())
 
 
-        if(testId==null){
+        if (testId == null) {
 
           docSnapshot.forEach((doc) => {
 
 
             console.log(doc.data())
             currentTest = doc.data()
-  
-  
-  
+
+
+
             db.collection("answers").where("testId", "==", doc.id).get().then(function (querySnapshot) {
-  
+
               querySnapshot.forEach((doc) => {
-  
+
                 answers.push(doc.data())
               })
-  
+
             }).then(() => {
-  
+
               console.log(answers)
-  
+
               listAnswers = answers
               loadBarChart(answers)
               loadBestAttributes(answers)
               loadRadarChart(answers)
               loadHighlights(currentTest, answers)
               //updateRadarChart(cateogorias[0])
-  
-  
+
+
             });
           })
 
 
         }
 
-        else{
+        else {
 
-          currentTest= docSnapshot.data()
+          currentTest = docSnapshot.data()
           db.collection("answers").where("testId", "==", docSnapshot.id).get().then(function (querySnapshot) {
-  
+
             querySnapshot.forEach((doc) => {
 
               answers.push(doc.data())
@@ -160,7 +175,7 @@ auth.onAuthStateChanged((user) => {
           });
 
         }
-      
+
         //obtiene respuestas
 
 
@@ -179,6 +194,19 @@ auth.onAuthStateChanged((user) => {
   }
 })
 
+
+
+btnGeneral.addEventListener("click", () => {
+
+  loadRadarChart(listAnswers)
+
+  btnGeneral.classList.add("gone")
+  //cardRadarChart.style.display="none"
+  radarChart.config.data.datasets[0].backgroundColor = 'rgb(29, 29, 29,0.5)'
+  radarChart.update()
+
+
+})
 
 
 console.log(getColor("Liderazgo"))
@@ -452,7 +480,7 @@ const configdepartmentChart = {
     indexAxis: 'x',
     scales: {
       x: {
-        
+
         display: true,
         drawBorder: false,
       },
@@ -538,9 +566,19 @@ const dataRadar = {
 
   labels: labels,
   datasets: [{
+
+
     label: 'Test overview',
-    backgroundColor: '#77D5FF',
-    //  borderColor: '#77D5FF',
+    backgroundColor: 'rgb(29, 29, 29,0.5)',
+    borderColor: '#DBDBDB',
+
+    pointRadius: 6,
+    pointHitRadius: 50,
+    pointBorderWidth: 4,
+    pointHoverRadius: 10,
+    pointBackgroundColor: "#fff",
+    pointBorderColor: "F4F4F4",
+
     data: dataChart,
     datalabels: {
       formatter: function (value, context) {
@@ -574,47 +612,59 @@ const configRadar = {
   data: dataRadar,
 
   options: {
+    //pointHitRadius:30,
 
 
-    onHover:({x ,y },activeHover,chart)=>{
+    onHover: ({ x, y }, activeHover, chart) => {
 
       console.log(chart.scales.r._pointLabelItems)
       const { canvas } = chart
-      let index =getLabelIndex(x,y,chart.scales.r._pointLabelItems)
+      let index = getLabelIndex(x, y, chart.scales.r._pointLabelItems)
 
       console.log(index)
-      if(index===-1){
+      if (index === -1) {
 
         canvas.style.cursor = 'default'
       }
-      else{
+      else {
 
-        canvas.style.cursor ='pointer'
+        canvas.style.cursor = 'pointer'
       }
     },
 
-    onClick :({x,y},activeClick,chart)=>{
+    onClick: ({ x, y }, activeClick, chart) => {
 
       const { canvas } = chart
 
-      let index=getLabelIndex(x,y,chart.scales.r._pointLabelItems)
+      let index = getLabelIndex(x, y, chart.scales.r._pointLabelItems)
 
-      if(index===-1){
+      if (index === -1) {
 
         return
       }
-        const selectedLabel = chart.scales.r._pointLabels[index]
-        console.log(selectedLabel)
+      const selectedLabel = chart.scales.r._pointLabels[index]
+      console.log(selectedLabel)
 
-        updateRadarChart(selectedLabel)
-      
+      updateRadarChart(selectedLabel)
+
     },
     scales: {
 
+      //
       r: {
 
         suggestedMin: 0,
-        suggestedMax: 22
+        //suggestedMax: 50,
+        backgroundColor: "#F4F4F4",
+
+        pointLabels: {
+          font: {
+            size: 15,
+            weight: "bold"
+            
+          }
+        }
+
       }
       //   ticks: {
       //     display:false,
@@ -628,27 +678,27 @@ const configRadar = {
 
   }
 };
-const getLabelIndex =(x,y,pointLabels)=>{
+const getLabelIndex = (x, y, pointLabels) => {
 
-let index = -1
+  let index = -1
 
 
-console.log(pointLabels.length)
-for(let i =0;i<pointLabels.length;i++){
+  console.log(pointLabels.length)
+  for (let i = 0; i < pointLabels.length; i++) {
 
-    const {top,right,bottom,left} =pointLabels[i]
+    const { top, right, bottom, left } = pointLabels[i]
 
     console.log(pointLabels[i])
-    
-    if(x>=left && x <=right && y>=top && y<=bottom){
+
+    if (x >= left && x <= right && y >= top && y <= bottom) {
 
       index = i;
       break
     }
 
-   
-}
-return index
+
+  }
+  return index
 }
 
 const radarChart = new Chart(
@@ -700,7 +750,7 @@ function sumAllSubCategories(answers) {
 
       console.log(number)
       if (!basket[number]) {
-        basket[number] = { categoria : respuesta.categoria ,name: respuesta.name, value: 0 };
+        basket[number] = { categoria: respuesta.categoria, name: respuesta.name, value: 0 };
       }
 
 
@@ -749,7 +799,7 @@ function loadHighlights(test, respuestas) {
 
   promedio = promedio / respuestas.length
 
-  cardAverageValue.textContent = Math.round(promedio * 100 / 63) + "%"
+  cardAverageValue.textContent = Math.round(promedio * 100 / maximoGeneral) + "%"
 
   console.log(answers)
 
@@ -775,11 +825,22 @@ function loadHighlights(test, respuestas) {
   console.log(min)
 
   worstAttributeName.textContent = min.name
-  worstAttributeValue.textContent = ((min.value / 21) * 100).toFixed(1) + "%"
+  worstAttributeValue.textContent = ((min.value / maximoCategoria) * 100).toFixed(1) + "%"
+
+  //actualiza la card del radar con el mas bajo
+  titleCardChart.textContent = min.name 
+  titleCardChart.style.color = getColor(min.name)
+  levelCardChart.style.color = getColor(min.name)
+
+  valueCardChart.textContent = parseInt((min.value / maximoCategoria) * 100) + "%"
+
 
 
   bestAttributeName.textContent = max.name
-  bestAttributeValue.textContent = ((max.value / 21) * 100).toFixed(1) + "%"
+  
+  bestAttributeValue.textContent = ((max.value / maximoCategoria) * 100).toFixed(1) + "%"
+
+
   //const getAllValuesByDataType = filterResponseByTag(finalNames, "values", respuestas);
 
   // const getAllValuesByParameter = filterResponseByParameter("Estrategia", "values", getAllValuesByDataType);
@@ -791,12 +852,18 @@ function loadHighlights(test, respuestas) {
   const proficiencyAverage = document.querySelector(".proficiency__view")
 
   const proficiencyValue = proficiencyAverage.querySelector(".infoValue")
-  let proficiency = Math.round(promedio * 100 / 63)
+  const proficiencyDescription = proficiencyAverage.querySelector(".descriptionProfiency")
+
+  console.log(proficiencyDescription)
+  let proficiency = Math.round(promedio * 100 / maximoGeneral)
   proficiencyValue.textContent = proficiency + "%"
 
   const proficiencyGrade = proficiencyAverage.querySelector(".infoDescription")
 
   proficiencyGrade.textContent = getProficiencyName(proficiency)
+
+  proficiencyDescription.textContent = getProficiencyDescription(proficiency)
+
 
 
   // carga tabla chafa
@@ -805,7 +872,7 @@ function loadHighlights(test, respuestas) {
 
     let proficiency
     console.log(xd)
-    let percentage = Math.round(xd.value * 100 / 21)
+    let percentage = Math.round(xd.value * 100 / maximoCategoria)
     console.log(percentage)
     let div = document.createElement("div")
     div.classList.add("proficiency")
@@ -833,44 +900,93 @@ function getProficiencyName(value) {
   return proficiencyName
 }
 
+
+function getProficiencyDescription(value){
+
+  console.log(value)
+  let proficiencyDescription = ""
+  if (value <= 60) proficiencyDescription = "Tus resultados muestran que tu compañía todavía tiene un largo viaje por delante, pero que esto no desmotive, ya que se darán los pasos necesarios para mejorar."
+  if (value > 60 && value <= 78) proficiencyDescription = "Tus resultados muestran que tu compañía está avanzando bastante, están tratando de mejorar lo que ya tienen y están abiertos a hacer los cambios que sean necesarios."
+  if (value > 78 && value <= 90) proficiencyDescription = "Tus resultados muestran que tu compañía es un lugar donde los trabajadores y la compañía están activamente aplicando nuevas ideas y buscamos formas nuevas de evitar obstáculos para progresar, recuerda siempre buscar ser mejor."
+  if (value > 90) proficiencyDescription = "Tu compañía es un ejemplo sobre como mantenerse siempre actualizado en un mercado competitivo y hacer que todos se sientan parte del equipo desde la posición más pequeña a la más alta, sigue tus esfuerzos para que tu cultura sea siempre la mejor."
+  return proficiencyDescription
+
+}
+
 //updateRadarChart("Estrategias")
 function updateRadarChart(category) {
 
 
-  if(!cateogorias.includes(category)) return
-  console.log(answers)
-  let filtrado=[]
-  
+  if (!cateogorias.includes(category)) return
+  let filtrado = []
 
-   filtrado = answers.map((respuesta) => { return respuesta.subCategorias })
+  btnGeneral.classList.remove("gone")
+  cardRadarChart.style.display="flex"
+
+  filtrado = answers.map((respuesta) => { return respuesta.subCategorias })
 
   console.log(filtrado)
 
   let arregloFinal = []
 
   console.log(arregloFinal.length)
-  
+
+  //descriptionCardChart
+  //valueCardChart
+
+ 
+
 
   //console.log(arregloFinal)
   let prueba = sumAllSubCategories(filtrado)
   console.log(currentTest)
-  prueba.forEach((prueba)=>{ prueba.value = parseInt(prueba.value /answers.length)})
+  prueba.forEach((prueba) => { prueba.value = parseInt(prueba.value / answers.length) })
 
-  arregloFinal= prueba.filter((a)=> a.categoria==category)
+  arregloFinal = prueba.filter((a) => a.categoria == category)
 
   console.log(arregloFinal)
 
-  let names = arregloFinal.map((x)=> {return x.categoria})
+  let promedioCategoria
+  let sumaCategoria = 0
+  arregloFinal.forEach((respuesta)=>{
+
+    console.log(respuesta.value)
+    sumaCategoria += respuesta.value
+
+  })
+
+  
+  console.log(sumaCategoria)
+
+  promedioCategoria = (sumaCategoria *100)/maximoCategoria 
+
+  console.log(promedioCategoria)
+
+  valueCardChart.textContent = promedioCategoria +"%"
+
+   //actualiza card radarChart
+   titleCardChart.textContent=category
+
+   let colorText = getColor(category)
+   titleCardChart.style.color = colorText
+   levelCardChart.style.color = colorText
+
+   levelCardChart.textContent=getProficiencyName(promedioCategoria)
+
+
+  let names = arregloFinal.map((x) => { return x.categoria })
 
   radarChart.config.data.labels = names
+
+  radarChart.config.options.scales.r.ticks.suggestedMax = maximoCategoria
 
   radarChart.config.data.datasets[0].data = arregloFinal
 
   let index = cateogorias.indexOf(category);
 
-  arregloFinal.forEach((e)=>{e.background=colorArrows[index]})
+  arregloFinal.forEach((e) => { e.background = colorRadar[index] })
 
-   //radarChart.config.data.datasets[0].backgroundColor = colorArrows[index]
+  //radarChart.config.data.datasets[0].backgroundColor = colorArrows[index]
   radarChart.update()
 
   sortBarChart("0", arregloFinal, radarChart)
@@ -881,12 +997,12 @@ function updateRadarChart(category) {
 
 function loadRadarChart(answers) {
 
-  let categorias = ["Estrategia", "Gobernanza", "Clima"]
+  //let categorias = ["Estrategia", "Gobernanza", "Clima"]
   // cateogorias
 
 
-  let totalEstrategia = 0, totalGobernanza = 0, totalClima = 0, totalPersonas = 0, totalLiderazgo = 0
-
+  let totalEstrategia = 0, totalGobernanza = 0, totalClima = 0, totalPersonas = 0, totalLiderazgo = 0, totalColaboracion = 0, totalProcesos = 0, totalRecursos = 0, totalResultados = 0
+  //let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0, Colaboracion = 0, Procesos = 0, Recursos = 0,Resultados=0
   let finalValues = []
   answers.forEach((respuesta) => {
 
@@ -930,6 +1046,41 @@ function loadRadarChart(answers) {
           totalLiderazgo += a.value
 
           break;
+
+        case "Colaboración":
+
+          console.log(a)
+          totalColaboracion += a.value
+
+          break;
+
+
+
+        case "Procesos":
+
+          console.log(a)
+          totalProcesos += a.value
+
+          break;
+
+
+
+        case "Recursos":
+
+          console.log(a)
+          totalRecursos += a.value
+
+          break;
+
+
+
+
+        case "Resultados":
+
+          console.log(a)
+          totalResultados += a.value
+
+          break;
       }
 
 
@@ -942,17 +1093,24 @@ function loadRadarChart(answers) {
   finalValues.push(parseInt(totalClima / answers.length))
   finalValues.push(parseInt(totalPersonas / answers.length))
   finalValues.push(parseInt(totalLiderazgo / answers.length))
+  finalValues.push(parseInt(totalRecursos / answers.length))
+  finalValues.push(parseInt(totalResultados / answers.length))
+  finalValues.push(parseInt(totalProcesos / answers.length))
+  finalValues.push(parseInt(totalColaboracion / answers.length))
 
 
 
-  merged = categorias.map((value, i) => {
+
+
+
+  merged = cateogorias.map((value, i) => {
 
     return { "name": value, "value": finalValues[i] }
   })
 
   console.log(merged)
 
-  radarChart.config.data.labels = categorias
+  radarChart.config.data.labels = cateogorias
 
   radarChart.config.data.datasets[0].data = finalValues
   // radarChart.config.data.datasets[0].backgroundColor = color
@@ -1288,7 +1446,6 @@ function sortBarChart(order, data, chart) {
   console.log(colorsDepartment)
   console.log(dataSort)
   console.log(Scolor)
-
 
   //console.log(chart)
 

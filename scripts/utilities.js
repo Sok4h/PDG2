@@ -23,3 +23,10 @@ function sumAllCategories(answers) {
     console.log(basket)
     return basket
   }
+
+
+  let maximoCategoria = 35
+
+  let maximoGeneral = 315;
+
+  let maximoPregunta = 7

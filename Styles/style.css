@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap");
 * {
   margin: 0;
   box-sizing: border-box;
@@ -65,6 +65,18 @@ p {
 
 button {
   cursor: pointer;
+}
+
+#btnGeneralProficiency {
+  width: 60%;
+}
+
+.gone {
+  visibility: hidden;
+}
+
+.btnGeneral {
+  width: 30%;
 }
 
 .btn {
@@ -586,6 +598,11 @@ input[type=radio]:checked + .label-select {
   gap: 40px;
   overflow: scroll;
 }
+.dashboard .radarContainer {
+  background-color: white;
+  border-radius: 18px;
+  padding: 32px;
+}
 
 .highlightsContainer {
   display: flex;
@@ -618,6 +635,18 @@ input[type=radio]:checked + .label-select {
 }
 .sunbust__infoContainer .card {
   height: 100%;
+  justify-content: space-evenly;
+}
+
+.containerProficiency {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  align-items: center;
+}
+.containerProficiency p {
+  width: 80%;
+  line-height: 24px;
 }
 
 .radarContainer {
@@ -637,7 +666,9 @@ input[type=radio]:checked + .label-select {
   display: flex;
   gap: 20px;
 }
-.proficiency__resume__titles h3, .proficiency__resume__titles div, .proficiency__resume__content h3, .proficiency__resume__content div {
+.proficiency__resume__titles h3,
+.proficiency__resume__titles div, .proficiency__resume__content h3,
+.proficiency__resume__content div {
   flex: 1;
 }
 .proficiency__resume__titles div, .proficiency__resume__content div {
@@ -681,6 +712,51 @@ input[type=radio]:checked + .label-select {
   font-size: 48px;
 }
 
+.infoTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(29, 29, 29, 0.7);
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 60%;
+  gap: 0.5em;
+}
+
+.infoValue {
+  font-size: 40px;
+}
+
+.infoDescription {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(29, 29, 29, 0.7);
+}
+
+.proficiency__view .infoTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(29, 29, 29, 0.7);
+}
+.proficiency__view .titles {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 60%;
+  gap: 0.5em;
+}
+.proficiency__view .infoValue {
+  font-size: 40px;
+}
+.proficiency__view .infoDescription {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(29, 29, 29, 0.7);
+}
+
 .btnFilterContainer {
   display: flex;
   width: 100%;
@@ -718,7 +794,16 @@ input[type=radio]:checked + .label-select {
 }
 
 .performance {
-  width: 80%;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  border-radius: 16px;
+}
+.performance h2 {
+  margin-bottom: 48px;
 }
 
 .performanceBody {
@@ -727,15 +812,73 @@ input[type=radio]:checked + .label-select {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  gap: 1em;
+}
+.performanceBody .atributos {
+  background-color: white;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 32px;
+}
+.performanceBody .atributos .atributosContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.performanceBody .atributos .atributosContainer p {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 16px;
+}
+.performanceBody .atributos .atributosContainer .atributo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+}
+.performanceBody .atributos .atributosContainer .atributo img {
+  width: 80%;
+}
+.performanceBody .generalActions {
+  background-color: white;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.performanceBody .generalActions .actionsContainer {
+  margin-top: 32px;
+  display: flex;
+  width: 100%;
+}
+.performanceBody .generalActions .action {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  gap: 0.3em;
+  padding: 8px;
+}
+.performanceBody .generalActions .action p {
+  margin-top: 16px;
+  text-align: start;
 }
 .performanceBody .levelPerformanceContainer {
   display: flex;
+}
+.performanceBody .containerArrow {
+  width: 200px;
 }
 .performanceBody .arrowInfo {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  background-color: #d53636;
+  background-color: #F3F3F3;
+  padding: 16px;
+  border-radius: 8px;
+  margin-right: 16px;
+  text-align: center;
+  font-weight: bold;
 }
 .performanceBody .arrow {
   position: relative;
@@ -749,7 +892,8 @@ input[type=radio]:checked + .label-select {
   height: 0;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
-  border-left: 30px solid #d53636;
+  border-left: 30px solid #F3F3F3;
+  margin-right: 16px;
 }
 .performanceBody .bar {
   position: relative;
@@ -795,7 +939,7 @@ input[type=radio]:checked + .label-select {
   align-items: center;
   flex-direction: column;
   padding: 32px;
-  background-color: #F3F3F3;
+  background-color: white;
 }
 .performanceBody .levelPerformance .container p {
   font-weight: bold;
@@ -819,14 +963,14 @@ input[type=radio]:checked + .label-select {
   box-sizing: border-box;
 }
 .performanceBody .levelDetails .container {
-  background-color: blue;
+  background-color: #F3F3F3;
   padding: 48px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 .performanceBody .levelDetails .container:nth-of-type(1) {
   height: 10%;

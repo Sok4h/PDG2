@@ -152,222 +152,37 @@ function startSurvey() {
     surveyEmail.style.display = "none"
     surveyBasicInfo.style.display = "flex"
 
-    
-    let pregunta = {
-
-        categoria: "Estrategia",
-        subcategoria: "Definición",
-        pregunta: "En la organización existe una definición clara y aspiracional de qué es la innovación en la organización",
-        hintHigh: "El termino innovacion tiene muchas definiciones y es diferente para todos los miembros del equipo, incluso los lideres no pueden llegar a un acuerdo para la definicion.",
-        hintLow: "El termino innovacion tiene muchas definiciones y es diferente para todos los miembros del equipo, incluso los lideres no pueden llegar a un acuerdo para la definicion."
-    }
-
-    let pregunta2 = {
-
-        categoria: "Estrategia",
-        subcategoria: "Entorno y Prospectiva",
-        pregunta: "La organización analiza constantemente el entorno y las tendencias para definir las apuestas e iniciativas que se deban desarrollar a futuro.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta3 = {
-
-        categoria: "Estrategia",
-        subcategoria: "Visión",
-        pregunta: "La organización analiza constantemente el entorno y las tendencias para definir las apuestas e iniciativas que se deban desarrollar a futuro.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
 
 
 
-    let pregunta4 = {
-
-        categoria: "Gobernanza",
-        subcategoria: "Evaluación de ideas",
-        pregunta: "La organización ofrece claridad y directrices sobre qué ideas se están buscando y sobre cómo se evaluarán y gestionarán para llevarlas a la realidad. Se tienen claras las reglas de juego para participar en las iniciativas de innovación.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta5 = {
-
-        categoria: "Gobernanza",
-        subcategoria: "Habilitadores",
-        pregunta: "Las políticas y reglas de la institución en torno a la innovación permiten explorar nuevas ideas y habilitan a las personas para llevar esos proyectos a altos niveles de desarrollo e implementación.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta6 = {
-
-        categoria: "Gobernanza",
-        subcategoria: "Indicadores",
-        pregunta: "Se cuenta con un sistema integral de métricas o indicadores que miden las entradas, el desarrollo y los resultados del sistema de innovación (Personas, Proyectos, Avances, Costos, Rentabilidad, etc). [→]",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-
-    let pregunta7 = {
-
-        categoria: "Clima",
-        subcategoria: "Creatividad",
-        pregunta: `El ambiente de la organización motiva a pensar creativamente y "por fuera de la caja" para generar ideas y propuestas novedosas y diferenciadas.`,
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta8 = {
-
-        categoria: "Clima",
-        subcategoria: "Franqueza",
-        pregunta: "Aquí podemos expresar de manera libre y sin miedos, nuestras opiniones, dudas, propuestas, críticas y sugerencias sobre situaciones, proyectos o iniciativas de innovación. [→]",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta9 = {
-
-        categoria: "Clima",
-        subcategoria: "Toma de riesgos",
-        pregunta: "La organización fomenta que persigamos libremente nuestra curiosidad y que tomemos riesgos para explorar nuevas oportunidades e ideas con un alto potencial de generar valor. [→]",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-
-    let pregunta10 = {
-
-        categoria: "Colaboración",
-        subcategoria: "Fluidez",
-        pregunta: "Hay una comunicación constante sobre los aspectos relacionados con innovación que fluye en diversas direcciones y en diversos canales. La información es clara, periódica y accesible",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta11 = {
-
-        categoria: "Colaboración",
-        subcategoria: "Resultados",
-        pregunta: "Los resultados de las iniciativas de innovación se hacen públicos y se reconocen los impactos positivos generados por individuos, grupos o la organización, dadas las métricas establecidas para medir el éxito.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta12 = {
-
-        categoria: "Colaboración",
-        subcategoria: "Transparencia",
-        pregunta: "Las personas que participan con ideas o propuestas reciben una retroalimentación transparente, adecuada y oportuna para comprender las decisiones que se han tomado sobre estas",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-
-    let pregunta13 = {
-
-        categoria: "Personas",
-        subcategoria: "Conocimiento",
-        pregunta: "Tenemos un grupo humano capacitado y con las competencias para desarrollar proyectos de innovación con éxito.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-
-    let pregunta14 = {
-
-        categoria: "Personas",
-        subcategoria: "Diversidad",
-        pregunta: "La organización promueve la diversidad de pensamiento, se respetan las diferencias y se potencian las particularidades de cada uno de los colaboradores.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta15 = {
-
-        categoria: "Personas",
-        subcategoria: "Eventos",
-        pregunta: "La organización tiene eventos donde se estimula la creatividad y se convoca a la comunidad interesada sobre la innovación para fortalecer lazos y promover nuevas conexiones",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta17 = {
-
-        categoria: "Liderazgo",
-        subcategoria: "Acción",
-        pregunta: "Nuestros líderes nos convocan a actuar. Se promueve un sesgo hacia la acción. Nos invitan a evitar la parálisis por el análisis.",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta16 = {
-
-        categoria: "Liderazgo",
-        subcategoria: "Modelo a seguir",
-        pregunta: "Los líderes asumen un rol activo y predican lo que aplican. Son ejemplo de lo que promueven y con sus actos dan muestra de lo que esperan de innovación. Los líderes son ejemplos a seguir en términos de innovación. ",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    let pregunta18 = {
-
-        categoria: "Liderazgo",
-        subcategoria: "Narrativas",
-        pregunta: "Los líderes nos inspiran constantemente con historias sobre colaboradores y equipos que demuestran altos valores y resultados positivos sobre innovación. ",
-        hintHigh: "este es el maximo2",
-        hintLow: "este es el minimo2"
-    }
-
-    // let pregunta19 = {
-
-    //     categoria: "Personas",
-    //     subcategoria: "Conocimiento",
-    //     pregunta: "Tenemos un grupo humano capacitado y con las competencias para desarrollar proyectos de innovación con éxito.",
-    //     hintHigh: "este es el maximo2",
-    //     hintLow: "este es el minimo2"
-    // }
-
-
-
-    preguntas.push(pregunta)
-    preguntas.push(pregunta2)
-    preguntas.push(pregunta3)
-    preguntas.push(pregunta4)
-    preguntas.push(pregunta5)
-    preguntas.push(pregunta6)
-    preguntas.push(pregunta7)
-    preguntas.push(pregunta8)
-    preguntas.push(pregunta9)
-
-    ///////////////////////////////////////
-
-    // preguntas.push(pregunta10)
-    // preguntas.push(pregunta11)
-    // preguntas.push(pregunta12)
-    // preguntas.push(pregunta13)
-    // preguntas.push(pregunta14)
-    // preguntas.push(pregunta15)
-    // preguntas.push(pregunta16)
-    // preguntas.push(pregunta17)
-    // preguntas.push(pregunta18)
-
-    console.log(preguntas.length)
+   
 
 
     setupQuestions(currentQuestion)
 
     function setupQuestions(currentQuestion) {
 
+
+        tippy('#btnInfoLow', {
+
+            content: preguntasFinales[currentQuestion].hintLow
+    
+        })
+    
+    
+        tippy('#btnInfoHigh', {
+    
+            content: preguntasFinales[currentQuestion].hintHigh
+    
+        })
+
         const progress = document.querySelector(".progressDone")
 
-        progress.style.width = (100 * currentQuestion) / preguntas.length + '%'
+        progress.style.width = (100 * currentQuestion) / preguntasFinales.length + '%'
 
         console.log(progress.style.width)
 
-        if (currentQuestion == preguntas.length - 1) {
+        if (currentQuestion == preguntasFinales.length - 1) {
 
             btnNextQuestion.textContent = "Finalizar"
         }
@@ -379,7 +194,9 @@ function startSurvey() {
 
             option.checked = false
         })
-        surveyTitle.textContent = preguntas[currentQuestion].pregunta
+
+        console.log(preguntasFinales[currentQuestion])
+        surveyTitle.textContent = preguntasFinales[currentQuestion].pregunta
 
     }
 
@@ -401,18 +218,6 @@ function startSurvey() {
 
     // nueva forma mostrar hint
 
-    tippy('#btnInfoLow', {
-
-        content: pregunta.hintLow
-
-    })
-
-
-    tippy('#btnInfoHigh', {
-
-        content: pregunta.hintHigh
-
-    })
     test.departments.forEach((departament) => {
 
         var opt = document.createElement('option');
@@ -446,30 +251,30 @@ function startSurvey() {
 
         if (!btnNextQuestion.classList.contains("btn--surveyActive")) return
         let value = checkRadio()
-        let tempRespuesta = preguntas[currentQuestion]
+        let tempRespuesta = preguntasFinales[currentQuestion]
         tempRespuesta.respuesta = value
-        preguntas[currentQuestion] = tempRespuesta
-        console.log(preguntas[currentQuestion])
+        preguntasFinales[currentQuestion] = tempRespuesta
+        console.log(preguntasFinales[currentQuestion])
 
 
-        if (currentQuestion == preguntas.length - 1) {
+        if (currentQuestion == preguntasFinales.length - 1) {
 
-            let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0
-            for (let i = 0; i < preguntas.length; i++) {
+            let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0, Colaboracion = 0, Procesos = 0, Recursos = 0,Resultados=0
 
-                switch (preguntas[i].categoria) {
+
+            for (let i = 0; i < preguntasFinales.length; i++) {
+
+                switch (preguntasFinales[i].categoria) {
 
 
                     case "Estrategia":
-                        Estrategia += parseInt(preguntas[i].respuesta)
-
-
+                        Estrategia += parseInt(preguntasFinales[i].respuesta)
                         console.log("Estrategia " + Estrategia)
                         break
 
                     case "Gobernanza":
 
-                        Gobernanza += parseInt(preguntas[i].respuesta)
+                        Gobernanza += parseInt(preguntasFinales[i].respuesta)
 
                         console.log("Gobernanza " + Gobernanza)
 
@@ -477,7 +282,7 @@ function startSurvey() {
 
                     case "Clima":
 
-                        Clima += parseInt(preguntas[i].respuesta)
+                        Clima += parseInt(preguntasFinales[i].respuesta)
 
                         console.log("Clima " + Clima)
 
@@ -485,7 +290,7 @@ function startSurvey() {
 
                     case "Personas":
 
-                        Clima += parseInt(preguntas[i].respuesta)
+                        Personas += parseInt(preguntasFinales[i].respuesta)
 
                         console.log("Personas " + Personas)
 
@@ -493,16 +298,45 @@ function startSurvey() {
 
                     case "Liderazgo":
 
-                        Liderazgo += parseInt(preguntas[i].respuesta)
+                        Liderazgo += parseInt(preguntasFinales[i].respuesta)
 
                         console.log("Liderazgo " + Liderazgo)
 
                         break;
                     case "Colaboración":
 
-                        Colaboración += parseInt(preguntas[i].respuesta)
+                        Colaboracion += parseInt(preguntasFinales[i].respuesta)
 
-                        console.log("Colaboración " + Personas)
+                        console.log("Colaboración " + Colaboracion)
+
+                        break;
+
+
+                    case "Procesos":
+
+                        Procesos += parseInt(preguntasFinales[i].respuesta)
+
+                        console.log("Procesos " + Procesos)
+
+                        break;
+
+
+                        
+                    case "Recursos":
+
+                        Recursos += parseInt(preguntasFinales[i].respuesta)
+
+                        console.log("Recursos " + Recursos)
+
+                        break;
+
+
+                             
+                    case "Resultados":
+
+                        Resultados += parseInt(preguntasFinales[i].respuesta)
+
+                        console.log("Resultados " + Resultados)
 
                         break;
 
@@ -512,9 +346,9 @@ function startSurvey() {
 
             let subCategorias = []
 
-            for (let i = 0; i < preguntas.length; i++) {
-                console.log(preguntas[i])
-                let tempSubCategoria = { name: preguntas[i].subcategoria, value: parseInt(preguntas[i].respuesta), categoria: preguntas[i].categoria }
+            for (let i = 0; i < preguntasFinales.length; i++) {
+                console.log(preguntasFinales[i])
+                let tempSubCategoria = { name: preguntasFinales[i].subcategoria, value: parseInt(preguntasFinales[i].respuesta), categoria: preguntasFinales[i].categoria }
 
                 subCategorias.push(tempSubCategoria)
             }
@@ -525,10 +359,25 @@ function startSurvey() {
             let tempValue1 = { name: "Estrategia", value: Estrategia }
             let tempValue2 = { name: "Gobernanza", value: Gobernanza }
             let tempValue3 = { name: "Clima", value: Clima }
-            let total = Estrategia + Gobernanza + Clima
+            let tempValue4 = { name: "Colaboración", value: Colaboracion }
+            let tempValue5 = { name: "Personas", value: Personas }
+            let tempValue6 = { name: "Liderazgo", value: Liderazgo }
+            let tempValue7 = { name: "Procesos", value: Procesos }
+            let tempValue8 = { name: "Recursos", value: Recursos }
+            let tempValue9 = { name: "Resultados", value: Resultados }
+
+
+            let total = Estrategia + Gobernanza + Clima +Colaboracion +Personas +Liderazgo +Procesos +Recursos +Resultados
             values.push(tempValue1)
             values.push(tempValue2)
             values.push(tempValue3)
+            values.push(tempValue4)
+            values.push(tempValue5)
+            values.push(tempValue6)
+            values.push(tempValue7)
+            values.push(tempValue8)
+            values.push(tempValue9)
+
 
             respuesta.values = values
             respuesta.total = total
@@ -537,7 +386,7 @@ function startSurvey() {
 
 
 
-            respuesta.respuestas = preguntas
+            respuesta.respuestas = preguntasFinales
 
 
 
@@ -556,11 +405,11 @@ function startSurvey() {
         else {
 
             currentQuestion++
-            // console.log(currentQuestion++)
             setupQuestions(currentQuestion)
         }
 
     })
+
 
 
     function checkRadio() {

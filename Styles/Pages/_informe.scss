@@ -1,43 +1,136 @@
-.performance{
+.performance {
 
-    width: 80%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+    border-radius: 16px;
+
+    h2{
+
+        margin-bottom: 48px;
+    }
+
+    
 }
 
-.performanceBody{
+.performanceBody {
 
     margin: 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    gap: 1em;
 
-    .levelPerformanceContainer{
+
+    .atributos{
+
+        background-color: white;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        padding: 32px;
+
+        .atributosContainer{
+
+            display: flex;
+            justify-content: space-between;
+           
+
+            p{
+
+                font-weight: bold;
+                text-align: center;
+                margin-top: 16px;
+            }
+
+            .atributo {
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                cursor: pointer;
+
+                width: 100px;
+
+                img{
+
+                    width: 80%;
+                }
+            }
+        }
+    }
+
+    .generalActions{
+
+        background-color: white;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        .actionsContainer{
+
+            margin-top: 32px;
+            display: flex;
+            width: 100%;
+        }
+        .action{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            gap: 0.3em;
+            padding: 8px;
+
+            p{
+                margin-top: 16px;
+                text-align: start;
+            }
+        }
+
+    }
+
+    .levelPerformanceContainer {
         display: flex;
     }
 
-    .arrowInfo{
-        height: max-content;
-        background-color: #d53636;
+    .containerArrow{
+
+        width: 200px;
     }
 
-    .arrow{
+    .arrowInfo {
+        height: max-content;
+        background-color: #F3F3F3;
+        padding: 16px;
+        border-radius: 8px;
+        margin-right: 16px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .arrow {
         position: relative;
 
-        .arrowTriangle{
+        .arrowTriangle {
             z-index: 10;
             position: absolute;
             right: -30px;
             top: calc(50% - 15px);
-            width: 0; 
-            height: 0; 
+            width: 0;
+            height: 0;
             border-top: 15px solid transparent;
             border-bottom: 15px solid transparent;
-            
-            border-left: 30px solid #d53636;
+
+            border-left: 30px solid #F3F3F3;
+            margin-right: 16px;
         }
     }
 
-    .bar{
+    .bar {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -48,7 +141,7 @@
         z-index: 0;
     }
 
-    .ninety{
+    .ninety {
         width: 100%;
         position: absolute;
         bottom: 0;
@@ -58,7 +151,7 @@
 
     }
 
-    .seventyeight{
+    .seventyeight {
         width: 100%;
         height: 78%;
         position: absolute;
@@ -66,7 +159,8 @@
         z-index: 2;
         bottom: 0;
     }
-    .sixty{
+
+    .sixty {
         width: 100%;
         position: absolute;
         bottom: 0;
@@ -74,56 +168,61 @@
         z-index: 3;
         background-color: #1D1D1D;
 
-        
+
 
     }
-    
-    .levelPerformance{
+
+    .levelPerformance {
         width: 30%;
-        display:flex;
+        display: flex;
         flex-direction: column;
-        .container{
+
+        .container {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             padding: 32px;
-            background-color: #F3F3F3;
+            background-color: white;
 
-            
-            p{
+
+            p {
                 font-weight: bold;
 
             }
-            &:nth-of-type(1){
+
+            &:nth-of-type(1) {
                 height: 10%;
                 //background-color: aliceblue;
             }
-            &:nth-of-type(2){
+
+            &:nth-of-type(2) {
                 height: 12%;
                 //background-color: aquamarine;
             }
-            &:nth-of-type(3){
+
+            &:nth-of-type(3) {
                 height: 18%;
                 //background-color: black;
             }
-            &:nth-of-type(4){
+
+            &:nth-of-type(4) {
                 height: 60%;
                 //background-color: brown;
             }
         }
     }
 
-    .levelDetails{
+    .levelDetails {
         width: 50%;
         display: flex;
         flex-direction: column;
         //background-color: tomato;
         box-sizing: border-box;
 
-        .container{
+        .container {
 
-            background-color: blue;
+            background-color: #F3F3F3;
             padding: 48px;
             //margin-left: 32px;
             border-radius: 8px;
@@ -131,21 +230,24 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            margin-bottom: 16px;
-            
-            &:nth-of-type(1){
+            margin-bottom: 8px;
+
+            &:nth-of-type(1) {
                 height: 10%;
                 //background-color: aliceblue;
             }
-            &:nth-of-type(2){
+
+            &:nth-of-type(2) {
                 height: 12%;
                 //background-color: aquamarine;
             }
-            &:nth-of-type(3){
+
+            &:nth-of-type(3) {
                 height: 18%;
                 //background-color: black;
             }
-            &:nth-of-type(4){
+
+            &:nth-of-type(4) {
                 height: 60%;
                 //background-color: brown;
             }

@@ -1,35 +1,42 @@
-.dashboard{
+.dashboard {
     display: flex;
     height: 100vh;
     background-color: #F4F4F4;
 
-    &__content{
+    &__content {
         width: 100%;
         height: 100%;
         padding: 2em;
         display: flex;
         flex-direction: column;
         gap: 40px;
-        
+
         overflow: scroll;
+    }
+
+    .radarContainer {
+
+        background-color: white;
+        border-radius: 18px;
+        padding: 32px;
     }
 }
 
-.highlightsContainer{
+.highlightsContainer {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     width: 100%;
 
-    .card{
+    .card {
         width: 100%;
         height: 100%;
         justify-content: space-evenly;
     }
 }
 
-.sunbust{
-    &__container{
+.sunbust {
+    &__container {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -37,7 +44,8 @@
         width: 100%;
     }
 
-    &__chart, &__infoContainer{
+    &__chart,
+    &__infoContainer {
         width: 50%;
         height: 100%;
         display: flex;
@@ -45,42 +53,63 @@
         justify-content: center;
     }
 
-    &__infoContainer{
+    &__infoContainer {
         gap: 20px;
 
         .card {
             height: 100%;
+            justify-content: space-evenly;
         }
     }
 
 }
 
-.radarContainer{
 
-    width: 50%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+.containerProficiency {
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    align-items: center;
+
+    p{
+
+        width: 80%;
+        //text-align: start;
+        line-height: 24px;
+    }
+
 }
 
-.proficiency{
 
-    &__resume{
+.radarContainer {
+
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.proficiency {
+
+    &__resume {
         width: 50%;
         gap: 20px;
 
-        &__titles, &__content{
+        &__titles,
+        &__content {
             width: 100%;
 
             display: flex;
             gap: 20px;
 
-            h3, div{
+            h3,
+            div {
                 flex: 1;
             }
 
-            div{
+            div {
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
@@ -90,7 +119,7 @@
 }
 
 
-.emptyDashboard{
+.emptyDashboard {
 
     display: flex;
     flex-direction: column;
@@ -102,49 +131,113 @@
 }
 
 
-.sunburstInfo{
+.sunburstInfo {
 
     width: 40%;
     gap: 2em;
 }
 
-.complexChart{
-    
+.complexChart {
+
     width: 50%;
-   
-   gap: 1.5em; 
 
-   canvas{
+    gap: 1.5em;
 
-    width: 80%;
-   }
+    canvas {
+
+        width: 80%;
+    }
 }
 
-.proficiency__container{
+.proficiency__container {
 
     display: flex;
     gap: 20px;
 
-    .proficiency__view{
+    .proficiency__view {
 
         width: 50%;
         gap: 20px;
 
-        .infoValue{
+        .infoValue {
 
             font-size: 48px;
         }
+
+
     }
 }
 
-.btnFilterContainer{
+
+.infoTitle {
+
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba($color: #1D1D1D, $alpha: 0.7);
+
+}
+
+.titles {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 60%;
+    gap: 0.5em;
+}
+
+.infoValue {
+
+    font-size: 40px;
+}
+
+.infoDescription {
+
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba($color: #1D1D1D, $alpha: 0.7);
+
+}
+.proficiency__view {
+
+    .infoTitle {
+
+        font-size: 24px;
+        font-weight: 600;
+        color: rgba($color: #1D1D1D, $alpha: 0.7);
+
+    }
+
+    .titles {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 60%;
+        gap: 0.5em;
+    }
+
+    .infoValue {
+
+        font-size: 40px;
+    }
+
+    .infoDescription {
+
+        font-size: 24px;
+        font-weight: 600;
+        color: rgba($color: #1D1D1D, $alpha: 0.7);
+
+    }
+}
+
+
+.btnFilterContainer {
 
     display: flex;
     width: 100%;
     justify-content: space-around;
 }
 
-.proficiency{
+.proficiency {
 
     display: flex;
     justify-content: space-around;
@@ -152,33 +245,33 @@
     text-align: center;
 }
 
-.proficiencyContainer{
+.proficiencyContainer {
 
     width: 100%;
     text-align: center;
 
-    p{
+    p {
         width: 100%;
     }
 
-    .proficiencyName{
+    .proficiencyName {
         text-align: start;
     }
 
-    .proficiencyGrade{
+    .proficiencyGrade {
         text-align: end;
 
     }
 }
 
 
-.arrowContainer{
+.arrowContainer {
 
     display: flex;
     align-items: center;
     gap: 0.5em;
 
-    svg:hover{
+    svg:hover {
 
         cursor: pointer;
     }
