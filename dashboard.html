@@ -158,18 +158,19 @@
 
                     <div class="containerProficiency">
 
-                        <p class="descriptionProfiency">Tus trabajadores sienten que los lideres de equipos deben dar mejor ejemplo y empujarlos a hacer
+                        <p class="descriptionProfiency">Tus trabajadores sienten que los lideres de equipos deben dar
+                            mejor ejemplo y empujarlos a hacer
                             mas.
                         </p>
                         <button class="detailsChartBtn btn" id="btnGeneralProficiency">Ver detalles</button>
                     </div>
-                   
+
 
 
                 </div>
 
 
-                  <div class="sunbust__info card">
+                <div class="sunbust__info card">
                     <div class="titles">
 
                         <h2 class="infoTitle">Liderazgo</h2>
@@ -178,20 +179,20 @@
 
                     </div>
 
-                    
 
-                        <p class="suggestion">Tus trabajadores sienten que eres un modelo a seguir y que bajo tu
-                            liderazgo
-                            se podrá triunfar.</p>
-                        <button class="detailsChartBtn btn">Ver detalles</button>
-                    
 
-                    
+                    <p class="suggestion">Tus trabajadores sienten que eres un modelo a seguir y que bajo tu
+                        liderazgo
+                        se podrá triunfar.</p>
+                    <button class="detailsChartBtn btn">Ver detalles</button>
+
+
+
 
 
                 </div>
 
-             
+
 
             </section>
 
@@ -216,7 +217,7 @@
             </div> -->
 
 
-            <div class="sunbust__details card">
+            <div class="bestAtributes card">
 
                 <h2>Mejores atributos</h2>
                 <canvas id="hChart"></canvas>
@@ -245,6 +246,99 @@
 
         <!-- Grafico complejo -->
 
+        <div class="separador">
+
+            <h2>Atributos</h2>
+        </div>
+
+
+        <div class="atributos">
+
+            <div class="atributoContainer card">
+
+
+                <img src="Iconos/Iconos/clima.png" alt="">
+                <div class="arrowContainer">
+
+
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="less">
+                        <path
+                            d="M2.33337 9.11199L2.33337 18.8887C2.33337 23.1353 4.86504 25.667 9.11171 25.667L18.8767 25.667C23.135 25.667 25.6667 23.1353 25.6667 18.8887L25.6667 9.12366C25.6667 4.87699 23.135 2.34533 18.8884 2.34533L9.11171 2.34533C4.86504 2.33366 2.33337 4.86533 2.33337 9.11199ZM16.3334 9.26366C16.5084 9.43866 16.59 9.66033 16.59 9.88199C16.59 10.1037 16.4967 10.3253 16.3334 10.5003L12.8334 14.0003L16.3334 17.5003C16.6717 17.8387 16.6717 18.3987 16.3334 18.737C15.995 19.0753 15.435 19.0753 15.0967 18.737L10.9784 14.6187C10.64 14.2803 10.64 13.7203 10.9784 13.382L15.0967 9.26366C15.435 8.92533 15.9834 8.92533 16.3334 9.26366Z"
+                            fill="#0073A7" />
+                    </svg>
+
+                    <h2 class="atributoTitle">Liderazgo</h3>
+
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            class="add">
+                            <path
+                                d="M25.6666 9.11199L25.6666 18.8887C25.6666 23.1353 23.135 25.667 18.8883 25.667L9.12329 25.667C4.86496 25.667 2.33329 23.1353 2.33329 18.8887L2.33329 9.12366C2.33329 4.87699 4.86496 2.34533 9.11162 2.34533L18.8883 2.34533C23.135 2.33366 25.6666 4.86533 25.6666 9.11199ZM11.6666 9.26366C11.4916 9.43866 11.41 9.66033 11.41 9.88199C11.41 10.1037 11.5033 10.3253 11.6666 10.5003L15.1666 14.0003L11.6666 17.5003C11.3283 17.8387 11.3283 18.3987 11.6666 18.737C12.005 19.0753 12.565 19.0753 12.9033 18.737L17.0216 14.6187C17.36 14.2803 17.36 13.7203 17.0216 13.382L12.9033 9.26366C12.565 8.92533 12.0166 8.92533 11.6666 9.26366Z"
+                                fill="#0073A7" />
+                        </svg>
+
+
+
+
+
+                </div>
+
+                <h2 class="atributoValue">57%</h2>
+                <p class="atributoProficiency">Principiante</p>
+                <p class="atributoDescription">Tus trabajadores sienten que los líderes de equipos deben dar mejor
+                    ejemplo y empujarlos a hacer más.</p>
+
+                <button class="btn" id="btnDetallesAtributos">Ver detalles</button>
+
+
+            </div>
+
+            <div class="graphAtributosContainer card">
+
+                <h2 class="title">Liderazgo</h2>
+                <h3 class="complexChart__description">Puntaje promedio por pregunta</h3>
+                <p class="complexChart__sortBy">Ordenar segun:</p>
+
+                <form class="btnFilterContainer" id="filterchartAtributos">
+
+                    <input type="radio" checked="true" name="sortLine" id="highLine" class="hidebox" value="0">
+                    <label for="highLine" class=" label-select">
+
+                        <div class="display-box">
+
+                            Mayor Valor
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="lowLine" class="hidebox" value="1">
+                    <label for="lowLine" class=" label-select">
+
+                        <div class="display-box">
+
+                            Menor Valor
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="alphaLine" class="hidebox" value="2">
+                    <label for="alphaLine" class="label-select">
+
+                        <div class="display-box">
+
+                            Alfabeticamente
+                        </div>
+                    </label>
+
+
+                </form>
+
+                <div class="container">
+                <canvas id="chartAtributos"></canvas> 
+            </div>
+
+
+            </div>
+        </div>
+
         <div class="card complexChart">
 
             <img src="Iconos/Iconos/clima.png" alt="">
@@ -270,7 +364,7 @@
 
 
             </div>
-            <h3 class="complexChart__description">Puntaje promedio por departamento</h4>
+            <h3 class="complexChart__description">Puntaje promedio por departamento</h3>
                 <p class="complexChart__sortBy">Ordenar segun:</p>
 
                 <form class="btnFilterContainer" id="filterLineChart">

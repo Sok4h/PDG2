@@ -22,6 +22,9 @@ const titleCardChart = cardRadarChart.querySelector(".infoTitle")
 const valueCardChart = cardRadarChart.querySelector(".infoValue")
 const descriptionCardChart = cardRadarChart.querySelector(".suggestion")
 const levelCardChart = cardRadarChart.querySelector(".infoDescription")
+const atributoContainer = document.querySelector(".atributoContainer")
+const flechasAtributos = atributoContainer.querySelectorAll("path")
+const graphAtributosContainer = document.querySelector(".graphAtributosContainer")
 
 //cardRadarChart.style.display="none"
 
@@ -163,8 +166,10 @@ auth.onAuthStateChanged((user) => {
           }).then(() => {
 
             console.log(answers)
-
             listAnswers = answers
+            atributoContainer.setAttribute("value", 0)
+            updateCardAtributos()
+           
             loadBarChart(answers)
             loadBestAttributes(answers)
             loadRadarChart(answers)
@@ -302,6 +307,181 @@ function loadInfoGraphByArea() {
 
 }
 
+
+
+
+//maneja clicks card atributos 
+
+console.log(flechasAtributos)
+let btnAtributos = atributoContainer.querySelectorAll("svg")
+
+
+btnAtributos.forEach((btn) => {
+
+  btn.addEventListener("click", () => {
+
+    let test = parseInt(atributoContainer.getAttribute("value"))
+
+    console.log(test)
+    if (btn.classList.contains("add")) {
+
+      if (test == 8) {
+
+
+        test = 0
+      }
+
+      else {
+
+        test += 1
+      }
+
+    }
+
+    if (btn.classList.contains("less")) {
+
+
+      if (test == 0) { test = 8 }
+
+      else {
+
+        test -= 1
+      }
+    }
+    atributoContainer.setAttribute("value", test)
+    updateCardAtributos()
+  })
+})
+
+
+function updateCardAtributos() {
+
+  let test = parseInt(atributoContainer.getAttribute("value"))
+
+  let img = atributoContainer.querySelector("img")
+
+  let atributoTitle = atributoContainer.querySelector(".atributoTitle")
+
+  let btnDetalles = atributoContainer.querySelector("button")
+
+  let atributoValue = atributoContainer.querySelector(".atributoValue")
+
+  console.log(atributoTitle)
+  img.src = rutasImagenes[test]
+
+  flechasAtributos.forEach((flecha) => {
+
+
+    flecha.style.fill = colorArrows[test]
+  })
+
+  atributoTitle.style.color = colorRadar[test]
+  atributoTitle.textContent = cateogorias[test]
+
+  btnDetalles.style.borderColor = colorArrows[test]
+
+  console.log(listAnswers)
+  let respuestasFilter = listAnswers.map((respuesta) => { return respuesta.values })
+
+  let respuestaOrdenada = sumAllCategories(respuestasFilter)
+
+  
+
+  console.log(respuestaOrdenada)
+  let respuestasDividas = respuestaOrdenada.map((respuesta) => {
+
+    respuesta.value = parseInt(respuesta.value / listAnswers.length)
+    return respuesta
+  })
+
+  console.log(cateogorias[test])
+
+  console.log(respuestasDividas)
+
+  respuestasDividas.forEach((a)=>{
+
+    console.log(a.name)
+    console.log(cateogorias[test])
+    console.log(a.name==cateogorias[test])
+  })
+  let filter = respuestasDividas.filter((e)=>{return e.name==cateogorias[test]})
+  console.log(filter)
+  //console.log(respuestasDividas)
+
+  let percentage = filter[0].value
+  atributoValue.textContent = (percentage*100)/maximoCategoria +"%"
+
+
+  //console.log(atributoTitle.style)
+
+  loadChartAtributos(cateogorias[test])
+}
+
+function loadChartAtributos(atributo){
+
+  console.log(atributo)
+    console.log(listAnswers)
+
+    let title = graphAtributosContainer.querySelector(".title")
+  console.log(title)
+    let index = cateogorias.indexOf(atributo)
+    title.textContent=atributo
+    title.style.color = colorRadar[index]
+
+    let filter = listAnswers.map((a)=>{ return a.respuestas})
+
+    console.log(filter)
+    //let prueba = sumAllSubCategories(filter)
+
+    //console.log(prueba)
+
+  let filtrado = filter.map((e)=>{
+    
+    let filtradoFinal= e.filter((x)=>{
+
+      return x.categoria==atributo
+    })
+    return filtradoFinal
+  
+  }
+    
+    )
+
+  console.log(filtrado)
+
+  let sumados =sumAllQuestions(filtrado)
+  console.log(sumAllQuestions(filtrado))
+
+  let respuestasDivididas = sumados.map((e)=>{
+
+    e.value = parseInt(e.value/listAnswers.length)
+
+    return e
+  })
+
+  console.log(respuestasDivididas)
+
+  let names = respuestasDivididas.map((e)=>{
+
+    return "Pregunta "+ e.numeroPregunta
+  })
+
+  let merged = respuestasDivididas.map((e)=>{
+
+    e.background= getColor(e.categoria)
+    e.name =" Pregunta "+ e.name
+
+    return e
+  })
+
+  console.log(names)
+
+  radarChart.config.data.labels = names
+
+
+  sortBarChart("0", merged, atributosChart)
+}
+
 const labels = [
 
 ];
@@ -348,6 +528,7 @@ const dataBar = {
     backgroundColor: 'rgb(255, 99, 132)',
     borderColor: 'rgb(255, 99, 132)',
     data: dataChart,
+    borderRadius: 4,
     datalabels: {
       formatter: function (value, context) {
 
@@ -420,7 +601,8 @@ const config = {
   data: dataBar,
   plugins: [ChartDataLabels],
   options: {
-
+    barPercentage: 0.8,
+    //barThickness : 73,
     layout: {
       padding: {
 
@@ -545,7 +727,7 @@ const config2 = {
   }
 };
 
-const myChart = new Chart(
+const HorizontalChart = new Chart(
   document.getElementById('hChart'),
   config
 );
@@ -560,6 +742,102 @@ const departmentChart = new Chart(
   document.getElementById('barChartDepartments'),
   configdepartmentChart
 );
+
+let dataAtributos ={
+
+  labels: labels,
+  datasets: [{
+    label: 'Mejores atributos',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: dataChart,
+    borderRadius: 4,
+    datalabels: {
+      formatter: function (value, context) {
+
+        console.log(value)
+        // return value * 100 / 100 + '%';
+        return value
+      },
+      color: "black",
+      anchor: "end",
+      align: "end",
+      clamp: true,
+      font: {
+
+        weight: "bold"
+      },
+      padding: {
+
+        right: 5
+      }
+
+    }
+  }
+
+
+  ]
+}
+
+
+
+
+const configAtributos ={
+
+  type: 'bar',
+  data: dataAtributos,
+
+  options: {
+
+    // layout: {
+    //   padding:{
+
+    //     right:50
+    //   }               
+    // }          
+    //   ,
+    maintainAspectRatio: false,
+    
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          usePointStyle: true
+        }
+      }
+    },
+    parsing: {
+
+      xAxisKey: 'name'
+    },
+    indexAxis: 'x',
+    scales: {
+
+
+      x: {
+
+        display: true,
+        drawBorder: false,
+      },
+      y: {
+         beginAtZero: true ,
+
+        grid: {
+          display: false,
+          drawBorder: false
+        }
+      }
+    }
+  }
+
+}
+const atributosChart = new Chart(
+
+  document.getElementById('chartAtributos'),
+  configAtributos
+)
+
 
 
 const dataRadar = {
@@ -661,7 +939,7 @@ const configRadar = {
           font: {
             size: 15,
             weight: "bold"
-            
+
           }
         }
 
@@ -725,6 +1003,31 @@ function sumAllCategories(answers) {
 
 
       basket[number].value += respuesta.value;
+      //console.log( basket[number].)
+
+    }
+
+    return basket;
+  }, []);
+
+  console.log(basket)
+  return basket
+}
+
+function sumAllQuestions(answers) {
+
+  console.log(answers)
+
+  const basket = answers.reduce((basket, fruit) => {
+
+    for (const [number, respuesta] of Object.entries(fruit)) {
+      console.log(respuesta)
+      if (!basket[number]) {
+        basket[number] = { categoria: respuesta.categoria, value: 0 ,name:respuesta.numeroPregunta,subcategoria:respuesta.subcategoria};
+      }
+
+
+      basket[number].value += parseInt(respuesta.respuesta);
       //console.log( basket[number].)
 
     }
@@ -828,7 +1131,7 @@ function loadHighlights(test, respuestas) {
   worstAttributeValue.textContent = ((min.value / maximoCategoria) * 100).toFixed(1) + "%"
 
   //actualiza la card del radar con el mas bajo
-  titleCardChart.textContent = min.name 
+  titleCardChart.textContent = min.name
   titleCardChart.style.color = getColor(min.name)
   levelCardChart.style.color = getColor(min.name)
 
@@ -837,7 +1140,7 @@ function loadHighlights(test, respuestas) {
 
 
   bestAttributeName.textContent = max.name
-  
+
   bestAttributeValue.textContent = ((max.value / maximoCategoria) * 100).toFixed(1) + "%"
 
 
@@ -901,7 +1204,7 @@ function getProficiencyName(value) {
 }
 
 
-function getProficiencyDescription(value){
+function getProficiencyDescription(value) {
 
   console.log(value)
   let proficiencyDescription = ""
@@ -921,7 +1224,7 @@ function updateRadarChart(category) {
   let filtrado = []
 
   btnGeneral.classList.remove("gone")
-  cardRadarChart.style.display="flex"
+  cardRadarChart.style.display = "flex"
 
   filtrado = answers.map((respuesta) => { return respuesta.subCategorias })
 
@@ -934,7 +1237,7 @@ function updateRadarChart(category) {
   //descriptionCardChart
   //valueCardChart
 
- 
+
 
 
   //console.log(arregloFinal)
@@ -948,30 +1251,30 @@ function updateRadarChart(category) {
 
   let promedioCategoria
   let sumaCategoria = 0
-  arregloFinal.forEach((respuesta)=>{
+  arregloFinal.forEach((respuesta) => {
 
     console.log(respuesta.value)
     sumaCategoria += respuesta.value
 
   })
 
-  
+
   console.log(sumaCategoria)
 
-  promedioCategoria = (sumaCategoria *100)/maximoCategoria 
+  promedioCategoria = (sumaCategoria * 100) / maximoCategoria
 
   console.log(promedioCategoria)
 
-  valueCardChart.textContent = promedioCategoria +"%"
+  valueCardChart.textContent = promedioCategoria + "%"
 
-   //actualiza card radarChart
-   titleCardChart.textContent=category
+  //actualiza card radarChart
+  titleCardChart.textContent = category
 
-   let colorText = getColor(category)
-   titleCardChart.style.color = colorText
-   levelCardChart.style.color = colorText
+  let colorText = getColor(category)
+  titleCardChart.style.color = colorText
+  levelCardChart.style.color = colorText
 
-   levelCardChart.textContent=getProficiencyName(promedioCategoria)
+  levelCardChart.textContent = getProficiencyName(promedioCategoria)
 
 
   let names = arregloFinal.map((x) => { return x.categoria })
@@ -1270,7 +1573,7 @@ function filterResponseByParameter(nameResponse = "", dataType = "", allValuesAr
 function loadBestAttributes(answers) {
 
   let merged
-  let categorias = ["Estrategia", "Gobernanza", "Clima"]
+  //let categorias = ["Estrategia", "Gobernanza", "Clima"]
 
   let res = []
 
@@ -1287,9 +1590,10 @@ function loadBestAttributes(answers) {
   console.log(res)
 
   let finalValues = []
-  let totalEstrategia = 0, totalGobernanza = 0, totalClima = 0
-  answers.forEach((respuesta) => {
+  let totalEstrategia = 0, totalGobernanza = 0, totalClima = 0, totalPersonas = 0, totalLiderazgo = 0, totalColaboracion = 0, totalProcesos = 0, totalRecursos = 0, totalResultados = 0
 
+  console.log(answers)
+  answers.forEach((respuesta) => {
 
     respuesta.values.forEach((a) => {
 
@@ -1317,6 +1621,55 @@ function loadBestAttributes(answers) {
           totalClima += a.value
 
           break;
+
+        case "Personas":
+
+          console.log(a)
+          totalPersonas += a.value
+
+          break;
+
+        case "Liderazgo":
+
+          console.log(a)
+          totalLiderazgo += a.value
+
+          break;
+
+        case "Colaboración":
+
+          console.log(a)
+          totalColaboracion += a.value
+
+          break;
+
+
+
+        case "Procesos":
+
+          console.log(a)
+          totalProcesos += a.value
+
+          break;
+
+
+
+        case "Recursos":
+
+          console.log(a)
+          totalRecursos += a.value
+
+          break;
+
+
+
+
+        case "Resultados":
+
+          console.log(a)
+          totalResultados += a.value
+
+          break;
       }
 
 
@@ -1330,6 +1683,12 @@ function loadBestAttributes(answers) {
   finalValues.push(parseInt(totalEstrategia / answers.length))
   finalValues.push(parseInt(totalGobernanza / answers.length))
   finalValues.push(parseInt(totalClima / answers.length))
+  finalValues.push(parseInt(totalPersonas / answers.length))
+  finalValues.push(parseInt(totalLiderazgo / answers.length))
+  finalValues.push(parseInt(totalRecursos / answers.length))
+  finalValues.push(parseInt(totalResultados / answers.length))
+  finalValues.push(parseInt(totalProcesos / answers.length))
+  finalValues.push(parseInt(totalColaboracion / answers.length))
 
   console.log(finalValues)
 
@@ -1337,35 +1696,35 @@ function loadBestAttributes(answers) {
 
 
 
-  merged = categorias.map((value, i) => {
+  merged = cateogorias.map((value, i) => {
 
-    return { "name": value, "value": finalValues[i] }
+    return { "name": value, "value": finalValues[i], background: colorArrows[i] }
   })
 
   console.log(merged)
-  const color = merged.map((a) => {
+  // const color = merged.map((a) => {
 
-    console.log(a)
-    switch (a.name) {
+  //   console.log(a)
+  //   switch (a.name) {
 
-      case "Estrategia": return "rgba(255, 102, 26, 1)";
+  //     case "Estrategia": return "rgba(255, 102, 26, 1)";
 
-      case "Gobernanza": return "rgba(234, 11, 52, 1)"
+  //     case "Gobernanza": return "rgba(234, 11, 52, 1)"
 
-      case "Clima": return "rgba(3, 140, 135, 1)"
+  //     case "Clima": return "rgba(3, 140, 135, 1)"
 
-    }
+  //   }
 
-  })
+  // })
   console.log(merged)
 
-  myChart.config.data.labels = finalNames
+  HorizontalChart.config.data.labels = finalNames
 
-  myChart.config.data.datasets[0].data = finalValues
-  myChart.config.data.datasets[0].backgroundColor = color
-  myChart.update()
+  HorizontalChart.config.data.datasets[0].data = finalValues
+  //HorizontalChart.config.data.datasets[0].backgroundColor = color
+  HorizontalChart.update()
   mergedAttribute = merged
-  sortBarChart("0", merged, myChart)
+  sortBarChart("0", merged, HorizontalChart)
 }
 
 for (let i = 0; i < filterDepartment.length; i++) {
@@ -1443,6 +1802,7 @@ function sortBarChart(order, data, chart) {
     console.log(Scolor[i])
   }
 
+  console.log(dataSort)
   console.log(colorsDepartment)
   console.log(dataSort)
   console.log(Scolor)

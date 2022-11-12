@@ -638,6 +638,10 @@ input[type=radio]:checked + .label-select {
   justify-content: space-evenly;
 }
 
+.bestAtributes {
+  width: 50%;
+}
+
 .containerProficiency {
   display: flex;
   flex-direction: column;
@@ -702,7 +706,9 @@ input[type=radio]:checked + .label-select {
 
 .proficiency__container {
   display: flex;
+  width: 100%;
   gap: 20px;
+  justify-content: space-between;
 }
 .proficiency__container .proficiency__view {
   width: 50%;
@@ -778,10 +784,15 @@ input[type=radio]:checked + .label-select {
   width: 100%;
 }
 .proficiencyContainer .proficiencyName {
-  text-align: start;
+  text-align: center;
 }
 .proficiencyContainer .proficiencyGrade {
-  text-align: end;
+  text-align: center;
+}
+
+#hChart {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .arrowContainer {
@@ -791,6 +802,61 @@ input[type=radio]:checked + .label-select {
 }
 .arrowContainer svg:hover {
   cursor: pointer;
+}
+
+.separador {
+  width: 100%;
+  background-color: red;
+  padding: 32px;
+  border-radius: 16px;
+}
+
+.atributos {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+  height: 700px;
+}
+
+.atributoContainer {
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  width: 30%;
+  gap: 1em;
+}
+.atributoContainer .atributoValue {
+  font-size: 64px;
+}
+.atributoContainer .atributoProficiency {
+  font-size: 24px;
+  font-weight: 600;
+}
+.atributoContainer .atributoDescription {
+  margin-top: 24px;
+}
+.atributoContainer p {
+  width: 60%;
+}
+.atributoContainer #btnDetallesAtributos {
+  margin-top: 32px;
+  width: 70%;
+}
+
+.graphAtributosContainer {
+  width: 90%;
+  gap: 1.5em;
+  height: 100%;
+}
+.graphAtributosContainer .container {
+  height: 70%;
+  width: 100%;
+}
+
+#chartAtributos {
+  width: 100%;
 }
 
 .performance {
