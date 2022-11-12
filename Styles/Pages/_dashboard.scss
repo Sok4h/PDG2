@@ -409,3 +409,29 @@
        
     }
 }
+
+.testLoad{
+
+    width: 100%;
+    background-color: #DBDBDB;
+    padding: 16px;
+    border-radius: 16px;
+    
+    font-weight: 500;
+  
+    select{
+
+        background-color:#DBDBDB ;
+        width: 20%;
+        padding-left: 16px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+
+        option{
+
+            width: min-content;
+
+        }
+    }
+}

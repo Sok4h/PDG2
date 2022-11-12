@@ -888,6 +888,27 @@ input[type=radio]:checked + .label-select {
 .containerEquipo .chart {
   width: 60%;
 }
+.testLoad {
+  width: 100%;
+  background-color: #DBDBDB;
+  padding: 16px;
+  border-radius: 16px;
+  font-weight: 500;
+}
+.testLoad select {
+  background-color: #DBDBDB;
+  width: 20%;
+  padding-left: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+.testLoad select option {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+
 .performance {
   width: 100%;
   background-color: white;

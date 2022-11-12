@@ -941,6 +941,7 @@ const dataVerticalAtributos = {
 
     //borderColor: 'rgb(255, 99, 132)',
     data: dataChart,
+    borderRadius: 6,
     datalabels: {
       formatter: function (value, context) {
 
@@ -948,9 +949,9 @@ const dataVerticalAtributos = {
         //return parseInt(value * 100 / maximoCategoria) + '%';
         return value
       },
-      color: "black",
-      anchor: "end",
-      align: "end",
+      color: "white",
+      anchor: "center",
+      align: "center",
       clamp: true,
       font: {
 
@@ -975,6 +976,9 @@ const dataVerticalEquipos = {
     //label: 'atributos por departamento',
 
     //borderColor: 'rgb(255, 99, 132)',
+
+    borderRadius: 6,
+
     data: dataChart,
     datalabels: {
       formatter: function (value, context) {
@@ -1011,6 +1015,7 @@ const dataVerticalEquiposCompleto = {
 
     //borderColor: 'rgb(255, 99, 132)',
     data: dataChart,
+    borderRadius: 6,
     datalabels: {
       formatter: function (value, context) {
 
@@ -1020,7 +1025,7 @@ const dataVerticalEquiposCompleto = {
       },
       color: "white",
       anchor: "center",
-      align: "end",
+      align: "center",
       clamp: true,
       font: {
 
@@ -1040,6 +1045,7 @@ const dataVerticalEquiposCompleto = {
 const configVerticalAtributoChart = {
   type: 'bar',
   data: dataVerticalAtributos,
+ 
   plugins: [ChartDataLabels],
   options: {
 
@@ -1343,7 +1349,7 @@ let dataAtributos = {
     backgroundColor: 'rgb(255, 99, 132)',
     borderColor: 'rgb(255, 99, 132)',
     data: dataChart,
-    borderRadius: 4,
+    borderRadius: 6,
     datalabels: {
       formatter: function (value, context) {
 
