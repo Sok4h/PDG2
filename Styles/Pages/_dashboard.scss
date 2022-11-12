@@ -4,12 +4,13 @@
     background-color: #F4F4F4;
 
     &__content {
-        width: 100%;
+        width: 70%;
         height: 100%;
         padding: 2em;
         display: flex;
         flex-direction: column;
         gap: 40px;
+        margin: auto;
 
         overflow: scroll;
     }
@@ -304,19 +305,26 @@
 .atributos {
 
     display: flex;
+    flex-direction: column;
     width: 100%;
-    justify-content:space-between;
-    gap: 20px;
-    height: 700px;
+    justify-content: space-between;
+    gap: 1em;
+
+    .container {
+        display: flex;
+        width: 100%;
+        gap: 20px;
+        height: 700px;
+
+    }
 }
 
 .atributoContainer {
 
     align-items: center;
-
-    width: fit-content;
-    width: 30%;
+    width: 40%;
     gap: 1em;
+    height: 100%;
 
     .atributoValue {
 
@@ -329,37 +337,75 @@
         font-weight: 600;
     }
 
-    .atributoDescription{
+    .atributoDescription {
 
         margin-top: 24px;
     }
+
     p {
 
         width: 60%;
     }
 
-    #btnDetallesAtributos{
+    #btnDetallesAtributos {
 
         margin-top: 32px;
         width: 70%;
-        
+
     }
 }
 
-.graphAtributosContainer{
+.graphAtributosContainer {
 
-    width: 90%;
+    width: 60%;
     gap: 1.5em;
     height: 100%;
 
-    .container{
+    .container {
 
         height: 70%;
         width: 100%;
     }
 }
 
-#chartAtributos{
+#chartAtributos {
 
     width: 100%;
+}
+
+.titleChart{
+
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.descriptionChart{
+
+    font-size: 24px;
+    font-weight: 600;
+    color: #818181;
+}
+
+.chart{
+
+    gap: 1.5em;
+}
+
+.containerEquipo{
+
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    height: 500px;
+
+    .chart{
+
+        width: 60%;
+    }   
+
+    .atributoContainer {
+
+       
+    }
 }

@@ -590,12 +590,13 @@ input[type=radio]:checked + .label-select {
   background-color: #F4F4F4;
 }
 .dashboard__content {
-  width: 100%;
+  width: 70%;
   height: 100%;
   padding: 2em;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  margin: auto;
   overflow: scroll;
 }
 .dashboard .radarContainer {
@@ -813,19 +814,23 @@ input[type=radio]:checked + .label-select {
 
 .atributos {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
+  gap: 1em;
+}
+.atributos .container {
+  display: flex;
+  width: 100%;
   gap: 20px;
   height: 700px;
 }
 
 .atributoContainer {
   align-items: center;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  width: 30%;
+  width: 40%;
   gap: 1em;
+  height: 100%;
 }
 .atributoContainer .atributoValue {
   font-size: 64px;
@@ -846,7 +851,7 @@ input[type=radio]:checked + .label-select {
 }
 
 .graphAtributosContainer {
-  width: 90%;
+  width: 60%;
   gap: 1.5em;
   height: 100%;
 }
@@ -859,6 +864,30 @@ input[type=radio]:checked + .label-select {
   width: 100%;
 }
 
+.titleChart {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.descriptionChart {
+  font-size: 24px;
+  font-weight: 600;
+  color: #818181;
+}
+
+.chart {
+  gap: 1.5em;
+}
+
+.containerEquipo {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  height: 500px;
+}
+.containerEquipo .chart {
+  width: 60%;
+}
 .performance {
   width: 100%;
   background-color: white;

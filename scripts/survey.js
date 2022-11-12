@@ -154,10 +154,6 @@ function startSurvey() {
 
 
 
-
-   
-
-
     setupQuestions(currentQuestion)
 
     function setupQuestions(currentQuestion) {
@@ -239,6 +235,7 @@ function startSurvey() {
             respuesta.numberYears = parseInt(numberYears.value)
             respuesta.area = companyAreas.value
             respuesta.position = companyPosition.value
+            respuesta.jerarquia = companyJerarchy.value
             surveyBasicInfo.style.display = "none"
             surveyContainer.style.display = "flex"
 

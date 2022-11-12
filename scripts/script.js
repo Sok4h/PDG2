@@ -25,6 +25,10 @@ const levelCardChart = cardRadarChart.querySelector(".infoDescription")
 const atributoContainer = document.querySelector(".atributoContainer")
 const flechasAtributos = atributoContainer.querySelectorAll("path")
 const graphAtributosContainer = document.querySelector(".graphAtributosContainer")
+const cardEquipo = document.querySelector("#cardEquipo")
+const cardJerarquia =document.querySelector("#cardJerarquia")
+
+const jerarquias =["Nivel superior","Nivel medio","Nivel operacional"]
 
 //cardRadarChart.style.display="none"
 
@@ -145,6 +149,8 @@ auth.onAuthStateChanged((user) => {
               loadRadarChart(answers)
               loadHighlights(currentTest, answers)
               //updateRadarChart(cateogorias[0])
+              loadTeams()
+              loadJerarquia()
 
 
             });
@@ -169,11 +175,14 @@ auth.onAuthStateChanged((user) => {
             listAnswers = answers
             atributoContainer.setAttribute("value", 0)
             updateCardAtributos()
-           
+
             loadBarChart(answers)
             loadBestAttributes(answers)
             loadRadarChart(answers)
             loadHighlights(currentTest, answers)
+
+            loadTeams()
+            loadJerarquia()
             //updateRadarChart(cateogorias[0])
 
 
@@ -207,11 +216,258 @@ btnGeneral.addEventListener("click", () => {
 
   btnGeneral.classList.add("gone")
   //cardRadarChart.style.display="none"
+  radarChart.config.options.scales.r.max = maximoCategoria
+
   radarChart.config.data.datasets[0].backgroundColor = 'rgb(29, 29, 29,0.5)'
   radarChart.update()
 
 
 })
+
+
+
+cardEquipo.setAttribute("value", 0)
+
+cardJerarquia.setAttribute("value", 0)
+
+function loadTeams() {
+
+  let arrows = cardEquipo.querySelectorAll("svg")
+
+  //let
+  console.log(currentTest)
+  //cardEquipo
+
+
+  console.log(arrows)
+  let atributoTitle = cardEquipo.querySelector(".atributoTitle")
+  let test = parseInt(cardEquipo.getAttribute("value"))
+
+
+
+  arrows.forEach((btn) => {
+
+    btn.addEventListener("click", () => {
+
+      //alert("xdd")
+      if (btn.classList.contains("add")) {
+
+
+        if (test == currentTest.departments.length-1) {
+
+
+          test = 0
+        }
+
+        else {
+
+          test += 1
+        }
+
+      }
+
+      if (btn.classList.contains("less")) {
+
+
+        if (test == 0) { test = currentTest.departments.length-1 }
+
+        else {
+
+          test -= 1
+        }
+      }
+
+      
+      cardEquipo.setAttribute("value", test)
+      atributoTitle.textContent = currentTest.departments[test]
+
+      loadChartDepartment(currentTest.departments[test])
+
+    })
+
+  })
+
+  atributoTitle.textContent = currentTest.departments[test]
+
+  loadChartDepartment(currentTest.departments[test])
+
+
+}
+
+
+
+function loadJerarquia() {
+
+  //let
+  console.log(currentTest)
+  let arrows = cardJerarquia.querySelectorAll("svg")
+
+  //cardEquipo
+
+
+  console.log(arrows)
+  let atributoTitle = cardJerarquia.querySelector(".atributoTitle")
+  let test = parseInt(cardJerarquia.getAttribute("value"))
+
+
+
+  arrows.forEach((btn) => {
+
+    btn.addEventListener("click", () => {
+
+     
+      if (btn.classList.contains("add")) {
+
+
+        if (test == jerarquias.length-1) {
+
+
+          test = 0
+        }
+
+        else {
+
+          test += 1
+        }
+
+      }
+
+      if (btn.classList.contains("less")) {
+
+
+        if (test == 0) { test = jerarquias.length-1 }
+
+        else {
+
+          test -= 1
+        }
+      }
+
+      
+      cardJerarquia.setAttribute("value", test)
+      atributoTitle.textContent = jerarquias[test]
+
+      loadChartJerarquia(jerarquias[test])
+
+    })
+
+  })
+
+  atributoTitle.textContent = jerarquias[test]
+
+  loadChartJerarquia(jerarquias[test])
+
+
+}
+
+
+
+function loadChartDepartment(department){
+
+    console.log(cateogorias)
+
+
+    let filter = listAnswers.filter((a) => { return a.area==department })
+
+    console.log(filter)
+    let respuestasFilter = filter.map((respuesta) => { return respuesta.values })
+
+    let respuestaOrdenada = sumAllCategories(respuestasFilter)
+
+    respuestaOrdenada.map((e)=>{e.value = parseInt(e.value/filter.length) , e.background=getColor(e.name)})
+    sortBarChart("0",respuestaOrdenada,vChartEquipoCompleto)
+
+    let xd = respuestaOrdenada.sort(function(a, b) {
+      return parseInt(b.value) - parseInt(a.value) ;
+  });
+
+  let slice = xd.slice(0,4)
+  console.log(xd)
+    sortBarChart("0",slice,vChartEquipo)
+
+  //console.log()
+    ///carga info en la card 
+
+    let promedio = 0 
+    
+    filter.forEach((e)=>{
+
+
+      promedio+=e.total
+    })
+
+    promedio = promedio/filter.length
+
+    let valueEquipo = cardEquipo.querySelector(".atributoValue")
+
+    valueEquipo.textContent = parseInt(promedio*100/maximoGeneral) +"%"
+
+    let titleEquipo = document.querySelector("#titleEquipo")
+    titleEquipo.textContent = department
+
+    //Obtener descripción equipo
+
+    
+ 
+}
+
+
+
+function loadChartJerarquia(jerarquia){
+
+  console.log(cateogorias)
+
+
+  let filter = listAnswers.filter((a) => { return a.jerarquia==jerarquia })
+
+  console.log(filter)
+  let respuestasFilter = filter.map((respuesta) => { return respuesta.values })
+
+  let respuestaOrdenada = sumAllCategories(respuestasFilter)
+
+  respuestaOrdenada.map((e)=>{e.value = parseInt(e.value/filter.length) , e.background=getColor(e.name)})
+  sortBarChart("0",respuestaOrdenada,vChartJerarquiaCompleto)
+
+  let xd = respuestaOrdenada.sort(function(a, b) {
+    return parseInt(b.value) - parseInt(a.value) ;
+});
+
+let slice = xd.slice(0,4)
+console.log(xd)
+  sortBarChart("0",slice,vChartJerarquia)
+
+//console.log()
+  ///carga info en la card 
+
+  let promedio = 0 
+  
+  filter.forEach((e)=>{
+
+
+    promedio+=e.total
+  })
+
+  promedio = promedio/filter.length
+
+  let valueEquipo = cardJerarquia.querySelector(".atributoValue")
+
+  valueEquipo.textContent = parseInt(promedio*100/maximoGeneral) +"%"
+
+  let titleEquipo = document.querySelector("#titleJerarquia")
+  let titleEquipoCompleto = document.querySelector("#titleJerarquiaCompleto")
+
+  titleEquipo.textContent = jerarquia
+  titleEquipoCompleto.textContent = jerarquia
+
+
+  //Obtener descripción equipo
+
+  
+
+}
+
+
+
 
 
 console.log(getColor("Liderazgo"))
@@ -385,7 +641,7 @@ function updateCardAtributos() {
 
   let respuestaOrdenada = sumAllCategories(respuestasFilter)
 
-  
+
 
   console.log(respuestaOrdenada)
   let respuestasDividas = respuestaOrdenada.map((respuesta) => {
@@ -398,18 +654,18 @@ function updateCardAtributos() {
 
   console.log(respuestasDividas)
 
-  respuestasDividas.forEach((a)=>{
+  respuestasDividas.forEach((a) => {
 
     console.log(a.name)
     console.log(cateogorias[test])
-    console.log(a.name==cateogorias[test])
+    console.log(a.name == cateogorias[test])
   })
-  let filter = respuestasDividas.filter((e)=>{return e.name==cateogorias[test]})
+  let filter = respuestasDividas.filter((e) => { return e.name == cateogorias[test] })
   console.log(filter)
   //console.log(respuestasDividas)
 
   let percentage = filter[0].value
-  atributoValue.textContent = (percentage*100)/maximoCategoria +"%"
+  atributoValue.textContent = parseInt((percentage * 100) / maximoCategoria) + "%"
 
 
   //console.log(atributoTitle.style)
@@ -417,66 +673,66 @@ function updateCardAtributos() {
   loadChartAtributos(cateogorias[test])
 }
 
-function loadChartAtributos(atributo){
+function loadChartAtributos(atributo) {
 
   console.log(atributo)
-    console.log(listAnswers)
+  console.log(listAnswers)
 
-    let title = graphAtributosContainer.querySelector(".title")
+  let title = graphAtributosContainer.querySelector(".title")
   console.log(title)
-    let index = cateogorias.indexOf(atributo)
-    title.textContent=atributo
-    title.style.color = colorRadar[index]
+  let index = cateogorias.indexOf(atributo)
+  title.textContent = atributo
+  title.style.color = colorRadar[index]
 
-    let filter = listAnswers.map((a)=>{ return a.respuestas})
+  let filter = listAnswers.map((a) => { return a.respuestas })
 
-    console.log(filter)
-    //let prueba = sumAllSubCategories(filter)
+  console.log(filter)
+  //let prueba = sumAllSubCategories(filter)
 
-    //console.log(prueba)
+  //console.log(prueba)
 
-  let filtrado = filter.map((e)=>{
-    
-    let filtradoFinal= e.filter((x)=>{
+  let filtrado = filter.map((e) => {
 
-      return x.categoria==atributo
+    let filtradoFinal = e.filter((x) => {
+
+      return x.categoria == atributo
     })
     return filtradoFinal
-  
+
   }
-    
-    )
+
+  )
 
   console.log(filtrado)
 
-  let sumados =sumAllQuestions(filtrado)
+  let sumados = sumAllQuestions(filtrado)
   console.log(sumAllQuestions(filtrado))
 
-  let respuestasDivididas = sumados.map((e)=>{
+  let respuestasDivididas = sumados.map((e) => {
 
-    e.value = parseInt(e.value/listAnswers.length)
+    e.value = parseInt(e.value / listAnswers.length)
 
     return e
   })
 
   console.log(respuestasDivididas)
 
-  let names = respuestasDivididas.map((e)=>{
+  let names = respuestasDivididas.map((e) => {
 
-    return "Pregunta "+ e.numeroPregunta
+    return "Pregunta " + e.numeroPregunta
   })
 
-  let merged = respuestasDivididas.map((e)=>{
+  let merged = respuestasDivididas.map((e) => {
 
-    e.background= getColor(e.categoria)
-    e.name =" Pregunta "+ e.name
+    e.background = getColor(e.categoria)
+    e.name = " Pregunta " + e.name
 
     return e
   })
 
   console.log(names)
 
-  radarChart.config.data.labels = names
+  atributosChart.config.data.labels = names
 
 
   sortBarChart("0", merged, atributosChart)
@@ -678,6 +934,314 @@ const configdepartmentChart = {
 };
 
 
+const dataVerticalAtributos = {
+  labels: labels,
+  datasets: [{
+    //label: 'atributos por departamento',
+
+    //borderColor: 'rgb(255, 99, 132)',
+    data: dataChart,
+    datalabels: {
+      formatter: function (value, context) {
+
+        console.log(value)
+        //return parseInt(value * 100 / maximoCategoria) + '%';
+        return value
+      },
+      color: "black",
+      anchor: "end",
+      align: "end",
+      clamp: true,
+      font: {
+
+        weight: "bold"
+      },
+      padding: {
+
+        top: 20
+      }
+
+    }
+  }
+
+
+  ]
+};
+
+
+const dataVerticalEquipos = {
+  labels: labels,
+  datasets: [{
+    //label: 'atributos por departamento',
+
+    //borderColor: 'rgb(255, 99, 132)',
+    data: dataChart,
+    datalabels: {
+      formatter: function (value, context) {
+
+        console.log(value)
+        //return parseInt(value * 100 / maximoCategoria) + '%';
+        return value
+      },
+      color: "white",
+      anchor: "center",
+      align: "end",
+      clamp: true,
+      font: {
+
+        weight: "bold"
+      },
+      padding: {
+
+        top: 20
+      }
+
+    }
+  }
+
+
+  ]
+};
+
+
+const dataVerticalEquiposCompleto = {
+  labels: labels,
+  datasets: [{
+    //label: 'atributos por departamento',
+
+    //borderColor: 'rgb(255, 99, 132)',
+    data: dataChart,
+    datalabels: {
+      formatter: function (value, context) {
+
+        console.log(value)
+        //return parseInt(value * 100 / maximoCategoria) + '%';
+        return value
+      },
+      color: "white",
+      anchor: "center",
+      align: "end",
+      clamp: true,
+      font: {
+
+        weight: "bold"
+      },
+      padding: {
+
+        top: 20
+      }
+
+    }
+  }
+
+
+  ]
+};
+const configVerticalAtributoChart = {
+  type: 'bar',
+  data: dataVerticalAtributos,
+  plugins: [ChartDataLabels],
+  options: {
+
+    layout: {
+      padding: {
+
+        top: 30
+      }
+    }
+    ,
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    parsing: {
+
+      xAxisKey: 'name'
+    },
+    indexAxis: 'x',
+    scales: {
+      x: {
+
+        display: true,
+        drawBorder: false,
+      },
+      y: {
+        max: 35,
+        grid: {
+          display: false,
+          drawBorder: false
+        }
+      }
+    }
+  }
+};
+
+
+const configVerticalEquipoChart = {
+  type: 'bar',
+  data: dataVerticalEquipos,
+  plugins: [ChartDataLabels],
+  options: {
+
+    layout: {
+      padding: {
+
+        top: 30
+      }
+    }
+    ,
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    parsing: {
+
+      xAxisKey: 'name'
+    },
+    indexAxis: 'x',
+    scales: {
+      x: {
+
+        display: true,
+        drawBorder: false,
+      },
+      y: {
+        max: 35,
+        grid: {
+          display: false,
+          drawBorder: false
+        }
+      }
+    }
+  }
+};
+
+
+const configVerticalJerarquiaChart = {
+  type: 'bar',
+  data: dataVerticalEquipos,
+  plugins: [ChartDataLabels],
+  options: {
+
+    layout: {
+      padding: {
+
+        top: 30
+      }
+    }
+    ,
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    parsing: {
+
+      xAxisKey: 'name'
+    },
+    indexAxis: 'x',
+    scales: {
+      x: {
+
+        display: true,
+        drawBorder: false,
+      },
+      y: {
+        max: 35,
+        grid: {
+          display: false,
+          drawBorder: false
+        }
+      }
+    }
+  }
+};
+
+
+
+const configVerticalEquipoChartCompleto = {
+  type: 'bar',
+  data: dataVerticalEquiposCompleto,
+  plugins: [ChartDataLabels],
+  options: {
+
+    layout: {
+      padding: {
+
+        top: 30
+      }
+    }
+    ,
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    parsing: {
+
+      xAxisKey: 'name'
+    },
+    indexAxis: 'x',
+    scales: {
+      x: {
+
+        display: true,
+        drawBorder: false,
+      },
+      y: {
+        max: 35,
+        grid: {
+          display: false,
+          drawBorder: false
+        }
+      }
+    }
+  }
+};
+
+
+
+const configVerticalJerarquiaChartCompleto = {
+  type: 'bar',
+  data: dataVerticalEquiposCompleto,
+  plugins: [ChartDataLabels],
+  options: {
+
+    layout: {
+      padding: {
+
+        top: 30
+      }
+    }
+    ,
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    parsing: {
+
+      xAxisKey: 'name'
+    },
+    indexAxis: 'x',
+    scales: {
+      x: {
+
+        display: true,
+        drawBorder: false,
+      },
+      y: {
+        max: 35,
+        grid: {
+          display: false,
+          drawBorder: false
+        }
+      }
+    }
+  }
+};
 
 
 
@@ -743,7 +1307,35 @@ const departmentChart = new Chart(
   configdepartmentChart
 );
 
-let dataAtributos ={
+
+const vChartAtributos = new Chart(
+  document.getElementById('vChartAtributos'),
+  configVerticalAtributoChart)
+
+
+
+  const vChartEquipo = new Chart(
+    document.getElementById('vChartEquipo'),
+    configVerticalEquipoChart)
+
+
+    const vChartJerarquia = new Chart(
+      document.getElementById('vChartJerarquia'),
+      configVerticalJerarquiaChart)
+
+
+    const vChartEquipoCompleto = new Chart(
+      document.getElementById('vChartEquipoCompleto'),
+      configVerticalEquipoChartCompleto)
+
+      const vChartJerarquiaCompleto = new Chart(
+        document.getElementById('vChartJerarquiaCompleto'),
+        configVerticalJerarquiaChartCompleto)
+  
+
+
+
+let dataAtributos = {
 
   labels: labels,
   datasets: [{
@@ -782,7 +1374,7 @@ let dataAtributos ={
 
 
 
-const configAtributos ={
+const configAtributos = {
 
   type: 'bar',
   data: dataAtributos,
@@ -797,8 +1389,8 @@ const configAtributos ={
     // }          
     //   ,
     maintainAspectRatio: false,
-    
-    maintainAspectRatio: false,
+
+    //maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,
@@ -821,7 +1413,7 @@ const configAtributos ={
         drawBorder: false,
       },
       y: {
-         beginAtZero: true ,
+        beginAtZero: true,
 
         grid: {
           display: false,
@@ -892,7 +1484,7 @@ const configRadar = {
   options: {
     //pointHitRadius:30,
 
-
+    //maintainAspectRatio: false,
     onHover: ({ x, y }, activeHover, chart) => {
 
       console.log(chart.scales.r._pointLabelItems)
@@ -927,7 +1519,7 @@ const configRadar = {
 
     },
     scales: {
-
+      
       //
       r: {
 
@@ -1023,7 +1615,7 @@ function sumAllQuestions(answers) {
     for (const [number, respuesta] of Object.entries(fruit)) {
       console.log(respuesta)
       if (!basket[number]) {
-        basket[number] = { categoria: respuesta.categoria, value: 0 ,name:respuesta.numeroPregunta,subcategoria:respuesta.subcategoria};
+        basket[number] = { categoria: respuesta.categoria, value: 0, name: respuesta.numeroPregunta, subcategoria: respuesta.subcategoria };
       }
 
 
@@ -1261,7 +1853,7 @@ function updateRadarChart(category) {
 
   console.log(sumaCategoria)
 
-  promedioCategoria = (sumaCategoria * 100) / maximoCategoria
+  promedioCategoria = parseInt((sumaCategoria * 100) / maximoCategoria)
 
   console.log(promedioCategoria)
 
@@ -1281,7 +1873,7 @@ function updateRadarChart(category) {
 
   radarChart.config.data.labels = names
 
-  radarChart.config.options.scales.r.ticks.suggestedMax = maximoCategoria
+  radarChart.config.options.scales.r.max = maximoPregunta
 
   radarChart.config.data.datasets[0].data = arregloFinal
 
@@ -1725,6 +2317,13 @@ function loadBestAttributes(answers) {
   HorizontalChart.update()
   mergedAttribute = merged
   sortBarChart("0", merged, HorizontalChart)
+
+  vChartAtributos.config.data.labels = finalNames
+  vChartAtributos.config.data.datasets[0].data = finalValues
+  vChartAtributos.update()
+
+  sortBarChart("2", merged, vChartAtributos)
+
 }
 
 for (let i = 0; i < filterDepartment.length; i++) {
