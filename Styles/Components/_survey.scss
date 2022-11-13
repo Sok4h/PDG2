@@ -159,8 +159,9 @@
     align-items: center;
     justify-content: center;
     width: fit-content;
-    padding: 4px;
+    padding: 4px 12px;
     cursor: pointer;
+
 }
 
 input[type=radio]:checked + .label-radio{
@@ -181,4 +182,11 @@ input[type=radio]:checked + .label-select{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+.seleccionado {
+
+    background-color: #0073A7; 
+    color: white;
 }

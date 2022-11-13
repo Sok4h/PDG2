@@ -283,6 +283,10 @@
 
             font-size: 32px;
         }
+        &__name{
+
+            font-weight: bold;
+        }
     }
 }
 
@@ -305,6 +309,7 @@
         .desempenoValue {
 
             font-size: 68px;
+
         }
 
         .info {
@@ -327,4 +332,9 @@
         margin-top: 24px;
         text-align: left;
     }
+}
+
+.desempenoValueName {
+
+    font-weight: bold;
 }

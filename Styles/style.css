@@ -72,7 +72,7 @@ button {
 }
 
 .gone {
-  visibility: hidden;
+  display: none !important;
 }
 
 .btnGeneral {
@@ -371,7 +371,7 @@ button {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 4px;
+  padding: 4px 12px;
   cursor: pointer;
 }
 
@@ -389,6 +389,11 @@ input[type=radio]:checked + .label-select {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.seleccionado {
+  background-color: #0073A7;
+  color: white;
 }
 
 .nav {
@@ -882,7 +887,7 @@ input[type=radio]:checked + .label-select {
   display: flex;
   width: 100%;
   gap: 20px;
-  height: 500px;
+  height: 100%;
 }
 .containerEquipo .chart {
   width: 60%;
@@ -906,6 +911,10 @@ input[type=radio]:checked + .label-select {
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
+}
+
+.chartGrande {
+  width: 60%;
 }
 
 .performance {
@@ -1121,6 +1130,9 @@ input[type=radio]:checked + .label-select {
 .nivelesPuntaje .puntaje__title {
   font-size: 32px;
 }
+.nivelesPuntaje .puntaje__name {
+  font-weight: bold;
+}
 
 .explicacionDesempeno {
   background-color: #F3F3F3;
@@ -1148,6 +1160,10 @@ input[type=radio]:checked + .label-select {
 .explicacionDesempeno .desempenoAcciones {
   margin-top: 24px;
   text-align: left;
+}
+
+.desempenoValueName {
+  font-weight: bold;
 }
 
 .formTitle {

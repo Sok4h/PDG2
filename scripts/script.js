@@ -26,12 +26,28 @@ const atributoContainer = document.querySelector(".atributoContainer")
 const flechasAtributos = atributoContainer.querySelectorAll("path")
 const graphAtributosContainer = document.querySelector(".graphAtributosContainer")
 const cardEquipo = document.querySelector("#cardEquipo")
-const cardJerarquia =document.querySelector("#cardJerarquia")
+const cardJerarquia = document.querySelector("#cardJerarquia")
 const testSelect = document.querySelector("#testList")
+const filterchartAtributosCompletos = document.querySelector("#filterVerticalChartAtributos")
+const filterChartDeparmentCompleto = document.querySelector("#filterChartDeparmentCompleto")
+const filterChartAtributos =document.querySelector("#filterchartAtributos")
+const filterVerticalChartDeparment = document.querySelector("#filterVerticalChartDeparment")
+const filterVerticalChartJerarquia  = document.querySelector("#filterVerticalChartJerarquia")
+const filterChartJerarquiaC = document.querySelector("#filterChartJerarquiaC")
 
+let filterDepartamento = filterVerticalChartDeparment.querySelectorAll(".hidebox")
+
+let filterDepartamentoC = filterChartDeparmentCompleto.querySelectorAll(".hidebox")
+
+let filterJerarquia = filterVerticalChartJerarquia.querySelectorAll(".hidebox")
+let filterJerarquiaC = filterChartJerarquiaC.querySelectorAll(".hidebox")
+
+let mergedAtributosCompletos
+let mergedAtributos
+let mergedDepartamentos
 console.log(testSelect)
 
-const jerarquias =["Nivel superior","Nivel medio","Nivel operacional"]
+const jerarquias = ["Nivel superior", "Nivel medio", "Nivel operacional"]
 
 //cardRadarChart.style.display="none"
 
@@ -80,7 +96,7 @@ const urlParams = new URLSearchParams(queryString);
 
 const testId = urlParams.get('testId')
 console.log(testId)
-let testArray =[]
+let testArray = []
 let docRef
 let answers = []
 
@@ -101,7 +117,7 @@ auth.onAuthStateChanged((user) => {
     // }
     docRef.get().then((docSnapshot) => {
 
-      
+
 
       if (!docSnapshot.empty) {
 
@@ -113,71 +129,32 @@ auth.onAuthStateChanged((user) => {
 
         //if (testId == null) {
 
-          docSnapshot.forEach((doc) => {
+        docSnapshot.forEach((doc) => {
 
-            var opt = document.createElement('option');
-            let tempTest =  doc.data()
+          var opt = document.createElement('option');
+          let tempTest = doc.data()
 
-            console.log(doc.id)
-            tempTest.id = doc.id
-            testArray.push(tempTest)
-            opt.value = doc.data().name
-            opt.textContent = doc.data().name
-            console.log(opt)
-            testSelect.appendChild(opt)
+          console.log(doc.id)
+          tempTest.id = doc.id
+          testArray.push(tempTest)
+          opt.value = doc.data().name
+          opt.textContent = doc.data().name
+          console.log(opt)
+          testSelect.appendChild(opt)
 
-            //currentTest = doc.data()
-          })
+          //currentTest = doc.data()
+        })
 
-          console.log(testList.value)
+        console.log(testList.value)
+
+        loadTest(testList.value)
+
+        testList.addEventListener("change", () => {
 
           loadTest(testList.value)
 
-          testList.addEventListener("change",()=>{
+        })
 
-            loadTest(testList.value)
-
-          })
-
-
-        //}
-
-        // else {
-
-        //   currentTest = docSnapshot.data()
-        //   db.collection("answers").where("testId", "==", docSnapshot.id).get().then(function (querySnapshot) {
-
-        //     querySnapshot.forEach((doc) => {
-
-        //       answers.push(doc.data())
-        //     })
-
-        //   }).then(() => {
-
-        //     console.log(answers)
-        //     listAnswers = answers
-        //     atributoContainer.setAttribute("value", 0)
-        //     updateCardAtributos()
-
-        //     loadBarChart(answers)
-        //     loadBestAttributes(answers)
-        //     loadRadarChart(answers)
-        //     loadHighlights(currentTest, answers)
-
-        //     loadTeams()
-        //     loadJerarquia()
-        //     //updateRadarChart(cateogorias[0])
-
-
-        //   });
-
-        // }
-
-        //obtiene respuestas
-
-
-
-        //?testId=8INIveodekK2Fj8ObEK7
       }
       else {
 
@@ -192,9 +169,9 @@ auth.onAuthStateChanged((user) => {
 })
 
 
-function loadTest (nameTest){
+function loadTest(nameTest) {
 
-  currentTest = testArray.find((e)=>{ return e.name ==nameTest})
+  currentTest = testArray.find((e) => { return e.name == nameTest })
 
   console.log(currentTest)
   console.log(nameTest)
@@ -270,7 +247,7 @@ function loadTeams() {
       if (btn.classList.contains("add")) {
 
 
-        if (test == currentTest.departments.length-1) {
+        if (test == currentTest.departments.length - 1) {
 
 
           test = 0
@@ -286,7 +263,7 @@ function loadTeams() {
       if (btn.classList.contains("less")) {
 
 
-        if (test == 0) { test = currentTest.departments.length-1 }
+        if (test == 0) { test = currentTest.departments.length - 1 }
 
         else {
 
@@ -294,7 +271,7 @@ function loadTeams() {
         }
       }
 
-      
+
       cardEquipo.setAttribute("value", test)
       atributoTitle.textContent = currentTest.departments[test]
 
@@ -326,17 +303,15 @@ function loadJerarquia() {
   let atributoTitle = cardJerarquia.querySelector(".atributoTitle")
   let test = parseInt(cardJerarquia.getAttribute("value"))
 
-
-
   arrows.forEach((btn) => {
 
     btn.addEventListener("click", () => {
 
-     
+
       if (btn.classList.contains("add")) {
 
 
-        if (test == jerarquias.length-1) {
+        if (test == jerarquias.length - 1) {
 
 
           test = 0
@@ -352,7 +327,7 @@ function loadJerarquia() {
       if (btn.classList.contains("less")) {
 
 
-        if (test == 0) { test = jerarquias.length-1 }
+        if (test == 0) { test = jerarquias.length - 1 }
 
         else {
 
@@ -360,7 +335,7 @@ function loadJerarquia() {
         }
       }
 
-      
+
       cardJerarquia.setAttribute("value", test)
       atributoTitle.textContent = jerarquias[test]
 
@@ -379,96 +354,108 @@ function loadJerarquia() {
 
 
 
-function loadChartDepartment(department){
-
-    console.log(cateogorias)
-
-
-    let filter = listAnswers.filter((a) => { return a.area==department })
-
-    console.log(filter)
-    let respuestasFilter = filter.map((respuesta) => { return respuesta.values })
-
-    let respuestaOrdenada = sumAllCategories(respuestasFilter)
-
-    respuestaOrdenada.map((e)=>{e.value = parseInt(e.value/filter.length) , e.background=getColor(e.name)})
-    sortBarChart("0",respuestaOrdenada,vChartEquipoCompleto)
-
-    let xd = respuestaOrdenada.sort(function(a, b) {
-      return parseInt(b.value) - parseInt(a.value) ;
-  });
-
-  let slice = xd.slice(0,4)
-  console.log(xd)
-    sortBarChart("0",slice,vChartEquipo)
-
-  //console.log()
-    ///carga info en la card 
-
-    let promedio = 0 
-    
-    filter.forEach((e)=>{
-
-
-      promedio+=e.total
-    })
-
-    promedio = promedio/filter.length
-
-    let valueEquipo = cardEquipo.querySelector(".atributoValue")
-
-    valueEquipo.textContent = parseInt(promedio*100/maximoGeneral) +"%"
-
-    let titleEquipo = document.querySelector("#titleEquipo")
-    titleEquipo.textContent = department
-
-    //Obtener descripción equipo
-
-    
- 
-}
-
-
-
-function loadChartJerarquia(jerarquia){
+function loadChartDepartment(department) {
 
   console.log(cateogorias)
 
 
-  let filter = listAnswers.filter((a) => { return a.jerarquia==jerarquia })
+  let filter = listAnswers.filter((a) => { return a.area == department })
 
   console.log(filter)
   let respuestasFilter = filter.map((respuesta) => { return respuesta.values })
 
   let respuestaOrdenada = sumAllCategories(respuestasFilter)
 
-  respuestaOrdenada.map((e)=>{e.value = parseInt(e.value/filter.length) , e.background=getColor(e.name)})
-  sortBarChart("0",respuestaOrdenada,vChartJerarquiaCompleto)
+  respuestaOrdenada.map((e) => { e.value = parseInt(e.value / filter.length), e.background = getColor(e.name) })
+  sortBarChart("0", respuestaOrdenada, vChartEquipoCompleto)
 
-  let xd = respuestaOrdenada.sort(function(a, b) {
-    return parseInt(b.value) - parseInt(a.value) ;
-});
+  let xd = respuestaOrdenada.sort(function (a, b) {
+    return parseInt(b.value) - parseInt(a.value);
+  });
 
-let slice = xd.slice(0,4)
-console.log(xd)
-  sortBarChart("0",slice,vChartJerarquia)
+  let slice = xd.slice(0, 4)
 
-//console.log()
+  mergedDepartamentos = slice
+  console.log(xd)
+  sortBarChart("0", slice, vChartEquipo)
+
+  console.log(filterDepartamento)
+  filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
+  filterChart(filterDepartamentoC,xd,vChartEquipoCompleto)
+
+
+  //console.log()
   ///carga info en la card 
 
-  let promedio = 0 
-  
-  filter.forEach((e)=>{
+  let promedio = 0
+
+  filter.forEach((e) => {
 
 
-    promedio+=e.total
+    promedio += e.total
   })
 
-  promedio = promedio/filter.length
+  promedio = promedio / filter.length
+
+  let valueEquipo = cardEquipo.querySelector(".atributoValue")
+
+  valueEquipo.textContent = parseInt(promedio * 100 / maximoGeneral) + "%"
+
+  let titleEquipo = document.querySelector("#titleEquipo")
+  titleEquipo.textContent = department
+
+  //Obtener descripción equipo
+
+
+
+}
+
+
+
+function loadChartJerarquia(jerarquia) {
+
+  console.log(cateogorias)
+
+
+  let filter = listAnswers.filter((a) => { return a.jerarquia == jerarquia })
+
+  console.log(filter)
+  let respuestasFilter = filter.map((respuesta) => { return respuesta.values })
+
+  let respuestaOrdenada = sumAllCategories(respuestasFilter)
+
+  respuestaOrdenada.map((e) => { e.value = parseInt(e.value / filter.length), e.background = getColor(e.name) })
+  sortBarChart("0", respuestaOrdenada, vChartJerarquiaCompleto)
+
+  let xd = respuestaOrdenada.sort(function (a, b) {
+    return parseInt(b.value) - parseInt(a.value);
+  });
+
+  let slice = xd.slice(0, 4)
+  console.log(xd)
+
+  filterChart(filterJerarquia,slice,vChartJerarquia)
+  filterChart(filterJerarquiaC,xd,vChartJerarquiaCompleto)
+
+
+  sortBarChart("0", slice, vChartJerarquia)
+
+  //console.log()
+  ///carga info en la card 
+
+  let promedio = 0
+
+  filter.forEach((e) => {
+
+
+    promedio += e.total
+  })
+
+  promedio = promedio / filter.length
 
   let valueEquipo = cardJerarquia.querySelector(".atributoValue")
 
-  valueEquipo.textContent = parseInt(promedio*100/maximoGeneral) +"%"
+  valueEquipo.textContent = parseInt(promedio * 100 / maximoGeneral) + "%"
 
   let titleEquipo = document.querySelector("#titleJerarquia")
   let titleEquipoCompleto = document.querySelector("#titleJerarquiaCompleto")
@@ -479,7 +466,7 @@ console.log(xd)
 
   //Obtener descripción equipo
 
-  
+
 
 }
 
@@ -749,6 +736,7 @@ function loadChartAtributos(atributo) {
 
   console.log(names)
 
+  mergedAtributos = merged
   atributosChart.config.data.labels = names
 
 
@@ -1062,7 +1050,7 @@ const dataVerticalEquiposCompleto = {
 const configVerticalAtributoChart = {
   type: 'bar',
   data: dataVerticalAtributos,
- 
+
   plugins: [ChartDataLabels],
   options: {
 
@@ -1225,7 +1213,6 @@ const configVerticalEquipoChartCompleto = {
 };
 
 
-
 const configVerticalJerarquiaChartCompleto = {
   type: 'bar',
   data: dataVerticalEquiposCompleto,
@@ -1337,25 +1324,23 @@ const vChartAtributos = new Chart(
 
 
 
-  const vChartEquipo = new Chart(
-    document.getElementById('vChartEquipo'),
-    configVerticalEquipoChart)
+const vChartEquipo = new Chart(
+  document.getElementById('vChartEquipo'),
+  configVerticalEquipoChart)
 
 
-    const vChartJerarquia = new Chart(
-      document.getElementById('vChartJerarquia'),
-      configVerticalJerarquiaChart)
+const vChartJerarquia = new Chart(
+  document.getElementById('vChartJerarquia'),
+  configVerticalJerarquiaChart)
 
 
-    const vChartEquipoCompleto = new Chart(
-      document.getElementById('vChartEquipoCompleto'),
-      configVerticalEquipoChartCompleto)
+const vChartEquipoCompleto = new Chart(
+  document.getElementById('vChartEquipoCompleto'),
+  configVerticalEquipoChartCompleto)
 
-      const vChartJerarquiaCompleto = new Chart(
-        document.getElementById('vChartJerarquiaCompleto'),
-        configVerticalJerarquiaChartCompleto)
-  
-
+const vChartJerarquiaCompleto = new Chart(
+  document.getElementById('vChartJerarquiaCompleto'),
+  configVerticalJerarquiaChartCompleto)
 
 
 let dataAtributos = {
@@ -1393,8 +1378,6 @@ let dataAtributos = {
 
   ]
 }
-
-
 
 
 const configAtributos = {
@@ -1542,7 +1525,7 @@ const configRadar = {
 
     },
     scales: {
-      
+
       //
       r: {
 
@@ -1911,6 +1894,9 @@ function updateRadarChart(category) {
   sortBarChart("0", arregloFinal, radarChart)
 
 }
+
+
+//let filterchartAtributosCompletos = document.querySelector("#filterchartAtributosCompletos")
 
 
 
@@ -2340,16 +2326,18 @@ function loadBestAttributes(answers) {
   //HorizontalChart.config.data.datasets[0].backgroundColor = color
   HorizontalChart.update()
   mergedAttribute = merged
+  mergedAtributosCompletos = merged
   sortBarChart("0", merged, HorizontalChart)
 
   vChartAtributos.config.data.labels = finalNames
   vChartAtributos.config.data.datasets[0].data = finalValues
   vChartAtributos.update()
 
-  sortBarChart("2", merged, vChartAtributos)
+  sortBarChart("0", merged, vChartAtributos)
 
 }
 
+///////////////////////////////////////  Filtrar ////////////////////////////////
 for (let i = 0; i < filterDepartment.length; i++) {
 
   filterDepartment[i].addEventListener("click", () => {
@@ -2361,12 +2349,92 @@ for (let i = 0; i < filterDepartment.length; i++) {
 }
 
 
+let filterAtributosCompletos = filterchartAtributosCompletos.querySelectorAll(".hidebox")
+
+
+for (let i = 0; i < filterAtributosCompletos.length; i++) {
+
+  filterAtributosCompletos[i].addEventListener("click", () => {
+
+    console.log(filterAtributosCompletos[i].value)
+
+
+    //let parentDiv = filterAtributos[i].closest("label") ;
+
+    //console.log(parentDiv)
+    filterAtributosCompletos[i].classList.add("seleccionado")
+    console.log(mergedAtributosCompletos)
+
+    console.log(dataVerticalAtributos.datasets[0])
+    sortBarChart(filterAtributosCompletos[i].value, mergedAtributosCompletos, vChartAtributos)
+  })
+
+}
+
+
+
+
+let filterAtributos = filterChartAtributos.querySelectorAll(".hidebox")
+
+
+for (let i = 0; i < filterAtributos.length; i++) {
+
+  filterAtributos[i].addEventListener("click", () => {
+
+    console.log(filterAtributos[i].value)
+
+
+    //let parentDiv = filterAtributos[i].closest("label") ;
+
+    //console.log(parentDiv)
+    filterAtributos[i].classList.add("seleccionado")
+    console.log(mergedAtributosCompletos)
+
+    console.log(dataVerticalAtributos.datasets[0])
+    sortBarChart(filterAtributos[i].value, mergedAtributos, atributosChart)
+  })
+
+}
+
+
+
+
+//filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
+
+console.log(mergedDepartamentos)
+
+function filterChart(arreglo,data,chart) {
+
+
+  console.log(data)
+  for (let i = 0; i < arreglo.length; i++) {
+
+    arreglo[i].addEventListener("click", () => {
+  
+      console.log(arreglo[i].value)
+  
+  
+      //let parentDiv = filterAtributos[i].closest("label") ;
+  
+      //console.log(parentDiv)
+      arreglo[i].classList.add("seleccionado")
+      console.log(mergedAtributosCompletos)
+  
+      console.log(dataVerticalAtributos.datasets[0])
+      sortBarChart(arreglo[i].value, data, chart)
+    })
+  
+  }
+
+
+}
 
 
 
 // 0 alfa 1 mayor 2 menor
 function sortBarChart(order, data, chart) {
 
+  console.log(chart)
   let dataSort = []
 
   console.log(data)
