@@ -66,7 +66,7 @@ auth.onAuthStateChanged((user) => {
                         })
 
     
-                        let copy = `?testId=${doc.id}`
+                        let copy = `https://sok4h.github.io/PDG2/survey.html?testId=${doc.id}`
                         btnCopy.addEventListener("click", () => {
     
                             navigator.clipboard.writeText(copy)
