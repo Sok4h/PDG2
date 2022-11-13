@@ -137,8 +137,8 @@ auth.onAuthStateChanged((user) => {
           console.log(doc.id)
           tempTest.id = doc.id
           testArray.push(tempTest)
-          opt.value = doc.data().name
-          opt.textContent = doc.data().name
+          opt.value = doc.data().companyName
+          opt.textContent = doc.data().companyName
           console.log(opt)
           testSelect.appendChild(opt)
 
@@ -171,7 +171,8 @@ auth.onAuthStateChanged((user) => {
 
 function loadTest(nameTest) {
 
-  currentTest = testArray.find((e) => { return e.name == nameTest })
+  console.log(nameTest)
+  currentTest = testArray.find((e) => { return e.companyName == nameTest })
 
   console.log(currentTest)
   console.log(nameTest)
