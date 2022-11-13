@@ -13,7 +13,6 @@
         margin-bottom: 48px;
     }
 
-    
 }
 
 .performanceBody {
@@ -24,6 +23,7 @@
     align-items: center;
     width: 100%;
     gap: 1em;
+    overflow: scroll;
 
 
     .atributos{
@@ -255,4 +255,58 @@
     }
 }
 
+
+.nivelesPuntaje{
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    gap: 0.7em;
+
+    .puntaje{
+
+
+        background-color: #F3F3F3;
+        width: 40%;
+
+        &__title{
+
+            font-size: 32px;            
+        }
+    }
+}
 //100,90,78,60
+
+.explicacionDesempeno{
+
+    background-color: #F3F3F3;
+
+
+    .desemepnoContainer{
+
+        display: flex;
+        justify-content: space-between;
+        margin-top: 32px;
+
+        .info{
+
+            text-align: start;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .value{
+
+            width: 40%;
+        }
+    }
+
+    .desempenoAcciones{
+
+        margin-top: 24px;
+        text-align: left;
+    }
+}

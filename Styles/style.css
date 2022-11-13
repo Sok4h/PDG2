@@ -408,38 +408,36 @@ input[type=radio]:checked + .label-select {
   transition: width 0.2s linear;
   border-radius: 0px 24px 24px 0px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-.nav:hover {
   width: 200px;
   transition: all 0.5s ease;
 }
-.nav:hover .btn--nav::after {
+.nav .btn--nav::after {
   content: "Crear prueba";
   transition: all 0.5s ease;
 }
-.nav:hover .nav__item {
+.nav .nav__item {
   justify-content: flex-start;
   padding-left: 1em;
 }
-.nav:hover .nav__item--home a::after {
+.nav .nav__item--home a::after {
   content: "Home";
 }
-.nav:hover .nav__item--team a::after {
+.nav .nav__item--team a::after {
   content: "Equipo";
 }
-.nav:hover .nav__item--herarchy a::after {
+.nav .nav__item--herarchy a::after {
   content: "Jerarquia";
 }
-.nav:hover .nav__item--atributes a::after {
+.nav .nav__item--atributes a::after {
   content: "Atributos";
 }
-.nav:hover .nav__item--history a::after {
+.nav .nav__item--history a::after {
   content: "Historial";
 }
-.nav:hover .nav__item--report a::after {
+.nav .nav__item--report a::after {
   content: "Informe";
 }
-.nav:hover .nav__item--logout a::after {
+.nav .nav__item--logout a::after {
   content: "Salir";
 }
 .nav__container {
@@ -807,9 +805,10 @@ input[type=radio]:checked + .label-select {
 
 .separador {
   width: 100%;
-  background-color: red;
-  padding: 32px;
+  background-color: #DBDBDB;
+  padding: 16px;
   border-radius: 16px;
+  text-align: center;
 }
 
 .atributos {
@@ -929,6 +928,7 @@ input[type=radio]:checked + .label-select {
   align-items: center;
   width: 100%;
   gap: 1em;
+  overflow: scroll;
 }
 .performanceBody .atributos {
   background-color: white;
@@ -1099,6 +1099,44 @@ input[type=radio]:checked + .label-select {
 }
 .performanceBody .levelDetails .container:nth-of-type(4) {
   height: 60%;
+}
+
+.nivelesPuntaje {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  gap: 0.7em;
+}
+.nivelesPuntaje .puntaje {
+  background-color: #F3F3F3;
+  width: 40%;
+}
+.nivelesPuntaje .puntaje__title {
+  font-size: 32px;
+}
+
+.explicacionDesempeno {
+  background-color: #F3F3F3;
+}
+.explicacionDesempeno .desemepnoContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+.explicacionDesempeno .desemepnoContainer .info {
+  text-align: start;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.explicacionDesempeno .desemepnoContainer .value {
+  width: 40%;
+}
+.explicacionDesempeno .desempenoAcciones {
+  margin-top: 24px;
+  text-align: left;
 }
 
 .formTitle {

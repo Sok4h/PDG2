@@ -206,6 +206,7 @@ auth.onAuthStateChanged((user) => {
   }
 })
 
+
 function loadTest (nameTest){
 
   currentTest = testArray.find((e)=>{ return e.name ==nameTest})
