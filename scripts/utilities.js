@@ -25,11 +25,11 @@ function sumAllCategories(answers) {
 }
 
 
-let maximoCategoria = 35
+const maximoCategoria = 35
 
-let maximoGeneral = 315;
+const maximoGeneral = 315;
 
-let maximoPregunta = 7
+const maximoPregunta = 7
 
 let listTestFinal  =[]
 
@@ -101,3 +101,21 @@ function getAllTests() {
 
 
 
+
+
+function getColor(category) {
+
+  switch (category) {
+
+    case "Liderazgo": return "#0073A7"
+    case "Resultados": return "#7022A8"
+    case "Procesos": return "#0064EF"
+    case "Recursos": return "#053AB8"
+    case "Gobernanza": return "#EB0000"
+    case "Clima": return "#FF981A"
+    case "Estrategia": return "#D3016A"
+    case "Personas": return "#058C00"
+    case "Colaboración": return "#FF661A"
+  }
+
+}

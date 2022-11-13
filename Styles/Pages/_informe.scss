@@ -8,7 +8,7 @@
     padding: 32px;
     border-radius: 16px;
 
-    h2{
+    h2 {
 
         margin-bottom: 48px;
     }
@@ -26,7 +26,7 @@
     overflow: scroll;
 
 
-    .atributos{
+    .atributos {
 
         background-color: white;
         display: flex;
@@ -34,13 +34,13 @@
         flex-direction: column;
         padding: 32px;
 
-        .atributosContainer{
+        .atributosContainer {
 
             display: flex;
             justify-content: space-between;
-           
 
-            p{
+
+            p {
 
                 font-weight: bold;
                 text-align: center;
@@ -56,15 +56,20 @@
 
                 width: 100px;
 
-                img{
+                img {
 
                     width: 80%;
                 }
             }
+
+            .selected {
+
+                width: 15%
+            }
         }
     }
 
-    .generalActions{
+    .generalActions {
 
         background-color: white;
         padding: 32px;
@@ -72,20 +77,21 @@
         flex-direction: column;
         text-align: center;
 
-        .actionsContainer{
+        .actionsContainer {
 
             margin-top: 32px;
             display: flex;
             width: 100%;
         }
-        .action{
+
+        .action {
             display: flex;
             flex-direction: column;
             width: 30%;
             gap: 0.3em;
             padding: 8px;
 
-            p{
+            p {
                 margin-top: 16px;
                 text-align: start;
             }
@@ -97,7 +103,7 @@
         display: flex;
     }
 
-    .containerArrow{
+    .containerArrow {
 
         width: 200px;
     }
@@ -256,40 +262,52 @@
 }
 
 
-.nivelesPuntaje{
+.nivelesPuntaje {
 
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 32px;
     gap: 0.7em;
+    //height: 100%;
+    flex: 1;
 
-    .puntaje{
+    .puntaje {
 
-
+        gap: 1em;
         background-color: #F3F3F3;
-        width: 40%;
+        width: 50%;
+        height: 100%;
 
-        &__title{
+        &__title {
 
-            font-size: 32px;            
+            font-size: 32px;
         }
     }
 }
+
 //100,90,78,60
 
-.explicacionDesempeno{
+.explicacionDesempeno {
 
     background-color: #F3F3F3;
 
 
-    .desemepnoContainer{
+    .desempenoContainer {
 
         display: flex;
         justify-content: space-between;
         margin-top: 32px;
+        width: 100%;
+        align-items: center;
 
-        .info{
+
+        .desempenoValue {
+
+            font-size: 68px;
+        }
+
+        .info {
 
             text-align: start;
             width: 40%;
@@ -298,13 +316,13 @@
             gap: 0.5em;
         }
 
-        .value{
+        .value {
 
             width: 40%;
         }
     }
 
-    .desempenoAcciones{
+    .desempenoAcciones {
 
         margin-top: 24px;
         text-align: left;

@@ -73,22 +73,7 @@ let colorsDepartment = ["#721F5A", "#F73D79", "#761AC1", "#3FA39C", "#4F6946", "
 let currentTest
 // por departamento
 
-function getColor(category) {
 
-  switch (category) {
-
-    case "Liderazgo": return "#0073A7"
-    case "Resultados": return "#7022A8"
-    case "Procesos": return "#0064EF"
-    case "Recursos": return "#053AB8"
-    case "Gobernanza": return "#EB0000"
-    case "Clima": return "#FF981A"
-    case "Estrategia": return "#D3016A"
-    case "Personas": return "#058C00"
-    case "Colaboración": return "#FF661A"
-  }
-
-}
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);

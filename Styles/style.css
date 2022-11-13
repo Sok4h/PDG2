@@ -956,6 +956,9 @@ input[type=radio]:checked + .label-select {
 .performanceBody .atributos .atributosContainer .atributo img {
   width: 80%;
 }
+.performanceBody .atributos .atributosContainer .selected {
+  width: 15%;
+}
 .performanceBody .generalActions {
   background-color: white;
   padding: 32px;
@@ -1107,10 +1110,13 @@ input[type=radio]:checked + .label-select {
   justify-content: space-between;
   margin-top: 32px;
   gap: 0.7em;
+  flex: 1;
 }
 .nivelesPuntaje .puntaje {
+  gap: 1em;
   background-color: #F3F3F3;
-  width: 40%;
+  width: 50%;
+  height: 100%;
 }
 .nivelesPuntaje .puntaje__title {
   font-size: 32px;
@@ -1119,19 +1125,24 @@ input[type=radio]:checked + .label-select {
 .explicacionDesempeno {
   background-color: #F3F3F3;
 }
-.explicacionDesempeno .desemepnoContainer {
+.explicacionDesempeno .desempenoContainer {
   display: flex;
   justify-content: space-between;
   margin-top: 32px;
+  width: 100%;
+  align-items: center;
 }
-.explicacionDesempeno .desemepnoContainer .info {
+.explicacionDesempeno .desempenoContainer .desempenoValue {
+  font-size: 68px;
+}
+.explicacionDesempeno .desempenoContainer .info {
   text-align: start;
   width: 40%;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
 }
-.explicacionDesempeno .desemepnoContainer .value {
+.explicacionDesempeno .desempenoContainer .value {
   width: 40%;
 }
 .explicacionDesempeno .desempenoAcciones {
