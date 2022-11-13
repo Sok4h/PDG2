@@ -27,6 +27,9 @@ const flechasAtributos = atributoContainer.querySelectorAll("path")
 const graphAtributosContainer = document.querySelector(".graphAtributosContainer")
 const cardEquipo = document.querySelector("#cardEquipo")
 const cardJerarquia =document.querySelector("#cardJerarquia")
+const testSelect = document.querySelector("#testList")
+
+console.log(testSelect)
 
 const jerarquias =["Nivel superior","Nivel medio","Nivel operacional"]
 
@@ -92,7 +95,7 @@ const urlParams = new URLSearchParams(queryString);
 
 const testId = urlParams.get('testId')
 console.log(testId)
-
+let testArray =[]
 let docRef
 let answers = []
 
@@ -104,15 +107,16 @@ auth.onAuthStateChanged((user) => {
     //currentUser=user
     console.log(user.uid)
 
-    docRef = db.collection("surveys").where("userId", "==", user.uid).limit(1)
+    docRef = db.collection("surveys").where("userId", "==", user.uid)
 
-    if (testId) {
+    // if (testId) {
 
-      docRef = db.collection("surveys").doc(testId)
+    //   docRef = db.collection("surveys").doc(testId)
 
-    }
+    // }
     docRef.get().then((docSnapshot) => {
 
+      
 
       if (!docSnapshot.empty) {
 
@@ -122,73 +126,67 @@ auth.onAuthStateChanged((user) => {
         //console.log(docSnapshot.data())
 
 
-        if (testId == null) {
+        //if (testId == null) {
 
           docSnapshot.forEach((doc) => {
 
+            var opt = document.createElement('option');
+            let tempTest =  doc.data()
 
-            console.log(doc.data())
-            currentTest = doc.data()
+            console.log(doc.id)
+            tempTest.id = doc.id
+            testArray.push(tempTest)
+            opt.value = doc.data().name
+            opt.textContent = doc.data().name
+            console.log(opt)
+            testSelect.appendChild(opt)
 
+            //currentTest = doc.data()
+          })
 
+          console.log(testList.value)
 
-            db.collection("answers").where("testId", "==", doc.id).get().then(function (querySnapshot) {
+          loadTest(testList.value)
 
-              querySnapshot.forEach((doc) => {
+          testList.addEventListener("change",()=>{
 
-                answers.push(doc.data())
-              })
+            loadTest(testList.value)
 
-            }).then(() => {
-
-              console.log(answers)
-
-              listAnswers = answers
-              loadBarChart(answers)
-              loadBestAttributes(answers)
-              loadRadarChart(answers)
-              loadHighlights(currentTest, answers)
-              //updateRadarChart(cateogorias[0])
-              loadTeams()
-              loadJerarquia()
-
-
-            });
           })
 
 
-        }
+        //}
 
-        else {
+        // else {
 
-          currentTest = docSnapshot.data()
-          db.collection("answers").where("testId", "==", docSnapshot.id).get().then(function (querySnapshot) {
+        //   currentTest = docSnapshot.data()
+        //   db.collection("answers").where("testId", "==", docSnapshot.id).get().then(function (querySnapshot) {
 
-            querySnapshot.forEach((doc) => {
+        //     querySnapshot.forEach((doc) => {
 
-              answers.push(doc.data())
-            })
+        //       answers.push(doc.data())
+        //     })
 
-          }).then(() => {
+        //   }).then(() => {
 
-            console.log(answers)
-            listAnswers = answers
-            atributoContainer.setAttribute("value", 0)
-            updateCardAtributos()
+        //     console.log(answers)
+        //     listAnswers = answers
+        //     atributoContainer.setAttribute("value", 0)
+        //     updateCardAtributos()
 
-            loadBarChart(answers)
-            loadBestAttributes(answers)
-            loadRadarChart(answers)
-            loadHighlights(currentTest, answers)
+        //     loadBarChart(answers)
+        //     loadBestAttributes(answers)
+        //     loadRadarChart(answers)
+        //     loadHighlights(currentTest, answers)
 
-            loadTeams()
-            loadJerarquia()
-            //updateRadarChart(cateogorias[0])
+        //     loadTeams()
+        //     loadJerarquia()
+        //     //updateRadarChart(cateogorias[0])
 
 
-          });
+        //   });
 
-        }
+        // }
 
         //obtiene respuestas
 
@@ -207,6 +205,39 @@ auth.onAuthStateChanged((user) => {
 
   }
 })
+
+function loadTest (nameTest){
+
+  currentTest = testArray.find((e)=>{ return e.name ==nameTest})
+
+  console.log(currentTest)
+  console.log(nameTest)
+  db.collection("answers").where("testId", "==", currentTest.id).get().then(function (querySnapshot) {
+
+    querySnapshot.forEach((doc) => {
+
+      console.log(doc.data())
+      answers.push(doc.data())
+    })
+
+  }).then(() => {
+
+    console.log(answers)
+
+    listAnswers = answers
+    loadBarChart(answers)
+    loadBestAttributes(answers)
+    atributoContainer.setAttribute("value", 0)
+    updateCardAtributos()
+    loadRadarChart(answers)
+    loadHighlights(currentTest, listAnswers)
+    //updateRadarChart(cateogorias[0])
+    loadTeams()
+    loadJerarquia()
+
+
+  });
+}
 
 
 
@@ -1668,6 +1699,7 @@ function sumAllSubCategories(answers) {
 }
 function loadHighlights(test, respuestas) {
 
+  console.log(respuestas)
   let numeroRespuestas = respuestas.length
 
   console.log(respuestas)
