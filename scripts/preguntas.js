@@ -274,7 +274,7 @@ let preguntasFinales = [  {
 }, {
     numeroPregunta : 5,
     categoria: "Resultados",
-    subcategoria: "Fracasos y cierres",
+    subcategoria: "Fracasos \ny cierres",
     pregunta: "Somos conscientes de nuestros fracasos y tenemos protocolos para frenar proyectos que no tienen futuro. Sabemos detener desarrollos innecesarios y promovemos un aprendizaje sobre estos.",
     hintHigh: "Somos conscientes de nuestros fracasos y tenemos protocolos para frenar proyectos que no tienen futuro. Sabemos detener desarrollos innecesarios y promovemos un aprendizaje sobre estos.",
     hintLow: "No sabemos cuándo cerrar proyectos, aunque causen muchos problemas, o tienen demasiados de implementación para ser viables."

@@ -211,7 +211,7 @@ btnGeneral.addEventListener("click", () => {
 
   btnGeneral.classList.add("gone")
   //cardRadarChart.style.display="none"
-  radarChart.config.options.scales.r.max = maximoCategoria
+  //radarChart.config.options.scales.r.max = maximoCategoria
 
   radarChart.config.data.datasets[0].backgroundColor = 'rgb(29, 29, 29,0.5)'
   radarChart.update()
@@ -340,7 +340,7 @@ function loadJerarquia() {
       cardJerarquia.setAttribute("value", test)
       atributoTitle.textContent = jerarquias[test]
 
-      loadChartJerarquia(jerarquias[test])
+      loadChartJerarquia(getJerarquia(jerarquias[test]))
 
     })
 
@@ -348,7 +348,7 @@ function loadJerarquia() {
 
   atributoTitle.textContent = jerarquias[test]
 
-  loadChartJerarquia(jerarquias[test])
+  loadChartJerarquia(getJerarquia(jerarquias[test]))
 
 
 }
@@ -367,7 +367,9 @@ function loadChartDepartment(department) {
 
   let respuestaOrdenada = sumAllCategories(respuestasFilter)
 
-  respuestaOrdenada.map((e) => { e.value = parseInt(e.value / filter.length), e.background = getColor(e.name) })
+  console.log(respuestaOrdenada)
+
+  respuestaOrdenada.map((e) => { e.value = parseInt((e.value / filter.length)*100/maximoCategoria), e.background = getColor(e.name) })
   sortBarChart("0", respuestaOrdenada, vChartEquipoCompleto)
 
   let xd = respuestaOrdenada.sort(function (a, b) {
@@ -412,10 +414,23 @@ function loadChartDepartment(department) {
 }
 
 
+function getJerarquia(jerarquia){
+
+  
+  switch(jerarquia){
+
+    case "Nivel superior": return "highHierarchy"
+    case "Nivel medio": return "midHierarchy"
+    case "Nivel operacional": return "lowHierarchy"
+
+  }
+}
 
 function loadChartJerarquia(jerarquia) {
 
   console.log(cateogorias)
+  console.log(jerarquia)
+
 
 
   let filter = listAnswers.filter((a) => { return a.jerarquia == jerarquia })
@@ -425,7 +440,7 @@ function loadChartJerarquia(jerarquia) {
 
   let respuestaOrdenada = sumAllCategories(respuestasFilter)
 
-  respuestaOrdenada.map((e) => { e.value = parseInt(e.value / filter.length), e.background = getColor(e.name) })
+  respuestaOrdenada.map((e) => { e.value = parseInt((e.value / filter.length)*100/maximoCategoria), e.background = getColor(e.name) })
   sortBarChart("0", respuestaOrdenada, vChartJerarquiaCompleto)
 
   let xd = respuestaOrdenada.sort(function (a, b) {
@@ -435,7 +450,9 @@ function loadChartJerarquia(jerarquia) {
   let slice = xd.slice(0, 4)
   console.log(xd)
 
-  filterChart(filterJerarquia,slice,vChartJerarquia)
+  console.log(xd)
+
+  filterChart(filterJerarquia, slice,vChartJerarquia)
   filterChart(filterJerarquiaC,xd,vChartJerarquiaCompleto)
 
 
@@ -731,6 +748,7 @@ function loadChartAtributos(atributo) {
 
     e.background = getColor(e.categoria)
     e.name = " Pregunta " + e.name
+    e.value = parseInt(e.value*100/maximoPregunta)
 
     return e
   })
@@ -761,7 +779,7 @@ const data = {
 
         console.log(value)
         // return value * 100 / 100 + '%';
-        return value
+        return value +"%"
       },
       color: "black",
       anchor: "end",
@@ -796,7 +814,7 @@ const dataBar = {
 
         console.log(value)
         // return value * 100 / 100 + '%';
-        return value
+        return value +" %"
       },
       color: "black",
       anchor: "end",
@@ -884,8 +902,8 @@ const config = {
     indexAxis: 'y',
     scales: {
       x: {
-
-        display: false,
+        max: 100,
+        display: true,
         drawBorder: false,
       },
       y: {
@@ -953,7 +971,7 @@ const dataVerticalAtributos = {
 
         console.log(value)
         //return parseInt(value * 100 / maximoCategoria) + '%';
-        return value
+        return value + "%"
       },
       color: "white",
       anchor: "center",
@@ -991,7 +1009,7 @@ const dataVerticalEquipos = {
 
         console.log(value)
         //return parseInt(value * 100 / maximoCategoria) + '%';
-        return value
+        return value +"%"
       },
       color: "white",
       anchor: "center",
@@ -1027,7 +1045,7 @@ const dataVerticalEquiposCompleto = {
 
         console.log(value)
         //return parseInt(value * 100 / maximoCategoria) + '%';
-        return value
+        return value +"%"
       },
       color: "white",
       anchor: "center",
@@ -1079,7 +1097,7 @@ const configVerticalAtributoChart = {
         drawBorder: false,
       },
       y: {
-        max: 35,
+        max: 100,
         grid: {
           display: false,
           drawBorder: false
@@ -1120,7 +1138,7 @@ const configVerticalEquipoChart = {
         drawBorder: false,
       },
       y: {
-        max: 35,
+        max: 100,
         grid: {
           display: false,
           drawBorder: false
@@ -1161,7 +1179,7 @@ const configVerticalJerarquiaChart = {
         drawBorder: false,
       },
       y: {
-        max: 35,
+        max: 100,
         grid: {
           display: false,
           drawBorder: false
@@ -1203,7 +1221,7 @@ const configVerticalEquipoChartCompleto = {
         drawBorder: false,
       },
       y: {
-        max: 35,
+        max: 100,
         grid: {
           display: false,
           drawBorder: false
@@ -1244,7 +1262,7 @@ const configVerticalJerarquiaChartCompleto = {
         drawBorder: false,
       },
       y: {
-        max: 35,
+        max: 100,
         grid: {
           display: false,
           drawBorder: false
@@ -1358,11 +1376,11 @@ let dataAtributos = {
 
         console.log(value)
         // return value * 100 / 100 + '%';
-        return value
+        return value +" %"
       },
-      color: "black",
-      anchor: "end",
-      align: "end",
+      color: "white",
+      anchor: "center",
+      align: "center",
       clamp: true,
       font: {
 
@@ -1370,7 +1388,7 @@ let dataAtributos = {
       },
       padding: {
 
-        right: 5
+       // right: 5
       }
 
     }
@@ -1385,6 +1403,8 @@ const configAtributos = {
 
   type: 'bar',
   data: dataAtributos,
+  plugins: [ChartDataLabels],
+
 
   options: {
 
@@ -1404,7 +1424,10 @@ const configAtributos = {
         labels: {
           usePointStyle: true
         }
-      }
+      },
+
+      
+
     },
     parsing: {
 
@@ -1489,12 +1512,13 @@ const configRadar = {
   data: dataRadar,
 
   options: {
-    //pointHitRadius:30,
 
-    //maintainAspectRatio: false,
+    //pointHitRadius:30,
+    responsive:true,
+    maintainAspectRatio: false,
     onHover: ({ x, y }, activeHover, chart) => {
 
-      console.log(chart.scales.r._pointLabelItems)
+      console.log(chart.scales)
       const { canvas } = chart
       let index = getLabelIndex(x, y, chart.scales.r._pointLabelItems)
 
@@ -1525,24 +1549,29 @@ const configRadar = {
       updateRadarChart(selectedLabel)
 
     },
+
+   
     scales: {
 
       //
       r: {
 
         suggestedMin: 0,
-        //suggestedMax: 50,
+        suggestedMax: 100,
         backgroundColor: "#F4F4F4",
 
         pointLabels: {
+          align:"center",
           font: {
-            size: 15,
+            size: 12,
             weight: "bold"
 
           }
         }
-
-      }
+        ,
+       
+    }
+      },
       //   ticks: {
       //     display:false,
       //     max:100, // Set it to your Max value
@@ -1550,10 +1579,31 @@ const configRadar = {
       //     beginAtZero: true,
       //     stepSize: 1, // in case you change the Min
       //  }
-    }
-    ,
 
-  }
+      
+    
+
+  },
+  plugins: [{
+    beforeInit: function(chart) {
+       chart.data.labels.forEach(function(e, i, a) {
+          if (/\n/.test(e)) {
+             a[i] = e.split(/\n/);
+          }
+       });
+    }
+ }],
+
+  // plugins: [{
+  //   beforeInit: function (chart) {
+  //     chart.data.labels.forEach(function (label, index, labelsArr) {
+  //       if (/\n/.test(label)) {
+  //         labelsArr[index] = label.split(/\n/)
+  //       }
+  //     })
+  //   }
+  // }]
+  
 };
 const getLabelIndex = (x, y, pointLabels) => {
 
@@ -1581,8 +1631,30 @@ const getLabelIndex = (x, y, pointLabels) => {
 const radarChart = new Chart(
 
   document.querySelector("#chartRadar"),
-  configRadar
+  configRadar,
 );
+
+
+function clickHandler(click){
+
+
+  const point = radarChart.getElementsAtEventForMode(click,'nearest',{
+
+    intersect:true},true)
+
+    if(point[0]){
+
+
+      const selectedLabel = radarChart.scales.r._pointLabels[point[0].index]
+      console.log(selectedLabel)
+
+      updateRadarChart(selectedLabel)
+    }
+  
+}
+
+
+radarChart.canvas.onclick = clickHandler
 
 
 loadInfoGraphByArea()
@@ -1846,7 +1918,7 @@ function updateRadarChart(category) {
   prueba.forEach((prueba) => { prueba.value = parseInt(prueba.value / answers.length) })
 
   arregloFinal = prueba.filter((a) => a.categoria == category)
-
+  
   console.log(arregloFinal)
 
   let promedioCategoria
@@ -1855,6 +1927,7 @@ function updateRadarChart(category) {
 
     console.log(respuesta.value)
     sumaCategoria += respuesta.value
+    respuesta.name = splitString(respuesta.name,1)
 
   })
 
@@ -1877,20 +1950,24 @@ function updateRadarChart(category) {
   levelCardChart.textContent = getProficiencyName(promedioCategoria)
 
 
-  let names = arregloFinal.map((x) => { return x.categoria })
+  let names = arregloFinal.map((x) => { return x.name })
+  radarChart.config.data.datasets[0].label = category
 
-  radarChart.config.data.labels = names
 
-  radarChart.config.options.scales.r.max = maximoPregunta
+  console.log(names)
+  //radarChart.config.data.labels = names
+
+  //radarChart.config.options.scales.r.max = maximoPregunta
 
   radarChart.config.data.datasets[0].data = arregloFinal
 
   let index = cateogorias.indexOf(category);
 
-  arregloFinal.forEach((e) => { e.background = colorRadar[index] })
+  arregloFinal.forEach((e) => { e.background = colorRadar[index], e.value = parseInt(e.value*100/maximoPregunta) })
 
   //radarChart.config.data.datasets[0].backgroundColor = colorArrows[index]
   radarChart.update()
+  console.log(arregloFinal)
 
   sortBarChart("0", arregloFinal, radarChart)
 
@@ -1900,6 +1977,16 @@ function updateRadarChart(category) {
 //let filterchartAtributosCompletos = document.querySelector("#filterchartAtributosCompletos")
 
 
+const splitString = (text, chunkSize) => {
+  const arr = text.split(" ")
+  const output = []
+
+  for (let i = 0, length = arr.length; i < length; i += chunkSize) {
+      output.push(arr.slice(i, i + chunkSize))
+  }
+
+  return output
+}
 
 function loadRadarChart(answers) {
 
@@ -2011,7 +2098,7 @@ function loadRadarChart(answers) {
 
   merged = cateogorias.map((value, i) => {
 
-    return { "name": value, "value": finalValues[i] }
+    return { "name": value, "value": parseInt(finalValues[i]*100/maximoCategoria) }
   })
 
   console.log(merged)
@@ -2019,6 +2106,8 @@ function loadRadarChart(answers) {
   radarChart.config.data.labels = cateogorias
 
   radarChart.config.data.datasets[0].data = finalValues
+  radarChart.config.data.datasets[0].label = "Puntaje General"
+
   // radarChart.config.data.datasets[0].backgroundColor = color
   radarChart.update()
   //mergedAttribute = merged
@@ -2301,7 +2390,7 @@ function loadBestAttributes(answers) {
 
   merged = cateogorias.map((value, i) => {
 
-    return { "name": value, "value": finalValues[i], background: colorArrows[i] }
+    return { "name": value, "value": parseInt(finalValues[i]*100/maximoCategoria), background: colorArrows[i] }
   })
 
   console.log(merged)
@@ -2492,12 +2581,15 @@ function sortBarChart(order, data, chart) {
     sName.push(dataSort[i].name)
     Scolor.push(dataSort[i].background)
     console.log(Scolor[i])
+    
   }
 
   console.log(dataSort)
   console.log(colorsDepartment)
   console.log(dataSort)
   console.log(Scolor)
+  console.log(sName)
+
 
   //console.log(chart)
 
@@ -2506,4 +2598,6 @@ function sortBarChart(order, data, chart) {
   chart.config.data.datasets[0].backgroundColor = Scolor
   chart.update()
 }
+
+
 
