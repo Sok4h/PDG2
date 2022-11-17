@@ -695,6 +695,17 @@ input[type=radio]:checked + .label-select {
   gap: 1em;
 }
 
+.emptyResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1em;
+  margin: auto;
+}
+
 .sunburstInfo {
   width: 40%;
   gap: 2em;
@@ -920,6 +931,13 @@ input[type=radio]:checked + .label-select {
 .radarChartContainer {
   width: 100%;
   height: 600px;
+}
+
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
 }
 
 .performance {

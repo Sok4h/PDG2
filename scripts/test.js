@@ -10,7 +10,7 @@ const containerSubdepartamentos=document.querySelector("#containerSubdepartament
 let subDepartamentoInput = document.querySelectorAll(".labelAdd")
 
 let emailInput = document.querySelector("#emails")
-
+let inputTestName = document.querySelector("#testName")
 let btnsDeparment = departmentContainer.querySelectorAll(".btn")
 let btnsSubDeparment = containerSubdepartamentos.querySelectorAll(".btn")
 let btnsBottomPyramid = pyramidBottom.querySelectorAll(".btn")
@@ -23,6 +23,8 @@ setupBtnSubDepartment()
 setupBtnPyramidBottom()
 setupBtnPyramidMid()
 setupBtnPyramidTop()
+
+console.log(testForm.testName)
 
 
  testForm.numberEmployers.addEventListener("input",()=>{
@@ -363,6 +365,11 @@ btnFinishTest.addEventListener("click",()=>{
         return
     }
 
+    if(testForm.testName.value== ""){
+
+        alert("ingrese un nombre a la prueba")
+        return
+    }
     let emails = emailInput.value.split(",")
 
 
@@ -373,9 +380,10 @@ btnFinishTest.addEventListener("click",()=>{
         return
     
     }
-    console.log(emails)
+   
     let test = {
         userId: currentUser.uid,
+        testName : testForm.testName.value,
         companyName : testForm.companyName.value,
         companyArea : testForm.companyArea.value,
         companySize : testForm.companySize.value,

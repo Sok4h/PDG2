@@ -119,3 +119,6 @@ function getColor(category) {
   }
 
 }
+
+
+function getDescriptionCategoria(){}

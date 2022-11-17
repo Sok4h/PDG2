@@ -138,6 +138,19 @@
     gap: 1em;
 }
 
+.emptyResults{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    //align-self: center;
+    width: 100%;
+    gap: 1em;
+    margin: auto;
+}
+
 
 .sunburstInfo {
 
@@ -451,4 +464,14 @@
 
     width: 100%;
     height: 600px;
+}
+
+
+.dashboardContainer{
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    //overflow: scroll;
 }
