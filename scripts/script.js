@@ -209,7 +209,12 @@ function loadTest(nameTest) {
     //updateRadarChart(cateogorias[0])
 
     cardEquipo.setAttribute("value", 0)
-    loadTeams()
+
+    setTimeout(() => {
+      console.log("Delayed for 1 second.");
+      loadTeams()
+    }, 1)
+   
     loadJerarquia()
 
 
@@ -240,6 +245,8 @@ cardJerarquia.setAttribute("value", 0)
 //cardEquipo.setAttribute("value", 0)
 
 
+
+
 function loadTeams() {
 
   let arrows = cardEquipo.querySelectorAll("svg")
@@ -249,11 +256,18 @@ function loadTeams() {
   //cardEquipo
   
   
+
   
   let atributoTitle = cardEquipo.querySelector(".atributoTitle")
   let test = parseInt(cardEquipo.getAttribute("value"))
   
   console.log(test)
+
+
+  cardEquipo.addEventListener("load", myScript=>{
+    
+    
+  });
 
   arrows.forEach((btn) => {
 
@@ -301,7 +315,7 @@ function loadTeams() {
  // cardEquipo.setAttribute("value", test)
   // console.log(test)
    atributoTitle.textContent = currentTest.departments[test]
-  // console.log(currentTest.departments[test])
+   console.log(currentTest.departments[test])
   
    loadChartDepartment(currentTest.departments[test])
    cardEquipo.setAttribute("value", test)
@@ -381,6 +395,10 @@ function loadChartDepartment(department) {
 
   console.log(department)
 
+  let value = parseInt(cardEquipo.getAttribute("value"))
+
+  console.log(value)
+
   let filter = listAnswers.filter((a) => { return a.area == department })
 
   console.log(filter)
@@ -405,12 +423,12 @@ function loadChartDepartment(department) {
 
   mergedDepartamentos = slice
   mergedDepartamentos.forEach((e)=> console.log(e.name))
- // console.log()
+   console.log(slice)
   //filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
 
 
   sortBarChart("0", slice, vChartEquipo)
-  //sortBarChart("0", xd, vChartEquipoCompleto)
+  sortBarChart("0", xd, vChartEquipoCompleto)
 
 
   console.log(filterDepartamento)

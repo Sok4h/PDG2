@@ -164,6 +164,6 @@ function getAverage(respuestas) {
   
     promedio = promedio / respuestas.length
   
-    return Math.round(promedio * 100 / maximoGeneral) + "%"
+    return parseInt(promedio * 100 / maximoGeneral) + "%"
 
 }

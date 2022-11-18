@@ -1189,6 +1189,26 @@ input[type=radio]:checked + .label-select {
   font-weight: bold;
 }
 
+.categoryHeader {
+  gap: 1.5em;
+}
+.categoryHeader__btns {
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.chartInformeContainer {
+  height: 100%;
+  width: 60%;
+}
+
+.graficasGenerales {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
 .formTitle {
   text-align: center;
   margin-bottom: 32px;

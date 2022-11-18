@@ -338,3 +338,28 @@
 
     font-weight: bold;
 }
+
+.categoryHeader{
+
+    gap: 1.5em;
+
+    &__btns{
+
+        width: 30%;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+.chartInformeContainer{
+
+    height: 100%;
+    width: 60%;
+}
+
+.graficasGenerales{
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}

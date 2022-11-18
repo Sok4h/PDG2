@@ -1,12 +1,23 @@
+let dataChart;
 const testSelect = document.querySelector("#testList")
 const arrow = document.querySelector(".arrow")
 const valueArrow = document.querySelector("#valueArrow")
 const desempenoValue = document.querySelector(".desempenoValue")
 const desempenoDescription = document.querySelector(".desempenoDescription")
 const desempenoName = document.querySelector(".desempenoName")
-const desempenoValueName =document.querySelector(".desempenoValueName")
+const desempenoValueName = document.querySelector(".desempenoValueName")
 
 const atributosContainer = document.querySelector(".atributosContainer")
+const dashboardContainer = document.querySelector(".dashboardContainer")
+const emptyAnswers = document.querySelector(".emptyResults")
+const emptyDashboard = document.querySelector(".emptyDashboard")
+
+const filterInforme = document.querySelector("#filterInforme")
+const cardCategoriaPregunta = document.querySelector("#cardCategoriaPregunta")
+console.log(filterInforme.value)
+
+let categoria
+
 
 const atributos = atributosContainer.querySelectorAll(".atributo")
 console.log(arrow)
@@ -22,16 +33,20 @@ auth.onAuthStateChanged((user) => {
 
             if (!docSnapshot.empty) {
 
+                //emptyAnswers.style.display="none"
+                emptyDashboard.style.display = "none"
+                dashboardContainer.style.display = "flex"
                 docSnapshot.forEach((doc) => {
 
+                    console.log(doc.data())
                     var opt = document.createElement('option');
                     let tempTest = doc.data()
 
                     console.log(doc.id)
                     tempTest.id = doc.id
                     testArray.push(tempTest)
-                    opt.value = doc.data().name
-                    opt.textContent = doc.data().name
+                    opt.value = doc.data().testName
+                    opt.textContent = doc.data().testName
                     console.log(opt)
                     testSelect.appendChild(opt)
 
@@ -53,7 +68,10 @@ auth.onAuthStateChanged((user) => {
             else {
 
 
+                emptyDashboard.style.display = "flex"
 
+
+                dashboardContainer.style.display = "none"
             }
 
 
@@ -63,9 +81,34 @@ auth.onAuthStateChanged((user) => {
 })
 
 
+let filterGeneral = filterInforme.querySelectorAll(".hidebox")
+
+
+for (let i = 0; i < filterGeneral.length; i++) {
+
+    filterGeneral[i].addEventListener("click", () => {
+
+        console.log(filterGeneral[i].value)
+
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(parentDiv)
+        filterGeneral[i].classList.add("seleccionado")
+        //console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        // sortBarChart(filterGeneral[i].value, mergedAtributos, atributosChart)
+    })
+
+}
+
+
 function loadTest(nameTest) {
 
-    currentTest = testArray.find((e) => { return e.name == nameTest })
+    console.log(nameTest)
+
+    currentTest = testArray.find((e) => { return e.testName == nameTest })
 
     console.log(currentTest)
     console.log(nameTest)
@@ -76,12 +119,19 @@ function loadTest(nameTest) {
 
             // alert("vacio")
 
+            emptyAnswers.style.display = "flex"
+
+            dashboardContainer.style.display = "none"
+
             return
 
         }
 
         //alert("vacio")
         querySnapshot.forEach((doc) => {
+
+            emptyAnswers.style.display = "none"
+            dashboardContainer.style.display = "flex"
 
             console.log(doc.data())
             answers.push(doc.data())
@@ -99,14 +149,14 @@ function loadTest(nameTest) {
     });
 }
 
-atributos.forEach((btn)=>{
+atributos.forEach((btn) => {
 
 
-    btn.addEventListener("click",()=>{
+    btn.addEventListener("click", () => {
 
         let name = btn.querySelector("p")
 
-        atributos.forEach((e)=>{
+        atributos.forEach((e) => {
 
 
             let name = e.querySelector("p")
@@ -115,7 +165,7 @@ atributos.forEach((btn)=>{
 
         })
 
-       
+
         btn.classList.add("selected")
 
         loadInforme()
@@ -129,27 +179,27 @@ function loadInforme() {
     let selected = atributosContainer.querySelector(".selected")
     let title = selected.querySelector("p")
     let name = selected.querySelector("p").textContent
-
+    categoria = name
     title.style.color = getColor(name)
 
     // -5% para que cuadre
 
     console.log(name)
     let respuestas = answers
-    let respuestaCategoria = answers.map((e)=>{ return e.values})
+    let respuestaCategoria = answers.map((e) => { return e.values })
 
     //console.log(respuestaCategoria)
 
     let respuestaSumado = sumAllCategories(respuestaCategoria)
-    
-    respuestaSumado.map((e)=>{
+
+    respuestaSumado.map((e) => {
         e.value = parseInt(e.value / answers.length)
-        
+
         return e
     })
 
     console.log(respuestaSumado)
-    let filtrado = respuestaSumado.find(e=>{ return e.name === name})
+    let filtrado = respuestaSumado.find(e => { return e.name === name })
 
     console.log(filtrado)
     let promedio = 0
@@ -164,24 +214,22 @@ function loadInforme() {
 
     //let value = Math.round(promedio * 100 / maximoCategoria)
 
-    valueArrow.textContent = Math.round(promedio * 100 / maximoGeneral) + "%"
+    valueArrow.textContent = parseInt(promedio * 100 / maximoGeneral) + "%"
 
-    arrow.style.top = 100 - Math.round(promedio * 100 / maximoGeneral) - 5 + "%"
+    arrow.style.top = 100 - parseInt(promedio * 100 / maximoGeneral) - 5 + "%"
 
-    desempenoValue.textContent = parseInt(filtrado.value *100 /maximoCategoria) + "%"
+    desempenoValue.textContent = parseInt(filtrado.value * 100 / maximoCategoria) + "%"
 
     getInfoPuntaje(name)
 
-    desempenoName.textContent = getInfoName(parseInt(filtrado.value *100 /maximoCategoria))
+    desempenoName.textContent = getInfoName(parseInt(filtrado.value * 100 / maximoCategoria))
 
     desempenoValueName.style.color = getColor(name)
 
-    desempenoDescription.textContent = getInfoDescription(parseInt(filtrado.value *100 /maximoCategoria))
-    
+    desempenoDescription.textContent = getInfoDescription(parseInt(filtrado.value * 100 / maximoCategoria))
 
+    loadCharts("general")
 }
-
-
 
 
 
@@ -208,9 +256,9 @@ function getInfoPuntaje(categoria) {
             baja.textContent = "La compañía no tiene un plan que le permita a los trabajadores observar que tan efectivos son sus esfuerzos por innovar, ya que no tienen una meta establecida o un modelo que seguir."
 
             break
-            
+
         }
-        
+
         case "Gobernanza": {
 
             alta.textContent = "La compañía permite y evitar obstaculizar a los trabajadores que quieran intentar nuevas ideas y siempre está disponible a cambiar según lo que se requiera, probar, además dan métricas con las cuales los trabajadores pueden observar la viabilidad de sus ideas."
@@ -297,36 +345,474 @@ function getInfoPuntaje(categoria) {
 }
 
 
-function getInfoName(value){
+function getInfoName(value) {
 
 
 
     let proficiencyName = ""
 
 
-  if (value <= 60) proficiencyName = "Principiante"
-  if (value > 60 && value <= 78) proficiencyName = "Competente"
-  if (value > 78 && value <= 90) proficiencyName = "Proficiente"
-  if (value > 90) proficiencyName = "Experto"
+    if (value <= 60) proficiencyName = "Principiante"
+    if (value > 60 && value <= 78) proficiencyName = "Competente"
+    if (value > 78 && value <= 90) proficiencyName = "Proficiente"
+    if (value > 90) proficiencyName = "Experto"
 
-  return proficiencyName
+    return proficiencyName
 }
 
 
 
 
 
-function getInfoDescription(value){
+function getInfoDescription(value) {
 
 
 
     let proficiencyName = ""
 
 
-  if (value <= 60) proficiencyName = "Tus resultados muestran que estas iniciando el proceso de mejora, pero todavía tienes un largo camino por delante."
-  if (value > 60 && value <= 78) proficiencyName = "Tus resultados muestran que tu compañía está en el proceso y todavía hay cambios que lograr pero que con dedicación y esfuerzo lo lograran."
-  if (value > 78 && value <= 90) proficiencyName = "Tus resultados muestran que están en una situación favorable pero que todavía quedan unos pequeños detalles por mejorar."
-  if (value > 90) proficiencyName = "Tus resultados muestran el ejemplo de excelencia y cambio que es tu compañía, recuerda seguir así."
+    if (value <= 60) proficiencyName = "Tus resultados muestran que estas iniciando el proceso de mejora, pero todavía tienes un largo camino por delante."
+    if (value > 60 && value <= 78) proficiencyName = "Tus resultados muestran que tu compañía está en el proceso y todavía hay cambios que lograr pero que con dedicación y esfuerzo lo lograran."
+    if (value > 78 && value <= 90) proficiencyName = "Tus resultados muestran que están en una situación favorable pero que todavía quedan unos pequeños detalles por mejorar."
+    if (value > 90) proficiencyName = "Tus resultados muestran el ejemplo de excelencia y cambio que es tu compañía, recuerda seguir así."
 
-  return proficiencyName
+    return proficiencyName
 }
+
+
+
+
+
+
+function loadCharts(nivel) {
+
+    console.log(categoria)
+
+    let titulos =document.querySelectorAll(".titleChart")
+
+    titulos.forEach((e)=>{
+
+        e.textContent = categoria
+        e.style.color = getColor(categoria)
+
+    })
+    if (nivel === "general") {
+
+        loadChartPregunta()
+
+        loadChartEquipo()
+        loadChartJerarquia()
+
+    }
+
+    else {
+
+
+
+    }
+
+
+}
+
+
+function loadChartPregunta() {
+
+
+
+    let title = cardCategoriaPregunta.querySelector(".titleChart")
+    title.textContent = categoria
+    title.style.color = getColor(categoria)
+    let filter = answers.map((a) => { return a.respuestas })
+
+    console.log(filter)
+    //let prueba = sumAllSubCategories(filter)
+
+    //console.log(prueba)
+
+    let filtrado = filter.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.categoria == categoria
+        })
+        return filtradoFinal
+
+    }
+
+    )
+
+    console.log(filtrado)
+
+    let sumados = sumAllQuestions(filtrado)
+    console.log(sumAllQuestions(filtrado))
+
+    let respuestasDivididas = sumados.map((e) => {
+
+        e.value = e.value / answers.length
+
+        return e
+    })
+
+    console.log(respuestasDivididas)
+
+    let names = respuestasDivididas.map((e) => {
+
+        return "Pregunta " + e.numeroPregunta
+    })
+
+    let merged = respuestasDivididas.map((e) => {
+
+        e.background = getColor(e.categoria)
+        e.name = " Pregunta " + e.name
+        e.value = parseInt(e.value * 100 / maximoPregunta)
+
+        return e
+    })
+
+    console.log(merged)
+
+    mergedAtributos = merged
+    //atributosChart.config.data.labels = names
+
+
+    sortBarChart("0", merged, vChartAtributosPregunta)
+}
+
+
+function loadChartEquipo() {
+
+
+
+    const names = answers.map((a) => {
+        return a.area
+    })
+
+    const finalNames = [...new Set(names)];
+    //let filter = listAnswers.filter((a) => { return a.area == department })
+    console.log(finalNames)
+
+
+
+    const getAllValuesByDataType = filterResponseByTag(finalNames, "values", answers,"area");
+
+    console.log(getAllValuesByDataType);
+
+    const getAllValuesByParameter = filterResponseByParameter(categoria, "values", getAllValuesByDataType);
+    console.log(getAllValuesByParameter)
+
+
+    getAllValuesByParameter.map((e) => {
+        e.value = parseInt(e.value * 100 / maximoCategoria, e.background = randomRGB())
+        return e
+    })
+
+    console.log(getAllValuesByParameter)
+
+
+    sortBarChart("0", getAllValuesByParameter, vChartAtributosEquipo)
+
+    //   let respuestasFilter = answers.map((respuesta) => { return respuesta.values })
+    //   console.log(respuestasFilter)
+    //   let respuestaOrdenada = sumAllCategories(respuestasFilter)
+
+    //   console.log(respuestaOrdenada)
+
+    //   respuestaOrdenada.map((e) => { e.value = parseInt((e.value / filter.length)*100/maximoCategoria), e.background = getColor(e.name)
+    //   return e})
+    //   console.log(respuestaOrdenada)
+}
+
+
+
+function loadChartJerarquia() {
+
+
+    console.log(answers)
+    const names = answers.map((a) => {
+        return a.jerarquia
+    })
+
+    const finalNames = [...new Set(names)];
+    //let filter = listAnswers.filter((a) => { return a.area == department })
+    console.log(finalNames)
+
+    
+    
+    const getAllValuesByDataType = filterResponseByTag(finalNames, "values", answers,"jerarquia");
+
+    console.log(getAllValuesByDataType);
+
+    const getAllValuesByParameter = filterResponseByParameter(categoria, "values", getAllValuesByDataType);
+    console.log(getAllValuesByParameter)
+
+
+    getAllValuesByParameter.map((e) => {
+        e.value = parseInt(e.value * 100 / maximoCategoria, e.background = randomRGB())
+        return e
+    })
+
+    console.log(getAllValuesByParameter)
+
+
+    sortBarChart("0", getAllValuesByParameter, vChartAtributosEquipo)
+
+    //   let respuestasFilter = answers.map((respuesta) => { return respuesta.values })
+    //   console.log(respuestasFilter)
+    //   let respuestaOrdenada = sumAllCategories(respuestasFilter)
+
+    //   console.log(respuestaOrdenada)
+
+    //   respuestaOrdenada.map((e) => { e.value = parseInt((e.value / filter.length)*100/maximoCategoria), e.background = getColor(e.name)
+    //   return e})
+    //   console.log(respuestaOrdenada)
+}
+
+
+const labels = [
+
+];
+
+const dataVerticalAtributos = {
+    labels: labels,
+    datasets: [{
+        //label: 'atributos por departamento',
+
+        //borderColor: 'rgb(255, 99, 132)',
+        data: dataChart,
+        borderRadius: 6,
+        datalabels: {
+            formatter: function (value, context) {
+
+                console.log(value)
+                //return parseInt(value * 100 / maximoCategoria) + '%';
+                return value + "%"
+            },
+            color: "white",
+            anchor: "center",
+            align: "center",
+            clamp: true,
+            font: {
+
+                weight: "bold"
+            },
+            padding: {
+
+                top: 20
+            }
+
+        }
+    }
+
+
+    ]
+};
+
+const dataVerticalAtributosEquipo = {
+    labels: labels,
+    datasets: [{
+        //label: 'atributos por departamento',
+
+        //borderColor: 'rgb(255, 99, 132)',
+        data: dataChart,
+        borderRadius: 6,
+        datalabels: {
+            formatter: function (value, context) {
+
+                console.log(value)
+                //return parseInt(value * 100 / maximoCategoria) + '%';
+                return value + "%"
+            },
+            color: "white",
+            anchor: "center",
+            align: "center",
+            clamp: true,
+            font: {
+
+                weight: "bold"
+            },
+            padding: {
+
+                top: 20
+            }
+
+        }
+    }
+
+
+    ]
+};
+
+const configVerticalAtributoChart = {
+    type: 'bar',
+    data: dataVerticalAtributos,
+
+    plugins: [ChartDataLabels],
+    options: {
+
+        layout: {
+            padding: {
+
+                top: 30
+            }
+        }
+        ,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        parsing: {
+
+            xAxisKey: 'name'
+        },
+        indexAxis: 'x',
+        scales: {
+            x: {
+
+                display: true,
+                drawBorder: false,
+            },
+            y: {
+                max: 100,
+                grid: {
+                    display: false,
+                    drawBorder: false
+                }
+            }
+        }
+    }
+};
+
+const configVerticalAtributoEquipoChart = {
+    type: 'bar',
+    data: dataVerticalAtributosEquipo,
+
+    plugins: [ChartDataLabels],
+    options: {
+
+        layout: {
+            padding: {
+
+                top: 30
+            }
+        }
+        ,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        parsing: {
+
+            xAxisKey: 'name'
+        },
+        indexAxis: 'x',
+        scales: {
+            x: {
+
+                display: true,
+                drawBorder: false,
+            },
+            y: {
+                max: 100,
+                grid: {
+                    display: false,
+                    drawBorder: false
+                }
+            }
+        }
+    }
+};
+
+const vChartAtributosPregunta = new Chart(
+    document.getElementById('vChartCategoriaPregunta'),
+    configVerticalAtributoChart)
+
+
+
+const vChartAtributosEquipo = new Chart(
+    document.getElementById('vChartCategoriaEquipo'),
+    configVerticalAtributoEquipoChart)
+
+
+
+function sortBarChart(order, data, chart) {
+
+    console.log(chart)
+    let dataSort = []
+
+    console.log(data)
+
+    let sValue = []
+    let sName = []
+    let Scolor = []
+
+    //console.log(color)
+    switch (order) {
+
+
+        case "0": {
+
+            dataSort = data.sort(function (a, b) {
+
+                console.log(a)
+                return b.value - a.value
+            })
+
+            break;
+
+        }
+
+        case "1": {
+
+            dataSort = data.sort(function (a, b) {
+
+                console.log(a)
+                return a.value - b.value
+            })
+            break;
+
+
+        }
+
+
+        case "2": {
+
+            dataSort = data.sort(function (a, b) {
+
+                console.log(a)
+                return a.name.localeCompare(b.name)
+            })
+            break;
+
+
+        }
+    }
+
+    for (let i = 0; i < dataSort.length; i++) {
+
+        sValue.push(dataSort[i].value)
+        sName.push(dataSort[i].name)
+        Scolor.push(dataSort[i].background)
+        console.log(Scolor[i])
+
+    }
+
+    console.log(dataSort)
+    console.log(dataSort)
+    console.log(Scolor)
+    console.log(sName)
+
+
+    //console.log(chart)
+
+    chart.config.data.datasets[0].data = sValue
+    chart.config.data.labels = sName
+    chart.config.data.datasets[0].backgroundColor = Scolor
+    chart.update()
+}
+
+
+
+
+

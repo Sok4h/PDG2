@@ -8,6 +8,9 @@
     <title>Informe</title>
     <link rel="stylesheet" href="./Styles/style.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
 </head>
 
 <body class="dashboard">
@@ -88,270 +91,465 @@
             </select>
 
         </div>
-        <div class="performance">
 
-            <h2>Explicación desempeño</h2>
+        <div class="dashboardContainer">
+            <div class="performance">
+
+                <h2>Explicación desempeño</h2>
 
 
-            <div class="levelPerformanceContainer">
-                <div class="containerArrow">
-                    <div class="arrow">
-                        <div class="arrowInfo">
-                            <p>Tus resultados</p>
-                            <p id="valueArrow">60%</p>
+                <div class="levelPerformanceContainer">
+                    <div class="containerArrow">
+                        <div class="arrow">
+                            <div class="arrowInfo">
+                                <p>Tus resultados</p>
+                                <p id="valueArrow">60%</p>
+
+                            </div>
+                            <div class="arrowTriangle"></div>
+                        </div>
+                    </div>
+                    <div class="bar">
+
+                        <div class="ninety"></div>
+                        <div class="seventyeight"></div>
+                        <div class="sixty"></div>
+
+                    </div>
+                    <div class="levelPerformance">
+
+                        <div class="container">
+
+                            <p>100%</p>
+                            <p>Experto</p>
 
                         </div>
-                        <div class="arrowTriangle"></div>
+                        <div class="container">
+
+                            <p>90%</p>
+                            <p>Proficiente</p>
+                        </div>
+                        <div class="container">
+
+                            <p>78%</p>
+                            <p>Competente</p>
+
+                        </div>
+                        <div class="container">
+
+                            <p>60%</p>
+                            <p>Principiante</p>
+                        </div>
+
+                    </div>
+
+                    <div class="levelDetails">
+
+                        <div class="container">
+
+                            <p>Tus resultados muestran el ejemplo de excelencia y cambio que es tu compañía, recuerda
+                                seguir
+                                así.</p>
+
+                        </div>
+                        <div class="container">
+
+                            <p>Tus resultados muestran que están en una situación favorable pero que todavía quedan unos
+                                pequeños detalles por mejorar.</p>
+                        </div>
+                        <div class="container">
+
+                            <p>Tus resultados muestran que tu compañía está en el proceso y todavía hay cambios que
+                                lograr
+                                pero que con dedicación y esfuerzo lo lograran.</p>
+                        </div>
+                        <div class="container">
+
+                            <p>Tus resultados muestran que estas iniciando el proceso de mejora, pero todavía tienes un
+                                largo camino por delante.</p>
+                        </div>
+
                     </div>
                 </div>
-                <div class="bar">
+            </div>
 
-                    <div class="ninety"></div>
-                    <div class="seventyeight"></div>
-                    <div class="sixty"></div>
+            <div class="generalActions">
 
-                </div>
-                <div class="levelPerformance">
+                <h2>Acciones generales para mejorar</h2>
 
-                    <div class="container">
+                <div class="actionsContainer">
+                    <div class="action">
 
-                        <p>100%</p>
-                        <p>Experto</p>
+                        <h3>Comunicar</h3>
 
-                    </div>
-                    <div class="container">
-
-                        <p>90%</p>
-                        <p>Proficiente</p>
-                    </div>
-                    <div class="container">
-
-                        <p>78%</p>
-                        <p>Competente</p>
-
-                    </div>
-                    <div class="container">
-
-                        <p>60%</p>
-                        <p>Principiante</p>
+                        <p>Asegúrate de que todos los miembros del equipo entiendan la importancia de sus acciones y que
+                            acciones pueden tomar, dales la confianza de hablar sin miedo.</p>
                     </div>
 
-                </div>
+                    <div class="action">
 
-                <div class="levelDetails">
+                        <h3>Dirigir</h3>
 
-                    <div class="container">
-
-                        <p>Tus resultados muestran el ejemplo de excelencia y cambio que es tu compañía, recuerda seguir
-                            así.</p>
-
+                        <p>Ayuda al equipo a tomar decisiones ágiles y no ser cerrados, pon una dirección a la cual ir y
+                            pide opiniones para saber que piensa el equipo y saber que sienten puede mejorar en el
+                            futuro.
+                        </p>
                     </div>
-                    <div class="container">
 
-                        <p>Tus resultados muestran que están en una situación favorable pero que todavía quedan unos
-                            pequeños detalles por mejorar.</p>
+                    <div class="action">
+
+                        <h3>Planear</h3>
+
+                        <p>Crea planees de acción para los diferentes proyectos, dale algo a el equipo con lo que puedan
+                            iniciar y permíteles ser flexibles con el plan, la idea es tener una guía, no abrumar.</p>
                     </div>
-                    <div class="container">
 
-                        <p>Tus resultados muestran que tu compañía está en el proceso y todavía hay cambios que lograr
-                            pero que con dedicación y esfuerzo lo lograran.</p>
-                    </div>
-                    <div class="container">
+                    <div class="action">
 
-                        <p>Tus resultados muestran que estas iniciando el proceso de mejora, pero todavía tienes un
-                            largo camino por delante.</p>
+                        <h3>Actuar</h3>
+
+                        <p>No tengas miedo de tomar decisiones, permitirle a la compañía y a los miembros del equipo
+                            probar
+                            diferentes opciones y contribuir a su manera.</p>
                     </div>
 
                 </div>
             </div>
+
+            <div class="separador">
+
+                <h3>Atributos</h3>
+            </div>
+            <div class="atributos">
+
+                <div class="atributosContainer">
+
+                    <div class="atributo Clima selected">
+
+                        <img src="Iconos/Iconos/clima.png" alt="">
+                        <p>Clima</p>
+                    </div>
+
+                    <div class="atributo Resultados">
+
+                        <img src="Iconos/Iconos/resultados.png" alt="">
+                        <p>Resultados</p>
+                    </div>
+
+                    <div class="atributo Procesos">
+
+                        <img src="Iconos/Iconos/procesos.png" alt="">
+                        <p>Procesos</p>
+                    </div>
+
+                    <div class="atributo Recursos">
+
+                        <img src="Iconos/Iconos/recursos.png" alt="">
+                        <p>Recursos</p>
+                    </div>
+
+
+                    <div class="atributo Liderazgo">
+
+                        <img src="Iconos/Iconos/liderazgo.png" alt="">
+                        <p>Liderazgo</p>
+                    </div>
+
+
+                    <div class="atributo Gobernanza">
+
+                        <img src="Iconos/Iconos/gobernanza.png" alt="">
+                        <p>Gobernanza</p>
+                    </div>
+
+
+                    <div class="atributo Estrategia">
+
+                        <img src="Iconos/Iconos/estrategia.png" alt="">
+                        <p>Estrategia</p>
+                    </div>
+
+
+                    <div class="atributo Personas">
+
+                        <img src="Iconos/Iconos/personas.png" alt="">
+                        <p>Personas</p>
+                    </div>
+
+
+                    <div class="atributo Colaboración">
+
+                        <img src="Iconos/Iconos/colaboracion.png" alt="">
+                        <p>Colaboración</p>
+                    </div>
+
+
+
+                </div>
+
+                <div class="nivelesPuntaje">
+
+                    <div class="puntaje card">
+
+                        <h3 class="puntaje__title"> &lt;75 </h3>
+
+                        <p class="puntaje__name">Bajo puntaje</p>
+
+                        <p class="puntaje__description" id="descripcionBaja"> Nuestros jefes no nos exigen o incitan a
+                            actuar, están contentos
+                            con solo hacer el trabajo requerido para el funcionamiento de la organización.</p>
+
+                    </div>
+
+
+
+                    <div class="puntaje card">
+
+                        <h3 class="puntaje__title"> &gt;75 </h3>
+
+                        <p class="puntaje__name">Alto puntaje</p>
+
+                        <p class="puntaje__description" id="descripcionAlta"> Nuestros jefes no nos exigen o incitan a
+                            actuar, están contentos
+                            con solo hacer el trabajo requerido para el funcionamiento de la organización.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="explicacionDesempeno card">
+
+                    <h2>Explicacion de desempeño</h2>
+
+                    <div class="desempenoContainer">
+
+                        <div class="info">
+
+                            <h4 class="desempenoName">Competente</h4>
+                            <p class="desempenoDescription">Tus resultados muestran que tu compañía todavía tiene un
+                                largo
+                                viaje por delante, pero que esto no desmotive ya que se darán los pasos necesarios para
+                                mejorar.</p>
+                        </div>
+
+
+
+                        <div class="value">
+
+                            <h1 class="desempenoValue">60%</h1>
+                            <p class="desempenoValueName">Tu puntaje</p>
+                        </div>
+                    </div>
+
+                    <div class="desempenoAcciones">
+                        <h4>Acciones que dañan tu desempeño</h4>
+
+                        <ul>
+
+                            <li>Falta de apoyo organizacional, promueve que todas las personas en la organización
+                                colaboren
+                                con
+                                el proceso y entiendan que ellos son importantes para lograrlo.</li>
+
+                            <li>Falta de plan, la compañía no tiene un proceso en mente de cómo lograr innovar, sin el
+                                plan
+                                los trabajadores no entenderán opciones tienen para actuar y colaborar.</li>
+
+                            <li>Falta de incentivos, los trabajadores no ven la necesidad de participar en el proceso
+                                porque
+                                sienten que no trae beneficios o cambios en la compañía, asegúrate de hacerlos sentir
+                                que el
+                                cambio es posible y será bueno.</li>
+
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <section class="categoryHeader card">
+
+                <h3 class="categoryTitle">Liderazgo</h3>
+
+                <h4>Resultados</h4>
+
+                <form class="categoryHeader__btns" id="filterInforme">
+
+                    <input type="radio" checked="true" name="sortLine" id="highLine" class="hidebox" value="general">
+                    <label for="highLine" class=" label-select">
+
+                        <div class="display-box">
+
+                            Generales
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="lowLine" class="hidebox" value="especifico">
+                    <label for="lowLine" class=" label-select">
+
+                        <div class="display-box">
+
+                            Especificos
+                        </div>
+                    </label>
+                </form>
+
+            </section>
+
+            <div class="graficasGenerales">
+
+
+                <div class="card chart" id="cardCategoriaPregunta">
+                    <h3 class="titleChart">Atributos</h3>
+                    <h3 class="descriptionChart">Puntaje promedio de las preguntas</h3>
+
+
+                    <p class="complexChart__sortBy">Ordenar segun:</p>
+
+                    <form class="btnFilterContainer chartGrande" id="filterChartDeparmentCompleto">
+
+                        <input type="radio" checked="true" name="sortLine" id="highDeparmentC" class="hidebox"
+                            value="0">
+                        <label for="highDeparmentC" class=" label-select">
+
+                            <div class="display-box">
+
+                                Mayor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="lowDeparmentC" class="hidebox" value="1">
+                        <label for="lowDeparmentC" class=" label-select">
+
+                            <div class="display-box">
+
+                                Menor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="aDeparmentC" class="hidebox" value="2">
+                        <label for="aDeparmentC" class="label-select">
+
+                            <div class="display-box">
+
+                                Alfabeticamente
+                            </div>
+                        </label>
+
+
+                    </form>
+                    <div class="chartInformeContainer">
+                        <canvas id="vChartCategoriaPregunta"></canvas>
+                    </div>
+                </div>
+
+                <div class="card chart" id="cardCategoriaEquipos">
+                    <h3 class="titleChart">Atributos</h3>
+                    <h3 class="descriptionChart">Puntaje promedio según equipos</h3>
+
+
+                    <p class="complexChart__sortBy">Ordenar segun:</p>
+
+                    <form class="btnFilterContainer chartGrande" id="filterChartDeparmentCompleto">
+
+                        <input type="radio" checked="true" name="sortLine" id="highDeparmentC" class="hidebox"
+                            value="0">
+                        <label for="highDeparmentC" class=" label-select">
+
+                            <div class="display-box">
+
+                                Mayor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="lowDeparmentC" class="hidebox" value="1">
+                        <label for="lowDeparmentC" class=" label-select">
+
+                            <div class="display-box">
+
+                                Menor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="aDeparmentC" class="hidebox" value="2">
+                        <label for="aDeparmentC" class="label-select">
+
+                            <div class="display-box">
+
+                                Alfabeticamente
+                            </div>
+                        </label>
+
+
+                    </form>
+                    <div class="chartInformeContainer">
+                        <canvas id="vChartCategoriaEquipo"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="card chart" id="cardCategoriaJerarquia">
+                    <h3 class="titleChart">Atributos</h3>
+                    <h3 class="descriptionChart">Puntaje promedio según jerarquia </h3>
+
+
+                    <p class="complexChart__sortBy">Ordenar segun:</p>
+
+                    <form class="btnFilterContainer chartGrande" id="filterChartDeparmentCompleto">
+
+                        <input type="radio" checked="true" name="sortLine" id="highDeparmentC" class="hidebox"
+                            value="0">
+                        <label for="highDeparmentC" class=" label-select">
+
+                            <div class="display-box">
+
+                                Mayor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="lowDeparmentC" class="hidebox" value="1">
+                        <label for="lowDeparmentC" class=" label-select">
+
+                            <div class="display-box">
+
+                                Menor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="aDeparmentC" class="hidebox" value="2">
+                        <label for="aDeparmentC" class="label-select">
+
+                            <div class="display-box">
+
+                                Alfabeticamente
+                            </div>
+                        </label>
+
+
+                    </form>
+                    <div class="chartInformeContainer">
+                        <canvas id="vChartCategoriaJerarquia"></canvas>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="generalActions">
+        <div class="emptyResults">
+            <h3>No hay ninguna respuesta para la prueba seleccionada</h3>
+            <img src="Iconos/Iconos/caritatriste.png" alt="">
+            <p>Podrás visualizar los datos cuando al menos una persona complete la prueba</p>
 
-            <h2>Acciones generales para mejorar</h2>
-
-            <div class="actionsContainer">
-                <div class="action">
-
-                    <h3>Comunicar</h3>
-
-                    <p>Asegúrate de que todos los miembros del equipo entiendan la importancia de sus acciones y que
-                        acciones pueden tomar, dales la confianza de hablar sin miedo.</p>
-                </div>
-
-                <div class="action">
-
-                    <h3>Dirigir</h3>
-
-                    <p>Ayuda al equipo a tomar decisiones ágiles y no ser cerrados, pon una dirección a la cual ir y
-                        pide opiniones para saber que piensa el equipo y saber que sienten puede mejorar en el futuro.
-                    </p>
-                </div>
-
-                <div class="action">
-
-                    <h3>Planear</h3>
-
-                    <p>Crea planees de acción para los diferentes proyectos, dale algo a el equipo con lo que puedan
-                        iniciar y permíteles ser flexibles con el plan, la idea es tener una guía, no abrumar.</p>
-                </div>
-
-                <div class="action">
-
-                    <h3>Actuar</h3>
-
-                    <p>No tengas miedo de tomar decisiones, permitirle a la compañía y a los miembros del equipo probar
-                        diferentes opciones y contribuir a su manera.</p>
-                </div>
-
-            </div>
         </div>
 
-        <div class="separador">
-
-            <h3>Atributos</h3>
-        </div>
-        <div class="atributos">
-
-            <div class="atributosContainer">
-
-                <div class="atributo Clima selected">
-
-                    <img src="Iconos/Iconos/clima.png" alt="">
-                    <p>Clima</p>
-                </div>
-
-                <div class="atributo Resultados">
-
-                    <img src="Iconos/Iconos/resultados.png" alt="">
-                    <p>Resultados</p>
-                </div>
-
-                <div class="atributo Procesos">
-
-                    <img src="Iconos/Iconos/procesos.png" alt="">
-                    <p>Procesos</p>
-                </div>
-
-                <div class="atributo Recursos">
-
-                    <img src="Iconos/Iconos/recursos.png" alt="">
-                    <p>Recursos</p>
-                </div>
-
-
-                <div class="atributo Liderazgo">
-
-                    <img src="Iconos/Iconos/liderazgo.png" alt="">
-                    <p>Liderazgo</p>
-                </div>
-
-
-                <div class="atributo Gobernanza">
-
-                    <img src="Iconos/Iconos/gobernanza.png" alt="">
-                    <p>Gobernanza</p>
-                </div>
-
-
-                <div class="atributo Estrategia">
-
-                    <img src="Iconos/Iconos/estrategia.png" alt="">
-                    <p>Estrategia</p>
-                </div>
-
-
-                <div class="atributo Personas">
-
-                    <img src="Iconos/Iconos/personas.png" alt="">
-                    <p>Personas</p>
-                </div>
-
-
-                <div class="atributo Colaboración">
-
-                    <img src="Iconos/Iconos/colaboracion.png" alt="">
-                    <p>Colaboración</p>
-                </div>
-
-
-
-            </div>
-
-            <div class="nivelesPuntaje">
-
-                <div class="puntaje card">
-
-                    <h3 class="puntaje__title"> &lt;75 </h3>
-
-                    <p class="puntaje__name">Bajo puntaje</p>
-
-                    <p class="puntaje__description" id="descripcionBaja"> Nuestros jefes no nos exigen o incitan a actuar, están contentos
-                        con solo hacer el trabajo requerido para el funcionamiento de la organización.</p>
-
-                </div>
-
-
-
-                <div class="puntaje card">
-
-                    <h3 class="puntaje__title"> &gt;75 </h3>
-
-                    <p class="puntaje__name">Alto puntaje</p>
-
-                    <p class="puntaje__description" id="descripcionAlta"> Nuestros jefes no nos exigen o incitan a actuar, están contentos
-                        con solo hacer el trabajo requerido para el funcionamiento de la organización.</p>
-
-                </div>
-
-            </div>
-
-            <div class="explicacionDesempeno card">
-
-                <h2>Explicacion de desempeño</h2>
-
-                <div class="desempenoContainer">
-
-                    <div class="info">
-
-                        <h4 class="desempenoName">Competente</h4>
-                        <p class="desempenoDescription">Tus resultados muestran que tu compañía todavía tiene un largo
-                            viaje por delante, pero que esto no desmotive ya que se darán los pasos necesarios para
-                            mejorar.</p>
-                    </div>
-
-
-
-                    <div class="value">
-
-                        <h1 class="desempenoValue">60%</h1>
-                        <p class="desempenoValueName">Tu puntaje</p>
-                    </div>
-                </div>
-
-                <div class="desempenoAcciones">
-                    <h4>Acciones que dañan tu desempeño</h4>
-
-                    <ul>
-
-                        <li>Falta de apoyo organizacional, promueve que todas las personas en la organización colaboren
-                            con
-                            el proceso y entiendan que ellos son importantes para lograrlo.</li>
-
-                        <li>Falta de plan, la compañía no tiene un proceso en mente de cómo lograr innovar, sin el plan
-                            los trabajadores no entenderán opciones tienen para actuar y colaborar.</li>
-
-                        <li>Falta de incentivos, los trabajadores no ven la necesidad de participar en el proceso porque
-                            sienten que no trae beneficios o cambios en la compañía, asegúrate de hacerlos sentir que el
-                            cambio es posible y será bueno.</li>
-
-                    </ul>
-
-                </div>
-            </div>
-
-        </div>
     </main>
+
+    <div class="emptyDashboard">
+        <h2>No hay ninguna prueba</h2>
+        <img src="Iconos/Iconos/emptyDashboard.png" alt="">
+        <a href="test.html"><button class="btn">Crear prueba</button></a>
+    </div>
 
 </body>
 
