@@ -31,7 +31,7 @@ const maximoGeneral = 315;
 
 const maximoPregunta = 7
 
-let listTestFinal  =[]
+let listTestFinal = []
 
 
 
@@ -42,61 +42,61 @@ function getAllTests() {
 
 
     if (user) {
-  
+
       //currentUser=user
       alert("entró")
       console.log(user.uid)
-  
+
       docRef = db.collection("surveys").where("userId", "==", user.uid)
-  
+
       // if (testId) {
-  
+
       //   docRef = db.collection("surveys").doc(testId)
-  
+
       // }
       docRef.get().then((docSnapshot) => {
-  
-        
-  
+
+
+
         if (!docSnapshot.empty) {
-  
-         
-  
+
+
+
           //console.log(docSnapshot.data())
-  
-  
+
+
           //if (testId == null) {
-  
-            docSnapshot.forEach((doc) => {
-  
-              let tempTest =  doc.data()
-  
-              console.log(doc.id)
-              tempTest.id = doc.id
-              listTestFinal.push(tempTest)
-  
-              //currentTest = doc.data()
-            })
-  
+
+          docSnapshot.forEach((doc) => {
+
+            let tempTest = doc.data()
+
+            console.log(doc.id)
+            tempTest.id = doc.id
+            listTestFinal.push(tempTest)
+
+            //currentTest = doc.data()
+          })
+
 
         }
         else {
-  
-          
-  
+
+
+
         }
-  
-  
-      }).then(()=>{
+
+
+      }).then(() => {
 
 
         return listTestFinal
       })
-  
+
     }
   })
 
-  
+
 }
 
 
@@ -133,16 +133,36 @@ function sumAllQuestionsF(answers) {
 
   const basket = answers.reduce((basket, fruit) => {
 
+
     for (const [number, respuesta] of Object.entries(fruit)) {
+
+
+      //let found = basket.find((x) => x.name === fruit[number].respuesta);
+      //console.log(found)
       console.log(number)
       console.log(respuesta)
+      console.log(fruit)
+      console.log(fruit[number])
+      console.log(basket[number])
 
-      if (!basket[respuesta.numeroPregunta]) {
-        basket[number] = { categoria: respuesta.categoria, value: 1, name: respuesta.respuesta, subcategoria: respuesta.subcategoria };
+
+      let existe = respuesta.respuesta == fruit.respuesta
+      console.log(existe)
+
+      console.log(!respuesta.respuesta == fruit[number].respuesta)
+
+      if (!existe) {
+
+        if (!basket[number]) {
+
+          basket[number] = { categoria: respuesta.categoria, value: 1, name: respuesta.respuesta, subcategoria: respuesta.subcategoria };
+        }
+
+
       }
 
+      basket[number].value += 1
 
-      basket[number].value +=1
       //console.log( basket[number].)
 
     }
@@ -176,7 +196,7 @@ function getColor(category) {
 }
 
 
-function getDescriptionCategoria(){}
+function getDescriptionCategoria() { }
 
 
 
@@ -264,14 +284,15 @@ const randomRGB = () => `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
 //console.log(randomRGB());
 
 
-function getJerarquiaName(jerarquia){
+function getJerarquiaName(jerarquia) {
 
-  
-  switch(jerarquia){
 
-    case  "highHierarchy" : return  "Nivel superior"
-    case  "midHierarchy" : return "Nivel medio"
-    case  "lowHierarchy" : return  "Nivel operacional"
+  switch (jerarquia) {
+
+    case "highHierarchy": return "Nivel administrativo"
+    case "midHierarchy": return "Nivel estratégico"
+    case "lowHierarchy": return "Nivel conocimiento"
+    case "lowestHierarchy": return "Nivel operacional"
 
   }
 }

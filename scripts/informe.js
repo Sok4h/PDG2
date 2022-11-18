@@ -179,8 +179,20 @@ function loadAllChart() {
     let filtrado = filter.map((e) => {
 
         let filtradoFinal = e.filter((x) => {
+            
+            return x.categoria == "Estrategia" 
+        })
+        return filtradoFinal
 
-            return x.categoria == "Estrategia" && x.numeroPregunta==1
+    })
+
+    console.log(filtrado)
+
+    let filtradoNumeroPregunta = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+            
+            return x.numeroPregunta === 1
         })
         return filtradoFinal
 
@@ -188,9 +200,9 @@ function loadAllChart() {
 
     finalNames = ["1", "2", "3", "4", "5", "6", "7"]
 
-    console.log(filtrado)
+    console.log(filtradoNumeroPregunta)
 
-    let sumado = sumAllQuestionsF(filtrado)
+    let sumado = sumAllQuestionsF(filtradoNumeroPregunta)
 
 
     // sumado.map((e)=>{ e.value = e.value/filtrado.length
@@ -672,10 +684,10 @@ function loadChartJerarquia() {
 
 
     getAllValuesByParameter.map((e) => {
-        e.value = parseInt(e.value * 100 / maximoCategoria, e.background = randomRGB())
+        e.value = parseInt(e.value * 100 / maximoCategoria, e.background = getColor(categoria))
         return e
     })
-
+    
     datoJerarquia = getAllValuesByParameter
 
 

@@ -251,8 +251,6 @@ button {
 
 .survey {
   display: flex;
-  background-color: gainsboro;
-  border-color: gainsboro;
   padding: 48px;
   row-gap: 3.5em;
   width: 70%;
@@ -389,6 +387,7 @@ input[type=radio]:checked + .label-select {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.5em;
 }
 
 .seleccionado {

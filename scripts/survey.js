@@ -1,6 +1,6 @@
 const openModalHigh = document.querySelector("#btnInfoHigh")
 const openModalLow = document.querySelector("#btnInfoLow")
-const survey = document.querySelector(".survey")
+//const survey = document.querySelector(".survey")
 const dialog = document.querySelector(".dialogSurvey")
 const closeDialog = document.querySelector(".btnCloseModal")
 const dialogTitle = dialog.querySelector(".dialogInfo")
@@ -20,11 +20,19 @@ const proficiencyContainer = document.querySelector(".proficiencyContainer")
 
 const companyPosition = document.querySelector("#companyPosition")
 const position = document.querySelector(".position")
+let formularios = document.querySelectorAll(".options")
 
-
+let btnBasicInfo = document.querySelector("#btnBasicInfo")
+console.log(btnBasicInfo)
+btnBasicInfo.style.display = "none"
 let currentQuestion = 0
 let preguntas = []
 
+console.log(btnNextQuestion)
+let multiplicador = 5
+let counter = 1
+
+let survey = document.querySelectorAll(".survey")
 
 
 //cargar info
@@ -82,6 +90,7 @@ function verifyTest(id) {
 
         companyJerarchy.addEventListener("change", () => {
 
+
             position.style.display = "flex"
             let value = companyJerarchy.value
 
@@ -90,8 +99,21 @@ function verifyTest(id) {
                 return
             }
 
+            if (value === "lowestHierarchy") {
 
-            loadPositions(test[value])
+                position.style.display = "none"
+                btnBasicInfo.style.display = "block"
+
+            }
+
+            else {
+
+                loadPositions(test[value])
+
+
+
+
+            }
 
 
 
@@ -135,6 +157,9 @@ function verifyTest(id) {
 
 function loadPositions(positions) {
 
+    btnBasicInfo.style.display = "block"
+
+
     positions.forEach((position) => {
 
         var opt = document.createElement('option');
@@ -146,6 +171,8 @@ function loadPositions(positions) {
 
 }
 
+
+console.log(preguntasFinales[5])
 function startSurvey() {
 
     console.log(test)
@@ -159,18 +186,49 @@ function startSurvey() {
     function setupQuestions(currentQuestion) {
 
 
-        tippy('#btnInfoLow', {
+        console.log(currentQuestion)
+        console.log(counter*multiplicador)
+        let multiplicado = counter*multiplicador
 
-            content: preguntasFinales[currentQuestion].hintLow
+        for(let i = 0; i < 5; i++) {
+           
+            if(currentQuestion!=0){
+
+                formularios[i].querySelector('input[name=optionSurvey]:checked').checked = false;
+            }
+           let preguntaaa = preguntasFinales[currentQuestion+i]
+           console.log(preguntaaa)
+
+            
+
+                //console.log(j)
+                tippy(survey[i].querySelector('.btnInfoLow'), {
+
+                    content: preguntasFinales[currentQuestion+i].hintLow
     
-        })
+                })
     
+                tippy(survey[i].querySelector('.btnInfoHigh'), {
     
-        tippy('#btnInfoHigh', {
+                    content: preguntasFinales[currentQuestion+i].hintHigh
     
-            content: preguntasFinales[currentQuestion].hintHigh
-    
-        })
+                })
+                let surveyTitle = survey[i].querySelector(".survey__title")
+                surveyTitle.textContent = preguntasFinales[currentQuestion+i].pregunta
+
+            
+            
+
+        }
+
+        // tippy('#btnInfoLow', {
+
+        //     content: preguntasFinales[currentQuestion].hintLow
+
+        // })
+
+
+
 
         const progress = document.querySelector(".progressDone")
 
@@ -178,37 +236,70 @@ function startSurvey() {
 
         console.log(progress.style.width)
 
-        if (currentQuestion == preguntasFinales.length - 1) {
+        if (currentQuestion == preguntasFinales.length - 5) {
 
             btnNextQuestion.textContent = "Finalizar"
         }
 
-        btnNextQuestion.classList.remove("btn--surveyActive")
-        btnNextQuestion.classList.add("btn--survey")
+        // btnNextQuestion.classList.remove("btn--surveyActive")
+        // btnNextQuestion.classList.add("btn--survey")
 
-        options.forEach((option) => {
+        // options.forEach((option) => {
 
-            option.checked = false
-        })
+        //     option.checked = false
+        // })
 
-        console.log(preguntasFinales[currentQuestion])
-        surveyTitle.textContent = preguntasFinales[currentQuestion].pregunta
+        // console.log(preguntasFinales[currentQuestion])
+        // surveyTitle.textContent = preguntasFinales[currentQuestion].pregunta
 
     }
 
 
 
 
-    form.addEventListener('change', function () {
 
-        let checked = form.querySelector('input[name=optionSurvey]:checked');
-        if (checked) {
+    
+    function checkInputs() {
 
-            btnNextQuestion.classList.remove("btn--survey")
-            btnNextQuestion.classList.add("btn--surveyActive")
+        let seleccionado = true
+        
 
-        }
-    });
+        formularios.forEach((form) => {
+
+            console.log(form.optionSurvey.value)
+                let checked = form.querySelector('input[name=optionSurvey]:checked');
+
+                console.log(checked)
+                if (checked) {
+                    //alert("seleccionado")
+                    //seleccionado = true
+                    btnNextQuestion.classList.remove("btn--survey")
+                    btnNextQuestion.classList.add("btn--surveyActive")
+                   
+                } else {
+                       
+                    console.log("sin llenar")
+                    seleccionado = false
+                    return  seleccionado
+                }
+            
+
+        })
+
+        return seleccionado
+    }
+
+
+    // form.addEventListener('change', function () {
+
+    //     let checked = form.querySelector('input[name=optionSurvey]:checked');
+    //     if (checked) {
+
+    //         btnNextQuestion.classList.remove("btn--survey")
+    //         btnNextQuestion.classList.add("btn--surveyActive")
+
+    //     }
+    // });
 
 
 
@@ -246,17 +337,39 @@ function startSurvey() {
 
     btnNextQuestion.addEventListener("click", () => {
 
-        if (!btnNextQuestion.classList.contains("btn--surveyActive")) return
+        console.log(checkInputs())
+        if(!checkInputs()){ 
+
+            alert("complete todas las preguntas")
+
+            return
+        }
+
+        //alert("noooo")
+       // if (!btnNextQuestion.classList.contains("btn--surveyActive")) return
         let value = checkRadio()
-        let tempRespuesta = preguntasFinales[currentQuestion]
-        tempRespuesta.respuesta = value
-        preguntasFinales[currentQuestion] = tempRespuesta
-        console.log(preguntasFinales[currentQuestion])
+
+        for(let i = 0;i<5;i++){
+
+            let tempRespuesta = preguntasFinales[i+currentQuestion]
+            tempRespuesta.respuesta = formularios[i].optionSurvey.value
+
+            console.log(tempRespuesta)
+            preguntasFinales[i+currentQuestion] = tempRespuesta
+
+            console.log(preguntasFinales[i])
+
+        }
+
+        // let tempRespuesta = preguntasFinales[currentQuestion]
+        // tempRespuesta.respuesta = value
+        // preguntasFinales[currentQuestion] = tempRespuesta
+        // console.log(preguntasFinales[currentQuestion])
 
 
-        if (currentQuestion == preguntasFinales.length - 1) {
+        if (currentQuestion == preguntasFinales.length - 5) {
 
-            let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0, Colaboracion = 0, Procesos = 0, Recursos = 0,Resultados=0
+            let Estrategia = 0, Gobernanza = 0, Clima = 0, Personas = 0, Liderazgo = 0, Colaboracion = 0, Procesos = 0, Recursos = 0, Resultados = 0
 
 
             for (let i = 0; i < preguntasFinales.length; i++) {
@@ -318,7 +431,7 @@ function startSurvey() {
                         break;
 
 
-                        
+
                     case "Recursos":
 
                         Recursos += parseInt(preguntasFinales[i].respuesta)
@@ -328,7 +441,7 @@ function startSurvey() {
                         break;
 
 
-                             
+
                     case "Resultados":
 
                         Resultados += parseInt(preguntasFinales[i].respuesta)
@@ -364,7 +477,7 @@ function startSurvey() {
             let tempValue9 = { name: "Resultados", value: Resultados }
 
 
-            let total = Estrategia + Gobernanza + Clima +Colaboracion +Personas +Liderazgo +Procesos +Recursos +Resultados
+            let total = Estrategia + Gobernanza + Clima + Colaboracion + Personas + Liderazgo + Procesos + Recursos + Resultados
             values.push(tempValue1)
             values.push(tempValue2)
             values.push(tempValue3)
@@ -386,7 +499,7 @@ function startSurvey() {
             respuesta.respuestas = preguntasFinales
 
 
-
+            console.log(respuesta)
             db.collection("answers").add(respuesta).then(() => {
 
                 dialogTitle.textContent = "prueba completada exitosamente,gracias por participar"
@@ -401,7 +514,13 @@ function startSurvey() {
         }
         else {
 
-            currentQuestion++
+            currentQuestion+=5
+            counter++
+            
+
+            console.log("counter" + counter)
+            console.log("current question" + currentQuestion)
+
             setupQuestions(currentQuestion)
         }
 
