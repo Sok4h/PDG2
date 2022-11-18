@@ -125,13 +125,18 @@ function verifyTest(id) {
         btnEmail.addEventListener("click", () => {
 
             let idValido = false
+            // console.log(typeof (emailTest.value))
+            // let existe = test.emails.find((e)=>{e.id== emailTest.value})
 
+            // console.log(existe)
             test.emails.forEach((email) => {
 
-                if (emailTest.value == email) {
+                console.log(email)
+                if (emailTest.value == email.id) {
 
+                    //alert("alv")
                     idValido = true
-
+                    return
                 }
 
             })
@@ -522,6 +527,8 @@ function startSurvey() {
             console.log("current question" + currentQuestion)
 
             setupQuestions(currentQuestion)
+
+            surveyContainer.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
         }
 
     })

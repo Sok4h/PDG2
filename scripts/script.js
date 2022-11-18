@@ -696,6 +696,10 @@ function updateCardAtributos() {
 
   let atributoValue = atributoContainer.querySelector(".atributoValue")
 
+  let atributoProficiency = atributoContainer.querySelector(".atributoProficiency")
+
+
+
   console.log(atributoTitle)
   img.src = rutasImagenes[test]
 
@@ -741,6 +745,7 @@ console.log(respuestasFilter)
   let percentage = filter[0].value
   atributoValue.textContent = parseInt((percentage * 100) / maximoCategoria) + "%"
 
+  atributoProficiency.textContent=getProficiencyName(parseInt((percentage * 100) / maximoCategoria))
   loadChartAtributos(cateogorias[test])
 }
 
@@ -811,6 +816,32 @@ function loadChartAtributos(atributo) {
   sortBarChart("0", merged, atributosChart)
 }
 
+
+const canvasBackgroundColor={
+
+  id:'canvasBackgroundColor',
+  beforeDraw(chart,args,pluginOptions){
+
+    const {ctx,chartArea:{top,bottom,left,right,width},scales:{x,y} } = chart
+
+
+    bgColors(0,60,"#E6E6E6")
+    bgColors(60,75,"#D9D9D9")
+    bgColors(75,90,"#D1D1D1")
+    bgColors(90,100,"#CACACA")
+
+
+
+
+    function bgColors(bracketLow,bracketHigh,color){
+      ctx.fillStyle =color;
+
+      ctx.fillRect(left,y.getPixelForValue(bracketHigh),width,y.getPixelForValue(bracketLow)-y.getPixelForValue(bracketHigh))
+    }
+    
+
+  }
+}
 const labels = [
 
 ];
@@ -1004,6 +1035,7 @@ const configdepartmentChart = {
       }
     }
   }
+  
 };
 
 
@@ -1153,7 +1185,7 @@ const configVerticalAtributoChart = {
         }
       }
     }
-  }
+  }//,plugins:[canvasBackgroundColor]
 };
 
 
@@ -1448,6 +1480,7 @@ let dataAtributos = {
 }
 
 
+
 const configAtributos = {
 
   type: 'bar',
@@ -1500,7 +1533,9 @@ const configAtributos = {
         }
       }
     }
-  }
+  },
+
+  //plugins:[canvasBackgroundColor]
 
 }
 const atributosChart = new Chart(

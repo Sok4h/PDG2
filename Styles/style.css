@@ -349,7 +349,7 @@ button {
   display: flex;
   width: 64px;
   height: 64px;
-  border: none;
+  border: 1px solid #1D1D1D;
   text-align: center;
   border-radius: 16px;
   background-color: white;
@@ -374,7 +374,7 @@ button {
 }
 
 input[type=radio]:checked + .label-radio {
-  background-color: #021E66;
+  background-color: #1D1D1D;
   color: white;
 }
 
@@ -667,6 +667,7 @@ input[type=radio]:checked + .label-select {
 .proficiency__resume {
   width: 50%;
   gap: 20px;
+  height: 100%;
 }
 .proficiency__resume__titles, .proficiency__resume__content {
   width: 100%;
@@ -916,6 +917,7 @@ input[type=radio]:checked + .label-select {
   border: none;
   font-size: 16px;
   font-weight: bold;
+  width: fit-content;
 }
 .testLoad select option {
   width: -webkit-min-content;

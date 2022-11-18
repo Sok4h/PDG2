@@ -687,7 +687,7 @@ function loadChartJerarquia() {
         e.value = parseInt(e.value * 100 / maximoCategoria, e.background = getColor(categoria))
         return e
     })
-    
+
     datoJerarquia = getAllValuesByParameter
 
 

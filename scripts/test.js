@@ -25,6 +25,32 @@ setupBtnPyramidBottom()
 setupBtnPyramidMid()
 setupBtnPyramidTop()
 
+
+let upload = document.querySelector("#upload")
+let xd
+let usersArray =[]
+upload.addEventListener("change",()=>{
+
+
+    readXlsxFile(upload.files[0]).then((data)=>{
+
+        console.log(data)
+        xd= data.map((row)=>{
+
+            console.log(row)
+            
+            
+           return   {email : row[0],id:row[1] }
+        })
+        console.log(data)
+    }).then(()=>{
+
+
+        usersArray =xd.slice(1)
+    })
+    
+})
+
 console.log(testForm.testName)
 
 
@@ -372,9 +398,9 @@ btnFinishTest.addEventListener("click", () => {
 
     console.log(departments)
 
-    if (emailInput.value == "") {
+    if (usersArray.length == 0) {
 
-        alert("coloque los correos")
+        alert("Por favor suba su base de datos")
 
         return
     }
@@ -384,7 +410,7 @@ btnFinishTest.addEventListener("click", () => {
         alert("ingrese un nombre a la prueba")
         return
     }
-    let emails = emailInput.value.split(",")
+    //let emails = emailInput.value.split(",")
 
 
     if (departments.length === 0 || subDepartments.length == 0 || highHierarchy.length == 0 || midHierarchy.length == 0 || lowHierarchy.length == 0) {
@@ -407,7 +433,7 @@ btnFinishTest.addEventListener("click", () => {
         highHierarchy: highHierarchy,
         midHierarchy: midHierarchy,
         lowHierarchy: lowHierarchy,
-        emails: emails
+        emails: usersArray
     }
     console.log(test)
 
