@@ -52,7 +52,7 @@ const jerarquias = ["Nivel superior", "Nivel medio", "Nivel operacional"]
 
 //cardRadarChart.style.display="none"
 
-
+Chart.defaults.font.weight = 'bold';
 console.log(completedCard)
 
 let listAnswers
@@ -373,10 +373,10 @@ function loadJerarquia() {
 
 
       cardJerarquia.setAttribute("value", test)
-      atributoTitle.textContent = getJerarquia(jerarquias[test])
+      atributoTitle.textContent = jerarquias[test]
 
       console.log(jerarquias[test])
-      loadChartJerarquia(getJerarquia(jerarquias[test]))
+      loadChartJerarquia(jerarquias[test])
 
     })
 
@@ -384,7 +384,7 @@ function loadJerarquia() {
 
   atributoTitle.textContent = jerarquias[test]
 
-  loadChartJerarquia(getJerarquia(jerarquias[test]))
+  loadChartJerarquia(jerarquias[test])
 
 
 }
@@ -424,7 +424,7 @@ function loadChartDepartment(department) {
   mergedDepartamentos = slice
   mergedDepartamentos.forEach((e)=> console.log(e.name))
    console.log(slice)
-  //filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
+  filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
 
 
   sortBarChart("0", slice, vChartEquipo)
@@ -433,7 +433,7 @@ function loadChartDepartment(department) {
 
   console.log(filterDepartamento)
   
-  // filterChart(filterDepartamentoC,xd,vChartEquipoCompleto)
+   filterChart(filterDepartamentoC,xd,vChartEquipoCompleto)
 
 
   //console.log()
@@ -530,8 +530,8 @@ function loadChartJerarquia(jerarquia) {
   let titleEquipo = document.querySelector("#titleJerarquia")
   let titleEquipoCompleto = document.querySelector("#titleJerarquiaCompleto")
 
-  titleEquipo.textContent = getJerarquiaName(jerarquia)
-  titleEquipoCompleto.textContent = getJerarquiaName(jerarquia)
+  titleEquipo.textContent = jerarquia
+  titleEquipoCompleto.textContent = jerarquia
 
 
   //Obtener descripción equipo
@@ -540,17 +540,7 @@ function loadChartJerarquia(jerarquia) {
 
 }
 
-function getJerarquiaName(jerarquia){
 
-  
-  switch(jerarquia){
-
-    case  "highHierarchy" : return  "Nivel superior"
-    case  "midHierarchy" : return "Nivel medio"
-    case  "lowHierarchy" : return  "Nivel operacional"
-
-  }
-}
 
 
 
@@ -1802,7 +1792,7 @@ function loadHighlights(test, respuestas) {
 
   promedio = promedio / 9
 
-  cardAverageValue.textContent = promedio + "%"
+  cardAverageValue.textContent = parseInt(promedio) + "%"
 
  
 
@@ -1834,7 +1824,7 @@ function loadHighlights(test, respuestas) {
   const proficiencyDescription = proficiencyAverage.querySelector(".descriptionProfiency")
 
   console.log(proficiencyDescription)
-  let proficiency = promedio
+  let proficiency = parseInt(promedio)
   proficiencyValue.textContent = proficiency + "%"
 
   const proficiencyGrade = proficiencyAverage.querySelector(".infoDescription")

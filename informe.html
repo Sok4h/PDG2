@@ -374,7 +374,7 @@
 
                 <h4>Resultados</h4>
 
-                <form class="categoryHeader__btns" id="filterInforme">
+                <form class="categoryHeader__btns" id="filterInforme">  
 
                     <input type="radio" checked="true" name="sortLine" id="highLine" class="hidebox" value="general">
                     <label for="highLine" class=" label-select">
@@ -395,9 +395,67 @@
                     </label>
                 </form>
 
+
+                <form class="categoryHeader__btns" id="filterEspecifico">  
+
+                    <input type="radio" checked="true" name="sortLine" id="todas" class="hidebox" value="todas">
+                    <label for="todas" class=" label-select">
+
+                        <div class="display-box">
+
+                            Todas
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="1" class="hidebox" value="1">
+                    <label for="1" class=" label-select">
+
+                        <div class="display-box">
+
+                            1
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="2" class="hidebox" value="2">
+                    <label for="2" class=" label-select">
+
+                        <div class="display-box">
+
+                            2
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="3" class="hidebox" value="3">
+                    <label for="3" class=" label-select">
+
+                        <div class="display-box">
+
+                            3
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="4" class="hidebox" value="4">
+                    <label for="4" class=" label-select">
+
+                        <div class="display-box">
+
+                            4
+                        </div>
+                    </label>
+
+                    <input type="radio" name="sortLine" id="5" class="hidebox" value="5">
+                    <label for="5" class=" label-select">
+
+                        <div class="display-box">
+
+                            5
+                        </div>
+                    </label>
+                </form>
+
             </section>
 
-            <div class="graficasGenerales">
+            <div class="graficasContainer" id="graficasGenerales">
 
 
                 <div class="card chart" id="cardCategoriaPregunta">
@@ -407,7 +465,7 @@
 
                     <p class="complexChart__sortBy">Ordenar segun:</p>
 
-                    <form class="btnFilterContainer chartGrande" id="filterChartDeparmentCompleto">
+                    <form class="btnFilterContainer chartGrande" id="filterChartPregunta">
 
                         <input type="radio" checked="true" name="sortLine" id="highDeparmentC" class="hidebox"
                             value="0">
@@ -453,9 +511,9 @@
 
                     <form class="btnFilterContainer chartGrande" id="filterChartDeparmentCompleto">
 
-                        <input type="radio" checked="true" name="sortLine" id="highDeparmentC" class="hidebox"
+                        <input type="radio" checked="true" name="sortLine" id="highDeparment" class="hidebox"
                             value="0">
-                        <label for="highDeparmentC" class=" label-select">
+                        <label for="highDeparment" class=" label-select">
 
                             <div class="display-box">
 
@@ -463,8 +521,8 @@
                             </div>
                         </label>
 
-                        <input type="radio" name="sortLine" id="lowDeparmentC" class="hidebox" value="1">
-                        <label for="lowDeparmentC" class=" label-select">
+                        <input type="radio" name="sortLine" id="lowDeparment" class="hidebox" value="1">
+                        <label for="lowDeparment" class=" label-select">
 
                             <div class="display-box">
 
@@ -472,8 +530,8 @@
                             </div>
                         </label>
 
-                        <input type="radio" name="sortLine" id="aDeparmentC" class="hidebox" value="2">
-                        <label for="aDeparmentC" class="label-select">
+                        <input type="radio" name="sortLine" id="aDeparment" class="hidebox" value="2">
+                        <label for="aDeparment" class="label-select">
 
                             <div class="display-box">
 
@@ -496,11 +554,11 @@
 
                     <p class="complexChart__sortBy">Ordenar segun:</p>
 
-                    <form class="btnFilterContainer chartGrande" id="filterChartDeparmentCompleto">
+                    <form class="btnFilterContainer chartGrande" id="filterChartJerarquia">
 
-                        <input type="radio" checked="true" name="sortLine" id="highDeparmentC" class="hidebox"
+                        <input type="radio" checked="true" name="sortLine" id="highJerarquia" class="hidebox"
                             value="0">
-                        <label for="highDeparmentC" class=" label-select">
+                        <label for="highJerarquia" class=" label-select">
 
                             <div class="display-box">
 
@@ -508,8 +566,8 @@
                             </div>
                         </label>
 
-                        <input type="radio" name="sortLine" id="lowDeparmentC" class="hidebox" value="1">
-                        <label for="lowDeparmentC" class=" label-select">
+                        <input type="radio" name="sortLine" id="lowJerarquia" class="hidebox" value="1">
+                        <label for="lowJerarquia" class=" label-select">
 
                             <div class="display-box">
 
@@ -517,8 +575,8 @@
                             </div>
                         </label>
 
-                        <input type="radio" name="sortLine" id="aDeparmentC" class="hidebox" value="2">
-                        <label for="aDeparmentC" class="label-select">
+                        <input type="radio" name="sortLine" id="aJerarquia" class="hidebox" value="2">
+                        <label for="aJerarquia" class="label-select">
 
                             <div class="display-box">
 
@@ -532,6 +590,58 @@
                         <canvas id="vChartCategoriaJerarquia"></canvas>
                     </div>
                 </div>
+            </div>
+
+
+
+            <div class="graficasContainer" id="graficasEspecificas">
+
+
+
+                <div class="card chart" id="cardCategoriaJerarquia">
+                    <h3 class="titleChart">Atributos</h3>
+                    <h3 class="descriptionChart">Puntaje promedio según jerarquia </h3>
+
+
+                    <p class="complexChart__sortBy">Ordenar segun:</p>
+
+                    <form class="btnFilterContainer chartGrande" id="filterChartJerarquia">
+
+                        <input type="radio" checked="true" name="sortLine" id="highJerarquia" class="hidebox"
+                            value="0">
+                        <label for="highJerarquia" class=" label-select">
+
+                            <div class="display-box">
+
+                                Mayor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="lowJerarquia" class="hidebox" value="1">
+                        <label for="lowJerarquia" class=" label-select">
+
+                            <div class="display-box">
+
+                                Menor Valor
+                            </div>
+                        </label>
+
+                        <input type="radio" name="sortLine" id="aJerarquia" class="hidebox" value="2">
+                        <label for="aJerarquia" class="label-select">
+
+                            <div class="display-box">
+
+                                Alfabeticamente
+                            </div>
+                        </label>
+
+
+                    </form>
+                    <div class="chartInformeContainer">
+                        <canvas id="vChartPregunta1"></canvas>
+                    </div>
+                </div>
+
             </div>
 
         </div>

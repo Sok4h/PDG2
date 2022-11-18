@@ -235,7 +235,7 @@ function startSurvey() {
             respuesta.numberYears = parseInt(numberYears.value)
             respuesta.area = companyAreas.value
             respuesta.position = companyPosition.value
-            respuesta.jerarquia = companyJerarchy.value
+            respuesta.jerarquia = getJerarquiaName(companyJerarchy.value)
             surveyBasicInfo.style.display = "none"
             surveyContainer.style.display = "flex"
 

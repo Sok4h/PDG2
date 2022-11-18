@@ -13,14 +13,34 @@ const emptyAnswers = document.querySelector(".emptyResults")
 const emptyDashboard = document.querySelector(".emptyDashboard")
 
 const filterInforme = document.querySelector("#filterInforme")
+const filterInformeEspecifico = document.querySelector("#filterEspecifico")
 const cardCategoriaPregunta = document.querySelector("#cardCategoriaPregunta")
+
+const graficasGenerales = document.querySelector("#graficasGenerales")
+const graficasEspecificas = document.querySelector("#graficasEspecificas")
+
+let datoPregunta, datoEquipo, datoJerarquia
+
+let filterChartPregunta = document.querySelector("#filterChartPregunta")
+
+let filterChartEquipo = document.querySelector("#filterChartDeparmentCompleto")
+
+let filterChartJerarquia = document.querySelector("#filterChartJerarquia")
+
 console.log(filterInforme.value)
 
 let categoria
 
+let currentTest
 
 const atributos = atributosContainer.querySelectorAll(".atributo")
 console.log(arrow)
+
+emptyAnswers.style.display = "none"
+emptyDashboard.style.display = "none"
+
+
+filterInformeEspecifico.style.display = "none"
 
 let testArray = []
 let answers = []
@@ -54,13 +74,15 @@ auth.onAuthStateChanged((user) => {
                 })
 
                 console.log(testList.value)
-
+                currentTest= testList.value
                 loadTest(testList.value)
 
                 testList.addEventListener("change", () => {
 
                     //alert("xd")
+                    currentTest= testList.value
                     loadTest(testList.value)
+
 
                 })
 
@@ -96,13 +118,110 @@ for (let i = 0; i < filterGeneral.length; i++) {
         //console.log(parentDiv)
         filterGeneral[i].classList.add("seleccionado")
         //console.log(mergedAtributosCompletos)
-
+        loadCharts(filterGeneral[i].value)
         //console.log(dataVerticalAtributos.datasets[0])
         // sortBarChart(filterGeneral[i].value, mergedAtributos, atributosChart)
     })
 
 }
 
+
+let filterEspecifico = filterInformeEspecifico.querySelectorAll(".hidebox")
+
+
+for (let i = 0; i < filterEspecifico.length; i++) {
+
+    filterEspecifico[i].addEventListener("click", () => {
+
+        //alert(filterEspecifico[i].value)
+
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(parentDiv)
+        // filterEspecifico[i].classList.add("seleccionado")
+        //console.log(mergedAtributosCompletos)
+        loadChartsEspecificas(filterEspecifico[i].value)
+        //console.log(dataVerticalAtributos.datasets[0])
+        // sortBarChart(filterGeneral[i].value, mergedAtributos, atributosChart)
+    })
+
+}
+
+
+function loadChartsEspecificas(value) {
+    // alert("hola")
+
+    if (value == "todas") {
+
+        loadAllChart()
+
+    }
+
+
+
+
+}
+
+function loadAllChart() {
+
+
+    let filter = answers.map((a) => { return a.respuestas })
+    console.log(filter)
+
+    console.log(categoria)
+
+    //let filtradoCategoria = filter.filter((e)=>{ return e.categoria=="Clima"}) 
+
+
+
+
+    let filtrado = filter.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.categoria == "Estrategia" && x.numeroPregunta==1
+        })
+        return filtradoFinal
+
+    })
+
+    finalNames = ["1", "2", "3", "4", "5", "6", "7"]
+
+    console.log(filtrado)
+
+    let sumado = sumAllQuestionsF(filtrado)
+
+
+    // sumado.map((e)=>{ e.value = e.value/filtrado.length
+
+    // return e
+    // })
+
+    console.log(sumado)
+    //const getAllValuesByDataType = filterResponseByTag(finalNames, "respuestas", filtrado,"name");
+
+    //console.log(getAllValuesByDataType);
+
+    //const getAllValuesByParameter = filterResponseByParameter(finalNames, "values", sumado);
+    //console.log(getAllValuesByParameter)
+
+    
+    sumado.map((e,index)=>{
+
+        e.background = getColor("Estrategia")
+        return e
+    })
+
+    console.log(sumado)
+    sortBarChart("0",sumado,vChartPregunta1)
+
+    vChartPregunta1.options.scales.y.max= parseInt(currentTest.numberEmployers)
+    // vChartPregunta1.config.data.labels= finalNames
+    vChartPregunta1.update()
+    
+    console.log(filtrado)
+}
 
 function loadTest(nameTest) {
 
@@ -388,9 +507,9 @@ function loadCharts(nivel) {
 
     console.log(categoria)
 
-    let titulos =document.querySelectorAll(".titleChart")
+    let titulos = document.querySelectorAll(".titleChart")
 
-    titulos.forEach((e)=>{
+    titulos.forEach((e) => {
 
         e.textContent = categoria
         e.style.color = getColor(categoria)
@@ -398,6 +517,9 @@ function loadCharts(nivel) {
     })
     if (nivel === "general") {
 
+        graficasGenerales.style.display = "flex"
+        filterInformeEspecifico.style.display = "none"
+        graficasEspecificas.style.display = "none"
         loadChartPregunta()
 
         loadChartEquipo()
@@ -407,7 +529,10 @@ function loadCharts(nivel) {
 
     else {
 
-
+        //alert(xd)
+        filterInformeEspecifico.style.display = "flex"
+        graficasGenerales.style.display = "none"
+        graficasEspecificas.style.display = "flex"
 
     }
 
@@ -471,7 +596,7 @@ function loadChartPregunta() {
 
     console.log(merged)
 
-    mergedAtributos = merged
+    datoPregunta = merged
     //atributosChart.config.data.labels = names
 
 
@@ -493,7 +618,7 @@ function loadChartEquipo() {
 
 
 
-    const getAllValuesByDataType = filterResponseByTag(finalNames, "values", answers,"area");
+    const getAllValuesByDataType = filterResponseByTag(finalNames, "values", answers, "area");
 
     console.log(getAllValuesByDataType);
 
@@ -506,7 +631,7 @@ function loadChartEquipo() {
         return e
     })
 
-    console.log(getAllValuesByParameter)
+    datoEquipo = getAllValuesByParameter
 
 
     sortBarChart("0", getAllValuesByParameter, vChartAtributosEquipo)
@@ -536,9 +661,9 @@ function loadChartJerarquia() {
     //let filter = listAnswers.filter((a) => { return a.area == department })
     console.log(finalNames)
 
-    
-    
-    const getAllValuesByDataType = filterResponseByTag(finalNames, "values", answers,"jerarquia");
+
+
+    const getAllValuesByDataType = filterResponseByTag(finalNames, "values", answers, "jerarquia");
 
     console.log(getAllValuesByDataType);
 
@@ -551,10 +676,10 @@ function loadChartJerarquia() {
         return e
     })
 
-    console.log(getAllValuesByParameter)
+    datoJerarquia = getAllValuesByParameter
 
 
-    sortBarChart("0", getAllValuesByParameter, vChartAtributosEquipo)
+    sortBarChart("0", getAllValuesByParameter, vChartAtributosJerarquia)
 
     //   let respuestasFilter = answers.map((respuesta) => { return respuesta.values })
     //   console.log(respuestasFilter)
@@ -567,6 +692,82 @@ function loadChartJerarquia() {
     //   console.log(respuestaOrdenada)
 }
 
+
+/////////////////////////////////////////////////     Filtrar//////////////
+let filterPregunta = filterChartPregunta.querySelectorAll(".hidebox")
+console.log(filterPregunta)
+
+for (let i = 0; i < filterPregunta.length; i++) {
+
+    filterPregunta[i].addEventListener("click", () => {
+
+        console.log(filterPregunta[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        console.log(datoPregunta)
+        filterPregunta[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filterPregunta[i].value, datoPregunta, vChartAtributosPregunta)
+    })
+
+}
+
+
+
+
+let filterEquipo = filterChartEquipo.querySelectorAll(".hidebox")
+console.log(filterPregunta)
+
+for (let i = 0; i < filterEquipo.length; i++) {
+
+    filterEquipo[i].addEventListener("click", () => {
+
+        console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        console.log(datoEquipo)
+        filterEquipo[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filterEquipo[i].value, datoEquipo, vChartAtributosEquipo)
+    })
+
+}
+
+
+
+
+let filterJerarquia = filterChartJerarquia.querySelectorAll(".hidebox")
+//console.log(filterPregunta)
+
+for (let i = 0; i < filterJerarquia.length; i++) {
+
+    filterJerarquia[i].addEventListener("click", () => {
+
+        console.log(filterJerarquia[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        console.log(datoEquipo)
+        filterJerarquia[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filterJerarquia[i].value, datoJerarquia, vChartAtributosJerarquia)
+    })
+
+}
 
 const labels = [
 
@@ -642,6 +843,76 @@ const dataVerticalAtributosEquipo = {
     ]
 };
 
+const dataVerticalAtributosJerarquia = {
+    labels: labels,
+    datasets: [{
+        //label: 'atributos por departamento',
+
+        //borderColor: 'rgb(255, 99, 132)',
+        data: dataChart,
+        borderRadius: 6,
+        datalabels: {
+            formatter: function (value, context) {
+
+                console.log(value)
+                //return parseInt(value * 100 / maximoCategoria) + '%';
+                return value + "%"
+            },
+            color: "white",
+            anchor: "center",
+            align: "center",
+            clamp: true,
+            font: {
+
+                weight: "bold"
+            },
+            padding: {
+
+                top: 20
+            }
+
+        }
+    }
+
+
+    ]
+};
+
+const dataPregunta1 = {
+    labels: labels,
+    datasets: [{
+        //label: 'atributos por departamento',
+
+        //borderColor: 'rgb(255, 99, 132)',
+        data: dataChart,
+        borderRadius: 6,
+        datalabels: {
+            formatter: function (value, context) {
+
+                console.log(value)
+                //return parseInt(value * 100 / maximoCategoria) + '%';
+                return value + " Personas"
+            },
+            color: "white",
+            anchor: "center",
+            align: "center",
+            clamp: true,
+            font: {
+
+                weight: "bold"
+            },
+            padding: {
+
+                top: 20
+            }
+
+        }
+    }
+
+
+    ]
+};
+
 const configVerticalAtributoChart = {
     type: 'bar',
     data: dataVerticalAtributos,
@@ -682,6 +953,93 @@ const configVerticalAtributoChart = {
         }
     }
 };
+
+const configVerticalAtributoJerarquiaChart = {
+    type: 'bar',
+    data: dataVerticalAtributosJerarquia,
+
+    plugins: [ChartDataLabels],
+    options: {
+
+        layout: {
+            padding: {
+
+                top: 30
+            }
+        }
+        ,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        parsing: {
+
+            xAxisKey: 'name'
+        },
+        indexAxis: 'x',
+        scales: {
+            x: {
+
+                display: true,
+                drawBorder: false,
+            },
+            y: {
+                max: 100,
+                grid: {
+                    display: false,
+                    drawBorder: false
+                }
+            }
+        }
+    }
+};
+
+
+
+
+
+const configVerticalChart1 = {
+    type: 'bar',
+    data: dataPregunta1,
+
+    plugins: [ChartDataLabels],
+    options: {
+
+        layout: {
+            padding: {
+
+                top: 30
+            }
+        }
+        ,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        parsing: {
+
+            xAxisKey: 'name'
+        },
+        indexAxis: 'x',
+        scales: {
+            x: {
+
+                display: true,
+                drawBorder: false,
+            },
+            y: {
+                max: 100,
+                grid: {
+                    display: false,
+                    drawBorder: false
+                }
+            }
+        }
+    }
+};
+
 
 const configVerticalAtributoEquipoChart = {
     type: 'bar',
@@ -733,6 +1091,28 @@ const vChartAtributosPregunta = new Chart(
 const vChartAtributosEquipo = new Chart(
     document.getElementById('vChartCategoriaEquipo'),
     configVerticalAtributoEquipoChart)
+
+
+
+
+const vChartAtributosJerarquia = new Chart(
+    document.getElementById('vChartCategoriaJerarquia'),
+    configVerticalAtributoJerarquiaChart)
+
+
+
+const vChartPregunta1 = new Chart(
+    document.getElementById('vChartPregunta1'),
+    configVerticalChart1)
+
+
+// const vChartPregunta2 = new Chart(
+//     document.getElementById('vChartCategoriaJerarquia'),
+//     configVerticalAtributoJerarquiaChart)
+
+// const vChartPregunta3 = new Chart(
+//     document.getElementById('vChartCategoriaJerarquia'),
+//     configVerticalAtributoJerarquiaChart)
 
 
 

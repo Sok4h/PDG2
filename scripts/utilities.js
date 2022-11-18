@@ -107,13 +107,42 @@ function sumAllQuestions(answers) {
   const basket = answers.reduce((basket, fruit) => {
 
     for (const [number, respuesta] of Object.entries(fruit)) {
-      console.log(respuesta)
+      console.log(fruit)
       if (!basket[number]) {
         basket[number] = { categoria: respuesta.categoria, value: 0, name: respuesta.numeroPregunta, subcategoria: respuesta.subcategoria };
       }
 
 
       basket[number].value += parseInt(respuesta.respuesta);
+      //console.log( basket[number].)
+
+    }
+
+    return basket;
+  }, []);
+
+  console.log(basket)
+  return basket
+}
+
+
+
+function sumAllQuestionsF(answers) {
+
+  console.log(answers)
+
+  const basket = answers.reduce((basket, fruit) => {
+
+    for (const [number, respuesta] of Object.entries(fruit)) {
+      console.log(number)
+      console.log(respuesta)
+
+      if (!basket[respuesta.numeroPregunta]) {
+        basket[number] = { categoria: respuesta.categoria, value: 1, name: respuesta.respuesta, subcategoria: respuesta.subcategoria };
+      }
+
+
+      basket[number].value +=1
       //console.log( basket[number].)
 
     }
@@ -233,3 +262,16 @@ const randomNum = () => Math.floor(Math.random() * (235 - 52 + 1) + 52);
 const randomRGB = () => `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
 
 //console.log(randomRGB());
+
+
+function getJerarquiaName(jerarquia){
+
+  
+  switch(jerarquia){
+
+    case  "highHierarchy" : return  "Nivel superior"
+    case  "midHierarchy" : return "Nivel medio"
+    case  "lowHierarchy" : return  "Nivel operacional"
+
+  }
+}
