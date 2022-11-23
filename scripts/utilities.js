@@ -25,6 +25,8 @@ function sumAllCategories(answers) {
 }
 
 
+const jerarquias = ["Nivel administrativo", "Nivel estratégico", "Nivel conocimiento","Nivel operacional"]
+
 const maximoCategoria = 35
 
 const maximoGeneral = 315;
@@ -129,51 +131,27 @@ function sumAllQuestions(answers) {
 
 function sumAllQuestionsF(answers) {
 
-  console.log(answers)
-
-  const basket = answers.reduce((basket, fruit) => {
+  const infoAnswers = answers.map(ans => ans[0]);
 
 
-    for (const [number, respuesta] of Object.entries(fruit)) {
+  const dataTest = infoAnswers.reduce((acc,object) => {
+    console.log(acc)
+      if( acc.find(obj => obj.name === object.respuesta) ){ 
+        return acc.map(obj => obj.name === object.respuesta? {...obj, value: obj.value += 1} : obj )
+      } else {
 
-
-      //let found = basket.find((x) => x.name === fruit[number].respuesta);
-      //console.log(found)
-      console.log(number)
-      console.log(respuesta)
-      console.log(fruit)
-      console.log(fruit[number])
-      console.log(basket[number])
-
-
-      let existe = respuesta.respuesta == fruit.respuesta
-      console.log(existe)
-
-      console.log(!respuesta.respuesta == fruit[number].respuesta)
-
-      if (!existe) {
-
-        if (!basket[number]) {
-
-          basket[number] = { categoria: respuesta.categoria, value: 1, name: respuesta.respuesta, subcategoria: respuesta.subcategoria };
-        }
-
+        acc.push({
+          name: object.respuesta,
+          value: 1,
+          background: object.background
+        })
 
       }
+    return acc;
+  },[]);
 
-      basket[number].value += 1
-
-      //console.log( basket[number].)
-
-    }
-
-    return basket;
-  }, []);
-
-  console.log(basket)
-  return basket
+  return dataTest;
 }
-
 
 
 

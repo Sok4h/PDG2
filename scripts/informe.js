@@ -19,7 +19,7 @@ const cardCategoriaPregunta = document.querySelector("#cardCategoriaPregunta")
 const graficasGenerales = document.querySelector("#graficasGenerales")
 const graficasEspecificas = document.querySelector("#graficasEspecificas")
 
-let datoPregunta, datoEquipo, datoJerarquia
+let datoPregunta, datoEquipo, datoJerarquia, datoP1, datoP2, datoP3, datoP4, datoP5, datoEquipoPregunta,datoPreguntaJerarquia,datoPreguntaPromedio
 
 let filterChartPregunta = document.querySelector("#filterChartPregunta")
 
@@ -27,8 +27,7 @@ let filterChartEquipo = document.querySelector("#filterChartDeparmentCompleto")
 
 let filterChartJerarquia = document.querySelector("#filterChartJerarquia")
 
-console.log(filterInforme.value)
-
+let numeroPreguntaIndividual
 let categoria
 
 let currentTest
@@ -74,13 +73,13 @@ auth.onAuthStateChanged((user) => {
                 })
 
                 console.log(testList.value)
-                currentTest= testList.value
+                currentTest = testList.value
                 loadTest(testList.value)
 
                 testList.addEventListener("change", () => {
 
                     //alert("xd")
-                    currentTest= testList.value
+                    currentTest = testList.value
                     loadTest(testList.value)
 
 
@@ -115,6 +114,15 @@ for (let i = 0; i < filterGeneral.length; i++) {
 
         //let parentDiv = filterAtributos[i].closest("label") ;
 
+        filterGeneral.forEach((e, i) => {
+
+            if (e.classList.contains("seleccionado")) {
+
+                filterGeneral[i].classList.remove("seleccionado")
+
+            }
+
+        })
         //console.log(parentDiv)
         filterGeneral[i].classList.add("seleccionado")
         //console.log(mergedAtributosCompletos)
@@ -150,11 +158,29 @@ for (let i = 0; i < filterEspecifico.length; i++) {
 
 
 function loadChartsEspecificas(value) {
+
+
+    const containerPregunta = document.querySelector("#graficasPregunta")
+
     // alert("hola")
 
     if (value == "todas") {
 
         loadAllChart()
+        containerPregunta.style.display = "none"
+        graficasEspecificas.style.display = "flex"
+
+    }
+    else {
+
+        let graficasEspecificas = document.querySelector("#graficasEspecificas")
+        containerPregunta.style.display = "flex"
+
+        graficasEspecificas.style.display = "none"
+
+        numeroPreguntaIndividual = value
+        loadPreguntaEspecifica(value)
+
 
     }
 
@@ -162,77 +188,462 @@ function loadChartsEspecificas(value) {
 
 
 }
+function loadPreguntaEspecifica(numeroPregunta) {
 
-function loadAllChart() {
 
+    //vChartPreguntaPromedio
+    const containerTodos = document.querySelector("#graficasPregunta")
 
-    let filter = answers.map((a) => { return a.respuestas })
-    console.log(filter)
-
-    console.log(categoria)
-
-    //let filtradoCategoria = filter.filter((e)=>{ return e.categoria=="Clima"}) 
+    const preguntaEquipo = document.querySelector("#preguntaEquipo")
+    const preguntaJerarquia = document.querySelector("#preguntaJerarquia")
 
 
 
 
-    let filtrado = filter.map((e) => {
+    const titulos = containerTodos.querySelectorAll(".titleChart")
+    const subtitulo = containerTodos.querySelectorAll(".subtitleChart")
+
+
+    titulos.forEach((title) => {
+
+        title.innerHTML = categoria
+        title.style.color = getColor(categoria)
+    })
+
+
+    let respuestas = answers.map((a) => { return a.respuestas })
+
+    let filtrado = respuestas.map((e) => {
 
         let filtradoFinal = e.filter((x) => {
-            
-            return x.categoria == "Estrategia" 
+
+            return x.categoria == categoria
         })
         return filtradoFinal
 
     })
 
-    console.log(filtrado)
 
-    let filtradoNumeroPregunta = filtrado.map((e) => {
+
+    //console.log(color)
+    let filtradoPreguntas = filtrado.map((e) => {
 
         let filtradoFinal = e.filter((x) => {
-            
+
+            return x.numeroPregunta == numeroPregunta
+        })
+        return filtradoFinal
+
+
+    })
+
+    console.log(filtradoPreguntas)
+
+    subtitulo.forEach((title) => {
+
+        title.innerHTML =`Pregunta ${numeroPregunta} ${filtradoPreguntas[0][0].subcategoria}`
+        title.style.color = getColor(categoria)
+    })
+
+    let sumado = sumAllQuestionsF(filtradoPreguntas)
+
+    sumado.map((e) => {
+
+        e.background = getColor(categoria)
+        return e
+
+    })
+    datoPreguntaPromedio=sumado
+
+    sortBarChart("0", sumado, vChartPreguntaPromedio)
+    preguntaEquipo.setAttribute("value", 0)
+    preguntaJerarquia.setAttribute("value", 0)
+
+    let test = parseInt(preguntaEquipo.getAttribute("value"))
+    let valueJerarquia = parseInt(preguntaJerarquia.getAttribute("value"))
+
+    let atributoTitle = preguntaEquipo.querySelector(".atributoTitle")
+    let titleJerarquia = preguntaJerarquia.querySelector(".atributoTitle")
+
+
+
+    let arrows = preguntaEquipo.querySelectorAll("svg")
+    let arrowsJerarquia = preguntaJerarquia.querySelectorAll("svg")
+
+
+    arrows.forEach((btn) => {
+
+        btn.addEventListener("click", () => {
+
+            console.log(test)
+            if (btn.classList.contains("add")) {
+
+
+                if (test == currentTest.departments.length - 1) {
+
+
+                    test = 0
+                }
+
+                else {
+
+                    test += 1
+                }
+
+            }
+
+            if (btn.classList.contains("less")) {
+
+
+                if (test == 0) { test = currentTest.departments.length - 1 }
+
+                else {
+
+                    test -= 1
+                }
+            }
+
+            console.log(test)
+            atributoTitle.textContent = currentTest.departments[test]
+
+            loadChartPreguntaEquipos(currentTest.departments[test])
+
+            preguntaEquipo.setAttribute("value", test)
+
+        })
+
+    })
+
+    atributoTitle.textContent = currentTest.departments[test]
+    loadChartPreguntaEquipos(currentTest.departments[test])
+
+    arrowsJerarquia.forEach((btn) => {
+
+        btn.addEventListener("click", () => {
+    
+    
+          if (btn.classList.contains("add")) {
+    
+    
+            if (valueJerarquia == jerarquias.length - 1) {
+    
+    
+                valueJerarquia = 0
+            }
+    
+            else {
+    
+                valueJerarquia += 1
+            }
+    
+          }
+    
+          if (btn.classList.contains("less")) {
+    
+    
+            if (valueJerarquia == 0) { valueJerarquia = jerarquias.length - 1 }
+    
+            else {
+    
+                valueJerarquia -= 1
+            }
+          }
+    
+    
+          preguntaJerarquia.setAttribute("value", valueJerarquia)
+          titleJerarquia.textContent = jerarquias[valueJerarquia]
+    
+          console.log(jerarquias[valueJerarquia])
+          loadChartPreguntaJerarquia(jerarquias[valueJerarquia])
+    
+        })
+    
+      })
+    
+      titleJerarquia.textContent = jerarquias[test]
+    
+      loadChartPreguntaJerarquia(jerarquias[test])
+
+
+}
+
+function loadChartPreguntaEquipos(equipo) {
+
+    let filterEquipo = answers.filter((e) => { return e.area === equipo })
+
+    //console.log(respuestas)
+
+
+    //  console.log(respuestas)
+
+
+    let respuestas = filterEquipo.map((a) => { return a.respuestas })
+
+    console.log(respuestas)
+
+    let filtrado = respuestas.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.categoria == categoria
+        })
+        return filtradoFinal
+
+    })
+
+    let filtradoPregunta = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.numeroPregunta == numeroPreguntaIndividual
+        })
+        return filtradoFinal
+
+
+    })
+
+    console.log(filtradoPregunta)
+
+    let sumado = sumAllQuestionsF(filtradoPregunta)
+
+    sumado.map((e) => {
+
+        e.background = getColor(categoria)
+        return e
+
+    })
+
+    datoEquipoPregunta = sumado
+
+    sortBarChart("0", datoEquipoPregunta, vChartPreguntaEquipo)
+
+}
+
+
+function loadChartPreguntaJerarquia(jerarquia) {
+
+    let filterEquipo = answers.filter((e) => { return e.jerarquia === jerarquia })
+
+    //console.log(respuestas)
+
+
+    //  console.log(respuestas)
+
+
+    let respuestas = filterEquipo.map((a) => { return a.respuestas })
+
+    console.log(respuestas)
+
+    let filtrado = respuestas.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.categoria == categoria
+        })
+        return filtradoFinal
+
+    })
+
+    let filtradoPregunta = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.numeroPregunta == numeroPreguntaIndividual
+        })
+        return filtradoFinal
+
+
+    })
+
+    console.log(filtradoPregunta)
+
+    let sumado = sumAllQuestionsF(filtradoPregunta)
+
+    sumado.map((e) => {
+
+        e.background = getColor(categoria)
+        return e
+
+    })
+
+    datoPreguntaJerarquia = sumado
+
+    sortBarChart("0", datoPreguntaJerarquia, vChartPreguntaJerarquia)
+
+}
+function loadAllChart() {
+
+    const pregunta1 = document.querySelector("#pregunta1")
+
+    const containerTodos = document.querySelector("#graficasEspecificas")
+    const titulos = containerTodos.querySelectorAll(".titleChart")
+    const subtitulos = containerTodos.querySelectorAll(".subtitleChart")
+
+
+
+
+    titulos.forEach((title) => {
+
+
+        title.innerHTML = categoria
+    })
+
+    subtitulos.forEach((sub) => {
+
+
+        sub.style.color = getColor(categoria)
+    })
+
+
+    let respuestas = answers.map((a) => { return a.respuestas })
+
+    let filtrado = respuestas.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.categoria == categoria
+        })
+        return filtradoFinal
+
+    })
+
+
+
+    //console.log(color)
+    let filtradoPregunta1 = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
             return x.numeroPregunta === 1
         })
         return filtradoFinal
 
+
     })
 
+    console.log(filtradoPregunta1[0][0])
+
+
+
+    let filtradoPregunta2 = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.numeroPregunta === 2
+        })
+        return filtradoFinal
+
+    })
+
+
+    let filtradoPregunta3 = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.numeroPregunta === 3
+        })
+        return filtradoFinal
+
+    })
+
+
+    let filtradoPregunta4 = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.numeroPregunta === 4
+        })
+        return filtradoFinal
+
+    })
+
+    let filtradoPregunta5 = filtrado.map((e) => {
+
+        let filtradoFinal = e.filter((x) => {
+
+            return x.numeroPregunta === 5
+        })
+        return filtradoFinal
+
+    })
     finalNames = ["1", "2", "3", "4", "5", "6", "7"]
 
-    console.log(filtradoNumeroPregunta)
-
-    let sumado = sumAllQuestionsF(filtradoNumeroPregunta)
 
 
-    // sumado.map((e)=>{ e.value = e.value/filtrado.length
+    subtitulos[0].textContent = "Pregunta #1 " + filtradoPregunta1[0][0].subcategoria
+    subtitulos[1].textContent = "Pregunta #2 " + filtradoPregunta2[0][0].subcategoria
 
-    // return e
-    // })
+    subtitulos[2].textContent = "Pregunta #3 " + filtradoPregunta3[0][0].subcategoria
 
-    console.log(sumado)
-    //const getAllValuesByDataType = filterResponseByTag(finalNames, "respuestas", filtrado,"name");
+    subtitulos[3].textContent = "Pregunta #4 " + filtradoPregunta4[0][0].subcategoria
 
-    //console.log(getAllValuesByDataType);
+    subtitulos[4].textContent = "Pregunta #5 " + filtradoPregunta5[0][0].subcategoria
 
-    //const getAllValuesByParameter = filterResponseByParameter(finalNames, "values", sumado);
-    //console.log(getAllValuesByParameter)
 
-    
-    sumado.map((e,index)=>{
 
-        e.background = getColor("Estrategia")
+    console.log(filtradoPregunta1)
+
+    let sumado = sumAllQuestionsF(filtradoPregunta1)
+    let sumado2 = sumAllQuestionsF(filtradoPregunta2)
+    let sumado3 = sumAllQuestionsF(filtradoPregunta3)
+    let sumado4 = sumAllQuestionsF(filtradoPregunta4)
+    let sumado5 = sumAllQuestionsF(filtradoPregunta5)
+
+
+    sumado.map((e) => {
+
+        e.background = getColor(categoria)
         return e
+
     })
 
-    console.log(sumado)
-    sortBarChart("0",sumado,vChartPregunta1)
 
-    vChartPregunta1.options.scales.y.max= parseInt(currentTest.numberEmployers)
+    sumado2.map((e) => {
+
+        e.background = getColor(categoria)
+        return e
+
+    })
+
+    sumado3.map((e) => {
+
+        e.background = getColor(categoria)
+        return e
+
+    })
+
+    sumado4.map((e) => {
+
+        e.background = getColor(categoria)
+        return e
+
+    })
+
+    sumado5.map((e) => {
+
+        e.background = getColor(categoria)
+        return e
+
+    })
+
+    datoP1 = sumado
+    datoP2 = sumado2
+    datoP3 = sumado3
+    datoP4 = sumado4
+    datoP5 = sumado5
+
+    sortBarChart("0", sumado, vChartPregunta1)
+    sortBarChart("0", sumado2, vChartPregunta2)
+    sortBarChart("0", sumado3, vChartPregunta3)
+    sortBarChart("0", sumado4, vChartPregunta4)
+    sortBarChart("0", sumado5, vChartPregunta5)
+
+
+
+    //vChartPregunta1.options.scales.y.max= parseInt(currentTest.numberEmployers)
     // vChartPregunta1.config.data.labels= finalNames
-    vChartPregunta1.update()
-    
-    console.log(filtrado)
+    //vChartPregunta1.update()
+
 }
 
 function loadTest(nameTest) {
@@ -285,7 +696,6 @@ atributos.forEach((btn) => {
 
     btn.addEventListener("click", () => {
 
-        let name = btn.querySelector("p")
 
         atributos.forEach((e) => {
 
@@ -298,6 +708,14 @@ atributos.forEach((btn) => {
 
 
         btn.classList.add("selected")
+
+        filterGeneral[0].checked = true;
+        filterGeneral[1].checked = false;
+
+        //document.getElementById("checkbox").checked = true;
+
+
+        //conso
 
         loadInforme()
     })
@@ -314,7 +732,10 @@ function loadInforme() {
     title.style.color = getColor(name)
 
     // -5% para que cuadre
+    filterGeneral[0].classList.add("seleccionado")
+    filterGeneral[1].classList.remove("seleccionado")
 
+    console.log(filterGeneral[0])
     console.log(name)
     let respuestas = answers
     let respuestaCategoria = answers.map((e) => { return e.values })
@@ -542,6 +963,9 @@ function loadCharts(nivel) {
     else {
 
         //alert(xd)
+
+        loadChartsEspecificas("todas")
+
         filterInformeEspecifico.style.display = "flex"
         graficasGenerales.style.display = "none"
         graficasEspecificas.style.display = "flex"
@@ -625,7 +1049,6 @@ function loadChartEquipo() {
     })
 
     const finalNames = [...new Set(names)];
-    //let filter = listAnswers.filter((a) => { return a.area == department })
     console.log(finalNames)
 
 
@@ -648,15 +1071,7 @@ function loadChartEquipo() {
 
     sortBarChart("0", getAllValuesByParameter, vChartAtributosEquipo)
 
-    //   let respuestasFilter = answers.map((respuesta) => { return respuesta.values })
-    //   console.log(respuestasFilter)
-    //   let respuestaOrdenada = sumAllCategories(respuestasFilter)
-
-    //   console.log(respuestaOrdenada)
-
-    //   respuestaOrdenada.map((e) => { e.value = parseInt((e.value / filter.length)*100/maximoCategoria), e.background = getColor(e.name)
-    //   return e})
-    //   console.log(respuestaOrdenada)
+   
 }
 
 
@@ -693,21 +1108,199 @@ function loadChartJerarquia() {
 
     sortBarChart("0", getAllValuesByParameter, vChartAtributosJerarquia)
 
-    //   let respuestasFilter = answers.map((respuesta) => { return respuesta.values })
-    //   console.log(respuestasFilter)
-    //   let respuestaOrdenada = sumAllCategories(respuestasFilter)
-
-    //   console.log(respuestaOrdenada)
-
-    //   respuestaOrdenada.map((e) => { e.value = parseInt((e.value / filter.length)*100/maximoCategoria), e.background = getColor(e.name)
-    //   return e})
-    //   console.log(respuestaOrdenada)
 }
 
 
-/////////////////////////////////////////////////     Filtrar//////////////
+///////////////////////     Filtrar      ////////////////////////
 let filterPregunta = filterChartPregunta.querySelectorAll(".hidebox")
 console.log(filterPregunta)
+
+
+let filter1 = document.querySelector("#pregunta1").querySelector("form")
+let filter2 = document.querySelector("#pregunta2").querySelector("form")
+
+let filter3 = document.querySelector("#pregunta3").querySelector("form")
+
+let filter4 = document.querySelector("#pregunta4").querySelector("form")
+
+let filter5 = document.querySelector("#pregunta5").querySelector("form")
+
+
+let filterPreguntaPromedio = document.querySelector("#preguntaPromedio").querySelector("form")
+let preguntaEquipo = document.querySelector("#preguntaEquipo").querySelector("#filterPreguntaEquipo")
+let preguntaJerarquia = document.querySelector("#preguntaJerarquia").querySelector("form")
+
+
+
+
+////////////////////////////////////////////////// Filtro pregunta individual /////////////////////////////////////////////////////////////////
+
+for (let i = 0; i < filterPreguntaPromedio.length; i++) {
+
+    filterPreguntaPromedio[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        filterPreguntaPromedio[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filterPreguntaPromedio[i].value, datoPreguntaPromedio, vChartPreguntaPromedio)
+    })
+
+}
+
+
+for (let i = 0; i < preguntaJerarquia.length; i++) {
+
+    preguntaJerarquia[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        preguntaJerarquia[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(preguntaJerarquia[i].value, datoPreguntaJerarquia, vChartPreguntaJerarquia)
+    })
+
+}
+
+
+for (let i = 0; i < preguntaEquipo.length; i++) {
+
+    preguntaEquipo[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        preguntaEquipo[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(preguntaEquipo[i].value, datoEquipoPregunta, vChartPreguntaEquipo)
+    })
+
+}
+
+for (let i = 0; i < filter1.length; i++) {
+
+    filter1[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        filter1[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filter1[i].value, datoP1, vChartPregunta1)
+    })
+
+}
+
+
+
+for (let i = 0; i < filter2.length; i++) {
+
+    filter2[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        filter2[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filter2[i].value, datoP2, vChartPregunta2)
+    })
+
+}
+
+
+for (let i = 0; i < filter3.length; i++) {
+
+    filter3[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        filter3[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filter3[i].value, datoP3, vChartPregunta3)
+    })
+
+}
+
+
+for (let i = 0; i < filter4.length; i++) {
+
+    filter4[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        filter4[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filter4[i].value, datoP4, vChartPregunta4)
+    })
+
+}
+
+
+for (let i = 0; i < filter5.length; i++) {
+
+    filter5[i].addEventListener("click", () => {
+
+        //console.log(filterEquipo[i].value)
+
+        //alert("entró")
+
+        //let parentDiv = filterAtributos[i].closest("label") ;
+
+        //console.log(datoEquipo)
+        filter5[i].classList.add("seleccionado")
+        // console.log(mergedAtributosCompletos)
+
+        //console.log(dataVerticalAtributos.datasets[0])
+        sortBarChart(filter5[i].value, datoP5, vChartPregunta5)
+    })
+
+}
 
 for (let i = 0; i < filterPregunta.length; i++) {
 
@@ -1042,7 +1635,7 @@ const configVerticalChart1 = {
                 drawBorder: false,
             },
             y: {
-                max: 100,
+                //max: 100,
                 grid: {
                     display: false,
                     drawBorder: false
@@ -1118,6 +1711,32 @@ const vChartPregunta1 = new Chart(
     configVerticalChart1)
 
 
+
+const vChartPregunta2 = new Chart(
+    document.getElementById('vChartPregunta2'),
+    configVerticalChart1)
+
+const vChartPregunta3 = new Chart(
+    document.getElementById('vChartPregunta3'),
+    configVerticalChart1)
+const vChartPregunta4 = new Chart(
+    document.getElementById('vChartPregunta4'),
+    configVerticalChart1)
+const vChartPregunta5 = new Chart(
+    document.getElementById('vChartPregunta5'),
+    configVerticalChart1)
+
+const vChartPreguntaPromedio = new Chart(
+    document.getElementById('vChartPreguntaPromedio'),
+    configVerticalChart1)
+
+const vChartPreguntaEquipo = new Chart(
+    document.getElementById('vChartPreguntaEquipo'),
+    configVerticalChart1)
+
+    const vChartPreguntaJerarquia = new Chart(
+        document.getElementById('vChartPreguntaJerarquia'),
+        configVerticalChart1)
 // const vChartPregunta2 = new Chart(
 //     document.getElementById('vChartCategoriaJerarquia'),
 //     configVerticalAtributoJerarquiaChart)

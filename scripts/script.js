@@ -264,10 +264,7 @@ function loadTeams() {
   console.log(test)
 
 
-  cardEquipo.addEventListener("load", myScript=>{
-    
-    
-  });
+  
 
   arrows.forEach((btn) => {
 
