@@ -31,6 +31,9 @@ let filterChartJerarquia = document.querySelector("#filterChartJerarquia")
 let numeroPreguntaIndividual
 let categoria
 
+Chart.defaults.font.weight = 'bold';
+
+
 let currentTest
 
 const atributos = atributosContainer.querySelectorAll(".atributo")

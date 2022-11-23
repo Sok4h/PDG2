@@ -307,8 +307,11 @@ function loadTeams() {
       cardEquipo.setAttribute("value", test)
       atributoTitle.textContent = currentTest.departments[test]
 
+      setTimeout(() => {
+        loadChartDepartment(currentTest.departments[test])
+      }, 1)
       
-      loadChartDepartment(currentTest.departments[test])
+      
 
       
 
@@ -317,11 +320,16 @@ function loadTeams() {
   })
 
  // cardEquipo.setAttribute("value", test)
-  console.log(currentTest.departments[test])
+  console.log(test)
    atributoTitle.textContent = currentTest.departments[test]
  
    //cardEquipo.setAttribute("value", test)
-   loadChartDepartment(currentTest.departments[test])
+
+   setTimeout(() => {
+    loadChartDepartment(currentTest.departments[test])
+  }, 1)
+  
+   // loadChartDepartment(currentTest.departments[test])
   
    console.log(currentTest.departments[1])
 
@@ -443,9 +451,9 @@ function loadChartDepartment(department) {
   vChartEquipo.update()
 
   console.log(filterDepartamento)
-  //filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
+  filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
   
-   //filterChart(filterDepartamentoC,xd,vChartEquipoCompleto)
+   filterChart(filterDepartamentoC,xd,vChartEquipoCompleto)
 
   let promedio = 0
 
