@@ -48,7 +48,6 @@ let mergedAtributos
 let mergedDepartamentos=[]
 console.log(testSelect)
 
-const jerarquias = ["Nivel administrativo", "Nivel estratégico", "Nivel conocimiento","Nivel operacional"]
 
 //cardRadarChart.style.display="none"
 

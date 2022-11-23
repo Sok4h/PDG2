@@ -18,6 +18,7 @@ const cardCategoriaPregunta = document.querySelector("#cardCategoriaPregunta")
 
 const graficasGenerales = document.querySelector("#graficasGenerales")
 const graficasEspecificas = document.querySelector("#graficasEspecificas")
+const containerPregunta = document.querySelector("#graficasPregunta")
 
 let datoPregunta, datoEquipo, datoJerarquia, datoP1, datoP2, datoP3, datoP4, datoP5, datoEquipoPregunta,datoPreguntaJerarquia,datoPreguntaPromedio
 
@@ -40,6 +41,7 @@ emptyDashboard.style.display = "none"
 
 
 filterInformeEspecifico.style.display = "none"
+containerPregunta.style.display = "none"
 
 let testArray = []
 let answers = []
@@ -160,7 +162,7 @@ for (let i = 0; i < filterEspecifico.length; i++) {
 function loadChartsEspecificas(value) {
 
 
-    const containerPregunta = document.querySelector("#graficasPregunta")
+    
 
     // alert("hola")
 
