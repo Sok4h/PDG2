@@ -1379,6 +1379,10 @@ select {
   height: 100%;
   width: 100%;
   border-radius: 16px;
+  min-height: 214px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .pyramid {
