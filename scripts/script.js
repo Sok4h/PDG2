@@ -45,7 +45,7 @@ let dashboardContainer =  document.querySelector(".dashboardContainer")
 
 let mergedAtributosCompletos
 let mergedAtributos
-let mergedDepartamentos=[]
+let mergedDepartamentos
 console.log(testSelect)
 
 
@@ -207,10 +207,10 @@ function loadTest(nameTest) {
     //loadHighlights(currentTest, listAnswers)
     //updateRadarChart(cateogorias[0])
 
-    cardEquipo.setAttribute("value", 0)
+    
 
     setTimeout(() => {
-      console.log("Delayed for 1 second.");
+      cardEquipo.setAttribute("value", 0)
       loadTeams()
     }, 1)
     
@@ -247,7 +247,7 @@ btnGeneral.addEventListener("click", () => {
 
 
 cardJerarquia.setAttribute("value", 0)
-//cardEquipo.setAttribute("value", 0)
+cardEquipo.setAttribute("value", 0)
 
 
 
@@ -304,27 +304,30 @@ function loadTeams() {
       }
 
       console.log(test)
+      cardEquipo.setAttribute("value", test)
       atributoTitle.textContent = currentTest.departments[test]
 
+      
       loadChartDepartment(currentTest.departments[test])
 
-      cardEquipo.setAttribute("value", test)
+      
 
     })
     
   })
 
  // cardEquipo.setAttribute("value", test)
-  // console.log(test)
+  console.log(currentTest.departments[test])
    atributoTitle.textContent = currentTest.departments[test]
-   console.log(currentTest.departments[test])
-  
+ 
+   //cardEquipo.setAttribute("value", test)
    loadChartDepartment(currentTest.departments[test])
-   cardEquipo.setAttribute("value", test)
-   
+  
+   console.log(currentTest.departments[1])
 
 
 }
+
 
 
 
@@ -419,27 +422,30 @@ function loadChartDepartment(department) {
   let xd = respuestaOrdenada.sort(function (a, b) {
     return parseInt(b.value) - parseInt(a.value);
   });
-
+  console.log(xd)
   console.log(respuestaOrdenada)
-  let slice = xd.slice(0, 4)
+  let mergedDepartamentos = xd.slice(0, 4)
 
-  mergedDepartamentos = slice
-  mergedDepartamentos.forEach((e)=> console.log(e.name))
-   console.log(slice)
-  filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
+  //console.log(primeros4)
+  //mergedDepartamentos = primeros4
+  // console.log(mer)
+  
 
 
-  sortBarChart("0", slice, vChartEquipo)
+  sortBarChart("0", mergedDepartamentos, vChartEquipo)
+
+ 
+ 
   sortBarChart("0", xd, vChartEquipoCompleto)
 
 
+  vChartEquipoCompleto.update()
+  vChartEquipo.update()
+
   console.log(filterDepartamento)
+  //filterChart(filterDepartamento,mergedDepartamentos,vChartEquipo)
   
-   filterChart(filterDepartamentoC,xd,vChartEquipoCompleto)
-
-
-  //console.log()
-  ///carga info en la card 
+   //filterChart(filterDepartamentoC,xd,vChartEquipoCompleto)
 
   let promedio = 0
 
@@ -2253,6 +2259,18 @@ for (let i = 0; i < filterDepartment.length; i++) {
   })
 
 }
+
+
+// for (let i = 0; i < filterDepartamento.length; i++) {
+
+//   filterDepartamento[i].addEventListener("click", () => {
+
+//     console.log(filterDepartamento[i].value)
+//     sortBarChart(filterDepartamento[i].value, mergedDepartmentos, vChartEquipo)
+//   })
+
+// }
+
 
 
 let filterAtributosCompletos = filterchartAtributosCompletos.querySelectorAll(".hidebox")
