@@ -965,12 +965,13 @@ input[type=radio]:checked + .label-select {
 }
 
 .performanceBody {
-  margin: 48px;
+  width: 70%;
+  height: 100%;
+  padding: 2em;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 1em;
+  gap: 16px;
+  margin: auto;
   overflow: scroll;
 }
 .performanceBody .atributos {
