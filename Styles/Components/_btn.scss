@@ -112,14 +112,18 @@ button{
   }
 
   &--survey{
-    width: 60%;
+    width: 40%;
     color: white;
     border: none;
-    background-color: rgba($color: #EC6969, $alpha: 0.3);
+    background-color:  #EC6969;
+    margin-top: 16px ;
+    margin-bottom: 32px ;
+
+    
   }
 
   &--surveyActive{
-    width: 60%;
+    width: 40%;
     border: none;
     color: white;
     background-color:  #EC6969

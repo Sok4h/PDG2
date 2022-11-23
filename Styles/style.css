@@ -150,13 +150,15 @@ button {
   border: none;
 }
 .btn--survey {
-  width: 60%;
+  width: 40%;
   color: white;
   border: none;
-  background-color: rgba(236, 105, 105, 0.3);
+  background-color: #EC6969;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 .btn--surveyActive {
-  width: 60%;
+  width: 40%;
   border: none;
   color: white;
   background-color: #EC6969;
@@ -199,7 +201,9 @@ button {
 
 .test {
   row-gap: 1em;
-  max-width: 20%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .test .infoContainer {
   display: flex;
@@ -389,7 +393,7 @@ input[type=radio]:checked + .label-select {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5em;
+  gap: 1em;
 }
 
 .seleccionado {
