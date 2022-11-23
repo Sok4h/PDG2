@@ -31,6 +31,10 @@ let xd
 let usersArray =[]
 upload.addEventListener("change",()=>{
 
+    let labelUpload = document.querySelector(".labelUpload")
+
+    labelUpload.querySelector("p").textContent="Archivo cargado correctamente"
+    labelUpload.querySelector("img").src="./Iconos/Iconos/upload-complete.svg"
 
     readXlsxFile(upload.files[0]).then((data)=>{
 

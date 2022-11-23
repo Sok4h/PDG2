@@ -64,7 +64,7 @@
 
             .selected {
 
-                width: 15%
+                width: 14%;
             }
         }
     }
@@ -352,9 +352,10 @@
 }
 
 .chartInformeContainer{
-
-    height: 100%;
-    width: 60%;
+    height: 400px;
+    width: 70%;
+    display: flex;
+    justify-content: center;
 }
 
 .graficasContainer{
@@ -364,4 +365,13 @@
     gap: 1.5em;
 }
 
+.ulInforme{
+
+    width: 80%;
+
+    li{
+
+        margin-top: 8px;
+    }
+}
 

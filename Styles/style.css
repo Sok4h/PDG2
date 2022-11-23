@@ -597,7 +597,7 @@ input[type=radio]:checked + .label-select {
   padding: 2em;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 16px;
   margin: auto;
   overflow: scroll;
 }
@@ -634,7 +634,7 @@ input[type=radio]:checked + .label-select {
   justify-content: center;
 }
 .sunbust__infoContainer {
-  gap: 20px;
+  gap: 16px;
 }
 .sunbust__infoContainer .card {
   height: 100%;
@@ -822,7 +822,7 @@ input[type=radio]:checked + .label-select {
 .separador {
   width: 100%;
   background-color: #DBDBDB;
-  padding: 16px;
+  padding: 8px;
   border-radius: 16px;
   text-align: center;
 }
@@ -846,9 +846,10 @@ input[type=radio]:checked + .label-select {
   width: 40%;
   gap: 1em;
   height: 100%;
+  justify-content: center;
 }
 .atributoContainer .atributoValue {
-  font-size: 64px;
+  font-size: 48px;
 }
 .atributoContainer .atributoProficiency {
   font-size: 24px;
@@ -856,9 +857,6 @@ input[type=radio]:checked + .label-select {
 }
 .atributoContainer .atributoDescription {
   margin-top: 24px;
-}
-.atributoContainer p {
-  width: 60%;
 }
 .atributoContainer #btnDetallesAtributos {
   margin-top: 32px;
@@ -895,7 +893,7 @@ input[type=radio]:checked + .label-select {
 }
 
 .chart {
-  gap: 1.5em;
+  gap: 1em;
 }
 
 .containerEquipo {
@@ -907,6 +905,7 @@ input[type=radio]:checked + .label-select {
 .containerEquipo .chart {
   width: 60%;
 }
+
 .testLoad {
   width: 100%;
   background-color: #DBDBDB;
@@ -918,7 +917,8 @@ input[type=radio]:checked + .label-select {
   background-color: #DBDBDB;
   width: 20%;
   padding-left: 16px;
-  border: none;
+  border: 1px solid #1D1D1D;
+  border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
 }
@@ -940,8 +940,15 @@ input[type=radio]:checked + .label-select {
 .dashboardContainer {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 16px;
   width: 100%;
+}
+
+.chartContainerGrande {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  justify-content: center;
 }
 
 .performance {
@@ -993,7 +1000,7 @@ input[type=radio]:checked + .label-select {
   width: 80%;
 }
 .performanceBody .atributos .atributosContainer .selected {
-  width: 15%;
+  width: 14%;
 }
 .performanceBody .generalActions {
   background-color: white;
@@ -1203,14 +1210,23 @@ input[type=radio]:checked + .label-select {
 }
 
 .chartInformeContainer {
-  height: 100%;
-  width: 60%;
+  height: 400px;
+  width: 70%;
+  display: flex;
+  justify-content: center;
 }
 
 .graficasContainer {
   display: flex;
   flex-direction: column;
   gap: 1.5em;
+}
+
+.ulInforme {
+  width: 80%;
+}
+.ulInforme li {
+  margin-top: 8px;
 }
 
 .formTitle {
@@ -1226,7 +1242,7 @@ input[type=radio]:checked + .label-select {
   gap: 1em;
 }
 .upload p {
-  width: 50%;
+  width: 70%;
 }
 
 .uploadContainer {
@@ -1246,11 +1262,13 @@ input[type=radio]:checked + .label-select {
 }
 
 main {
-  margin-top: 48px;
   display: flex;
   flex-direction: column;
   padding: 32px;
   align-items: center;
+  width: 70%;
+  margin: auto;
+  margin-top: 48px;
 }
 
 span {
@@ -1305,7 +1323,7 @@ select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background-image: url("../../resources/dropdown.png");
+  background-image: url("../resources/dropdown.png");
   background-repeat: no-repeat, repeat;
   background-position: right 0.7em top 50%, 0 0;
   background-size: 16px;
@@ -1405,4 +1423,28 @@ select {
   width: 50%;
   height: 200px;
   padding: 16px;
+}
+
+.labelUpload {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F3F3F3;
+  border-radius: 16px;
+  cursor: pointer;
+}
+.labelUpload p {
+  text-align: center;
+  font-weight: bold;
+}
+.labelUpload img {
+  width: 20%;
+  height: 20%;
+}
+
+#upload {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

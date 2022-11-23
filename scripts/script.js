@@ -213,8 +213,14 @@ function loadTest(nameTest) {
       console.log("Delayed for 1 second.");
       loadTeams()
     }, 1)
-   
-    loadJerarquia()
+    
+    cardJerarquia.setAttribute("value", 0)
+
+    setTimeout(() => {
+      console.log("Delayed for 1 second.");
+      loadJerarquia()
+    }, 1)
+  
 
 
   });
@@ -488,7 +494,7 @@ function loadChartJerarquia(jerarquia) {
 
   let respuestaOrdenada = sumAllCategories(respuestasFilter)
 
-  respuestaOrdenada.map((e) => { e.value = parseInt((e.value / filter.length)*100/maximoCategoria), e.background = getColor(e.name) })
+  respuestaOrdenada.map((e) => { e.value = parseInt(((e.value / filter.length)*100)/maximoCategoria), e.background = getColor(e.name) })
   sortBarChart("0", respuestaOrdenada, vChartJerarquiaCompleto)
 
   let xd = respuestaOrdenada.sort(function (a, b) {
@@ -708,7 +714,7 @@ function updateCardAtributos() {
   atributoTitle.style.color = colorRadar[test]
   atributoTitle.textContent = cateogorias[test]
 
-  btnDetalles.style.borderColor = colorArrows[test]
+ // btnDetalles.style.borderColor = colorArrows[test]
 
   console.log(listAnswers)
   let respuestasFilter = listAnswers.map((respuesta) => { return respuesta.values })
@@ -1273,7 +1279,7 @@ const configVerticalEquipoChartCompleto = {
   data: dataVerticalEquiposCompleto,
   plugins: [ChartDataLabels],
   options: {
-
+    maintainAspectRatio: false,
     layout: {
       padding: {
 
@@ -1836,6 +1842,7 @@ function loadHighlights(test, respuestas) {
   titleCardChart.textContent = minValue.name
   titleCardChart.style.color = getColor(minValue.name)
   levelCardChart.style.color = getColor(minValue.name)
+  levelCardChart.textContent = getProficiencyName(minValue.value)
 
   valueCardChart.textContent = minValue.value  + "%"
 
@@ -1980,6 +1987,8 @@ function updateRadarChart(category) {
   let colorText = getColor(category)
   titleCardChart.style.color = colorText
   levelCardChart.style.color = colorText
+
+  console.log(promedioCategoria)
 
   levelCardChart.textContent = getProficiencyName(promedioCategoria)
 

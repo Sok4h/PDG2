@@ -162,10 +162,6 @@ for (let i = 0; i < filterEspecifico.length; i++) {
 function loadChartsEspecificas(value) {
 
 
-    
-
-    // alert("hola")
-
     if (value == "todas") {
 
         loadAllChart()
@@ -731,6 +727,10 @@ function loadInforme() {
     let title = selected.querySelector("p")
     let name = selected.querySelector("p").textContent
     categoria = name
+
+    let categoryTitle = document.querySelector(".categoryTitle")
+    categoryTitle.style.color = getColor(categoria)
+    categoryTitle.textContent = categoria
     title.style.color = getColor(name)
 
     // -5% para que cuadre
@@ -1526,7 +1526,7 @@ const configVerticalAtributoChart = {
 
     plugins: [ChartDataLabels],
     options: {
-
+        maintainAspectRatio: false,
         layout: {
             padding: {
 
