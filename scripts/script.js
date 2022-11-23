@@ -1152,9 +1152,12 @@ const dataVerticalEquiposCompleto = {
 const configVerticalAtributoChart = {
   type: 'bar',
   data: dataVerticalAtributos,
+  
 
   plugins: [ChartDataLabels],
   options: {
+
+    maintainAspectRatio: false,
 
     layout: {
       padding: {
@@ -1321,6 +1324,7 @@ const configVerticalJerarquiaChartCompleto = {
   plugins: [ChartDataLabels],
   options: {
 
+    maintainAspectRatio: false,
     layout: {
       padding: {
 

@@ -35,7 +35,7 @@ auth.onAuthStateChanged((user) => {
                         const div = document.createElement('div');
                         div.classList.add("card")
                         div.classList.add("test")
-                        div.innerHTML = `<h2 class="">Prueba 2021</h2>
+                        div.innerHTML = `<h2>${tempDoc.testName}</h2>
         
                         <div class="infoContainer">
                 
