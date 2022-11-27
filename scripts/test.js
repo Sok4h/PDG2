@@ -453,6 +453,20 @@ btnFinishTest.addEventListener("click", () => {
 })
 
 
+tippy('#companySizeInfo',{
+
+    
+    allowHTML: true,
+    content:`<pre><strong>Startup</strong> : Máximo 5 trabajadores\n</pre>
+    <strong>Microempresa</strong> : Menos de 10 trabajadores\n
+    <strong>Pyme</strong> : Empresas pequeñas y medianas de máximo 260 trabajadores
+    <pre><strong>Empresa pequeña</strong> : entre 11  y 50 trabajadores\n</pre>
+    <strong>Empresa mediana</strong> :Menos de 250 trabajadores\n
+    <strong>Grande</strong> : Más de 250 trabajadores\n`
+})
+
+
+
 
 
 

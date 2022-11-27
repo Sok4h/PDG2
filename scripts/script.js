@@ -2035,9 +2035,6 @@ function updateRadarChart(category) {
 }
 
 
-//let filterchartAtributosCompletos = document.querySelector("#filterchartAtributosCompletos")
-
-
 const splitString = (text, chunkSize) => {
   const arr = text.split(" ")
   const output = []

@@ -8,6 +8,7 @@
     <title>Test</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script>
+    <link rel="shortcut icon" href="resources/logo-menu.png" type="image/x-icon">
 
     <link rel="stylesheet" href="Styles/style.css">
 
@@ -15,7 +16,74 @@
 
 </head>
 
-<body>
+<body class="testBody">
+
+    <section class="nav__container ">
+        <nav class="nav">
+
+            <a href="" class="nav__logo">
+                <img src="resources/logo-menu.png" alt="">
+            </a>
+
+            <a href="test.html"><button class="btn btn--nav"></button></a>
+
+            <ul>
+
+                <li class="nav__item nav__item--home ">
+                    <a href="dashboard.html">
+
+                        <img src="Iconos/Iconos/homeBarra.png" alt="">
+
+                    </a>
+                </li>
+                <li class="nav__item nav__item--team">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/equiposBarra.png" alt="">
+
+                    </a>
+                </li>
+                <li class="nav__item nav__item--herarchy">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/jerarquiaBarra.png" alt="">
+                    </a>
+                </li>
+                <li class="nav__item nav__item--atributes">
+                    <a href="">
+                        <img src="Iconos/Iconos/atributosBarra.png" alt="">
+
+
+                    </a>
+                </li>
+                <li class="nav__item nav__item--history">
+                    <a href="history.html">
+
+                        <img src="Iconos/Iconos/historialBarra.png" alt="">
+
+
+                    </a>
+                </li>
+
+                <li class="nav__item nav__item--report nav__item--active">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/informeBarra.png" alt="">
+
+
+                    </a>
+                </li>
+
+                <li class="nav__item nav__item--logout">
+                    <a href="">
+
+                        <img src="Iconos/Iconos/logoutBarra.png" alt="">
+
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </section>
     <main>
 
         <h2 class="formTitle">INNLAB innovation index</h2>
@@ -30,21 +98,21 @@
 
             <div class="input-box">
 
-                <span class="labelInput">Nombre de la compañia</span>
-                <input class="inputs inputs--form" id="companyName" name="companyName" type="text" required placeholder="Nombre de la compañia">
+                <span class="labelInput">Nombre de la compañía</span>
+                <input class="inputs inputs--form" id="companyName" name="companyName" type="text" required placeholder="Nombre de la compañía">
             </div>
 
             <div class="input-box">
 
-                <span class="labelInput">Sector de la compañia</span>
-                <input class="inputs inputs--form" id="companySector" name="companyArea" required type="text" placeholder="Sector de la compañia">
+                <span class="labelInput">Sector de la compañía</span>
+                <input class="inputs inputs--form" id="companySector" name="companyArea" required type="text" placeholder="Sector de la compañía">
             </div>
 
             <div class="input-box">
 
                 <div class="infoContainer">
                     <span class="labelInput">Tamaño de empresa</span>
-                    <i class='bx bxs-info-circle' id="companySize"></i>
+                    <i class='bx bxs-info-circle' id="companySizeInfo"></i>
 
                 </div>
 
@@ -65,7 +133,7 @@
 
             <div class="input-box">
 
-                <span class="labelInput">Cantidad de personas en la compañia</span>
+                <span class="labelInput">Cantidad de personas en la compañía</span>
 
                 <input class="inputs inputs--form"  name="numberEmployers" id="numberEmployers" type="number" placeholder="Cantidad de empleados">
             </div>
@@ -153,58 +221,14 @@
         </section>
 
 
-        <!--  Departamento -->
-        <!-- <section class="trustLevel">
-            <p>Para asegurar la fiabilidad de datos en el equipo o departamento N.A la prueba debe ser realizada por
-                almenos:</p>
-
-            <div class="trustOrganization">
-
-                <div class="trustbox" id="trustPopulation">
-
-                    <i class='bx bxs-badge-check'></i>
-                    <p>Población</p>
-
-                    <span>100</span>
-
-                </div>
-
-                <div class="trustbox" id="trustLevel">
-
-                    <i class='bx bxs-group'></i>
-                    <p>Nivel de confianza</p>
-
-                    <span>95%</span>
-                </div>
-
-
-                <div class="trustbox" id="errorMargin">
-
-                    <i class='bx bxs-shield-x'></i>
-                    <p>Margen de error</p>
-
-                    <span>5%</span>
-                </div>
-
-                <div class="trustbox" id="errorMargin">
-
-                    <i class='bx bxs-user-check'></i>
-                    <p>Muestra</p>
-
-                    <span>na</span>
-                </div>
-            </div>
-
-        </section> -->
-
         <div class="piramidJerarchy">
 
-            <div class="infoContainer">
-                <span class="labelInput">Subdepartamentos</span>
+            <!-- <div class="infoContainer">
+                <span class="labelInput">Jerarquía</span>
                 <i class='bx bxs-info-circle' id="companySize"></i>
 
-            </div>
-            <h3>Niveles</h3>
+            </div> -->
+            <h3>Niveles Jerarquía</h3>
 
             <div class="pyramidContainers">
 
@@ -214,14 +238,14 @@
 
                     <div class="pyramidInfo" id="pyramidTop">
 
-                        <h3 class="title">Nivel superior</h3>
+                        <h3 class="title">Nivel administrativo</h3>
 
                         <h4 class="subTitle">Ejemplo</h4>
 
                         <p>Direciones generales, presidencias, CEO’s, lideres de areas, etc.</p>
 
                         <div class="labelAdd">
-                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Nivel superior">
+                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Nivel administrativo">
                             <button class="btn btn--addInput">+</button>
                         </div>
                         
@@ -235,13 +259,13 @@
 
                     <div class="pyramidInfo"id="pyramidMid">
 
-                        <h3 class="title">Nivel medio</h3>
+                        <h3 class="title">Nivel estratégico</h3>
 
                         <h4 class="subTitle">Ejemplo</h4>
 
                         <p>Directores, gerentes, administradores, etc.</p>
                         <label class="labelAdd">
-                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Nivel medio">
+                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Nivel estratégico">
                             <button class="btn btn--addInput">+</button>
                         </label>
 
@@ -255,14 +279,14 @@
 
                     <div class="pyramidInfo"id="pyramidBottom" >
 
-                        <h3 class="title">Nivel operacional</h3>
+                        <h3 class="title">Nivel de conocimiento</h3>
 
                         <h4 class="subTitle">Ejemplo</h4>
 
                         <p>Supervisores, jefes, etc.</p>
 
                         <label class="labelAdd">
-                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Nivel operacional">
+                            <input class="inputs inputs--form inputs--add" type="text" placeholder="Nivel de conocimiento">
                             <button class="btn btn--addInput">+</button>
                         </label>
 
@@ -276,7 +300,7 @@
         <div class="upload">
 
             <h3>Registro de usuarios</h3>
-            <p>La prueba requiere que se le mande a los usuarios un usuario de entrada, porfavor sube la informacion requerida como un documento de Excel para mandar la informacion. (Los usuarios que no tengan correo necesitaran ser llamadaos dentro de la compañia) </p>
+            <p>La prueba requiere que se le mande a los usuarios un usuario de entrada, por favor descarga la plantilla <a href='https://firebasestorage.googleapis.com/v0/b/index-1b729.appspot.com/o/Formato%20Base%20de%20datos.xlsx?alt=media&token=f8ef61d0-0d3f-43a9-9023-b1952f558ad4' target="_blank">aquí</a> y completa la información requerida. (Los usuarios que no tengan correo necesitaran ser llamados dentro de la compañía)</p>
             <!-- <div class="card uploadContainer">   -->
                 <!-- <p>Poner archivo aqui</p>
                 <button class="btn">Upload</button> -->
@@ -290,11 +314,20 @@
                    <p>Sube tu archivo aquí</p> 
                 </label>
             <!-- </div> -->
+
+            
+        <button  type="submit" class="btn btnFinishTest">Finalizar</button>
         </div>
 
-        <button  type="submit" class="btn btnFinishTest">Finalizar</button>
     </main>
 </body>
+
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+
+<!-- Production -->
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
 
 <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
