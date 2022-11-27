@@ -7,6 +7,7 @@
     align-items: center;
     padding: 32px;
     border-radius: 16px;
+   // height: 600px;
 
     h2 {
 
@@ -102,6 +103,7 @@
 
     .levelPerformanceContainer {
         display: flex;
+        height: 600px;
     }
 
     .containerArrow {
@@ -288,6 +290,10 @@
 
             font-weight: bold;
         }
+        &__description{
+
+            text-align: start;
+        }
     }
 }
 
@@ -353,7 +359,7 @@
 }
 
 .chartInformeContainer{
-    height: 400px;
+    height: 60%;
     width: 70%;
     display: flex;
     justify-content: center;

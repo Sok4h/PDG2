@@ -466,6 +466,13 @@ tippy('#companySizeInfo',{
 })
 
 
+tippy('#companyDeparmentsInfo',{
+
+
+    content:'Los diferentes equipos de trabajo en la compañía: Finanzas, Diseño,etc.'
+})
+
+
 
 
 

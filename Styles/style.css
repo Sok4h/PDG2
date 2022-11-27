@@ -845,7 +845,6 @@ input[type=radio]:checked + .label-select {
   display: flex;
   width: 100%;
   gap: 20px;
-  height: 700px;
 }
 
 .atributoContainer {
@@ -854,6 +853,10 @@ input[type=radio]:checked + .label-select {
   gap: 1em;
   height: 100%;
   justify-content: center;
+}
+.atributoContainer img {
+  width: 100px;
+  height: 100px;
 }
 .atributoContainer .atributoValue {
   font-size: 48px;
@@ -876,7 +879,7 @@ input[type=radio]:checked + .label-select {
   height: 100%;
 }
 .graphAtributosContainer .container {
-  height: 70%;
+  height: 50%;
   width: 100%;
 }
 
@@ -1035,6 +1038,7 @@ input[type=radio]:checked + .label-select {
 }
 .performanceBody .levelPerformanceContainer {
   display: flex;
+  height: 600px;
 }
 .performanceBody .containerArrow {
   width: 200px;
@@ -1175,6 +1179,9 @@ input[type=radio]:checked + .label-select {
 .nivelesPuntaje .puntaje__name {
   font-weight: bold;
 }
+.nivelesPuntaje .puntaje__description {
+  text-align: start;
+}
 
 .explicacionDesempeno {
   background-color: #F3F3F3;
@@ -1218,7 +1225,7 @@ input[type=radio]:checked + .label-select {
 }
 
 .chartInformeContainer {
-  height: 400px;
+  height: 60%;
   width: 70%;
   display: flex;
   justify-content: center;
