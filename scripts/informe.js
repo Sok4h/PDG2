@@ -1529,7 +1529,7 @@ const configVerticalAtributoChart = {
 
     plugins: [ChartDataLabels],
     options: {
-        maintainAspectRatio: false,
+        // maintainAspectRatio: false,
         layout: {
             padding: {
 
@@ -1567,6 +1567,7 @@ const configVerticalAtributoChart = {
 const configVerticalAtributoJerarquiaChart = {
     type: 'bar',
     data: dataVerticalAtributosJerarquia,
+    maintainAspectRatio: false,
 
     plugins: [ChartDataLabels],
     options: {
