@@ -407,6 +407,13 @@ function loadChartPreguntaEquipos(equipo) {
 
     let sumado = sumAllQuestionsF(filtradoPregunta)
 
+    console.log(sumado)
+
+    sumado.forEach((e)=>{
+
+
+    })
+
     sumado.map((e) => {
 
         e.background = getColor(categoria)
@@ -590,10 +597,12 @@ function loadAllChart() {
     let sumado4 = sumAllQuestionsF(filtradoPregunta4)
     let sumado5 = sumAllQuestionsF(filtradoPregunta5)
 
+    console.log(sumado)
 
     sumado.map((e) => {
 
         e.background = getColor(categoria)
+        e.name = changeValue(e.name)
         return e
 
     })
@@ -602,6 +611,7 @@ function loadAllChart() {
     sumado2.map((e) => {
 
         e.background = getColor(categoria)
+        e.name = changeValue(e.name)
         return e
 
     })
@@ -609,6 +619,7 @@ function loadAllChart() {
     sumado3.map((e) => {
 
         e.background = getColor(categoria)
+        e.name = changeValue(e.name)
         return e
 
     })
@@ -616,6 +627,7 @@ function loadAllChart() {
     sumado4.map((e) => {
 
         e.background = getColor(categoria)
+        e.name = changeValue(e.name)
         return e
 
     })
@@ -623,6 +635,7 @@ function loadAllChart() {
     sumado5.map((e) => {
 
         e.background = getColor(categoria)
+        e.name = changeValue(e.name)
         return e
 
     })
@@ -646,6 +659,22 @@ function loadAllChart() {
     //vChartPregunta1.update()
 
 }
+
+function changeValue(value){
+
+
+    switch(value){
+
+        case "1": return "-3"
+        case "2": return "-2"
+        case "3": return "-1"
+        case "4": return "0"
+        case "5": return "1"
+        case "6": return "2"
+        case "7": return "3"
+
+    }
+}  
 
 function loadTest(nameTest) {
 
