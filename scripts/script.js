@@ -467,10 +467,14 @@ function loadChartDepartment(department) {
 
   let valueEquipo = cardEquipo.querySelector(".atributoValue")
   let valueName = cardEquipo.querySelector(".atributoProficiency")
+  let description = cardEquipo.querySelector(".atributoDescription")
 
+
+  
 
   valueName.textContent = getProficiencyName(parseInt(promedio * 100 / maximoGeneral))
   valueEquipo.textContent = parseInt(promedio * 100 / maximoGeneral) + "%"
+  description.textContent = getDescriptionTeam(getProficiencyName(parseInt(promedio * 100 / maximoGeneral)))
 
   let titleEquipo = document.querySelector("#titleEquipo")
   titleEquipo.textContent = department
@@ -540,17 +544,24 @@ function loadChartJerarquia(jerarquia) {
   promedio = promedio / filter.length
 
   let valueEquipo = cardJerarquia.querySelector(".atributoValue")
-
+  let proficiencyName = cardJerarquia.querySelector(".atributoProficiency")
+  console.log(promedio)
   valueEquipo.textContent = parseInt(promedio * 100 / maximoGeneral) + "%"
+
+  proficiencyName.textContent = getProficiencyName(parseInt(promedio * 100 / maximoGeneral))
+
 
   let titleEquipo = document.querySelector("#titleJerarquia")
   let titleEquipoCompleto = document.querySelector("#titleJerarquiaCompleto")
+  let description = cardJerarquia.querySelector(".atributoDescription")
 
   titleEquipo.textContent = jerarquia
   titleEquipoCompleto.textContent = jerarquia
 
 
-  //Obtener descripción equipo
+  //Obtener descripción jerarquia
+
+  description.textContent = getDescriptionJerarquia(getProficiencyName(parseInt(promedio * 100 / maximoGeneral)))
 
 
 

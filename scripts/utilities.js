@@ -25,7 +25,7 @@ function sumAllCategories(answers) {
 }
 
 
-const jerarquias = ["Nivel administrativo", "Nivel estratégico", "Nivel conocimiento","Nivel operacional"]
+const jerarquias = ["Nivel administrativo", "Nivel estratégico", "Nivel conocimiento", "Nivel operacional"]
 
 const maximoCategoria = 35
 
@@ -134,21 +134,21 @@ function sumAllQuestionsF(answers) {
   const infoAnswers = answers.map(ans => ans[0]);
 
 
-  const dataTest = infoAnswers.reduce((acc,object) => {
+  const dataTest = infoAnswers.reduce((acc, object) => {
     console.log(acc)
-      if( acc.find(obj => obj.name === object.respuesta) ){ 
-        return acc.map(obj => obj.name === object.respuesta? {...obj, value: obj.value += 1} : obj )
-      } else {
+    if (acc.find(obj => obj.name === object.respuesta)) {
+      return acc.map(obj => obj.name === object.respuesta ? { ...obj, value: obj.value += 1 } : obj)
+    } else {
 
-        acc.push({
-          name: object.respuesta,
-          value: 1,
-          background: object.background
-        })
+      acc.push({
+        name: object.respuesta,
+        value: 1,
+        background: object.background
+      })
 
-      }
+    }
     return acc;
-  },[]);
+  }, []);
 
   return dataTest;
 }
@@ -177,7 +177,35 @@ function getColor(category) {
 function getDescriptionCategoria() { }
 
 
+function getDescriptionTeam(nivel) {
 
+  switch (nivel) {
+
+
+    case "Principiante": return "Este equipo tiene problemas en entender e implementar los valores que la compañía quiere que sean parte esencial para una mejor cultura organizacional, también puede que no entiendan la importancia de los cambios que se buscan hacer"
+    case "Competente": return "Este equipo está implementando los valores que harán a su equipo ser un espacio de crecimiento que permitirá a la organización ser mejor, todavía se tienen que arreglar algunos detalles para ser excelentes."
+    case "Proficiente" : return "Este equipo está efectivamente implementando los valores que harán crecer a la compañía, el equipo entiende la importancia de los valores que se buscan, como implementarlos y como transmitirlos a todos los miembros del equipo"  
+    case "Experto" :return "El equipo es un ejemplo a seguir sobre como deberían ser los departamentos en las compañías, sobresalen por su interés y voluntad a trabajar y contribuir a un mejor espacio de trabajo."
+    
+  }
+
+}
+
+
+
+function getDescriptionJerarquia(nivel) {
+
+  switch (nivel) {
+
+
+    case "Principiante": return "Este sector de la compañía tiene problemas con los valores que la compañía quiere representar y como sus esfuerzos aportan a un mejor espacio de trabajo."
+    case "Competente": return "Este sector de la compañía, entiende los valores que la compañía trata de transmitir a todos los niveles, pero sufre un poco en la ejecución."  
+    case "Proficiente" : return "Este sector de la compañía, aplica de forma efectiva los valores que quiere ver en toda la compañía, los aplica cuando es posible, siempre trata de mejorar y ser flexibles cuando la situación lo requiere."  
+    case "Experto" :return "El equipo es un ejemplo a seguir sobre como deberían ser los departamentos en las compañías, sobresalen por su interés y voluntad a trabajar y contribuir a un mejor espacio de trabajo."
+    
+  }
+
+}
 
 
 function filterResponseByTag(areas, dataType = "", responses, tagName) {
