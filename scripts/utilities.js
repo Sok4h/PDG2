@@ -208,6 +208,32 @@ function getDescriptionJerarquia(nivel) {
 }
 
 
+const canvasBackgroundColor={
+
+  id:'canvasBackgroundColor',
+  beforeDraw(chart,args,pluginOptions){
+
+    const {ctx,chartArea:{top,bottom,left,right,width},scales:{x,y} } = chart
+
+
+    bgColors(0,60,"#E6E6E6")
+    bgColors(60,75,"#D9D9D9")
+    bgColors(75,90,"#D1D1D1")
+    bgColors(90,100,"#CACACA")
+
+
+
+    function bgColors(bracketLow,bracketHigh,color){
+      ctx.fillStyle =color;
+
+      ctx.fillRect(left,y.getPixelForValue(bracketHigh),width,y.getPixelForValue(bracketLow)-y.getPixelForValue(bracketHigh))
+    }
+    
+
+  }
+}
+
+
 function filterResponseByTag(areas, dataType = "", responses, tagName) {
 
   let areasName = areas;

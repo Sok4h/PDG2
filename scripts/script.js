@@ -844,31 +844,7 @@ function loadChartAtributos(atributo) {
 }
 
 
-const canvasBackgroundColor={
 
-  id:'canvasBackgroundColor',
-  beforeDraw(chart,args,pluginOptions){
-
-    const {ctx,chartArea:{top,bottom,left,right,width},scales:{x,y} } = chart
-
-
-    bgColors(0,60,"#E6E6E6")
-    bgColors(60,75,"#D9D9D9")
-    bgColors(75,90,"#D1D1D1")
-    bgColors(90,100,"#CACACA")
-
-
-
-
-    function bgColors(bracketLow,bracketHigh,color){
-      ctx.fillStyle =color;
-
-      ctx.fillRect(left,y.getPixelForValue(bracketHigh),width,y.getPixelForValue(bracketLow)-y.getPixelForValue(bracketHigh))
-    }
-    
-
-  }
-}
 const labels = [
 
 ];
@@ -1177,9 +1153,9 @@ const dataVerticalEquiposCompleto = {
 const configVerticalAtributoChart = {
   type: 'bar',
   data: dataVerticalAtributos,
-  
 
-  plugins: [ChartDataLabels],
+  plugins: [canvasBackgroundColor,ChartDataLabels],
+ 
   options: {
 
     maintainAspectRatio: false,
@@ -1215,14 +1191,14 @@ const configVerticalAtributoChart = {
         }
       }
     }
-  }//,plugins:[canvasBackgroundColor]
+  }
 };
 
 
 const configVerticalEquipoChart = {
   type: 'bar',
   data: dataVerticalEquipos,
-  plugins: [ChartDataLabels],
+  plugins: [ChartDataLabels,canvasBackgroundColor],
   options: {
 
     layout: {
@@ -1263,7 +1239,7 @@ const configVerticalEquipoChart = {
 const configVerticalJerarquiaChart = {
   type: 'bar',
   data: dataVerticalEquipos,
-  plugins: [ChartDataLabels],
+  plugins: [ChartDataLabels,canvasBackgroundColor],
   options: {
 
     layout: {
@@ -1305,7 +1281,7 @@ const configVerticalJerarquiaChart = {
 const configVerticalEquipoChartCompleto = {
   type: 'bar',
   data: dataVerticalEquiposCompleto,
-  plugins: [ChartDataLabels],
+  plugins: [ChartDataLabels,canvasBackgroundColor],
   options: {
     maintainAspectRatio: false,
     layout: {
@@ -1346,7 +1322,7 @@ const configVerticalEquipoChartCompleto = {
 const configVerticalJerarquiaChartCompleto = {
   type: 'bar',
   data: dataVerticalEquiposCompleto,
-  plugins: [ChartDataLabels],
+  plugins: [ChartDataLabels,canvasBackgroundColor],
   options: {
 
     maintainAspectRatio: false,
@@ -1516,7 +1492,7 @@ const configAtributos = {
 
   type: 'bar',
   data: dataAtributos,
-  plugins: [ChartDataLabels],
+  plugins: [ChartDataLabels,canvasBackgroundColor],
 
 
   options: {
@@ -1533,7 +1509,7 @@ const configAtributos = {
     //maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
+        display: false,
         labels: {
           usePointStyle: true
         }
@@ -1556,6 +1532,7 @@ const configAtributos = {
         drawBorder: false,
       },
       y: {
+        max: 100,
         beginAtZero: true,
 
         grid: {
@@ -1566,7 +1543,6 @@ const configAtributos = {
     }
   },
 
-  //plugins:[canvasBackgroundColor]
 
 }
 const atributosChart = new Chart(
