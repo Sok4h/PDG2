@@ -1,6 +1,5 @@
 const openModalHigh = document.querySelector("#btnInfoHigh")
 const openModalLow = document.querySelector("#btnInfoLow")
-//const survey = document.querySelector(".survey")
 const dialog = document.querySelector(".dialogSurvey")
 const closeDialog = document.querySelector(".btnCloseModal")
 const dialogTitle = dialog.querySelector(".dialogInfo")
@@ -125,10 +124,7 @@ function verifyTest(id) {
         btnEmail.addEventListener("click", () => {
 
             let idValido = false
-            // console.log(typeof (emailTest.value))
-            // let existe = test.emails.find((e)=>{e.id== emailTest.value})
 
-            // console.log(existe)
             test.emails.forEach((email) => {
 
                 console.log(email)
@@ -192,45 +188,35 @@ function startSurvey() {
 
 
         console.log(currentQuestion)
-        console.log(counter*multiplicador)
-        let multiplicado = counter*multiplicador
+        console.log(counter * multiplicador)
 
-        for(let i = 0; i < 5; i++) {
-           
-            if(currentQuestion!=0){
+        for (let i = 0; i < 5; i++) {
+
+            if (currentQuestion != 0) {
 
                 formularios[i].querySelector('input[name=optionSurvey]:checked').checked = false;
             }
-           let preguntaaa = preguntasFinales[currentQuestion+i]
-           console.log(preguntaaa)
 
-            
 
-                //console.log(j)
-                tippy(survey[i].querySelector('.btnInfoLow'), {
+            tippy(survey[i].querySelector('.btnInfoLow'), {
 
-                    content: preguntasFinales[currentQuestion+i].hintLow
-    
-                })
-    
-                tippy(survey[i].querySelector('.btnInfoHigh'), {
-    
-                    content: preguntasFinales[currentQuestion+i].hintHigh
-    
-                })
-                let surveyTitle = survey[i].querySelector(".survey__title")
-                surveyTitle.textContent = preguntasFinales[currentQuestion+i].pregunta
+                content: preguntasFinales[currentQuestion + i].hintLow
 
-            
-            
+            })
+
+            tippy(survey[i].querySelector('.btnInfoHigh'), {
+
+                content: preguntasFinales[currentQuestion + i].hintHigh
+
+            })
+            let surveyTitle = survey[i].querySelector(".survey__title")
+            surveyTitle.textContent = preguntasFinales[currentQuestion + i].pregunta
+
+
+
 
         }
 
-        // tippy('#btnInfoLow', {
-
-        //     content: preguntasFinales[currentQuestion].hintLow
-
-        // })
 
 
 
@@ -246,16 +232,6 @@ function startSurvey() {
             btnNextQuestion.textContent = "Finalizar"
         }
 
-        // btnNextQuestion.classList.remove("btn--surveyActive")
-        // btnNextQuestion.classList.add("btn--survey")
-
-        // options.forEach((option) => {
-
-        //     option.checked = false
-        // })
-
-        // console.log(preguntasFinales[currentQuestion])
-        // surveyTitle.textContent = preguntasFinales[currentQuestion].pregunta
 
     }
 
@@ -263,31 +239,30 @@ function startSurvey() {
 
 
 
-    
+
     function checkInputs() {
 
         let seleccionado = true
-        
+
 
         formularios.forEach((form) => {
 
             console.log(form.optionSurvey.value)
-                let checked = form.querySelector('input[name=optionSurvey]:checked');
+            let checked = form.querySelector('input[name=optionSurvey]:checked');
 
-                console.log(checked)
-                if (checked) {
-                    //alert("seleccionado")
-                    //seleccionado = true
-                    btnNextQuestion.classList.remove("btn--survey")
-                    btnNextQuestion.classList.add("btn--surveyActive")
-                   
-                } else {
-                       
-                    console.log("sin llenar")
-                    seleccionado = false
-                    return  seleccionado
-                }
-            
+            console.log(checked)
+            if (checked) {
+      
+                btnNextQuestion.classList.remove("btn--survey")
+                btnNextQuestion.classList.add("btn--surveyActive")
+
+            } else {
+
+                console.log("sin llenar")
+                seleccionado = false
+                return seleccionado
+            }
+
 
         })
 
@@ -295,16 +270,6 @@ function startSurvey() {
     }
 
 
-    // form.addEventListener('change', function () {
-
-    //     let checked = form.querySelector('input[name=optionSurvey]:checked');
-    //     if (checked) {
-
-    //         btnNextQuestion.classList.remove("btn--survey")
-    //         btnNextQuestion.classList.add("btn--surveyActive")
-
-    //     }
-    // });
 
 
 
@@ -343,33 +308,27 @@ function startSurvey() {
     btnNextQuestion.addEventListener("click", () => {
 
         console.log(checkInputs())
-        if(!checkInputs()){ 
+        if (!checkInputs()) {
 
             alert("complete todas las preguntas")
 
             return
         }
 
-        //alert("noooo")
-       // if (!btnNextQuestion.classList.contains("btn--surveyActive")) return
+
         let value = checkRadio()
 
-        for(let i = 0;i<5;i++){
+        for (let i = 0; i < 5; i++) {
 
-            let tempRespuesta = preguntasFinales[i+currentQuestion]
+            let tempRespuesta = preguntasFinales[i + currentQuestion]
             tempRespuesta.respuesta = formularios[i].optionSurvey.value
 
             console.log(tempRespuesta)
-            preguntasFinales[i+currentQuestion] = tempRespuesta
+            preguntasFinales[i + currentQuestion] = tempRespuesta
 
             console.log(preguntasFinales[i])
 
         }
-
-        // let tempRespuesta = preguntasFinales[currentQuestion]
-        // tempRespuesta.respuesta = value
-        // preguntasFinales[currentQuestion] = tempRespuesta
-        // console.log(preguntasFinales[currentQuestion])
 
 
         if (currentQuestion == preguntasFinales.length - 5) {
@@ -519,16 +478,16 @@ function startSurvey() {
         }
         else {
 
-            currentQuestion+=5
+            currentQuestion += 5
             counter++
-            
+
 
             console.log("counter" + counter)
             console.log("current question" + currentQuestion)
 
             setupQuestions(currentQuestion)
 
-            surveyContainer.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+            surveyContainer.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
         }
 
     })

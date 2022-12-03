@@ -1,4 +1,3 @@
-let dataChart;
 const testSelect = document.querySelector("#testList")
 const arrow = document.querySelector(".arrow")
 const valueArrow = document.querySelector("#valueArrow")
@@ -146,17 +145,8 @@ for (let i = 0; i < filterEspecifico.length; i++) {
 
     filterEspecifico[i].addEventListener("click", () => {
 
-        //alert(filterEspecifico[i].value)
-
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        //console.log(parentDiv)
-        // filterEspecifico[i].classList.add("seleccionado")
-        //console.log(mergedAtributosCompletos)
         loadChartsEspecificas(filterEspecifico[i].value)
-        //console.log(dataVerticalAtributos.datasets[0])
-        // sortBarChart(filterGeneral[i].value, mergedAtributos, atributosChart)
+
     })
 
 }
@@ -372,11 +362,6 @@ function loadChartPreguntaEquipos(equipo) {
 
     let filterEquipo = answers.filter((e) => { return e.area === equipo })
 
-    //console.log(respuestas)
-
-
-    //  console.log(respuestas)
-
 
     let respuestas = filterEquipo.map((a) => { return a.respuestas })
 
@@ -431,11 +416,6 @@ function loadChartPreguntaEquipos(equipo) {
 function loadChartPreguntaJerarquia(jerarquia) {
 
     let filterEquipo = answers.filter((e) => { return e.jerarquia === jerarquia })
-
-    //console.log(respuestas)
-
-
-    //  console.log(respuestas)
 
 
     let respuestas = filterEquipo.map((a) => { return a.respuestas })
@@ -652,12 +632,6 @@ function loadAllChart() {
     sortBarChart("0", sumado4, vChartPregunta4)
     sortBarChart("0", sumado5, vChartPregunta5)
 
-
-
-    //vChartPregunta1.options.scales.y.max= parseInt(currentTest.numberEmployers)
-    // vChartPregunta1.config.data.labels= finalNames
-    //vChartPregunta1.update()
-
 }
 
 function changeValue(value){
@@ -808,7 +782,7 @@ function loadInforme() {
 
     getInfoPuntaje(name)
 
-    desempenoName.textContent = getInfoName(parseInt(filtrado.value * 100 / maximoCategoria))
+    desempenoName.textContent = getProficiencyName(parseInt(filtrado.value * 100 / maximoCategoria))
 
     desempenoValueName.style.color = getColor(name)
 
@@ -931,22 +905,6 @@ function getInfoPuntaje(categoria) {
 }
 
 
-function getInfoName(value) {
-
-
-
-    let proficiencyName = ""
-
-
-    if (value <= 60) proficiencyName = "Principiante"
-    if (value > 60 && value <= 78) proficiencyName = "Competente"
-    if (value > 78 && value <= 90) proficiencyName = "Proficiente"
-    if (value > 90) proficiencyName = "Experto"
-
-    return proficiencyName
-}
-
-
 
 
 
@@ -1050,10 +1008,7 @@ function loadChartPregunta() {
 
     console.log(respuestasDivididas)
 
-    let names = respuestasDivididas.map((e) => {
-
-        return "Pregunta " + e.numeroPregunta
-    })
+    
 
     let merged = respuestasDivididas.map((e) => {
 
@@ -1119,7 +1074,6 @@ function loadChartJerarquia() {
     })
 
     const finalNames = [...new Set(names)];
-    //let filter = listAnswers.filter((a) => { return a.area == department })
     console.log(finalNames)
 
 
@@ -1215,17 +1169,8 @@ for (let i = 0; i < preguntaEquipo.length; i++) {
 
     preguntaEquipo[i].addEventListener("click", () => {
 
-        //console.log(filterEquipo[i].value)
-
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        //console.log(datoEquipo)
         preguntaEquipo[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
-
-        //console.log(dataVerticalAtributos.datasets[0])
+ 
         sortBarChart(preguntaEquipo[i].value, datoEquipoPregunta, vChartPreguntaEquipo)
     })
 
@@ -1235,17 +1180,8 @@ for (let i = 0; i < filter1.length; i++) {
 
     filter1[i].addEventListener("click", () => {
 
-        //console.log(filterEquipo[i].value)
-
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        //console.log(datoEquipo)
         filter1[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
-
-        //console.log(dataVerticalAtributos.datasets[0])
+ 
         sortBarChart(filter1[i].value, datoP1, vChartPregunta1)
     })
 
@@ -1257,17 +1193,7 @@ for (let i = 0; i < filter2.length; i++) {
 
     filter2[i].addEventListener("click", () => {
 
-        //console.log(filterEquipo[i].value)
-
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        //console.log(datoEquipo)
         filter2[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
-
-        //console.log(dataVerticalAtributos.datasets[0])
         sortBarChart(filter2[i].value, datoP2, vChartPregunta2)
     })
 
@@ -1278,17 +1204,8 @@ for (let i = 0; i < filter3.length; i++) {
 
     filter3[i].addEventListener("click", () => {
 
-        //console.log(filterEquipo[i].value)
-
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        //console.log(datoEquipo)
         filter3[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
 
-        //console.log(dataVerticalAtributos.datasets[0])
         sortBarChart(filter3[i].value, datoP3, vChartPregunta3)
     })
 
@@ -1299,17 +1216,8 @@ for (let i = 0; i < filter4.length; i++) {
 
     filter4[i].addEventListener("click", () => {
 
-        //console.log(filterEquipo[i].value)
-
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        //console.log(datoEquipo)
         filter4[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
 
-        //console.log(dataVerticalAtributos.datasets[0])
         sortBarChart(filter4[i].value, datoP4, vChartPregunta4)
     })
 
@@ -1320,17 +1228,9 @@ for (let i = 0; i < filter5.length; i++) {
 
     filter5[i].addEventListener("click", () => {
 
-        //console.log(filterEquipo[i].value)
 
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        //console.log(datoEquipo)
         filter5[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
 
-        //console.log(dataVerticalAtributos.datasets[0])
         sortBarChart(filter5[i].value, datoP5, vChartPregunta5)
     })
 
@@ -1342,13 +1242,9 @@ for (let i = 0; i < filterPregunta.length; i++) {
 
         console.log(filterPregunta[i].value)
 
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
 
         console.log(datoPregunta)
         filterPregunta[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
 
         console.log(dataVerticalAtributos.datasets[0])
         sortBarChart(filterPregunta[i].value, datoPregunta, vChartAtributosPregunta)
@@ -1368,15 +1264,9 @@ for (let i = 0; i < filterEquipo.length; i++) {
 
         console.log(filterEquipo[i].value)
 
-        //alert("entró")
-
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
         console.log(datoEquipo)
         filterEquipo[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
 
-        //console.log(dataVerticalAtributos.datasets[0])
         sortBarChart(filterEquipo[i].value, datoEquipo, vChartAtributosEquipo)
     })
 
@@ -1386,7 +1276,6 @@ for (let i = 0; i < filterEquipo.length; i++) {
 
 
 let filterJerarquia = filterChartJerarquia.querySelectorAll(".hidebox")
-//console.log(filterPregunta)
 
 for (let i = 0; i < filterJerarquia.length; i++) {
 
@@ -1394,851 +1283,13 @@ for (let i = 0; i < filterJerarquia.length; i++) {
 
         console.log(filterJerarquia[i].value)
 
-        //alert("entró")
 
-        //let parentDiv = filterAtributos[i].closest("label") ;
-
-        console.log(datoEquipo)
         filterJerarquia[i].classList.add("seleccionado")
-        // console.log(mergedAtributosCompletos)
 
-        //console.log(dataVerticalAtributos.datasets[0])
         sortBarChart(filterJerarquia[i].value, datoJerarquia, vChartAtributosJerarquia)
     })
 
 }
-
-const labels = [
-
-];
-
-const dataVerticalAtributos = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + "%"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const dataVerticalAtributosEquipo = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + "%"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const dataVerticalAtributosJerarquia = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + "%"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const dataPregunta1 = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + " Personas"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-
-const dataPreguntaPromedio = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + " Personas"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const dataPregunta2 = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + " Personas"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const dataPregunta3 = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + " Personas"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const dataPregunta4 = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + " Personas"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const dataPregunta5 = {
-    labels: labels,
-    datasets: [{
-        //label: 'atributos por departamento',
-
-        //borderColor: 'rgb(255, 99, 132)',
-        data: dataChart,
-        borderRadius: 6,
-        datalabels: {
-            formatter: function (value, context) {
-
-                console.log(value)
-                //return parseInt(value * 100 / maximoCategoria) + '%';
-                return value + " Personas"
-            },
-            color: "white",
-            anchor: "center",
-            align: "center",
-            clamp: true,
-            font: {
-
-                weight: "bold"
-            },
-            padding: {
-
-                top: 20
-            }
-
-        }
-    }
-
-
-    ]
-};
-
-const configVerticalAtributoChart = {
-    type: 'bar',
-    data: dataVerticalAtributos,
-
-    plugins: [ChartDataLabels,canvasBackgroundColor],
-    options: {
-        // maintainAspectRatio: false,
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-const configVerticalAtributoJerarquiaChart = {
-    type: 'bar',
-    data: dataVerticalAtributosJerarquia,
-    maintainAspectRatio: false,
-
-    plugins: [ChartDataLabels,canvasBackgroundColor],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-
-
-
-
-const configVerticalChart1 = {
-    type: 'bar',
-    data: dataPregunta1,
-
-    plugins: [ChartDataLabels],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                //max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-const configVerticalChartPromedio = {
-    type: 'bar',
-    data: dataPreguntaPromedio,
-
-    plugins: [ChartDataLabels],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                //max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-const configVerticalChart2 = {
-    type: 'bar',
-    data: dataPregunta2,
-
-    plugins: [ChartDataLabels],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                //max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-const configVerticalChart3 = {
-    type: 'bar',
-    data: dataPregunta3,
-
-    plugins: [ChartDataLabels],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                //max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-const configVerticalChart4 = {
-    type: 'bar',
-    data: dataPregunta4,
-
-    plugins: [ChartDataLabels],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                //max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-const configVerticalChart5 = {
-    type: 'bar',
-    data: dataPregunta5,
-
-    plugins: [ChartDataLabels],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                //max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-
-const configVerticalAtributoEquipoChart = {
-    type: 'bar',
-    data: dataVerticalAtributosEquipo,
-
-    plugins: [ChartDataLabels,canvasBackgroundColor],
-    options: {
-
-        layout: {
-            padding: {
-
-                top: 30
-            }
-        }
-        ,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        parsing: {
-
-            xAxisKey: 'name'
-        },
-        indexAxis: 'x',
-        scales: {
-            x: {
-
-                display: true,
-                drawBorder: false,
-            },
-            y: {
-                max: 100,
-                grid: {
-                    display: false,
-                    drawBorder: false
-                }
-            }
-        }
-    }
-};
-
-const vChartAtributosPregunta = new Chart(
-    document.getElementById('vChartCategoriaPregunta'),
-    configVerticalAtributoChart)
-
-
-
-const vChartAtributosEquipo = new Chart(
-    document.getElementById('vChartCategoriaEquipo'),
-    configVerticalAtributoEquipoChart)
-
-
-
-
-const vChartAtributosJerarquia = new Chart(
-    document.getElementById('vChartCategoriaJerarquia'),
-    configVerticalAtributoJerarquiaChart)
-
-
-
-const vChartPregunta1 = new Chart(
-    document.getElementById('vChartPregunta1'),
-    configVerticalChart1)
-
-
-
-const vChartPregunta2 = new Chart(
-    document.getElementById('vChartPregunta2'),
-    configVerticalChart2)
-
-const vChartPregunta3 = new Chart(
-    document.getElementById('vChartPregunta3'),
-    configVerticalChart3)
-const vChartPregunta4 = new Chart(
-    document.getElementById('vChartPregunta4'),
-    configVerticalChart4)
-const vChartPregunta5 = new Chart(
-    document.getElementById('vChartPregunta5'),
-    configVerticalChart5)
-
-const vChartPreguntaPromedio = new Chart(
-    document.getElementById('vChartPreguntaPromedio'),
-    configVerticalChartPromedio)
-
-const vChartPreguntaEquipo = new Chart(
-    document.getElementById('vChartPreguntaEquipo'),
-    configVerticalChart1)
-
-    const vChartPreguntaJerarquia = new Chart(
-        document.getElementById('vChartPreguntaJerarquia'),
-        configVerticalChart1)
-// const vChartPregunta2 = new Chart(
-//     document.getElementById('vChartCategoriaJerarquia'),
-//     configVerticalAtributoJerarquiaChart)
-
-// const vChartPregunta3 = new Chart(
-//     document.getElementById('vChartCategoriaJerarquia'),
-//     configVerticalAtributoJerarquiaChart)
-
-
-
-function sortBarChart(order, data, chart) {
-
-    console.log(chart)
-    let dataSort = []
-
-    console.log(data)
-
-    let sValue = []
-    let sName = []
-    let Scolor = []
-
-    //console.log(color)
-    switch (order) {
-
-
-        case "0": {
-
-            dataSort = data.sort(function (a, b) {
-
-                console.log(a)
-                return b.value - a.value
-            })
-
-            break;
-
-        }
-
-        case "1": {
-
-            dataSort = data.sort(function (a, b) {
-
-                console.log(a)
-                return a.value - b.value
-            })
-            break;
-
-
-        }
-
-
-        case "2": {
-
-            dataSort = data.sort(function (a, b) {
-
-                console.log(a)
-                return a.name.localeCompare(b.name)
-            })
-            break;
-
-
-        }
-    }
-
-    for (let i = 0; i < dataSort.length; i++) {
-
-        sValue.push(dataSort[i].value)
-        sName.push(dataSort[i].name)
-        Scolor.push(dataSort[i].background)
-        console.log(Scolor[i])
-
-    }
-
-    console.log(dataSort)
-    console.log(dataSort)
-    console.log(Scolor)
-    console.log(sName)
-
-
-    //console.log(chart)
-
-    chart.config.data.datasets[0].data = sValue
-    chart.config.data.labels = sName
-    chart.config.data.datasets[0].backgroundColor = Scolor
-    chart.update()
-}
-
 
 
 

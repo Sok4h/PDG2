@@ -18,7 +18,6 @@ let btnsBottomPyramid = pyramidBottom.querySelectorAll(".btn")
 let btnsMidPyramid = pyramidMid.querySelectorAll(".btn")
 let btnsTopPyramid = pyramidTop.querySelectorAll(".btn")
 
-console.log(btnsBottomPyramid)
 setupBtnDepartment()
 setupBtnSubDepartment()
 setupBtnPyramidBottom()

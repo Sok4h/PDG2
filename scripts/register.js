@@ -5,12 +5,7 @@ const registerName = document.querySelector("#registerName")
 
 const btnRegister = document.querySelector("#btnRegister")
 const registerPassword = document.querySelector("#registerPassword")
- 
-// loginSpan,addEventListener("click",()=>{
 
-//   window.location.href = "login.html"
-
-// })
 
 btnRegister.addEventListener("click", () => {
 
@@ -31,7 +26,6 @@ btnRegister.addEventListener("click", () => {
       db.collection("users").doc(user.uid).set(user).then(() => {
 
         window.location.href = "dashboard.html"
-        // setLoggedUser(firebaseauth().currentUser)
       })
 
     }).catch((error) => {

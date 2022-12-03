@@ -155,6 +155,32 @@ function sumAllQuestionsF(answers) {
 
 
 
+function sumAllSubCategories(answers) {
+  console.log(answers)
+
+
+  const basket = answers.reduce((basket, fruit) => {
+
+    for (const [number, respuesta] of Object.entries(fruit)) {
+      // console.log(value)
+
+      console.log(number)
+      if (!basket[number]) {
+        basket[number] = { categoria: respuesta.categoria, name: respuesta.name, value: 0 };
+      }
+
+
+      basket[number].value += respuesta.value;
+      //console.log( basket[number].)
+
+    }
+
+    return basket;
+  }, []);
+
+  console.log(basket)
+  return basket
+}
 
 function getColor(category) {
 
@@ -306,6 +332,32 @@ function filterResponseByParameter(nameResponse = "", dataType = "", allValuesAr
 
 
 
+function getProficiencyDescription(value) {
+
+  console.log(value)
+  let proficiencyDescription = ""
+  if (value <= 60) proficiencyDescription = "Tus resultados muestran que tu compañía todavía tiene un largo viaje por delante, pero que esto no desmotive, ya que se darán los pasos necesarios para mejorar."
+  if (value > 60 && value <= 78) proficiencyDescription = "Tus resultados muestran que tu compañía está avanzando bastante, están tratando de mejorar lo que ya tienen y están abiertos a hacer los cambios que sean necesarios."
+  if (value > 78 && value <= 90) proficiencyDescription = "Tus resultados muestran que tu compañía es un lugar donde los trabajadores y la compañía están activamente aplicando nuevas ideas y buscamos formas nuevas de evitar obstáculos para progresar, recuerda siempre buscar ser mejor."
+  if (value > 90) proficiencyDescription = "Tu compañía es un ejemplo sobre como mantenerse siempre actualizado en un mercado competitivo y hacer que todos se sientan parte del equipo desde la posición más pequeña a la más alta, sigue tus esfuerzos para que tu cultura sea siempre la mejor."
+  return proficiencyDescription
+
+}
+
+
+function getProficiencyName(value) {
+
+
+  let proficiencyName = ""
+
+
+  if (value <= 60) proficiencyName = "Principiante"
+  if (value > 60 && value <= 78) proficiencyName = "Competente"
+  if (value > 78 && value <= 90) proficiencyName = "Proficiente"
+  if (value > 90) proficiencyName = "Experto"
+
+  return proficiencyName
+}
 
 
 
@@ -328,3 +380,82 @@ function getJerarquiaName(jerarquia) {
 
   }
 }
+
+
+
+function sortBarChart(order, data, chart) {
+
+  console.log(chart)
+  let dataSort = []
+
+  console.log(data)
+
+  let sValue = []
+  let sName = []
+  let Scolor = []
+
+  //console.log(color)
+  switch (order) {
+
+
+      case "0": {
+
+          dataSort = data.sort(function (a, b) {
+
+              console.log(a)
+              return b.value - a.value
+          })
+
+          break;
+
+      }
+
+      case "1": {
+
+          dataSort = data.sort(function (a, b) {
+
+              console.log(a)
+              return a.value - b.value
+          })
+          break;
+
+
+      }
+
+
+      case "2": {
+
+          dataSort = data.sort(function (a, b) {
+
+              console.log(a)
+              return a.name.localeCompare(b.name)
+          })
+          break;
+
+
+      }
+  }
+
+  for (let i = 0; i < dataSort.length; i++) {
+
+      sValue.push(dataSort[i].value)
+      sName.push(dataSort[i].name)
+      Scolor.push(dataSort[i].background)
+      console.log(Scolor[i])
+
+  }
+
+  console.log(dataSort)
+  console.log(dataSort)
+  console.log(Scolor)
+  console.log(sName)
+
+
+  //console.log(chart)
+
+  chart.config.data.datasets[0].data = sValue
+  chart.config.data.labels = sName
+  chart.config.data.datasets[0].backgroundColor = Scolor
+  chart.update()
+}
+

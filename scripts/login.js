@@ -15,16 +15,7 @@ auth.onAuthStateChanged(
 
 
             window.location.href = "dashboard.html"
-            // db.collection("users").doc(user.uid).get().then((doc) => {
-
-
-            //     setLoggedUser(doc.data())
-            //     getCart()
-            //     userLoggedIn()
-
-
-
-            // })
+      
         }
 
     })
